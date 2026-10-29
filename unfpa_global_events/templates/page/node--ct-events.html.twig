@@ -1,0 +1,149 @@
+{% set module_path = bamboo_path_system('module', 'unfpa_global_events') %}
+<div class="row gp-header">
+  <div class="col-md-12">
+    <div class="gp-header__content">
+      <ul class="breadcrumb">
+        <li><a href="{{ url('<front>') }}">{{ 'Home'|t }}</a></li>
+        <li><a href="{{ path('view.events.event_listing') }}">{{ 'Event'|t }}</a></li>
+        <li>{{ node.label }}</li>
+      </ul>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <section>
+              <div class="btn_share" id="btn_share">
+                <span class="icon_share"><img src="{{ base_path ~ directory }}/images/icon-share.svg" alt=""></span>
+              </div>
+              <h1 class="title">{{ node.label }}</h1>
+              <div class="title">
+                <div class="infos">
+                  <p class="calendar">
+                    <span class="date-display -single">{{ node.field_date.value|date("d F Y") }}</span>
+                  </p>
+                  <p class="location">{{ node.field_location.value|raw|striptags }}</p>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row margin-0">
+  <div class="col-md-12">
+    <div class="container">
+      <section class="page-content">
+        <article{{attributes.addClass(classes)}}>
+          {{ content.body }}
+        </article>
+      </section>
+    </div>
+  </div>
+</div>
+{# Event Documents #}
+{% set field_title = node.field_event_documents.entity.field_event_document_title.value %}
+{% if field_title is not empty %}
+  <div class="row bg-white">
+    <div class="col-md-12">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <section class="page-content pad-top-bottom level3">
+              {% set event_documents = node.field_event_documents %}
+              <div id="event-documents-wrapper">
+                <div class="documents-wrapper">
+                  {% for event_document in event_documents %}
+                    <div class="row">
+                      {# Document Title #}
+                      {% set document_title = event_document.entity.field_event_document_title.value %}
+                      {% if document_title is not empty %}
+                        <div class="col-sm-6 docs-info-wrapper inner-row-wrapper">
+                          <div class="doc-title">
+                            {{ event_document.entity.field_event_document_title.value }}
+                          </div>
+                        </div>
+                        {# Uploaded Documents #}
+                        {% set md_file_url  = '' %}
+                        {% set documents = event_document.entity.field_document_upload %}
+                        {% if documents.entity.field_available_language.entity.getTitle is not empty %}
+                          {% set first_doc_url = documents|first %}
+                          <div class="col-sm-6 docs-action-wrapper inner-row-wrapper">
+                            <div class="form-group sessionDropdown action-elements">
+                              <div class="dropdown-select">
+                                <select class="main-document">
+                                  {% for document_files in documents %}
+                                    {% set document_language = document_files.entity.field_available_language.entity.getTitle %}
+                                    {# Get File Url #}
+                                    {% set file_uri = document_files.entity.field_event_pdf_upload.entity.uri.value %}
+                                    {% if file_uri %}
+                                      {% set file_url = bamboo_file_url_absolute(file_uri) %}
+                                    {% endif %}
+                                    {% set md_file_url  = bamboo_file_url_absolute(first_doc_url.entity.field_event_pdf_upload.entity.uri.value) %}
+                                    <option value="{{ file_url }}">
+                                      {{ document_language }}
+                                    </option>
+                                  {% endfor %}
+                                </select>
+                              </div>
+                            </div>
+                            <div class="doc-download-icon action-elements">
+                              <a href="{{ md_file_url }}" target="_blank"><img src="/{{ module_path }}/images/download.svg"></a>
+                            </div>
+                          </div>
+                        {% endif %}
+                      {% endif %}
+                      {# EOF document title empty condition #}
+                    </div>
+                  {% endfor %}
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endif %}
+{# Start share it popup #}
+<div class="popup-wrapper">
+  <div class="row-backto">
+    <div class="btn-close" id="btnClose">
+      <span class="backarow"><img src="{{ base_path ~ directory }}/images/icon-back-arrow.svg" alt=""></span>
+      {{ 'Back to Event'|t }}</div>
+  </div>
+  {% set share_card_title = node.field_share_card_title.value|raw %}
+  {% set feature_image_uri = node.field_feature_banner_image.entity.uri.value %}
+  {% set feature_banner_image = feature_image_uri is not empty ? file_url(feature_image_uri) : '' %}
+  {% set share_image_uri = node.field_share_card_image.entity.uri.value %}
+  {% set share_card_image = share_image_uri is not empty ? file_url(share_image_uri) : '' %}
+  {% set sharing_image = share_card_image ? share_card_image : feature_banner_image %}
+  <div class="share-card">
+    <div class="img-holder"><img src={{ sharing_image }}></div>
+    <div class="share-card__cardbody">
+      {% if node.type.entity.label is not empty %}
+        <p class="content-type">{{ node.type.entity.label|t }}</p>
+      {% endif %}
+      <h4 class="card-title">
+        <a href="{{ path('entity.node.canonical', {'node': node.id}) }}">{{ share_card_title is not empty ? share_card_title : node.label }}</a>
+      </h4>
+    </div>
+    <div class="social-wrapper">
+      <div class="colm-1">
+        <a href="#" class="social-link fa fa-facebook fa-sm st_facebook_custom">
+          <span>{{ 'Share on Facebook'|t }}</span>
+          <i><img src="{{ base_path ~ directory }}/images/logo-facebook.svg" alt="{{ 'facebok'|t }}"></i>
+        </a>
+      </div>
+      <div class="colm-2">
+        <a href="#" class="social-link fa fa-twitter fa-sm st_twitter_custom">
+          <span>{{ 'Share on Twitter'|t }}</span>
+          <i><img src="{{ base_path ~ directory }}/images/logo-twitter.svg" alt="{{ 'twitter'|t }}"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="overley-white"></div>
+{# End share it popup  #}
+

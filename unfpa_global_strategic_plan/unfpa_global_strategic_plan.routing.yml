@@ -1,0 +1,7 @@
+unfpa_global_strategic_plan.strategic_plan:
+ path: '/strategic-plan'
+ defaults:
+   _title: 'Strategic plan'
+   _controller: '\Drupal\unfpa_global_strategic_plan\Controller\StrategicPlanController::unfpa_global_strategic_plan_details'
+ requirements:
+   _permission: 'access content'

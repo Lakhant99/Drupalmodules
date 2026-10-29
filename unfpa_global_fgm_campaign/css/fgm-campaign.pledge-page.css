@@ -1,0 +1,22 @@
+/**
+ * @file
+ * Contains customizations of default CSS used by regular main page.
+ */
+
+/* Hide header and footer entirely. */
+#skip-link,
+header#header,
+footer#footer {
+  display: none;
+}
+
+.fgm-map {
+  padding-top: 74px;
+}
+
+/* Since we have no share icon, exten the length of the submit button. */
+@media all and (min-width: 1250px) {
+  .fgm-form-submit {
+    width: 20%;
+  }
+}

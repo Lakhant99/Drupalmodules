@@ -1,0 +1,6 @@
+name: UNFPA Global Events
+type: module
+description: 'Display Events node with parallax banner images on detail page.'
+package: UNFPA Global
+core_version_requirement: ^8.8 || ^9
+php: 7.0

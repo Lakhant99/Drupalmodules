@@ -1,0 +1,5 @@
+name: UNFPA Global Donation
+description: Module for Donation Page
+package: UNFPA Global
+type: module
+core_version_requirement: ^8.8 || ^9

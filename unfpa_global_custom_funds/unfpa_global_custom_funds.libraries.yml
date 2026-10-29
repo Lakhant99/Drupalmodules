@@ -1,0 +1,20 @@
+unfpa_global_custom_funds.update_chart:
+  css:
+    theme:
+      css/unfpa_global_custom_funds.css: {}
+  js:
+    js/unfpa_global_custom_funds.js: {}
+  dependencies:
+    - core/jquery
+    - core/jquery.once
+    - core/drupalSettings  
+
+unfpa_global_custom_funds.custom_incoming_funds:
+  header: true
+  js:
+    https://www.google.com/jsapi: {type: external}
+    https://www.gstatic.com/charts/loader.js: {type: external}
+  dependencies:
+    - core/jquery
+    - core/jquery.once
+    - core/drupalSettings

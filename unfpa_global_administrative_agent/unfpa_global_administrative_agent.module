@@ -1,0 +1,248 @@
+<?php
+
+/**
+ * @file
+ * Register a module or theme's theme implementations as well as other function override as per requirement.
+ */
+use Drupal\Core\Render\Markup;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\file\Entity\File;
+use Drupal\Core\Url;
+
+/**
+ * Implements hook_theme()
+ */
+function unfpa_global_administrative_agent_theme($existing, $type, $theme, $path) {
+  return [
+    'dashboard_page' => [
+      'variables' => [],
+    ],
+    'dashboard_map' => [
+      'variables' => [
+        'data' => NULL,
+        'additional_amount_hq_all' => NULL,
+        'start_year' => NULL,
+        'start_year_amount' => NULL,
+      ],
+    ],
+    'summary_block' => [
+      'variables' => [
+        'summary_block_data' => NULL,
+      ],
+    ],
+    'overtime_chart' => [
+      'variables' => [
+        'node_type' => NULL,
+        'node_title' => NULL,
+      ],
+    ],
+    'sankey_chart' => [
+      'variables' => [
+        'date_dropdown' => NULL,
+        'start_date' => NULL,
+      ],
+    ],
+    'key_figures_chart' => [
+      'variables' => [
+        'date_dropdown' => NULL,
+        'start_date' => NULL,
+      ],
+    ],
+    'transaction_register' => [
+      'variables' => [
+        'node_type' => NULL,
+        'node_id' => NULL,
+        'commitment_transaction' => NULL,
+        'commitment_count' => NULL,
+        'deposit_transaction' => NULL,
+        'deposit_count' => NULL,
+        'transfer_transaction' => NULL,
+        'transfer_count' => NULL,
+        'theme_path' => NULL,
+      ],
+    ],
+    'donut_chart' => [
+      'variables' => [
+        'date_dropdown' => NULL,
+        'start_date' => NULL,
+        'node_type' => NULL,
+      ],
+    ],
+    'about_fund_page' => [
+      'variables' => [
+        'bottom_header_text' => NULL,
+        'theme_path' => NULL,
+        'past_funds' => NULL,
+        'active_funds' => NULL,
+      ],
+    ],
+    'news_and_publications' => [
+      'variables' => [],
+    ],
+    'homepage_map' => [
+      'variables' => [
+        'homepage_map_data' => NULL,
+        'additional_amount_hq_all' => NULL,
+        'start_year' => NULL,
+        'start_year_amount' => NULL,
+      ],
+    ],
+  ];
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function unfpa_global_administrative_agent_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  if ($form['#id'] == 'views-exposed-form-aa-portal-vw-aa-all') {
+    unset($form['type_1']['#options']['All']);
+  }
+  if ($form['#id'] == 'node-financial-data-edit-form') {
+    $form['#attached']['library'][] = 'unfpa_global_administrative_agent/unfpa_global_administrative_agent.custom';
+  }
+}
+
+/**
+ * Implements hook_preprocess_views_view_field().
+ */
+function unfpa_global_administrative_agent_preprocess_views_view_field(&$variables) {
+  $view = $variables['view'];
+  $field = $variables['field'];
+  if (isset($view) && ($view->id() == 'aa_portal') && ($view->current_display == 'vw_aa_all')) {
+    if (isset($field->field) && ($field->field == 'field_blurb')) {
+      $output = strip_tags($variables['field']->getValue($variables['row']));
+      // The output value should be a renderable array.
+      $variables['output'] = [
+        '#markup' => Markup::create($output),
+      ];
+    }
+  }
+  if (isset($view) && ($view->id() == 'aa_portal')) {
+    if ($view->current_display == 'deposit_transaction_register' || $view->current_display == 'transfers_transaction_register') {
+      if (isset($field->field) && ($field->field == 'field_finance_amount')) {
+        $output = \Drupal::service('unfpa_global_administrative_agent.dashboard_data')->getNumberFormat($variables['field']->getValue($variables['row']));
+        // The output value should be a renderable array.
+        $variables['output'] = [
+          '#markup' => Markup::create($output),
+        ];
+      }
+    }
+    if ($view->current_display == 'commitment_transaction_register') {
+      if (isset($field->field) && ($field->field == 'field_finance_amount')) {
+        $output = \Drupal::service('unfpa_global_administrative_agent.dashboard_data')->getNumberFormat($variables['field']->getValue($variables['row']), 'commitment');
+        // The output value should be a renderable array.
+        $variables['output'] = [
+          '#markup' => Markup::create($output),
+        ];
+      }
+    }
+    if ($view->current_display == 'aa_recent_transactions') {
+
+      if (isset($field->field) && ($field->field == 'field_finance_amount')) {
+        $output = \Drupal::service('unfpa_global_administrative_agent.dashboard_data')->getNumberFormat($variables['field']->getValue($variables['row']));
+        // The output value should be a renderable array.
+        $variables['output'] = [
+          '#markup' => Markup::create($output),
+        ];
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_page_attachments().
+ */
+function unfpa_global_administrative_agent_page_attachments(array &$attachments) {
+
+  $route_name = \Drupal::routeMatch()->getRouteName();
+
+  $routes = [
+    'unfpa_global_administrative_agent.about_funds',
+    'unfpa_global_general.home',
+    'unfpa_global_administrative_agent.dashboard_data',
+    'view.aa_portal.vw_aa_all',
+  ];
+
+  if (in_array($route_name, $routes)) {
+    $active_id = \Drupal::service('domain.negotiator')->getActiveId();
+    $current_language_id = \Drupal::service('language_manager')->getCurrentLanguage()->getId();
+    $config = \Drupal::service('config.factory')->get('unfpa_global_administrative_agent.headerconfig');
+    $config_suffix = $current_language_id . '_' . $active_id;
+
+    $title = $image_url = $description = $page_url = '';
+    switch ($route_name) {
+      case 'unfpa_global_administrative_agent.about_funds' :
+        // Get Title
+        $title = $config->get("about-funds-title_{$config_suffix}");
+        // Get description
+        $description = $config->get("about-funds-bottom_header_text_{$config_suffix}");
+
+        // Get image
+        $image_id = $config->get("about-funds-header_image_{$config_suffix}");
+        if ($image_id) {
+          $image_file = File::load($image_id)->get('uri')->value;
+          $image_url = file_create_url($image_file);
+        }
+        break;
+
+      case 'unfpa_global_general.home' :
+        // Get Title
+        $title = $config->get("home-title_{$config_suffix}");
+        // Get description
+        $description = $config->get("home-bottom_header_text_{$config_suffix}");
+
+        // Get image
+        $image_id = $config->get("home-header_image_{$config_suffix}");
+        if ($image_id) {
+          $image_file = File::load($image_id)->get('uri')->value;
+          $image_url = file_create_url($image_file);
+        }
+        break;
+
+      case 'unfpa_global_administrative_agent.dashboard_data' :
+        // Get Title
+        $title = $config->get("dashboard-title_{$config_suffix}");
+        // Get description
+        $description = $config->get("dashboard-bottom_header_text_{$config_suffix}");
+
+        // Get image
+        $image_id = $config->get("dashboard-header_image_{$config_suffix}");
+        if ($image_id) {
+          $image_file = File::load($image_id)->get('uri')->value;
+          $image_url = file_create_url($image_file);
+        }
+        break;
+
+      case 'view.aa_portal.vw_aa_all' :
+        // Get Title
+        $title = $config->get("news-and-publications-title_{$config_suffix}");
+        // Get description
+        $description = $config->get("news-and-publications-bottom_header_text_{$config_suffix}");
+
+        // Get image
+        $image_id = $config->get("news-and-publications-header_image_{$config_suffix}");
+        if ($image_id) {
+          $image_file = File::load($image_id)->get('uri')->value;
+          $image_url = file_create_url($image_file);
+        }
+        break;
+
+    }
+
+    if (\Drupal::service('path.matcher')->isFrontPage()) {
+      $page_url = Url::fromRoute('<front>', array(), array("absolute" => TRUE))->toString();
+    }
+    else {
+      // current url
+      $page_url = Url::fromRoute('<current>', array(), array("absolute" => TRUE))->toString();
+    }
+
+    $meta_tag_list = unfpa_global_social_share_metatags($page_url, $image_url, $title, $description);
+
+    if (!empty($meta_tag_list)) {
+      foreach ($meta_tag_list as $key => $value) {
+        $attachments['#attached']['html_head'][] = [$value, 'keywords' . $key];
+      }
+    }
+  }
+}

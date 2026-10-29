@@ -1,0 +1,83 @@
+{#
+/**
+ * @file
+ * Default view template to display all the fields in a row.
+ *
+ * Available variables:
+ * - view: The view in use.
+ * - fields: A list of fields, each one contains:
+ *   - content: The output of the field.
+ *   - raw: The raw data for the field, if it exists. This is NOT output safe.
+ *   - class: The safe class ID to use.
+ *   - handler: The Views field handler controlling this field.
+ *   - inline: Whether or not the field should be inline.
+ *   - wrapper_element: An HTML element for a wrapper.
+ *   - wrapper_attributes: List of attributes for wrapper element.
+ *   - separator: An optional separator that may appear before a field.
+ *   - label: The field's label text.
+ *   - label_element: An HTML element for a label wrapper.
+ *   - label_attributes: List of attributes for label wrapper.
+ *   - label_suffix: Colon after the label.
+ *   - element_type: An HTML element for the field content.
+ *   - element_attributes: List of attributes for HTML element for field content.
+ *   - has_label_colon: A boolean indicating whether to display a colon after
+ *     the label.
+ *   - element_type: An HTML element for the field content.
+ *   - element_attributes: List of attributes for HTML element for field content.
+ * - row: The raw result from the query, with all data it fetched.
+ *
+ * @see template_preprocess_views_view_fields()
+ *
+ * @ingroup themeable
+ */
+#}
+{% set module_path = bamboo_path_system('module', 'unfpa_global_executive_board') %}
+{{ attach_library('unfpa_global_procurement_supplychain/resource_listing') }}
+{#{{ dd(row._entity.field_resource_document.entity.field_resource_pdf_upload.entity.fileuri) }}#}
+<div class="col-sm-6 docs-info-wrapper inner-row-wrapper">
+  <div class="title-wrapper">
+    <div class="doc-title">
+    {{ fields.title.content }}
+    </div>
+  </div>
+</div>
+
+<div class="col-sm-6 docs-action-wrapper inner-row-wrapper">
+  <div class="form-group sessionDropdown action-elements">
+    <div class="dropdown-select">
+{#      {{ dd(row._entity.field_resource_document.entity.field_available_language.entity.getTitle) }}#}
+      <select class="resource-document">
+        {% set selected_file = null %}
+        {% for resources in row._entity.field_resource_document %}
+          {# Get File Url #}
+          {% set file_url  = resources.entity.field_resource_pdf_upload.entity.uri.value %}
+          {%- if file_url -%}
+            {% set file_url = bamboo_file_url_absolute(file_url) %}
+
+            {# Set first one as the default file, in case resource language doesn't match #}
+            {% if selected_file is empty %}
+              {% set selected_file = file_url %}
+            {% endif %}
+
+            {# Get Language #}
+            {% set res_language_id   = resources.entity.field_available_language.entity.id %}
+            {% set res_language      = resources.entity.field_available_language.entity.getTitle %}
+            {% set res_language_code = resources.entity.field_available_language.entity.field_language_code.value %}
+
+            {% if res_language_code is not null %}
+              {% if language == res_language_code %}
+                {% set selected_file = file_url %}
+                <option value="{{ res_language_id }}" url="{{ file_url }}" selected='selected'> {{ res_language }} </option>
+            {% else %}
+                <option value="{{ res_language_id }}" url="{{ file_url }}"> {{ res_language }} </option>
+            {%- endif -%}
+            {% endif %}
+          {%- endif -%}
+        {% endfor %}
+      </select>
+    </div>
+  </div>
+  <div class="doc-download-icon action-elements">
+    <a href="{{ selected_file }}" target="_blank"><img src="/{{ module_path }}/images/download-orange.svg"></a>
+  </div>
+</div>

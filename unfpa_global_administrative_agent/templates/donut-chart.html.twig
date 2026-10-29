@@ -1,0 +1,51 @@
+<div class="margin-default">
+  <nav class="custom-graph-header margin-small tabs-nav donut " for="donorsFoundsChart">
+    <div class="container">
+      <div class="row between-xs middle-xs">
+        <div class="mobile-dropdown">
+          {% if node_type == 'ct_donor' %}
+            <label for="#" class="mobile-dropdown__selected">{{ 'Deposits'|t }}</label>
+            <ul class="custom-graph-header__menu tabs-nav__options" data-filter="type">
+              <li class="commitments" onclick="generate_donut_chart('commitment');">{{ 'Commitments'|t }}</li>
+              <li class="deposits active" onclick="generate_donut_chart('deposit');">{{ 'Deposits'|t }}</li>
+            </ul>
+          {% elseif node_type == 'aa_partners' %}          
+            <label for="#" class="mobile-dropdown__selected">{{ 'Transfers'|t }}</label>
+            <ul class="custom-graph-header__menu tabs-nav__options" data-filter="type">
+              <li class="active transfers" onclick="generate_donut_chart('disbursement');">{{ 'Transfers'|t }}</li>
+              <li class="expenditure" onclick="generate_donut_chart('expenditure');">{{ 'Expenditure'|t }}</li>
+            </ul>
+          {% else %}
+            <label for="#" class="mobile-dropdown__selected">{{ 'Deposits'|t }}</label>
+            <ul class="custom-graph-header__menu tabs-nav__options" data-filter="type">
+              <li class="commitments" onclick="generate_donut_chart('commitment');">{{ 'Commitments'|t }}</li>
+              <li class="deposits active" onclick="generate_donut_chart('deposit');">{{ 'Deposits'|t }}</li>
+              <li class="active transfers" onclick="generate_donut_chart('disbursement');">{{ 'Transfers'|t }}</li>
+              <li class="expenditure" onclick="generate_donut_chart('expenditure');">{{ 'Expenditure'|t }}</li>
+            </ul>
+          {% endif %}
+        </div>
+        <div class="graph-header__actions">
+          {% if date_dropdown %}
+          <select name="" id="donut-year" class="select-year custom-chart-select donut-chart-year" data-filter="date">
+            {% for year in date_dropdown %}
+              <option value="{{ year }}">{{ year }}</option>
+            {% endfor %}
+          </select>
+          {% endif %}
+        </div>
+      </div>
+      <hr>
+    </div>
+
+  </nav>
+</div>
+<section class="margin-small">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <div id="donut_chart"></div>
+      </div>
+    </div>
+  </div>
+</section>

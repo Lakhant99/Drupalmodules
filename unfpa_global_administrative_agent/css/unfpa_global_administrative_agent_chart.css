@@ -1,0 +1,63 @@
+.tooltip {
+  padding: 10px;
+  border: 1px #2290ca solid;
+  background-color: #fff;
+}
+.tooltip strong {
+  font-weight: 700;
+}
+#ovetime_chart_label {
+   font-weight: 700;
+   color: #9B9B9B;
+   position: relative;
+   right: 20px;
+}
+.dashboard-numbers {
+    justify-content: center;
+}
+nav[for='mapChart'] .graph-header__menu {
+    width: 75%;
+}
+nav[for='mapChart'] .graph-header__menu li:nth-child(2) {
+    min-width: 20%;
+}
+nav[for='mapChart'] .graph-header__menu li:nth-child(2) .select2-container--default {
+    width: 100% !important;
+}
+.dashboard-numbers .dashboard-numbers__col .title-h1 {
+    line-height: 0.2em;
+}
+.dashboard-numbers .dashboard-numbers__col .title-h1 span {
+    display: inline;
+}
+.dashboard-numbers .dashboard-numbers__col .title-h1 span.amount {
+    display: block;
+}
+div[data-type='sankey'] .tooltip img {
+    height: auto;
+    margin: 0 6px;
+    width: 25px;
+}
+/*---css for respective chart color for its tab border start here---*/
+.graph-header__menu li.commitments:after,
+.custom-graph-header__menu li.commitments:after {
+  border-color: #0084C4;
+}
+.graph-header__menu li.deposits:after,
+.custom-graph-header__menu li.deposits:after {
+  border-color: #12745D;
+}
+.graph-header__menu li.transfers:after,
+.custom-graph-header__menu li.transfers:after {
+  border-color: #F7941E;
+}
+.graph-header__menu li.expenditure:after,
+.custom-graph-header__menu li.expenditure:after {
+  border-color: #56368B;
+}
+.graph-header .graph-header__menu li.active a,
+.graph-header .custom-graph-header__menu li.active a {
+  color: #4A4A4A !important;
+  font-weight: 300;
+}
+/*---css for respective chart color for its tab border end here---*/

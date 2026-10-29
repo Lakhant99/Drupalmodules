@@ -1,0 +1,362 @@
+/*====Transformative goals css start here====*/
+
+/*==== Goal For ==*/
+/*== mobile view =*/
+@media (max-width: 767px) {
+  .transformative-goals-wrapper .section.left-pos {
+    margin-right: 0%;
+  }
+  .img-with-quote-wrapper {
+    width: 260px;
+    height: 260px;
+    position: relative;
+    z-index: 1;
+    top: 15px;
+    left: 0px;
+    right: 0px;
+    margin: 0 auto;
+  }
+  .right-pos .img-with-quote-wrapper {
+    left: 0px;
+    right: 0px;
+  }
+  .transformative-goals-wrapper .pad-chart-right {
+    padding: 238px 20px 20px 20px;
+  }
+  .transformative-goals-wrapper .pad-chart-left {
+    padding: 238px 20px 20px 20px;
+  }
+  transformative-goals-wrapper .goal-content .right-pos.planning h2 {
+    color: #c94181;
+    padding-left: 25px;
+  }
+  transformative-goals-wrapper .pad-subheading-left {
+    padding: 18px 20px 20px 20px;
+  }
+  .transformative-goals-wrapper .section.right-pos {
+    margin-left: 0%;
+  }
+  .img-with-quote-wrapper .pos-relative .img-wraper {
+    width: 260px;
+    height: 260px;
+  }
+  h3.goals-chart-heading {
+    font-size: 1em;
+  }
+  .goalBanner .banner-caption span {
+    display: block;
+    font-size: 15px;
+    padding: 10px;
+    text-transform: none;
+    font-weight: normal;
+  }
+}
+
+@media (max-width: 340px) {
+  .img-with-quote-wrapper {
+    width: 240px;
+    height: 240px;
+  }
+  .img-with-quote-wrapper .pos-relative {
+    position: relative;
+    width: 240px;
+    height: 240px;
+  }
+  .img-with-quote-wrapper .pos-relative .img-wraper {
+    width: 240px;
+    height: 240px;
+  }
+  .img-with-quote-wrapper .pos-relative .quotebg {
+    width: 240px;
+    height: 240px;
+    bottom: -200px;
+  }
+  .pos-relative .quotebg .quote {
+    font-size: 10px;
+    line-height: 13px;
+    padding: 45px 40px;
+  }
+  .transformative-goals-wrapper .pad-chart-left,
+  .transformative-goals-wrapper .pad-chart-right {
+    padding: 230px 25px 20px 25px;
+  }
+}
+/*== ipad view =*/
+@media (min-width: 768px) and (max-width: 1023px) {
+  .goalBanner .banner-caption {
+    font-size: 36px;
+    bottom: 50px;
+    max-width: 70%;
+  }
+  .transformative-goals-wrapper .goal-content h2 {
+    font-size: 24px;
+  }
+  .left-pos.practices h2 {
+    padding-left: 25px;
+    padding-right: 0;
+  }
+  .transformative-goals-wrapper .goal-content .subheading {
+    max-height: 250px;
+  }
+  .transformative-goals-wrapper .pad-subheading-right {
+    padding: 18px 25px 20px 25px;
+  }
+  .transformative-goals-wrapper .pad-chart-right {
+    padding: 250px 25px 20px 25px;
+  }
+  .transformative-goals-wrapper .subheading h3,
+  .transformative-goals-wrapper .chart-map h3,
+  .transformative-goals-wrapper .chart-map p {
+    font-size: 18px;
+  }
+  .transformative-goals-wrapper .subheading p,
+  .transformative-goals-wrapper .chart-map p {
+    font-size: 13px;
+  }
+  .transformative-goals-wrapper .goal-content .right-pos.planning h2 {
+    padding-left: 25px;
+  }
+  .transformative-goals-wrapper .goal-content .left-pos.practices h2 {
+    padding-right: 25px;
+  }
+  .transformative-goals-wrapper .pad-subheading-left {
+    padding: 25px 25px 20px 25px;
+  }
+  .transformative-goals-wrapper .pad-chart-left {
+    padding: 250px 25px 20px 25px;
+  }
+  .img-with-quote-wrapper {
+    width: 320px;
+    height: 320px;
+    position: relative;
+    z-index: 1;
+    left: 40px;
+    top: 0px;
+  }
+  .right-pos .img-with-quote-wrapper {
+    left: -150px;
+  }
+  .img-with-quote-wrapper .pos-relative {
+    position: relative;
+    width: 320px;
+    height: 320px;
+  }
+  .img-with-quote-wrapper .pos-relative .img-wraper {
+    width: 320px;
+    height: 320px;
+    overflow: hidden;
+    border-radius: 100%;
+    background-color: #282828;
+    position: absolute;
+    z-index: 1;
+    top: 0;
+  }
+  .img-with-quote-wrapper .pos-relative .img-wraper img {
+    border-radius: 100px;
+    width: 100%;
+  }
+  .img-with-quote-wrapper .pos-relative .quotebg {
+    background: url(../images/icon-quote.png) no-repeat 18% 18% #282828;
+    width: 320px;
+    height: 320px;
+    position: absolute;
+    top: 0;
+    left: auto;
+    right: -290px;
+    border-radius: 100%;
+  }
+  .pos-relative .quotebg .quote {
+    color: #fff;
+    font-size: 14px;
+    line-height: 19px;
+    padding: 54px 60px;
+  }
+  .lang-es .pos-relative .quotebg .quote {
+    font-size: 13px;
+    line-height: 18px;
+  }
+  .lang-fr .pos-relative .quotebg .quote {
+    font-size: 12px;
+    line-height: 17px;
+  }
+  h3.goals-chart-heading {
+    font-size: 1.5em;
+  }
+  .goalBanner .banner-caption span {
+    display: block;
+    font-size: 16px;
+    padding: 10px;
+    text-transform: none;
+    font-weight: normal;
+  }
+}
+@media (min-width: 1024px) {
+  .goalBanner .banner-caption {
+    font-size: 54px;
+    bottom: 50px;
+    max-width: 50%;
+  }
+  .transformative-goals-wrapper .pad-subheading-right {
+    padding: 18px 236px 20px 25px;
+  }
+  .transformative-goals-wrapper .pad-subheading-left {
+    padding: 18px 25px 20px 236px;
+  }
+  .transformative-goals-wrapper .pad-chart-right {
+    padding: 18px 236px 20px 25px;
+  }
+  .transformative-goals-wrapper .pad-chart-left {
+    padding: 18px 25px 20px 236px;
+  }
+  .transformative-goals-wrapper .goal-content .right-pos.planning h2 {
+    padding-left: 280px;
+  }
+  .img-with-quote-wrapper {
+    width: 360px;
+    height: 360px;
+    right: -150px;
+    top: -50px;
+  }
+  .right-pos .img-with-quote-wrapper {
+    left: -150px;
+  }
+  .img-with-quote-wrapper .pos-relative {
+    width: 360px;
+    height: 360px;
+  }
+  .img-with-quote-wrapper .pos-relative .img-wraper {
+    width: 360px;
+    height: 360px;
+  }
+  .img-with-quote-wrapper .pos-relative .quotebg {
+    background: url(../images/icon-quote.png) no-repeat 18% 18% #282828;
+    width: 360px;
+    height: 360px;
+    left: 0;
+    bottom: -324px;
+  }
+  .pos-relative .quotebg .quote {
+    font-size: 16px;
+    padding: 80px 50px 60px 60px;
+    line-height: 22px;
+  }
+  .lang-es .pos-relative .quotebg .quote {
+    font-size: 14px;
+    padding: 62px 45px 60px 60px;
+    line-height: 20px;
+  }
+  .lang-fr .pos-relative .quotebg .quote {
+    font-size: 14px;
+    padding: 62px 45px 60px 60px;
+    line-height: 20px;
+  }
+  .transformative-goals-wrapper .goal-content h2 {
+    font-size: 30px;
+  }
+  .transformative-goals-wrapper .subheading h3,
+  .transformative-goals-wrapper .chart-map h3,
+  .transformative-goals-wrapper .chart-map p {
+    font-size: 22px;
+  }
+  .transformative-goals-wrapper .subheading p,
+  .transformative-goals-wrapper .chart-map p {
+    font-size: 15px;
+  }
+  .radio-wrapper .iradio_futurico {
+    background-position: -73px 0;
+  }
+}
+@media (max-width: 360px) {
+  .chart-map .selector .selected {
+    width: 160px;
+    background: url(../images/dropdown_bg.png) 0 0 no-repeat;
+    background-size: 98%;
+    line-height: 32px;
+  }
+  .chart-map .selector .list {
+    display: block;
+    width: 180px;
+  }
+}
+/*====Dropdown css end====*/
+
+/*====tab css====*/
+@media (max-width: 460px) {
+  ul.tabs {
+    border-bottom: 0;
+  }
+  ul.tabs li {
+    background: #fff;
+    color: #282828;
+    display: inline-block;
+    padding: 6px 0 6px 0;
+    margin: 0 10px 0 0;
+    cursor: pointer;
+    font-size: 11px;
+    border: 2px #333 solid;
+    width: 100%;
+    text-align: center;
+    margin: 2px;
+  }
+  ul.tabs li.current {
+    background: #333;
+    color: #fff;
+  }
+  ul.tabs li.current span {
+    width: 0px;
+    height: 0px;
+    display: block;
+    background: transparent;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    bottom: -10px;
+    z-index: 5;
+  }
+}
+@media (max-width: 640px) {
+  .trans-goals svg g.x.axis g.tick text {
+    transform: rotate(60deg) translate(15px, -8px);
+    -o-transform: rotate(60deg) translate(15px, -8px);
+    -ms-transform: rotate(60deg) translate(15px, -8px);
+    -webkit-transform: rotate(60deg) translate(15px, -8px);
+    -moz-transform: rotate(60deg) translate(15px, -8px);
+  }
+  .trans-goals svg,
+  text.animate-data {
+    font: 9px 'robotoregular';
+  }
+  .goalBanner .banner-caption span {
+    display: block;
+    font-size: 15px;
+    padding: 10px;
+    text-transform: none;
+    font-weight: normal;
+  }
+  .radio-wrapper span {
+    font-size: 12px;
+  }
+
+}
+/*====tab css end====*/
+/*legend css */
+@media (max-width: 990px) {
+  ul.chart-legend {
+    list-style: none;
+    margin: 20px 0 20px 0;
+    padding: 10px;
+    display: block;
+    border: 1px #ccc solid;
+    position: relative;
+    right: 0%;
+    left: 0%;
+  }
+  ul.chart-legend li {
+    margin: 0 10px;
+    font-size: 12px;
+    list-style: none;
+    color: #333;
+    display: inline-block;
+  }
+}

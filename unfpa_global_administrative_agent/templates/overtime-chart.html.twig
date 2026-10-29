@@ -1,0 +1,47 @@
+{% if (node_type == 'ct_donor') or (node_type == 'aa_partners') %}
+  <h2 class="title-h2">{{ 'Financial data for'|t }} {{ node_title }}</h2>
+{% else %}
+  <h2 class="title-h2">{{ 'Financial data' }}</h2>
+{% endif %}
+<div class="custom-margin-default">
+  <nav class="custom-graph-header margin-small tabs-nav overtime">
+    <div class="container">
+      <div class="row between-xs middle-xs">
+        <div class="mobile-dropdown">
+          {% if node_type == 'ct_donor' %}
+            <label for="#" class="mobile-dropdown__selected">{{ 'Deposits'|t }}</label>
+            <ul class="custom-graph-header__menu tabs-nav__options" data-filter="type">
+              <li class="commitments" onclick="regenerate_overtime_chart('commitment')">{{ 'Commitments'|t }}</li>
+              <li class="deposits active" onclick="regenerate_overtime_chart('deposit')">{{ 'Deposits'|t }}</li>
+            </ul>
+          {% elseif node_type == 'aa_partners' %}
+            <label for="#" class="mobile-dropdown__selected">{{ 'Transfers'|t }}</label>
+            <ul class="custom-graph-header__menu tabs-nav__options" data-filter="type">
+              <li class="active transfers" onclick="regenerate_overtime_chart('disbursement')">{{ 'Transfers'|t }}</li>
+              <li class="expenditure" onclick="regenerate_overtime_chart('expenditure')">{{ 'Expenditure'|t }}</li>
+            </ul>
+          {% else %}
+            <label for="#" class="mobile-dropdown__selected">{{ 'Commitments'|t }}</label>
+            <ul class="custom-graph-header__menu tabs-nav__options" data-filter="type">
+              <li class="commitments" onclick="regenerate_overtime_chart('commitment')">{{ 'Commitments'|t }}</li>
+              <li class="deposits active" onclick="regenerate_overtime_chart('deposit')">{{ 'Deposits'|t }}</li>
+              <li class="transfers" onclick="regenerate_overtime_chart('disbursement')">{{ 'Transfers'|t }}</li>
+              <li class="expenditure" onclick="regenerate_overtime_chart('expenditure')">{{ 'Expenditure'|t }}</li>
+            </ul>
+          {% endif %}
+        </div>
+        <span id="ovetime_chart_label">{{ 'Over time'|t }}</span>
+        <hr>
+      </div>
+    </div>
+  </nav>
+  <section class="margin-small">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          <div id="overtime_chart" class="bar-chart"  data-legend="{{ 'Over time'|t }}"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

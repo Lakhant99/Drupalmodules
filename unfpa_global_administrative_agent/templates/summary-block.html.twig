@@ -1,0 +1,50 @@
+{#
+/**
+* @file
+* Default theme implementation to display a block.
+*
+* @see template_preprocess_block()
+*
+* @ingroup themeable
+*/
+#}
+<section class="margin-default">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="dashboard-numbers">
+         
+          <div class="dashboard-numbers__col dashboard-numbers-commitments">
+            <h3 class="title-h1">
+              <span class="amount">{{ summary_block_data.commit_amount_dashboard }}</span>
+              <span>{{'total commitments'|t}}
+                <span class="tootip-i">i <span class="tooltip-info">Commitments are made in local currencies and converted using UN Operational Rates of Exchange.</span>
+                </span>
+              </span>
+            </h3>
+          </div>
+          <div class="dashboard-numbers__col dashboard-numbers-deposit">
+            <h3 class="title-h1">
+              <span class="amount">{{ summary_block_data.deposit_amount_dashboard }}</span>
+              <span>{{'total deposits'|t }}</span>
+            </h3>
+          </div>
+          <div class="dashboard-numbers__col dashboard-numbers-disbursed">
+            <h3 class="title-h1">
+              <span class="amount">{{ summary_block_data.disbursement_amount_dashboard }}</span>
+              <span>{{'total transfers'|t }}</span>
+            </h3>
+          </div>
+           <div class="dashboard-numbers__col dashboard-numbers-expenditure">
+            <h3 class="title-h1">
+               <span class="amount">{{ summary_block_data.expenditure_amount_dashboard }}</span>
+              <span>{{ 'total expenditure'|t }}</span>
+            </h3>
+          </div> 
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+         

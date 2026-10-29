@@ -1,0 +1,21 @@
+<?php
+
+/**
+ * @file
+ * Custom module for Joint Programme Funds Page
+ */
+
+/**
+ * Implements hook_theme().
+ * @return array
+ */
+function unfpa_global_custom_funds_theme() {
+  return [
+    'unfpa_global_custom_incoming_funds' => [
+      'variables' => [
+        'data' => NULL,
+      ],
+      'template' => 'incoming-funds',
+    ],
+  ];
+}

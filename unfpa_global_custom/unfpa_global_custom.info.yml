@@ -1,0 +1,5 @@
+name: UNFPA Global Custom
+type: module
+description: 'This module contain all the custom data'
+package: UNFPA Global
+core: 8.x

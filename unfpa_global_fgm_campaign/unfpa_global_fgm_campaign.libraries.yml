@@ -1,0 +1,57 @@
+unfpa_global_fgm_campaign:
+  version: 1.x
+  css:
+    theme:
+      css/fgm-campaign.page.css: {}
+      /libraries/chosen/lib.chosen.css: {}
+      css/fgm-campaign.nav.css: {}
+      css/fgm-campaign.share.css: {}
+      css/fgm-campaign.entry.css: {}
+      css/fgm-campaign.panels.css: {}
+      css/fgm-campaign.map.css: {}
+      css/fgm-campaign.actions.css: {}
+  js:
+    /libraries/lib/lib.raf.js: {}
+    /libraries/html5worldmap/worldmap.js: {}
+    /libraries/chosen/lib.chosen.js: {}
+    js/fgm-campaign.general.js: {}
+    js/fgm-campaign.nav.js: {}
+    js/fgm-campaign.share.js: {}
+    js/fgm-campaign.entry.js: {}
+    js/fgm-campaign.panels.js: {}
+    js/fgm-campaign.map-config.js: {}
+    js/fgm-campaign.map.js: {}
+    js/fgm-campaign.actions.js: {}
+  dependencies:
+    - core/drupal
+    - core/jquery
+    - core/jquery.once
+    - core/drupalSettings
+
+unfpa_global_fgm_campaign_details:
+  version: 1.x
+  css:
+    theme:
+      css/fgm-campaign.page.css: {}
+      css/fgm-campaign.nav.css: {}
+      css/fgm-campaign.share.css: {}
+      css/fgm-campaign.actions.css: {}
+      css/fgm-campaign.node.css: {}
+      css/fgm-campaign.prevalance.css: {}
+  js:
+    /libraries/lib/lib.raf.js: {}
+    /libraries/lib/lib.cycle2.js: {}
+    /libraries/lib/lib.cycle-swipe.js: {}
+    js/fgm-campaign.general.js: {}
+    js/fgm-campaign.nav.js: {}
+    js/fgm-campaign.share.js: {}
+    js/fgm-campaign.actions.js: {}
+    js/fgm-campaign.node.js: {}
+    js/fgm-campaign.map-config.js: {}
+    /libraries/html5worldmap/worldmap.js: {}
+    js/fgm-campaign.prevalance.js: {}
+  dependencies:
+    - core/drupal
+    - core/jquery
+    - core/jquery.once
+    - core/drupalSettings

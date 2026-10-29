@@ -1,0 +1,302 @@
+<?php
+
+/**
+ * @file
+ * Unfpa global custom data.
+ */
+use Drupal\paragraphs\Entity\Paragraph;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\views\ViewExecutable;
+use Drupal\views\Plugin\views\query\QueryPluginBase;
+use Drupal\unfpa_global_download_counter\Controller\DownloadcounterController;
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function unfpa_global_custom_form_views_exposed_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+
+  $view_exposed_form_id = [
+    'views-exposed-form-news-news-listing',
+    'views-exposed-form-publications-publication-listing',
+    'views-exposed-form-slideshow-listing-related-block',
+    'views-exposed-form-feature-photo-feature-page',
+  ];
+  if (isset($form['#id']) && in_array($form['#id'], $view_exposed_form_id)) {
+    switch ($form['#id']) {
+      // Set year selection range for slideshow listing block.
+      case 'views-exposed-form-slideshow-listing-related-block':
+      // Set year selection range for Photo Feature listing page.
+      case 'views-exposed-form-feature-photo-feature-page':
+        $keys = array_merge(['all'], range(date("Y"), 2018));
+        $values = array_merge([t('- Year -')], range(date("Y"), 2018));
+        break;
+
+      default:
+        $keys = array_merge(['all'], range(date("Y"), 1997));
+        $values = array_merge([t('- Year -')], range(date("Y"), 1997));
+    }
+    $options = array_combine($keys, $values);
+    // Adding exposed filter.
+    $form['year'] = [
+      '#type' => 'select',
+      '#options' => $options,
+      '#size' => NULL,
+      '#default_value' => 'all',
+      '#attributes' => ['class' => ['select-dropdown', 'select-dropdown__year']],
+    ];
+  }
+}
+
+function unfpa_global_custom_search_api_query_alter(\Drupal\search_api\Query\QueryInterface $query) {
+  $current_domain = \Drupal::service('domain.negotiator')->getActiveId();
+  $query->addCondition('field_domain_access', $current_domain);
+}
+
+/**
+ * Implements hook_views_query_alter().
+ */
+function unfpa_global_custom_views_query_alter(ViewExecutable $view, QueryPluginBase $query) {
+
+  // Query alter for expired filter in events.
+  $view_name = [
+    'news',
+    'publications',
+    'slideshow',
+    'feature',
+    'search_api'
+  ];
+  $view_display_id = [
+    'news_listing',
+    'publication_listing',
+    'listing_related_block',
+    'photo_feature_page',
+    'unfpa_global_search_page'
+  ];
+
+  if (in_array($view->id(), $view_name) && in_array($view->getDisplay()->display['id'], $view_display_id)) {
+    // Fetching Data whose date as per selection.
+    if (!empty($view->exposed_raw_input['year']) && $view->exposed_raw_input['year'] != 'all') {
+      // Traverse through the 'where' part of the query.
+      foreach ($query->where as &$condition_group) {
+        foreach ($condition_group['conditions'] as &$condition) {
+          if ($condition['field'] == 'node_field_data.type') {
+            $query->queueTable('node__field_date', 'node_field_data', NULL, 'node__field_date');
+            $field = 'node__field_date.field_date_value';
+            $value = $view->exposed_raw_input['year'];
+            $operator = 'REGEXP';
+            $query->addWhere(2, $field, $value, $operator);
+          }
+        }
+      }
+    }
+  }
+
+  if ($view->id() == "search_api" && $view->getDisplay()->display['id'] == 'unfpa_global_search_page') {
+    $view->element['#attached']['library'][] = 'unfpa_global_custom/unfpa_global_custom.solr-libraries';
+  }
+
+  if ($view->id() == 'media_details' && $view->getDisplay()->display['id'] == 'press_release') {
+    $current_path = \Drupal::service('path.current')->getPath();
+    $current_path_with_alias = \Drupal::service('path.alias_manager')->getAliasByPath($current_path);
+    foreach ($query->where as &$condition_group) {
+      foreach ($condition_group['conditions'] as &$condition) {
+        if ($condition['field'] == 'node__field_format.field_format_value') {
+          if($current_path_with_alias == '/press/media-advisory') {
+            $condition['value'] = ['Media Advisory'];
+          }
+          elseif($current_path_with_alias == '/press/opinion') {
+            $condition['value'] = ['opinion'];
+          }
+          elseif($current_path_with_alias == '/press/speech') {
+            $condition['value'] = ['speech'];
+          }
+          elseif($current_path_with_alias == '/press/press-release') {
+            $condition['value'] = ['Press Release'];
+          }
+          else {
+            $condition['value'] = ['statement','speech'];
+          }
+          $condition['operator'] = "IN";
+        }
+      }
+    }
+  }
+
+}
+
+
+  /**
+ * Implements hook_preprocess_html() to attach solr search library to all page.
+ */
+function unfpa_global_custom_preprocess_html(&$vars) {
+  $vars['#attached']['library'][] = 'unfpa_global_custom/unfpa_global_custom.solr-libraries';
+}
+
+/**
+ * Implements hook_views_pre_render().
+ */
+function unfpa_global_custom_views_pre_render(ViewExecutable $view) {
+  if ($view->id() == "publications" && $view->getDisplay()->display['id'] == 'publication_listing' || $view->getDisplay()->display['id'] == 'latest_publication') {
+    foreach ($view->result as &$row) {
+      $output = '';
+      foreach ($row->_entity->get('field_languages') as $language_paragraph) {
+        if (!empty($pid = $language_paragraph->target_id)) {
+          $paragraph = Paragraph::load($pid);
+          if (is_object($paragraph)) {
+            $fid = $paragraph->field_pdf_upload->target_id;
+            if ($fid) {
+              $uri = $paragraph->field_pdf_upload->entity->uri->value;
+              $pdf_url = file_create_url($uri);
+              $langCode = isset($paragraph->field_available_language->entity) ? $paragraph->field_available_language->entity->field_language_code->value : '';
+              // Get Pdf download counter.
+              $dwld_cnt = get_pdf_download_count($fid);
+              $count = isset($dwld_cnt[0]) ? $dwld_cnt[0]->count : 0;
+            }
+          }
+          if (!empty($uri)) {
+            if (!empty($count)) {
+              $output .= '<a href="' . $pdf_url . '" class="btn default btn-download" target="_blank" data-toggle="tooltip" data-placement="top" title="' . $count . ' Downloads"><strong>' . $langCode . '</strong><span>' . $count . '</span></a>';
+            }
+            else {
+              $output .= '<a href="' . $pdf_url . '" class="btn default btn-download" target="_blank" data-toggle="tooltip" data-placement="top"><strong>' . $langCode . '</strong></a>';
+            }
+          }
+        }
+      }
+      $row->field_sub_title[0]['rendered']['#markup'] = $output;
+      unset($row);
+    }
+  }
+  if ($view->id() == "resource" && $view->getDisplay()->display['id'] == 'resource_library_listing') {
+    foreach ($view->result as &$row) {
+      $output = '';
+      foreach ($row->_entity->get('field_resource_document') as $language_paragraph) {
+        if (!empty($pid = $language_paragraph->target_id)) {
+          $paragraph = Paragraph::load($pid);
+          if (is_object($paragraph)) {
+            $fid = $paragraph->field_resource_pdf_upload->target_id;
+            if ($fid) {
+              $uri = $paragraph->field_resource_pdf_upload->entity->uri->value;
+              $pdf_url = file_create_url($uri);
+              $langCode = isset($paragraph->field_available_language->entity) ? $paragraph->field_available_language->entity->field_language_code->value : '';
+            }
+          }
+          if (!empty($uri)) {
+            $output .= '<a href="' . $pdf_url . '" class="btn default btn-download" target="_blank"><strong>' . $langCode . '</strong></a>';
+          }
+        }
+      }
+      $row->field_sub_title[0]['rendered']['#markup'] = $output;
+      unset($row);
+    }
+  }
+  if ($view->id() == "team_members" && $view->getDisplay()->display['id'] == 'active_executive_directors') {
+    foreach ($view->result as &$row) {
+      $output = '';
+      foreach ($row->_entity->get('field_biography') as $language_paragraph) {
+        if (!empty($pid = $language_paragraph->target_id)) {
+          $paragraph = Paragraph::load($pid);
+          if (is_object($paragraph)) {
+            $fid = $paragraph->field_file_upload->target_id;
+            if ($fid) {
+              $uri = $paragraph->field_file_upload->entity->uri->value;
+              $pdf_url = file_create_url($uri);
+              $langCode = isset($paragraph->field_available_language->entity) ? $paragraph->field_available_language->entity->field_language_code->value : '';
+            }
+          }
+          if (!empty($uri)) {
+            $output .= '<a href="' . $pdf_url . '" class="btn default btn-download" target="_blank"><strong>' . $langCode . '</strong></a>';
+          }
+        }
+      }
+      $row->field_tenure[0]['rendered']['#markup'] = $output;
+      unset($row);
+    }
+  }
+}
+
+/**
+ * Function to get pdf download count for publication page.
+ */
+function get_pdf_download_count($fid = '') {
+
+  $module_handler = \Drupal::service('module_handler');
+  $connection = \Drupal::service('database');
+  $config = \Drupal::service('config.factory');
+  $obj = new DownloadcounterController($module_handler, $connection, $config);
+  $result = $obj->unfpa_global_download_counter_get_download_count($fid);
+
+  return $result;
+}
+
+/**
+ * Implements hook_preprocess_node().
+ * Assign counter to template to show download count.
+ */
+function unfpa_global_custom_preprocess_node(&$variables) {
+  if ($variables['node']->bundle() == 'ct_publications') {
+    $counter = [];
+    foreach ($variables['node']->get('field_languages') as $language_paragraph) {
+      if (!empty($pid = $language_paragraph->target_id)) {
+        $paragraph = Paragraph::load($pid);
+        if (is_object($paragraph)) {
+          $fid = $paragraph->field_pdf_upload->target_id;
+
+          // Get Pdf download counter.
+          if ($fid) {
+            $dwld_cnt = get_pdf_download_count($fid);
+            $count = isset($dwld_cnt[0]) ? $dwld_cnt[0]->count : 0;
+            $counter[$fid] = $count;
+          }
+        }
+      }
+    }
+    $variables['counter'] = $counter;
+  }
+  if ($variables['node']->bundle() == 'ct_featured_publication') {
+    $counter = [];
+
+    if ($variables['node']->get('field_featured_pub')->entity) {
+      foreach ($variables['node']->get('field_featured_pub')->entity->get('field_languages') as $language_paragraph) {
+
+        if (!empty($pid = $language_paragraph->target_id)) {
+          $paragraph = Paragraph::load($pid);
+          if (is_object($paragraph)) {
+            $fid = $paragraph->field_pdf_upload->target_id;
+
+            // Get Pdf download counter.
+            if ($fid) {
+              $dwld_cnt = get_pdf_download_count($fid);
+              $count = isset($dwld_cnt[0]) ? $dwld_cnt[0]->count : 0;
+              $counter[$fid] = $count;
+            }
+          }
+        }
+      }
+    }
+    $variables['counter'] = $counter;
+  }
+}
+
+/**
+ * Implements hook_preprocess_views_view_field().
+ */
+function unfpa_global_custom_preprocess_views_view_field(&$variables) {
+  $view = $variables['view'];
+  $field = $variables['field'];
+}
+
+/**
+ * Get share tags locale in a form of en_US.
+ *
+ * @return string
+ *   Locale information in form of 'en_US', 'fr_FR', etc.
+ */
+function unfpa_global_custom_share_get_locale($langcode) {
+  $country = $langcode;
+  if ($langcode == 'en') {
+    $country = 'us';
+  }
+
+  return $langcode . '_' . strtoupper($country);
+}

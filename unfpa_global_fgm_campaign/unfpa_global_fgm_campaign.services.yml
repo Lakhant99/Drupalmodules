@@ -1,0 +1,4 @@
+services:
+  unfpa_global_fgm_campaign.fgm_campaign_data:
+      class: Drupal\unfpa_global_fgm_campaign\FGMCampaignData
+      arguments: ['@module_handler','@database','@serialization.json','@language_manager']

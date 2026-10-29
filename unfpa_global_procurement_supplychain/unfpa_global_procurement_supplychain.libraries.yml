@@ -1,0 +1,41 @@
+procurement_supplychain:
+  version: 1.x
+  css:
+    theme:
+      css/style.css: {}
+      css/procurement-supplychain-menu.css: {}
+      css/quick-nav.css: {}
+      css/custom.css: {}
+      css/unfpa_global_procurement_slider.css: {}
+      css/banner.css: {}
+  js:
+    js/unfpa_global_procurement_supplychain_slider.js: { header: true }
+    js/extra.js: { footer: true }
+    js/common.js: {}
+  dependencies:
+    - core/drupal
+    - core/jquery
+    - core/jquery.once
+    - core/drupalSettings
+    - unfpa_global/global-results
+    - unfpa_global/slick-library
+    - unfpa_global/topics-libraries
+    - unfpa_global/parallax-libraries
+resource_listing:
+  version: 1.x
+  css:
+    theme:
+      css/resource-listing.css: {}
+  js:
+    js/resource-listing.js: {}
+
+topics_sidebar:
+  version: 1.x
+  css:
+    theme:
+      css/topic.css: {}
+
+government_partners:
+  version: 1.x
+  js:
+    js/government-spendings-map.js: {}

@@ -1,0 +1,33 @@
+{#
+/**
+ * @file
+ * Default theme implementation of a views exposed form.
+ *
+ * Available variables:
+ * - form: A render element representing the form.
+ *
+ * @ingroup templates
+ *
+ * @see template_preprocess_views_exposed_form()
+ */
+#}
+{% if q is not empty %}
+  {#
+    This ensures that, if clean URLs are off, the 'q' is added first,
+    as a hidden form element, so that it shows up first in the POST URL.
+  #}
+  {{ q }}
+{% endif %}
+<div class="form--inline form-inline clearfix">
+  <div class="form-fields">
+    <div class="view-exposed-widget supplies-resources-search">
+      {{ form.combine }}
+    </div>
+      <div class="views-exposed-widget views-widget-filter-field_resource_date_value supplies-resources-search">
+      {{ form.field_date_value}}
+    </div>
+    <div class="view-exposed-widget supplies-resources-document-actions">
+      {{ form.actions }}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,25 @@
+unfpa_global_events:
+  version: 1.x
+  css:
+    theme:
+      css/event-page.css: {}
+      css/hero-image.css: { scope: footer }
+  js:
+    js/event-banner.js: { scope: footer}
+  dependencies:
+    - core/drupal
+    - core/jquery
+    - core/jquery.once
+    - core/drupalSettings
+
+event_share:
+  version: 1.x
+  js:
+    /themes/custom/unfpa_global/vendor/js/jquery.floatit.js: {}
+    /themes/custom/unfpa_global/js/floatit.js: {}
+
+event_listing:
+  version: 1.x
+  css:
+    theme:
+      css/event-listing.css: {}

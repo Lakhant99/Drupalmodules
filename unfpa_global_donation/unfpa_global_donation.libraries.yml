@@ -1,0 +1,35 @@
+donate_page:
+  version: 1.x
+  css:
+    theme:
+      css/global_new.css: {}
+      css/donate.css: {}
+      css/donate-main.css: {}
+  js:
+    js/ct_donate_page.js: {}
+    js/global.js: {}
+    js/stripe_form.js: {}
+    js/payment.js: {}
+    https://js.stripe.com/v3/stripe.js: { type: external, minified: true }
+  dependencies:
+    - core/drupal
+    - core/jquery
+    - core/jquery.once
+    - core/drupalSettings
+    - unfpa_global/global-results
+
+wo_header_effect:
+  version: 1.x
+  css:
+    theme:
+      css/global.css: {}
+
+thankyou:
+  version: 1.x
+  js:
+    js/thankyou.js: {}
+    js/donation-track.js: {}
+  dependencies:
+    - core/jquery
+    - core/jquery.once
+    - core/drupalSettings

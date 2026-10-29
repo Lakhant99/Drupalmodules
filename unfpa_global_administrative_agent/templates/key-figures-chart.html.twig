@@ -1,0 +1,31 @@
+<div class="margin-default">
+  <header class="graph-header margin-small" for="finacialChart">
+    <div class="container">
+      <div class="row between-xs middle-xs">
+        <div class="graph-header__title">
+          <h3 class="title-h3">{{ 'Key figures'|t }}</h3>
+        </div>
+        <div class="graph-header__actions">
+          {% if date_dropdown %}
+            <select name="" id="" class="select-year chart-select" data-filter="date">
+              {% for year in date_dropdown %}
+                <option value="{{ year }}">{{ year }}</option>
+              {% endfor %}
+            </select>
+          {% endif %}
+        </div>
+      </div>
+      <hr>
+    </div>
+  </header>
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <div id="finacialChart" class="chart-container bar-chart" data-type="bar" data-legend="In US$" {% if start_date %}data-filters="[{column: 'date', value: {{ start_date }}}] {% endif %}"></div>
+        {% if date_dropdown is empty %}
+          <span class="map-no-data-available">{{ 'No data available'|t }}</span>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,286 @@
+.fgm-panels {
+  background: #fff;
+  position: relative;
+  z-index: 2;
+}
+
+/* Fix for MS Edge flicker when going to #map href. */
+@media all and (min-width: 850px) {
+  html.js .fgm-panels {
+    min-height: 170vh;
+  }
+}
+
+.fgm-panels-lock {
+  width: 100%;
+  left: 0;
+  overflow: hidden;
+}
+
+.fgm-panels-inner {
+  padding-top: 96px;
+}
+
+.fgm-panel {
+  width: 100%;
+  margin-bottom: 24px;
+}
+
+.fgm-panels .fgm-panel a {
+  display: block;
+  width: 100%;
+  text-decoration: none;
+  outline: 0 none;
+}
+
+.fgm-panel-holder {
+  width: 100%;
+  height: 0;
+  padding-bottom: 129.571%;
+  position: relative;
+  overflow: hidden;
+  background: #f5f5f5;
+}
+
+.fgm-panel-img {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1;
+  background: 0 0 no-repeat;
+  background-size: cover;
+  transition: transform 1s ease-out;
+}
+
+.fgm-panel a:hover .fgm-panel-img {
+  transform: scale(1.02);
+}
+
+.fgm-panel-content {
+  width: 100%;
+  height: 100%;
+  padding: 24px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 2;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+h3.fgm-panel-title {
+  margin: 0;
+  color: #fff;
+  font-size: 43px;
+  line-height: 48px;
+  letter-spacing: 1px;
+  opacity: 0.7;
+  transition: opacity 0.3s ease-out;
+}
+
+.fgm-panel a:hover .fgm-panel-title,
+.fgm-panel a.fgm-hover .fgm-panel-title {
+  opacity: 0.9;
+}
+
+.fgm-panel-texts {
+  width: 100%;
+  padding: 0 24px 24px 24px;
+  min-height: 50px;
+  position: absolute;
+  left: 0;
+  bottom: -300px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  opacity: 0;
+  transition: opacity 0.3s ease-out, bottom 0.3s ease-out;
+}
+
+.fgm-panel a:hover .fgm-panel-texts,
+.fgm-panel a.fgm-hover .fgm-panel-texts {
+  opacity: 1;
+  bottom: 0;
+}
+
+.fgm-panel-texts p {
+  margin: -26px 0 0 0;
+  color: #fff;
+  font-size: 30px;
+  line-height: 38px;
+  max-width: 235px;
+  position: relative;
+  z-index: 2;
+}
+
+.fgm-panel-tint {
+  display: block;
+  position: absolute;
+  left: 0;
+  top: -60px;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 800px 60px 0;
+  z-index: 1;
+}
+
+.fgm-panel-arrow {
+  display: block;
+  width: 20px;
+  height: 14px;
+  background: url(../images/arrow-right.svg) 0 0 no-repeat;
+  background-size: 20px 14px;
+  position: absolute;
+  right: 24px;
+  bottom: 33px;
+  z-index: 2;
+}
+
+.fgm-panel-color-1 .fgm-panel-texts {
+  background: rgba(249, 149, 27, 0.7);
+}
+
+.fgm-panel-color-1 .fgm-panel-tint {
+  border-color: transparent transparent rgba(249, 149, 27, 0.7) transparent;
+}
+
+.fgm-panel-color-2 .fgm-panel-texts {
+  background: rgba(46, 166, 181, 0.7);
+}
+
+.fgm-panel-color-2 .fgm-panel-tint {
+  border-color: transparent transparent rgba(46, 166, 181, 0.7) transparent;
+}
+
+.fgm-panel-color-3 .fgm-panel-texts {
+  background: rgba(241, 196, 104, 0.7);
+}
+
+.fgm-panel-color-3 .fgm-panel-tint {
+  border-color: transparent transparent rgba(241, 196, 104, 0.7) transparent;
+}
+
+@media all and (min-width: 850px) {
+  .fgm-panels-inner {
+    padding-top: 196px;
+  }
+
+  .fgm-panels-wrap {
+    overflow: hidden;
+  }
+
+  .fgm-panels-panels {
+    margin-left: -24px;
+  }
+
+  .fgm-panel {
+    float: left;
+    width: 33.3333%;
+    padding-left: 24px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    margin-bottom: 0;
+    transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+  }
+
+  .fgm-panel-content {
+    padding-top: 18px;
+  }
+
+  h3.fgm-panel-title {
+    font-size: 33px;
+    line-height: 38px;
+  }
+
+  .fgm-panel-texts p {
+    font-size: 22px;
+    line-height: 28px;
+  }
+
+  .fgm-panel-arrow {
+    bottom: 30px;
+  }
+}
+
+@media all and (min-width: 1200px) {
+  .fgm-panel-content {
+    padding: 30px 38px 0 38px;
+  }
+
+  .fgm-panel-texts {
+    padding: 0 38px 41px 38px;
+  }
+
+  h3.fgm-panel-title {
+    font-size: 43px;
+    line-height: 48px;
+  }
+
+  .fgm-panel-texts p {
+    margin-top: -46px;
+    font-size: 30px;
+    line-height: 38px;
+  }
+
+  .fgm-panel-tint {
+    top: -120px;
+    border-width: 0 800px 120px 0;
+  }
+
+  .fgm-panel-arrow {
+    right: 44px;
+    bottom: 50px;
+  }
+}
+
+/* RTL Arabic */
+.lang-ar h3.fgm-panel-title {
+  text-align: right;
+}
+
+.lang-ar .fgm-panel-tint {
+  left: auto;
+  right: 0;
+  border-width: 0 0 60px 800px;
+}
+
+.lang-ar .fgm-panel-arrow {
+  right: auto;
+  left: 24px;
+  -webkit-transform: rotateZ(180deg);
+  -moz-transform: rotateZ(180deg);
+  -ms-transform: rotateZ(180deg);
+  transform: rotateZ(180deg);
+}
+
+.lang-ar .fgm-panel-texts p {
+  padding-left: 20px;
+}
+
+/* TODO: Middle panel has alignment issues. */
+@media all and (min-width: 850px) {
+  .lang-ar .fgm-panel-texts p {
+    position: absolute;
+    right: 24px;
+    left: 24px;
+    bottom: 26px;
+  }
+}
+
+@media all and (min-width: 1200px) {
+  .lang-ar .fgm-panel-tint {
+    border-width: 0 0 120px 800px;
+  }
+
+  .lang-ar .fgm-panel-texts p {
+    bottom: 40px;
+    margin-top: 0;
+    font-size: 24px;
+    line-height: 31px;
+  }
+}

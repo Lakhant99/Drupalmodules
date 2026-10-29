@@ -1,0 +1,66 @@
+<div class="fgm-actions {{ data.class }} cond-font">
+  <div class="fgm-width-wrap fgm-side-padd">
+    <div class="fgm-actions-inner">
+      <div class="fgm-actions-inner-2">
+
+        <div class="fgm-action">
+          <a href="{{ data.url_learn }}">
+            <span class="fgm-action-content">
+              <span class="fgm-action-title">
+                {{ "Learn"|t }}
+                <span class="fgm-action-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 42 42">
+                    <polygon points="0,23.543 30.643,23.543 16.176,37.627 20.433,42 42,21 20.433,0 16.176,4.371 30.643,18.458 0,18.458 "></polygon>
+                  </svg>
+                </span>
+              </span>
+              <span class="fgm-action-description">
+                {{ "more about UNFPA’s work to eliminate FGM"|t }}
+              </span>
+            </span>
+          </a>
+        </div>
+
+
+        {% if data.show_pledge is not empty %}
+          <div class="fgm-action">
+            <a href="{{ data.url_pledge }}">
+              <span class="fgm-action-content">
+                <span class="fgm-action-title">
+                  {{ "Pledge"|t }}
+                  <span class="fgm-action-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 42 42">
+                      <polygon points="0,23.543 30.643,23.543 16.176,37.627 20.433,42 42,21 20.433,0 16.176,4.371 30.643,18.458 0,18.458 "></polygon>
+                    </svg>
+                  </span>
+                </span>
+                <span class="fgm-action-description">
+                  {{ "to become a champion in the fight to end FGM"|t }}
+                </span>
+              </span>
+            </a>
+          </div>
+        {% endif %}
+
+        <div class="fgm-action">
+          <a href="{{ data.url_donate }}">
+            <span class="fgm-action-content">
+              <span class="fgm-action-title">
+                {{ "Donate"|t }}
+                <span class="fgm-action-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 42 42">
+                    <polygon points="0,23.543 30.643,23.543 16.176,37.627 20.433,42 42,21 20.433,0 16.176,4.371 30.643,18.458 0,18.458 "></polygon>
+                  </svg>
+                </span>
+              </span>
+              <span class="fgm-action-description">
+                {{ "to help 68 million girls remain uncut"|t }}
+              </span>
+            </span>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,56 @@
+# unfpa_global_procurement_supplychain.procurement-supplychain-config:
+  # path: 'admin/unfpa_global_site_config/procurement-supplychain-config'
+  # defaults:
+    # _form: '\Drupal\unfpa_global_procurement_supplychain\Form\ProcurementSupplyChainConfigForm'
+    # _title: 'Procurement & Supply Chain Configuration'
+  # requirements:
+    # _permission: 'access content'
+    
+#unfpa_global_procurement_supplychain.overview:
+#  path: '/procurement-and-supplychain/what-we-do'
+#  defaults:
+#    _controller: '\Drupal\unfpa_global_procurement_supplychain\Controller\ProcurementSupplyChainWhatWeDoController::content'
+#  requirements:
+#    _permission: 'access content'
+    
+#unfpa_global_procurement_supplychain.govt_and_partners:
+#  path: '/procurement-and-supplychain/for-governments-and-partners'
+#  defaults:
+#    _controller: '\Drupal\unfpa_global_procurement_supplychain\Controller\ForGovernmentsAndPartnersController::content'
+#  requirements:
+#    _permission: 'access content'
+    
+unfpa_global_procurement_supplychain.suppliers:
+  path: '/procurement-and-supplychain/for-suppliers'
+  defaults:
+    _controller: '\Drupal\unfpa_global_procurement_supplychain\Controller\ForSuppliersController::content'
+  requirements:
+    _permission: 'access content'
+    
+unfpa_global_procurement_supplychain.prod_and_tools:
+  path: '/procurement-and-supplychain/products-and-tools'
+  defaults:
+    _controller: '\Drupal\unfpa_global_procurement_supplychain\Controller\ProductsAndToolsController::content'
+  requirements:
+    _permission: 'access content'
+    
+# unfpa_global_procurement_supplychain.resources:
+#   path: '/procurement-and-supplychain/resources'
+#   defaults:
+#     _controller: '\Drupal\unfpa_global_procurement_supplychain\Controller\ResourcesController::content'
+#   requirements:
+#     _permission: 'access content'
+    
+unfpa_global_procurement_supplychain.my_account:
+  path: '/procurement-and-supplychain/my-account'
+  defaults:
+    _controller: '\Drupal\unfpa_global_procurement_supplychain\Controller\MyAccountController::content'
+  requirements:
+    _permission: 'access content'
+
+unfpa_global_procurement_supplychain.goverment_map:
+  path: '/update-partners-government-map'
+  defaults:
+    _controller: '\Drupal\unfpa_global_procurement_supplychain\Controller\GovermentMapController::content'
+  requirements:
+    _permission: 'access content'

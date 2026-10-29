@@ -1,0 +1,78 @@
+{% set module_path = bamboo_path_system('module', 'unfpa_global_donation') %}
+<div class="hero-image withoutEffect">
+  <div class="hero-image__content">
+    <h1> {{ data.share_card_title }} </h1>
+    <a class="btn secondary" href="{{ data.node_alias }}">{{ "Back to donate page"|t }}</a>
+  </div>
+</div><!-- hero image end -->
+<div class="container-fluid withoutEffect-hero-image">
+  <!-- //donate breadcrumb -->
+  <div class="row donate-header bg-white">
+    <div class="donate-header__content">
+      <ul class="breadcrumb">
+        <li> <a href="{{ url('<front>') }}">{{ 'Home'|t }}</a></li>
+        <li> <a href="{{ data.node_alias }}">{{ data.node_title|t }}</a></li>
+        <li>{{ 'Thank you'|t }}</li>
+      </ul>
+    </div>
+  </div> <!-- end-->
+  <!-- //donate first content-->
+  <div class="row bg-white">
+    <div class="col-md-12">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <section class="page-content">
+              <article>
+                <div class="donate-thanks">
+                  {{ data.description|raw }}
+                </div>
+                <div class="req-share-wrapper">
+                  {{ data.share_description|raw }}
+                  {% if data.is_share %}
+                    <div class="btn_share" id="btn_share">
+                      <span class="icon_share"><img src="/{{ module_path }}/images/icon-share.svg" alt=""></span>
+                      <span class="txt-share"> {{ 'Share'|t }} </span>
+                    </div>
+                  {% endif %}
+                </div>
+              </article>
+            </section>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div><!-- end-->
+  <div class="popup-wrapper">
+    <div class="row-backto">
+      <div class="btn-close" id="btnClose">
+        <span class="backarow">
+          <img src="/{{ module_path }}/images/icon-back-arrow.svg" alt="">
+        </span>
+        {{ 'Back to Page'|t }}
+      </div>
+    </div>
+    <div class="share-card">
+      <div class="img-holder"><img src="{{ data.share_card_image }}" alt="" title=""></div>
+      <div class="share-card__cardbody">
+        <h4 class="card-title"><a href="{{ data.share_url }}"> {{ data.share_card_title|t }} </a></h4>
+      </div>
+      <div class="social-wrapper">
+        <div class="colm-1">
+          <a href="#" class="fa st_facebook_custom social-link">
+            <span> {{ 'Share on Facebook'|t }} </span>
+            <i><img src="/{{ module_path }}/images/logo-facebook.svg" alt="facebok"></i>
+          </a>
+        </div>
+        <div class="colm-2">
+          <a href="#" class="fa st_twitter_custom social-link">
+            <span> {{ 'Share on Twitter'|t }} </span>
+            <i><img src="/{{ module_path }}/images/logo-twitter.svg" alt="twitter"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="overlay-white"></div>
+</div>
+<!-- //Share popup -->

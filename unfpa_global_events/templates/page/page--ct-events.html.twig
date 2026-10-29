@@ -1,0 +1,36 @@
+{#
+/**
+ * @file
+ *
+ * Default theme implementation to display a single page.
+ */
+#}
+{% set banner_title = bamboo_load_field('field_banner_title', 'node', page.node_id) %}
+{% set banner_sub_title = bamboo_load_field('field_banner_sub_title', 'node', page.node_id) %}
+{% set flag = banner_title ? 1 : banner_sub_title ? 1 : 0 %}
+{% block main %}
+  {% include '@unfpa_global/include/header.html.twig' %}
+  <!-- Hero image desktop -->
+  <div class="page page-height" id="ct-events">
+    <div class="hero-image withoutEffect">
+      {% if flag == 1 %}
+        <div class="hero-image__content">
+          {% if banner_title.value is not empty %}
+            <h1 class="subtitle">{{ banner_title.value }}</h1>
+          {% endif %}
+          {% if banner_sub_title.value is not empty %}
+            <h4 class="subtitle">{{ banner_sub_title.value }}</h4>
+          {% endif %}
+        </div>
+      {% endif %}
+    </div>
+    <!-- Hero image end -->
+    <!-- Content Section starts -->
+    <div class="container-fluid">
+      {{ page.content }}
+    </div>
+    {% include '@unfpa_global/include/footer.html.twig' %}
+    <!-- ontent Section end -->
+  </div>
+  <!-- Hero image end -->
+{% endblock %}

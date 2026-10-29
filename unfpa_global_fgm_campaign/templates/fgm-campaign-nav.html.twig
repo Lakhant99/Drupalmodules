@@ -1,0 +1,58 @@
+<div class="fgm-nav">
+
+  <nav class="fgm-navbar">
+    <div class="fgm-navbar-inner">
+
+      <div class="fgm-nav-links">
+        <div class="fgm-nav-links-inner">
+
+          <button class="fgm-nav-expand">
+            {{ "Show nav"|t }}
+          </button>
+          {% if not data.location == 'page' %}
+            {% if data.sharelink is not empty %}
+              {{ data.sharelink|raw }}
+            {% endif %}
+          {% endif %}
+
+          <a href="{{ data.donate_url }}" class="fgm-nav-donate">
+            {{ "Donate"|t }}
+          </a>
+          {% for item in data.language_links_reversed %}
+            {{ item|raw }}
+          {% endfor %}
+
+        </div>
+      </div>
+
+      <a class="fgm-nav-logo" href="{{ data.front_page }}">
+        <img src="{{ data.module_path }}/images/logo.svg" alt="{{ "UNFPA"|t }}" />
+      </a>      
+      {% if data.location == 'page' %}
+        <a href="{{ data.base_url_wln }}/born-complete" class="fgm-nav-back" data-uw-styling-context="true" data-uw-rm-brl="false">{{ "Back"|t }}</a>
+      {% else %}
+        <div class="fgm-nav-controls">
+          <button class="fgm-nav-skip">{{ "Skip intro"|t }}</button>
+        </div>
+      {% endif %}        
+    </div>
+  </nav>
+
+  <nav class="fgm-menu">
+    <div class="fgm-menu-inner">
+      <ul>
+        {% for item in data.menu_links %}
+          <li>
+            {{ item|raw }}
+          </li>
+        {% endfor %}
+        <li class="fgm-menu-donate">
+          <a href="{{ data.donate_url }}">
+            {{ "Donate"|t }}
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+</div>

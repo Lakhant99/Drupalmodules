@@ -1,0 +1,39 @@
+{# Set content path and title #}
+{% set path = fields.view_node.content|striptags|trim %}
+{# Set content type #}
+{% if fields.field_news_type.content is not empty and fields.type.content == 'ct_news' %}
+  {% set type = fields.field_news_type.content %}
+{% else %}
+  {% set type = fields.type_1.content %}
+{% endif %}
+
+{% set content_title = fields.title.content|striptags|trim %}
+
+{# Set content image url #}
+{% if fields.field_feature_banner_image.content is not empty %}
+  {% set img_url = fields.field_feature_banner_image.content %}
+{% else %}
+  {% set img_url = base_path ~ directory ~ '/images/placeholders/' ~ fields.type.content ~ '_' ~  fields.langcode.content ~ '.gif' %}
+{% endif %}
+{% if img_url is empty %}
+  {% set img_url = base_path ~ directory ~ '/images/placeholders/' ~ fields.type.content ~ '_' ~  fields.langcode.content ~ '.gif' %}
+{% endif %}
+<div class="ct-card">
+  <div class="ct-card__image publication">
+    {% if fields.type.content == 'ct_video' %}
+      {{fields.field_video.content}}
+    {% endif %}
+    {% if fields.type.content == 'ct_news' %}
+      <img class="img-blur" src="{{ img_url }}" alt="{{ content_title }}" title="{{ content_title }}">
+    {% endif %}
+    <a href="{{ path }}">
+      <img src="{{ img_url }}" alt="{{ content_title }}" title="{{ content_title }}">
+    </a>
+  </div>
+  <div class="ct-card__details">
+    <div class="ct-card__details--body">
+      <p class="content-type">{{ type }}</p>
+      <h3 class="card-title"><a href="{{ path }}">{{ content_title }}</a></h3>
+    </div>
+  </div>
+</div>

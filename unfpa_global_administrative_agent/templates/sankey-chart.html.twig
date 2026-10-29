@@ -1,0 +1,34 @@
+<div class="margin-default">
+  <nav class="graph-header margin-small tabs-nav" for="donorsFoundsChart">
+    <div class="container">
+      <div class="row between-xs middle-xs">
+        <div class="mobile-dropdown">
+          <label for="#" class="mobile-dropdown__selected">{{ 'Deposits'|t }}</label>
+          <ul class="graph-header__menu tabs-nav__options" data-filter="type">
+            <li class="commitments"><a href="#">{{ 'Commitments'|t }}</a></li>
+            <li class="deposits active"><a href="#">{{ 'Deposits'|t }}</a></li>
+            <li class="transfers"><a href="#">{{ 'Transfers'|t }}</a></li>
+            <li class="expenditure"><a href="#">{{ 'Expenditure'|t }}</a></li>
+          </ul>
+        </div>
+        <div class="graph-header__actions">
+          <select name="" id="" class="select-year chart-select" data-filter="date">
+            {% for year in date_dropdown %}
+            <option value="{{ year }}">{{ year }}</option>
+          {% endfor %}
+          </select>
+        </div>
+      </div>
+      <hr>
+    </div>
+  </nav>
+  <section class="margin-small">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="chart-container sankey-chart" data-type="sankey" id="donorsFoundsChart" data-filters="[{column: 'date', value: {{ start_date }}}, {column: 'type', value: 'deposits'}]"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

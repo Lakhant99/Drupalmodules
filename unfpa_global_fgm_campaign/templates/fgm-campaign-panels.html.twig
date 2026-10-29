@@ -1,0 +1,29 @@
+<div class="fgm-panels fgm-after-entry">
+  <div class="fgm-panels-lock">
+    <div class="fgm-panels-inner fgm-width-wrap fgm-side-padd">
+      <div class="fgm-panels-wrap">
+        <div class="fgm-panels-panels">
+          {% for item in data.panels %}
+            <div class="fgm-panel fgm-panel-color-{{ item.color }}">
+              <a href="{{ item.url }}">
+                <div class="fgm-panel-holder">
+                  <div class="fgm-panel-img" style="background-image: url( {{ data.module_path }}/images/{{ item.image }});"></div>
+                  <div class="fgm-panel-content">
+                    <h3 class="fgm-panel-title conb-font">{{ item.title }}</h3>
+                    <img src=" {{ data.module_path }}/images/{{ item.image }}" alt="{{ "Photo"|t }}" class="element-invisible" />
+                    <div class="fgm-panel-texts">
+                      <p class="conb-font">{{ item.text }}</p>
+                      <span class="fgm-panel-arrow"></span>
+                      <span class="fgm-panel-tint"></span>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+          {% endfor %}
+          <div class="fgm-clear">&nbsp;</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

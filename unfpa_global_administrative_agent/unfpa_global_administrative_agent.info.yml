@@ -1,0 +1,6 @@
+name: UNFPA Global Administrative Agent
+type: module
+description: 'This module contain all code related to AA Portal'
+package: UNFPA Global
+version: 8.x
+core_version_requirement: ^8.8 || ^9

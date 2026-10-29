@@ -1,0 +1,6 @@
+name: UNFPA Global FGM Campaign
+description: Contains FGM Campaign page.
+type: module
+package: UNFPA Global
+core_version_requirement: ^8.8 || ^9
+php: 7.0

@@ -1,0 +1,5 @@
+unfpa_global_administrative_agent.aa_homepage_configuration:
+  title: 'AA Homepage Configuration'
+  description: 'AA homepage configuration'
+  parent: unfpa_global_front.css_interface
+  route_name: unfpa_global_administrative_agent.aa_homepage

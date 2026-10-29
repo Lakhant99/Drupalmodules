@@ -1,0 +1,40 @@
+<div class="fgm-form-item">
+  <div class="form-item form-type-textfield form-item-firstname">
+    <label for="edit-firstname">{{ 'First name'|t }} <span class="form-required" title="This field is required.">*</span></label>
+    {{ form.firstname }}
+    <p id='firstname_err' class="text-danger"></p>
+  </div>
+</div>
+<div class="fgm-form-item">
+  <div class="form-item form-type-textfield form-item-lastname">
+    <label for="edit-lastname">{{ 'Last name'|t }} <span class="form-required" title="This field is required.">*</span></label>
+    {{ form.lastname }}
+    <p id='lastname_err' class="text-danger"></p>
+  </div>
+</div>
+<div class="element-invisible"><div class="form-item form-type-textfield form-item-username">
+    <label for="edit-username">{{ 'Username'|t }} </label>
+    {{ form.username }}
+    <p id='username_err' class="text-danger"></p>
+  </div>
+</div><div class="fgm-form-item"><div class="form-item form-type-textfield form-item-email">
+    <label for="edit-email">{{ 'Email address'|t }} <span class="form-required" title="This field is required.">*</span></label>
+    {{ form.email }}
+    <p id='email_err' class="text-danger"></p>
+  </div>
+</div>
+<div class="fgm-form-item">
+  <div class="form-item form-type-select form-item-country">
+    <label for="edit-country">{{ 'Country/Territory'|t }} <span class="form-required" title="This field is required.">*</span></label>
+    {{ form.country }}
+    <p id='country_err' class="text-danger"></p>
+  </div>
+</div>
+{{ form.result }}
+<div class="fgm-form-item fgm-form-submit fgm-form-filled">
+  {{ form.form_build_id }}
+  {{ form.form_id }}
+  {{ form.form_token }}
+  {{ form.actions }}
+    {{ form.sharelink['#markup'] }}
+</div>

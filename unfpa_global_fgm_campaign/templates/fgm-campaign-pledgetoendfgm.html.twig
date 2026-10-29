@@ -1,0 +1,76 @@
+<div class="fgm">
+<div class="fgm-map" id="map">
+  <div class="fgm-map-inner fgm-width-wrap fgm-side-padd">
+
+    <h2 class="fgm-map-title conb-font">
+      {{ "Take action"|t }}
+    </h2>
+
+    <div class="fgm-map-copy light-font">
+      <p class="fgm-map-copy-bold b-font">{{ "Unless we step up action to end female genital mutilation, another 68&nbsp;million girls will have been cut by 2030."|t }}</p>
+      <p><span class="fgm-map-copy-bold b-font">{{ "Girls are working hard for their right to remain intact."|t }}</span>{{ "Keeping them safe will take a concerted effort – involving everyone from their families to local, national and international leaders."|t }}</p>
+      <p><span class="fgm-map-copy-bold b-font">{{ "You, too, have a role to play."|t }}</span>{{ "Every voice raised in support will strengthen the push to eliminate female genital mutilation."|t }}</p>
+    </div>
+
+    <div class="fgm-form">
+      <div class="fgm-form-form">
+        <h3 class="fgm-form-title conb-font">
+          {{ "Pledge to champion the end of female genital mutilation"|t }}
+        </h3>
+        {% if data.pledge_form is not empty %}
+          {{ data.pledge_form }}
+          <p id='mess_success' class="text-success"></p>
+        {% endif %}
+        <p class="fgm-form-desc">{{ "Join the movement to end FGM, and you’ll receive occasional updates from UNFPA, including funding appeals. You can unsubscribe at any time."|t }}</p>
+      </div>
+      <div class="fgm-form-success element-hidden">
+        <div class="fgm-form-success-inner">
+          <div class="fgm-form-success-inner-2">
+            <p class="fgm-form-success-p1 conb-font">{{ "Thank you for pledging!"|t }}</p>
+            <p class="fgm-form-success-p2 cond-font">{{ "See how many people have joined the movement in your country and in others."|t }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p class="fgm-map-instruction b-font">
+      {{ "Hover over a country to view pledges"|t }}
+    </p>
+
+    <div class="fgm-map-map">
+      <div id="fgm-map-worldmap"></div>
+
+      <div class="fgm-map-legend">
+        <h4 class="conb-font">{{ "Pledges"|t }}</h4>
+        <div class="fgm-map-legend-item">
+          <span class="fgm-map-legend-color legend-color-1"></span>
+          <span class="fgm-map-legend-label cond-font">{{ "1 - 50"|t }}</span>
+        </div>
+        <div class="fgm-map-legend-item">
+          <span class="fgm-map-legend-color legend-color-2"></span>
+          <span class="fgm-map-legend-label cond-font">{{ "51 - 100"|t }}</span>
+        </div>
+        <div class="fgm-map-legend-item">
+          <span class="fgm-map-legend-color legend-color-3"></span>
+          <span class="fgm-map-legend-label cond-font">{{ "101 - 150"|t }}</span>
+        </div>
+        <div class="fgm-map-legend-item">
+          <span class="fgm-map-legend-color legend-color-4"></span>
+          <span class="fgm-map-legend-label cond-font">{{ "151 - 200"|t }}</span>
+        </div>
+        <div class="fgm-map-legend-item">
+          <span class="fgm-map-legend-color legend-color-5"></span>
+          <span class="fgm-map-legend-label cond-font">{{ "201+"|t }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="fgm-map-disclaimer">
+      <p>{{ "The boundaries and names shown and the designations used on this map do not imply official endorsement or acceptance by the United Nations."|t }}</p>
+      <p>{{ "A dispute exists between the Governments of Argentina and the United Kingdom of Great Britain and Northern Ireland concerning sovereignty over the Falkland Islands (Malvinas)."|t }}</p>
+    </div>
+
+  </div>
+</div>
+    </div>
+

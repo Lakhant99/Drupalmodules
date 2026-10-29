@@ -1,0 +1,24 @@
+<section class="bg-white with-banner">
+  <!-- Container for top navigation starts -->
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="navigation">
+          <ul class="list-group exb-nav">
+            {% for item in items %}
+              {% set link_title = "<span><img src='{{item.icon}}' alt='{{item.title}}' title='{{item.title}}' ></span>{{item.title}}" %}
+              <li class="list-group-item {{ item.in_active_trail ? 'active' : '' }}">
+                <a href="{{item.url}}">
+                  <span>
+                    <img src="{{item.icon}}" alt='{{item.title}}' title='{{item.title}}' width='40px' height='40px' />
+                  </span>
+                  {{item.title}}
+                </a>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+ </div>
+</section>

@@ -1,0 +1,9 @@
+name: UNFPA Global Strategic Plan
+description: 'This module related to strategic plan'
+type: module
+package: UNFPA Global
+core_version_requirement: ^8.8 || ^9
+php: 7.0
+
+interface translation project: unfpa_global_strategic_plan
+interface translation server pattern: modules/custom/unfpa_global_strategic_plan/translations/unfpa_global_strategic_plan-%language.po

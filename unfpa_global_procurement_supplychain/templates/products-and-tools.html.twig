@@ -1,0 +1,170 @@
+{% set module_path = bamboo_path_system('module', 'unfpa_global_procurement_supplychain') %}
+{% set theme_path = bamboo_path_system('theme', 'unfpa_global') %}
+
+<section id="main" class="procure-page clearfix">
+  <div class="max-wrapper">
+
+    <div id="procurement-supplychain-wrapper">
+      {# Procurement & SupplyChain Menu #}
+      {{ drupal_menu('procurement-supplychain') }}
+
+      {# Social Sharing options #}
+      <div id="sticky-anchor"></div>
+      <div class="btn_share" id="btn_share">
+        <span class="icon_share"><img src="/{{ theme_path }}/images/icon-share.svg" alt=""></span>
+      </div>
+
+      {# Body section #}
+      <section class="bg-white">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <article>
+                <div class="article__content">
+                  <h2 class="article__title"> {{ 'Products and Tools'|t }} </h2>
+                  <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.</p>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+      {# End body section #}
+      <div class="ind-wrapper">
+        <div class="global-result-wrapper">
+          <div class="slider autoplay global-result-slider">     
+            <div class="row-wrap">
+              <div class="row-col3">
+                <div class="card-highlights">
+                  <div class="ind-content">
+                    <h3>{{ '+500' }}</h3>
+                    <p>{{ 'Products' }}</p>
+                  </div>
+                </div>
+              </div>
+            </div>  
+            <div class="row-wrap">
+              <div class="row-col3">
+                <div class="card-highlights">
+                  <div class="ind-content">
+                    <h3>{{ '63.9' }}</h3>
+                    <p>{{ 'Million couples provided with 1 full year of protection' }}</p>
+                  </div>
+                </div>
+              </div>
+            </div>  
+            <div class="row-wrap">
+              <div class="row-col3">
+                <div class="card-highlights">
+                  <div class="ind-content">
+                    <h3>{{ '47' }}</h3>
+                    <p>{{ 'million vials of injectable contraceptives' }}</p>
+                  </div>
+                </div>
+              </div>
+            </div>  
+            <div class="row-wrap">
+              <div class="row-col3">
+                <div class="card-highlights">
+                  <div class="ind-content">
+                    <h3>{{ '+500' }}</h3>
+                    <p>{{ 'Products' }}</p>
+                  </div>
+                </div>
+              </div>
+            </div>  
+            <div class="row-wrap">
+              <div class="row-col3">
+                <div class="card-highlights">
+                  <div class="ind-content">
+                    <h3>{{ '63.9' }}</h3>
+                    <p>{{ 'Million couples provided with 1 full year of protection' }}</p>
+                  </div>
+                </div>
+              </div>
+            </div>  
+            <div class="row-wrap">
+              <div class="row-col3">
+                <div class="card-highlights">
+                  <div class="ind-content">
+                    <h3>{{ '47' }}</h3>
+                    <p>{{ 'million vials of injectable contraceptives' }}</p>
+                  </div>
+                </div>
+              </div>
+            </div> 
+            <div class="row-wrap">
+              <div class="row-col3">
+                <div class="card-highlights">
+                  <div class="ind-content">
+                    <h3>{{ '+500' }}</h3>
+                    <p>{{ 'Products' }}</p>
+                  </div>
+                </div>
+              </div>
+            </div>  
+            <div class="row-wrap">
+              <div class="row-col3">
+                <div class="card-highlights">
+                  <div class="ind-content">
+                    <h3>{{ '63.9' }}</h3>
+                    <p>{{ 'Million couples provided with 1 full year of protection' }}</p>
+                  </div>
+                </div>
+              </div>
+            </div>  
+            <div class="row-wrap">
+              <div class="row-col3">
+                <div class="card-highlights">
+                  <div class="ind-content">
+                    <h3>{{ '47' }}</h3>
+                    <p>{{ 'million vials of injectable contraceptives' }}</p>
+                  </div>
+                </div>
+              </div>
+            </div> 
+          </div>
+        </div>
+
+      </div>
+      <!-- Other Procurement website link buttons begins -->
+      <div class="procurement-btn-blk">
+        <a class="btn btn-collapse collapsed" href="https://www.unfpaprocurement.org/products" role="button">
+          <span>{{ 'UNFPA Catalogue'|t }}</span>
+        </a>
+        <a class="btn btn-collapse collapsed" href="https://www.unfpaprocurement.org/lead-time-calculator" role="button">
+          <span>{{ 'Lead Time Calculator'|t }}</span>
+        </a>
+        <a class="btn btn-collapse collapsed" href="https://www.unfpaprocurement.org/budget-planner" role="button">
+          <span>{{ 'Budget Planner'|t }}</span>
+        </a>
+      </div>
+      <!-- Other Procurement website link buttons ends -->
+
+
+      {# Share it popup  #}
+      <div class="popup-wrapper">
+        <div class="row-backto">
+          <div class="btn-close" id="btnClose">
+            <span class="backarow"><img src="/{{ theme_path }}/images/icon-back-arrow.svg" alt=""></span>{{ 'Back to Procurement'|t }}</div>
+        </div>
+        <div class="share-card">
+          <div class="img-holder"><img src="" alt="Products & Tools" title="Products & Tools"></div>
+          <div class="share-card__cardbody">
+            <h4 class="card-title"><a href="{{ path('unfpa_global_procurement_supplychain.prod_and_tools') }}"> Products & Tools </a></h4>
+          </div>
+          <div class="social-wrapper">
+            <div class="colm-1">
+              <a href="#" class="social-link fa fa-facebook fa-sm st_facebook_custom"><span>{{ 'Share on Facebook'|t }}</span><i><img src="/{{ theme_path }}/images/logo-facebook.svg" alt="{{ 'facebook'|t }}"></i></a>
+            </div>
+            <div class="colm-2">
+              <a href="#" class="social-link fa fa-twitter fa-sm st_twitter_custom"><span>{{ 'Share on Twitter'|t }}</span><i><img src="/{{ theme_path }}/images/logo-twitter.svg" alt="{{ 'twitter'|t }}"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="overley-white"></div>
+
+    </div>
+  </div>
+</section>

@@ -1,0 +1,112 @@
+<div class="row gp-header">
+  <div class="col-md-12">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="gp-header__content">
+          <ul class="breadcrumb">
+            <li><a href="{{ url('<front>') }}">{{ 'Home'|t }}</a></li>
+            <li>{{ "Joint Funding Administered by UNFPA"|t }}</li>
+          </ul>
+          <div class="container">
+            <div class="row">
+              <div class="col-md-12">
+                <section>
+                  <h1 class="title">{{ "Joint Funding Administered by UNFPA"|t }}</h1>
+                </section>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row margin-0">
+  <div class="col-md-12">
+    <div class="container">
+      <section class="page-content">
+        <div class="panel-display panel-1col clearfix" id="funds-template">
+          <div class="select_wrapper">
+            <div class="year_wrapper">
+              <div class="filter">                 
+                <div class="form-group">
+                  <label for="year">{{ 'Year'|t }}: </label>
+                  <div class="select-dropdown">
+                    <select id ="year_dropdown" name="year">
+                      {% for key, item in data %}
+                        {% if key == '0' %}
+                          <option value="{{ item.year }}" selected="selected">{{ item.year }}</option>
+                        {% else %}
+                          <option value="{{ item.year }}">{{ item.year }}</option>
+                        {% endif %}
+                      {% endfor %}
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Incoming funds -->
+          <div class = "data donut_chart_container">
+            <div id = "donut_chart_tabs1" class = "container donut_chart_tabs">
+              <ul>
+                <li class = "active donut_chart_tab" tabfor = "1 by-donor"><span>{{ 'By Donor'|t }}</span></li>
+                <li class = "donut_chart_tab" tabfor = "1 by-fund"><span>{{ 'By Funds'|t }}</span></li>
+              </ul>
+            </div>
+            <div class="donut_chart_wrapper">
+              <div id="donutchart-by-donor" class="donut_chart1 by-donor" style="visibility: visible;"></div>
+              <div id="donutchart-by-fund" class="donut_chart1 by-fund"></div>
+            </div>
+          </div>
+          <div class = "bchart_container">
+            <div id = "bchart-by-donor" class = "bchart1 by-donor" style = "visibility: visible;" > </div>
+            <div id = "bchart-by-fund" class = "bchart1 by-fund" > </div>
+          </div>
+
+          <!-- Disbursement -->
+          <div class = "data donut_chart_container">
+            <div id = "donut_chart_tabs2" class = "container donut_chart_tabs">
+              <ul>
+                <li class = "active donut_chart_tab" tabfor = "2 by-org"><span>{{ 'By Organization'|t }}</span></li>
+                <li class = "donut_chart_tab" tabfor = "2 by-funds"><span>{{ 'By Funds'|t }}</span></li>
+              </ul>
+            </div>
+            <div class="donut_chart_wrapper">
+              <div id="donutchart-by-org-dis" class="donut_chart2 by-org" style="visibility: visible;"></div>
+              <div id="donutchart-by-fund-dis" class="donut_chart2 by-funds"></div>
+            </div>
+          </div>
+          <div class = "bchart_container" >
+            <div id = "bchart-by-org-dis" class = "bchart2 by-org" style = "visibility: visible;" > </div>
+            <div id = "bchart-by-fund-dis" class = "bchart2 by-funds" > </div>
+          </div>
+
+          <!-- Expenditure -->
+          <div class = "data donut_chart_container">
+            <div id = "donut_chart_tabs3" class = "container donut_chart_tabs">
+              <ul>
+                <li class = "active donut_chart_tab" tabfor = "3 by-org-exp"><span>{{ 'By Organization'|t }}</span></li>
+                <li class = "donut_chart_tab" tabfor = "3 by-fund-exp"><span>{{ 'By Funds'|t }}</span></li>
+              </ul>
+            </div>
+            <div class="donut_chart_wrapper">
+              <div id="donutchart-by-org-exp" class="donut_chart3 by-org-exp" style="visibility: visible;"></div>
+              <div id="donutchart-by-fund-exp" class="donut_chart3 by-fund-exp"></div>
+            </div>
+          </div>
+          <div class = "bchart_container" >
+            <div id = "bchart-by-org-exp" class = "bchart3 by-org-exp" style = "visibility: visible;" > </div>
+            <div id = "bchart-by-fund-exp" class = "bchart3 by-fund-exp" > </div>
+          </div>
+          <div id="disclaimer-block">
+            <sup>1</sup><b>{{ 'Incoming funds'|t }}:</b> {{ 'Funds received in the selected year'|t }}.<br />
+            <sup>2</sup><b>{{ 'Disbursements'|t }}:</b>{{ 'Payments made to Participating Agencies during the selected year'|t }}.<br />
+            <sup>3</sup><b>{{ 'Expenditures'|t }}:</b>{{ 'Funds spent during the selected year'|t }}.<br />
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>

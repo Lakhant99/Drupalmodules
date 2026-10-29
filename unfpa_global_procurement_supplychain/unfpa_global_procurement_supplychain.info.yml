@@ -1,0 +1,6 @@
+name: UNFPA Global Procurement & Supply Chain
+description: Feature for UNFPA Procurement & Supply Chain
+package: UNFPA Global
+type: module
+core_version_requirement: ^8.8 || ^9
+php: 7.0

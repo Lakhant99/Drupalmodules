@@ -1,0 +1,353 @@
+/* --- Share Link --- */
+
+html.no-js .fgm-sharelink {
+  display: none;
+}
+
+.fgm-sharelink a {
+  display: block;
+  width: 60px;
+  height: 60px;
+  position: relative;
+  overflow: hidden;
+}
+
+.fgm .fgm-sharelink a {
+  outline: 0 none;
+}
+
+.fgm-sharelink svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  fill: currentColor;
+  stroke: currentColor;
+  transition: opacity 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.fgm-sharelink svg.fgm-sharelink-hover {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.fgm-sharelink a:hover svg {
+  opacity: 0;
+}
+
+.fgm-sharelink a:hover svg.fgm-sharelink-hover {
+  opacity: 1;
+}
+
+/* --- Share Modal --- */
+
+.fgm-sharemodal {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 998;
+  align-items: center;
+  justify-content: center;
+  color: #4a4a4a;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+html.no-js .fgm-sharemodal {
+  display: none;
+}
+
+.fgm-sharemodal-bg {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  background-color: rgba(255, 255, 255, 0.9);
+  transform: translate(100%, 0);
+  transition: transform 0.5s cubic-bezier(.16,.72,.88,.58);
+  transition-delay: 0.3s;
+}
+
+.fgm-sharemodal-window {
+  max-width: 700px;
+  z-index: 2;
+  transform: translate(50%, 0%);
+  transition: transform 1s ease-in-out, opacity 1s ease-in-out;
+  opacity: 0;
+}
+
+/* --- Shown --- */
+
+.fgm-sharemodal-shown {
+  pointer-events: all;
+}
+
+.fgm-sharemodal-shown .fgm-sharemodal-bg {
+  transform: translate(0, 0);
+}
+
+.fgm-sharemodal-shown .fgm-sharemodal-window {
+  transform: translate(0, 0);
+  opacity: 1;
+}
+
+/* --- Close Button --- */
+
+.fgm-sharemodal-close {
+  margin-bottom: 15px;
+  widt: 100%;
+}
+
+.fgm-sharemodal-close button {
+  display: block;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  padding: 0;
+  color: inherit;
+  outline: 0;
+}
+
+.fgm-sharemodal-close svg {
+  float: left;
+  width: 40px;
+  height: 40px;
+  transition: transform 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+  fill: currentColor;
+}
+
+.fgm-sharemodal-close span {
+  float: left;
+  font-size: 15px;
+  line-height: 40px;
+  padding-left: 15px;
+}
+
+.fgm-sharemodal-close button:hover svg {
+  transform: translateX(-10px);
+}
+
+/* --- Modal Content --- */
+
+.fgm-sharemodal-content {
+  background: #fff;
+  padding: 36px 60px 0;
+  box-shadow: 0 0 13px 0 rgba(0, 0, 0, 0.1);
+  max-height: calc(100vh - 55px);
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+.fgm-sharemodal-image {
+  width: 100%;
+  height: 0;
+  padding-bottom: 52.3333%;
+  overflow: hidden;
+  position: relative;
+}
+
+.fgm-sharemodal-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+p.fgm-sharemodal-description {
+  font-size: 21px;
+  line-height: 28px;
+  margin: 10px 0 25px;
+}
+
+.fgm-sharemodal-actions {
+  display: flex;
+  border-top: 3px solid currentColor;
+  padding-top: 15px;
+  padding-bottom: 25px;
+}
+
+a.fgm-sharemodal-button {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+  width: 100%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  outline: 0 !important;
+  border: 0;
+}
+
+a.fgm-sharemodal-button.facebook {
+  color: #4267b2;
+}
+
+a.fgm-sharemodal-button.twitter {
+  color: #38a1f3;
+}
+
+a.fgm-sharemodal-button:first-child {
+  padding-right: 20px;
+}
+
+a.fgm-sharemodal-button:last-child {
+  border-left: 1px solid #4a4a4a;
+  padding-left: 30px;
+}
+
+a.fgm-sharemodal-button span {
+  display: block;
+  width: calc(100% - 65px);
+  padding-bottom: 1px;
+  font-size: 21px;
+  line-height: 28px;
+  text-decoration: none;
+}
+
+a.fgm-sharemodal-button svg {
+  width: 40px;
+  height: 40px;
+  margin-left: 15px;
+  fill: currentColor;
+}
+
+@media only screen and (max-width: 768px) {
+  .fgm-sharemodal-close {
+    padding-left: 20px;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .fgm-sharemodal-content {
+    padding: 24px 24px 15px;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .fgm-sharemodal-close svg,
+  .fgm-sharemodal-button svg {
+    width: 30px;
+    height: 30px;
+  }
+
+  .fgm-sharemodal-close {
+    margin-bottom: 10px;
+  }
+
+  .fgm-sharemodal-close span {
+    line-height: 30px;
+  }
+
+  .fgm-sharemodal-content {
+    padding-bottom: 0;
+    max-height: calc(100vh - 40px);
+  }
+
+  p.fgm-sharemodal-description {
+    font-size: 18px;
+    line-height: 26px;
+  }
+
+  .fgm-sharemodal-actions {
+    display: block;
+    padding-top: 0;
+  }
+
+  a.fgm-sharemodal-button {
+    padding: 17px 0;
+    border: 0;
+  }
+
+  .fgm-sharemodal-actions a.fgm-sharemodal-button:last-child {
+    border-left: 0;
+    padding-left: 0;
+    padding-right: 20px;
+    border-top: 1px solid #4a4a4a;
+  }
+
+  a.fgm-sharemodal-button span {
+    font-size: 18px;
+    line-height: 26px;
+    width: calc(100% - 55px);
+  }
+}
+
+/* RTL Arabic */
+/* Inverts direction from which modal slides in. */
+/*.lang-ar .fgm-sharemodal-bg {
+  transform: translate(0%, 0);
+}*/
+
+.lang-ar .fgm-sharemodal-window {
+  transform: translate(0%, 0%);
+}
+
+.lang-ar .fgm-sharemodal-close svg {
+  float: right;
+  width: 40px;
+  height: 40px;
+  -webkit-transform: translateX(0) rotateZ(180deg);
+  -moz-transform: translateX(0) rotateZ(180deg);
+  -ms-transform: translateX(0) rotateZ(180deg);
+  transform: translateX(0) rotateZ(180deg);
+}
+
+.lang-ar .fgm-sharemodal-close span {
+  float: right;
+  padding-left: 0;
+  padding-right: 15px;
+}
+
+.lang-ar .fgm-sharemodal-close button:hover svg {
+  -webkit-transform: translateX(10px) rotateZ(180deg);
+  -moz-transform: translateX(10px) rotateZ(180deg);
+  -ms-transform: translateX(10px) rotateZ(180deg);
+  transform: translateX(10px) rotateZ(180deg);
+}
+
+.lang-ar a.fgm-sharemodal-button:first-child {
+  border-left: 1px solid #4a4a4a;
+  padding-right: 0;
+  padding-left: 20px;
+}
+
+.lang-ar a.fgm-sharemodal-button:last-child {
+  border: 0;
+  padding-left: 0;
+  padding-right: 30px;
+}
+
+.lang-ar a.fgm-sharemodal-button svg {
+  margin-left: 0;
+  margin-right: 15px;
+}
+
+@media only screen and (max-width: 768px) {
+  .lang-ar .fgm-sharemodal-close {
+    padding-left: 0;
+    padding-right: 20px;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .lang-ar .fgm-sharemodal-actions a.fgm-sharemodal-button:first-child {
+    border-left: 0;
+    padding-left: 0;
+  }
+
+  .lang-ar .fgm-sharemodal-actions a.fgm-sharemodal-button:last-child {
+    padding-right: 0;
+  }
+}

@@ -1,0 +1,395 @@
+<?php
+
+/**
+ * @file
+ * Register a module or theme's theme implementations as well as other function
+ * override as per requirement.
+ */
+
+/**
+ * Implements hook_theme().
+ */
+function unfpa_global_strategic_plan_theme($existing, $type, $theme, $path) {
+
+  return [
+    'strategic_plan_template' => [
+      'variables' => [
+        'module_path' => NULL,
+        'base_url' => NULL,
+        'language' => NULL,
+        'url_with_lang' => NULL,
+      ],
+      'template' => 'strategic_plan',
+    ],
+  ];
+}
+/**
+ * Implements hook_page_attachments().
+ */
+function unfpa_global_strategic_plan_page_attachments(array &$attachments) {
+  $meta_tag_list = unfpa_global_strategic_plan_add_metatag();
+ 
+  $route_name = \Drupal::routeMatch()->getRouteName();
+  if ($route_name == 'unfpa_global_strategic_plan.strategic_plan') {
+    foreach ($meta_tag_list as $key => $value) {
+      $attachments['#attached']['html_head'][] = [$value, 'keywords' . $key];
+    }
+  }
+}
+/**
+ * Get share tags locale in a form of 'en_US'.
+ *
+ * Used by og:locale sharing meta tag.
+ *
+ * @return string
+ *   Locale information in form of 'en_US', 'fr_FR', etc.
+ */
+function unfpa_global_strategic_plan_get_locale() {
+  $lang = \Drupal::languageManager()->getCurrentLanguage()->getId();
+  $country = $lang;
+
+  if ($lang == 'en') {
+    $country = 'us';
+  }
+
+  return $lang . '_' . strtoupper($country);
+}
+
+/**
+ * Function to get meta tag.
+ */
+function unfpa_global_strategic_plan_add_metatag() {
+  $langcode = \Drupal::languageManager()->getCurrentLanguage()->getId();
+  $config = \Drupal::config('system.site');
+  $sharecard_id = \Drupal::requestStack()->getCurrentRequest()->get('sharecardid');
+  $share_id = \Drupal::request()->query->get('shareid');
+
+  if (!$share_id) {
+    $share_id = $sharecard_id;
+  }
+
+  $data = unfpaGlobalStrategicPlanShareGetData($share_id, $langcode);
+  $share_url = $data['url'];
+  $share_image = $data['img'];
+  $share_title = $data['title'];
+  $share_description = $data['description'];
+
+  // Meta tags that don't change dynamically.
+  $og_locale = unfpa_global_strategic_plan_get_locale();
+  $og_sitename = $config->get('name');
+  $og_updated_time = time();
+  $og_type = 'article';
+  $og_image_type = 'image/jpeg';
+  $tw_site = '@UNFPA';
+  $tw_card = 'summary_large_image';
+  $fb_app_id = \Drupal::state()->get('unfpa_global_common_facebook_app_id', '2280985865254142');
+
+  $metatag = [
+   [
+     '#tag' => 'meta',
+     '#attributes' => [
+       'name' => 'twitter:site',
+       'content' => $tw_site,
+     ],
+   ],
+   [
+     '#tag' => 'meta',
+     '#attributes' => [
+       'name' => 'twitter:card',
+       'content' => $tw_card,
+     ],
+   ],
+   [
+     '#tag' => 'meta',
+     '#attributes' => [
+       'name' => 'twitter:url',
+       'content' => $share_url,
+     ],
+   ],
+   [
+     '#tag' => 'meta',
+     '#attributes' => [
+       'name' => 'twitter:title',
+       'content' => $share_title,
+     ],
+   ],
+   [
+     '#tag' => 'meta',
+     '#attributes' => [
+       'name' => 'twitter:image',
+       'content' => $share_image,
+     ],
+   ],
+   [
+     '#tag' => 'meta',
+     '#attributes' => [
+       'name' => 'twitter:description',
+       'content' => $share_description,
+     ],
+   ],
+   [
+     '#tag' => 'meta',
+     '#attributes' => [
+       'property' => 'fb:app_id',
+       'content' => $fb_app_id,
+     ],
+   ],
+   [
+     '#tag' => 'meta',
+     '#attributes' => [
+       'property' => 'og:description',
+       'content' => $share_description,
+     ],
+   ],
+   [
+     '#tag' => 'meta',
+     '#attributes' => [
+       'property' => 'og:image:url',
+       'content' => $share_image,
+     ],
+   ],
+   [
+     '#tag' => 'meta',
+     '#attributes' => [
+       'property' => 'og:image:height',
+       'content' => '628',
+     ],
+   ],
+   [
+     '#tag' => 'meta',
+     '#attributes' => [
+       'property' => 'og:image:width',
+       'content' => '1200',
+     ],
+   ],
+   [
+     '#tag' => 'meta',
+     '#attributes' => [
+       'property' => 'og:image:type',
+       'content' => $og_image_type,
+     ],
+   ],
+   [
+     '#tag' => 'meta',
+     '#attributes' => [
+       'property' => 'og:image',
+       'content' => $share_image,
+     ],
+   ],
+   [
+     '#tag' => 'meta',
+     '#attributes' => [
+       'property' => 'og:title',
+       'content' => $share_title,
+     ],
+   ],
+   [
+     '#tag' => 'meta',
+     '#attributes' => [
+       'property' => 'og:url',
+       'content' => $share_url,
+     ],
+   ],
+   [
+     '#tag' => 'meta',
+     '#attributes' => [
+       'property' => 'og:type',
+       'content' => $og_type,
+     ],
+   ],
+   [
+     '#tag' => 'meta',
+     '#attributes' => [
+       'property' => 'og:updated_time',
+       'content' => $og_updated_time,
+     ],
+   ],
+   [
+     '#tag' => 'meta',
+     '#attributes' => [
+       'property' => 'og:locale',
+       'content' => $og_locale,
+     ],
+   ],
+   [
+     '#tag' => 'meta',
+     '#attributes' => [
+       'property' => 'og:site_name',
+       'content' => $og_sitename,
+     ],
+   ],
+  ];
+
+  return $metatag;
+}
+
+function unfpaGlobalStrategicPlanShareGetData($shareid, $langcode) {
+
+  global $base_url;
+  switch ($shareid) {
+      case 17060:
+        $data['url'] = $base_url . "/strategic-plan?shareid=17060";
+        $data['img'] = $base_url . "/modules/custom/unfpa_global_strategic_plan/images/intro-video.jpg";
+        if ($langcode == "es") {
+          $data['title'] = "Una agenda audaz exige medidas audaces.” Watch Dr. Natalia Kanem speak about UNFPA's work to ensure universal access to sexual and reproductive health and rights";
+          $data['description'] = "UNFPA - VISIÓN Y AGENDA 2030";
+        }
+        else if ($langcode == "fr") {
+          $data['title'] = "Un programme ambitieux nécessite des mesures audacieuses.” Watch Dr. Natalia Kanem speak about UNFPA's work to ensure universal access to sexual and reproductive health and rights";
+          $data['description'] = "UNFPA - VISION ET PROGRAMME 2030";
+        }
+        else {
+          $data['title'] = "A bold agenda requires bold action.” Watch Dr. Natalia Kanem speak about UNFPA's work to ensure universal access to sexual and reproductive health and rights";
+          $data['description'] = "UNFPA - Vision and Agenda 2030";
+        }
+        break;
+      case 17061:
+        $data['url'] = $base_url . "/strategic-plan?shareid=17061";
+        $data['img'] = $base_url . "/modules/custom/unfpa_global_strategic_plan/images/uni_access/images/keyprinc-3.jpg";
+        if ($langcode == "es") {
+          $data['description'] = "UNFPA - VISIÓN Y AGENDA 2030";
+        }
+        else if ($langcode == "fr") {
+          $data['description'] = "UNFPA - VISION ET PROGRAMME 2030";
+        }
+        else {
+          $data['title'] = 'See how achieving universal access to sexual and reproductive health and rights of women and young people will transform our future: via @UNFPA #SRHR';
+          $data['description'] = "UNFPA - Vision and Agenda 2030";
+        }
+        break;
+      case 17067:
+        $data['url'] = $base_url . "/strategic-plan?shareid=17067";
+        $data['img'] = $base_url . "/modules/custom/unfpa_global_strategic_plan/images/2-1_0.png";
+        if ($langcode == "es") {
+          $data['description'] = "UNFPA - VISIÓN Y AGENDA 2030";
+          $data['title'] = "Si todas las mujeres embarazadas y los recién nacidos recibieran atención completa, y si todas las mujeres tuvieran acceso a anticonceptivos, la muerte materna se reduciría en un 73%: #SRHR";
+        }
+        else if ($langcode == "fr") {
+          $data['description'] = "UNFPA - VISION ET PROGRAMME 2030";
+          $data['title'] = "Si toutes les femmes enceintes et les nouveau-nés recevaient des soins complets, et si toutes les femmes avaient accès aux contraceptifs, la mortalité maternelle diminuerait de 73%: #SRHR";
+        }
+        else {
+          $data['description'] = "UNFPA - Vision and Agenda 2030";
+          $data['title'] = "If all pregnant women and newborns received full care, and if all women had access to contraceptives, maternal death would drop by 73%: #SRHR";
+        }
+        break;
+      case 17068:
+        $data['url'] = $base_url . "/strategic-plan?shareid=17068";
+        $data['img'] = $base_url . "/modules/custom/unfpa_global_strategic_plan/images/2-2.png";
+        $data['title'] = 'Empowering 10-year-old girls can triple their lifetime income, increase a nation’s economic growth and lead to a cycle of healthier, better educated children: via @UNFPA #GirlPower';
+        if ($langcode == "es") {
+          $data['description'] = "UNFPA - VISIÓN Y AGENDA 2030";
+        }
+        else if ($langcode == "fr") {
+          $data['description'] = "UNFPA - VISION ET PROGRAMME 2030";
+        }
+        else {
+          $data['description'] = "UNFPA - Vision and Agenda 2030";
+        }
+        break;
+      case 17069:
+        $data['url'] = $base_url . "/strategic-plan?shareid=17069";
+        $data['img'] = $base_url . "/modules/custom/unfpa_global_strategic_plan/images/2-3.png";
+        $data['title'] = "#DidYouKnow: An estimated 35% of women have experienced physical and/or sexual violence? See how @UNFPA is working to end this #humanrights violation: #TimesUp";
+        if ($langcode == "es") {
+          $data['description'] = "UNFPA - VISIÓN Y AGENDA 2030";
+        }
+        else if ($langcode == "fr") {
+          $data['description'] = "UNFPA - VISION ET PROGRAMME 2030";
+        }
+        else {
+          $data['description'] = "UNFPA - Vision and Agenda 2030";
+        }
+        break;
+      case 17070:
+        $data['url'] = $base_url . "/strategic-plan?shareid=17070";
+        $data['img'] = $base_url . "/modules/custom/unfpa_global_strategic_plan/images/2-4.png";
+        $data['title'] = "Of the 230 #SDGs indicators, 98 require #population data and, of these, only 40% are regularly collected. Helping countries secure this info is also @UNFPA's work";
+        if ($langcode == "es") {
+          $data['description'] = "UNFPA - VISIÓN Y AGENDA 2030";
+        }
+        else if ($langcode == "fr") {
+          $data['description'] = "UNFPA - VISION ET PROGRAMME 2030";
+        }
+        else {
+          $data['description'] = "UNFPA - Vision and Agenda 2030";
+        }
+        break;
+      case 17072:
+        $data['url'] = $base_url . "/strategic-plan?shareid=17072";
+        $data['img'] = $base_url . "/modules/custom/unfpa_global_strategic_plan/images/2-5_0.jpg";
+        if ($langcode == "es") {
+          $data['title'] = "En 2018, más de 135 millones de personas en todo el mundo precisarán ayuda humanitaria y protección.";
+          $data['description'] = "UNFPA - VISIÓN Y AGENDA 2030";
+        }
+        else if ($langcode == "fr") {
+          $data['title'] = "En 2018, plus de 135 millions de personnes à l'échelle mondiale auront besoin d'une aide et d'une protection humanitaires.";
+          $data['description'] = "UNFPA - VISION ET PROGRAMME 2030";
+        }
+        else {
+          $data['title'] = "In 2018, more than 135 million people across the world will need #humanitarian assistance. UNFPA is working to ensuring that their reproductive health and rights are protected: #SRHR";
+          $data['description'] = "UNFPA - Vision and Agenda 2030";
+        }
+        break;
+      case 15905:
+        $data['url'] = $base_url . "/strategic-plan?sharecardid=15905";
+        $data['img'] = $base_url . "/modules/custom/unfpa_global_strategic_plan/images/sharecards/sharecard-1_1.jpg";
+        $data['title'] = '#DidYouKnow: Every 2 minutes, a woman dies from causes related to pregnancy and childbirth? See how UNFPA is working to end maternal death: unfpa.org #GlobalGoals';
+        if ($langcode == "es") {
+          $data['description'] = "UNFPA - VISIÓN Y AGENDA 2030";
+        }
+        else if ($langcode == "fr") {
+          $data['description'] = "UNFPA - VISION ET PROGRAMME 2030";
+        }
+        else {
+          $data['description'] = "UNFPA - Vision and Agenda 2030";
+        }
+        break;
+      case 15906:
+        $data['url'] = $base_url . "/strategic-plan?sharecardid=15906";
+        $data['img'] = $base_url . "/modules/custom/unfpa_global_strategic_plan/images/sharecards/sharecard-2_1.jpg";
+        $data['title'] = '214 million women still lack access to #familyplanning. See how UNFPA, the UN reproductive health and rights agency, is working to bring this number down to ZERO: unfpa.org #SRHR';
+        if ($langcode == "es") {
+          $data['description'] = "UNFPA - VISIÓN Y AGENDA 2030";
+        }
+        else if ($langcode == "fr") {
+          $data['description'] = "UNFPA - VISION ET PROGRAMME 2030";
+        }
+        else {
+          $data['description'] = "UNFPA - Vision and Agenda 2030";
+        }
+        break;
+      case 15907:
+        $data['url'] = $base_url . "/strategic-plan?sharecardid=15907";
+        $data['img'] = $base_url . "/modules/custom/unfpa_global_strategic_plan/images/sharecards/sharecard-3_2.jpg";
+        $data['title'] = '1-in-3 women will experience physical or sexual abuse in her lifetime. See how UNFPA works to #ENDviolence against women and girls: unfpa.org #GlobalGoals';
+        if ($langcode == "es") {
+          $data['description'] = "UNFPA - VISIÓN Y AGENDA 2030";
+        }
+        else if ($langcode == "fr") {
+          $data['description'] = "UNFPA - VISION ET PROGRAMME 2030";
+        }
+        else {
+          $data['description'] = "UNFPA - Vision and Agenda 2030";
+        }
+        break;
+      default:
+        $data['img'] = $base_url . "/modules/custom/unfpa_global_strategic_plan/images/share-default.jpg";
+        $data['title'] = "UNFPA Strategic Plan 2018 - 2021";
+        if ($langcode == "es") {
+          $data['url'] = $base_url . "/es/strategic-plan";
+          $data['description'] = "EL ACCESO UNIVERSAL A LA SALUD SEXUAL Y REPRODUCTIVA Y LOS DERECHOS REPRODUCTIVOS";
+        }
+        else if ($langcode == "fr") {
+          $data['url'] = $base_url . "/fr/strategic-plan";
+          $data['description'] = "L&#039;ACCÈS UNIVERSEL À LA SANTÉ SEXUELLE ET REPRODUCTIVE ET AUX DROITS EN MATIÈRE DE REPRODUCTION";
+        }
+        else {
+          $data['url'] = $base_url . "/strategic-plan";
+          $data['description'] = "Universal access to sexual and reproductive health and reproductive rights";
+        }
+        break;
+  }
+
+  return $data;
+}

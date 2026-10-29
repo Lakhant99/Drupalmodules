@@ -1,0 +1,115 @@
+#procurement-supplychain-wrapper .list-group.exb-nav {
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-bottom: -2px;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+
+@media (max-width: 767px) {
+  #procurement-supplychain-wrapper .list-group.exb-nav {
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+  }
+}
+
+#procurement-supplychain-wrapper .navigation {
+  border-bottom: 2px solid #CCCCCC;
+  margin-bottom: 20px;
+}
+
+#procurement-supplychain-wrapper .navigation a {
+  color: #bbbbbb;
+  display: block;
+  padding: 0 10px 20px 10px;
+  text-decoration: none;
+  text-align: left;
+  text-transform: normal;
+  font-size: 0.82rem;
+  line-height: 1.3;
+  min-width: 110px;
+  max-width: 110px;
+  font-weight: 400;
+  outline: 0;
+}
+
+@media (max-width: 767px) {
+  #procurement-supplychain-wrapper .navigation a {
+    max-width: 100%;
+    text-align: left;
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    padding: 10px 0;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 980px) {
+  #procurement-supplychain-wrapper .navigation a {
+    min-width: auto;
+    max-width: 110px;
+  }
+}
+
+#procurement-supplychain-wrapper .navigation a span {
+  display: block;
+  width: 50px;
+  height: 40px;
+  margin: 0 0 35px 0;
+}
+
+@media (max-width: 767px) {
+  #procurement-supplychain-wrapper .navigation a span {
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    margin-right: 15px;
+    margin-bottom: 0;
+    width: 30px;
+    height: 30px;
+  }
+}
+
+#procurement-supplychain-wrapper .navigation a span img {
+  display: block;
+  border: 0;
+  margin: 0;
+  height: 100%;
+  width: 100%;
+}
+
+#procurement-supplychain-wrapper .navigation .list-group-horizontal {
+  margin-bottom: -2px;
+}
+
+#procurement-supplychain-wrapper .navigation .list-group-item {
+  border: 0;
+  border-bottom: 2px solid #CCCCCC;
+  border-radius: 0;
+  margin-bottom: 0px;
+}
+
+@media (max-width: 767px) {
+  #procurement-supplychain-wrapper .navigation .list-group-item {
+    width: 44%;
+  }
+}
+
+#procurement-supplychain-wrapper .navigation .list-group-item.active {
+  border-color: transparent;
+  border-bottom: 4px solid #f7941e;
+  background-color: transparent;
+}
+
+#procurement-supplychain-wrapper .navigation .list-group-item.active a {
+  color: #000000;
+}

@@ -1,0 +1,52 @@
+unfpa_global_strategic_plan:
+  version: 1.x
+  css:
+    theme:
+      images/font-icons/sowp-icons.css: {}
+      css/sowp-fonts.css: {}
+      css/sowp-style.css: {}
+      css/sowp-style-2016.css: {}
+      css/sowp-style-2017.css: {}
+      css/sowp.strategic-plan.css: {}
+      css/goals.css: {}
+      css/goals-responsive.css: {}
+      /libraries/plugins/skins/futurico/futurico.css: {}
+      /libraries/plugins/skins/polaris/polaris.css: {}
+  js:
+    /libraries/d3/d3.v3.js: {}
+    /modules/custom/unfpa_global_goals/js/ending_maternal_death.js: {}
+    /modules/custom/unfpa_global_goals/js/ending_unmet_need.js: {}
+    /modules/custom/unfpa_global_goals/js/ending_harmful_practices.js: {}
+    /libraries/icheck.min/icheck.min.js: {}
+    /modules/custom/unfpa_global_goals/js/unfpa_global_goals_child_mrg_bf_15.js: {}
+    /modules/custom/unfpa_global_goals/js/unfpa_global_goals_child_mrg_bf_18.js: {}
+    /libraries/lib/lib.progressbar.js: {}
+    js/sowp.loading-stp.js: {}
+    /libraries/lib/lib.detectmobilebrowser.js: {}
+    /libraries/lib/lib.cycle2.js: {}
+    /libraries/lib/lib.cycle-swipe.js: {}
+    js/lib.chartjs.js: {}
+    /libraries/lib/lib.tinycolor.js: {}
+    /libraries/lib/lib.easing.js: {}
+    /libraries/lib/lib.jqueryui-touch-punch.js: {}
+    /libraries/lib/lib.raf.js: {}
+    /libraries/lib/lib.bowser.js: {}
+    /libraries/lib/lib.masonry.js: {}
+    /libraries/lib/lib.qtip.js: {}
+    https://www.youtube.com/iframe_api: { type: external }
+    js/viewportSize.js: {}
+    /libraries/lib/simplemaps/lib.worldmap.js: {}
+    js/map_1.js: {}
+    js/map_2.js: {}
+    js/sowp.general.js: {}
+    js/sowp.scrolling.js: {}
+    js/sowp.scrolling-stp.js: {}
+    js/sowp.strategic-plan.js: {}
+
+  dependencies:
+    - core/drupal
+    - core/jquery
+    - core/jquery.once
+    - core/drupalSettings
+    - core/jquery.ui.slider
+    - core/jquery.ui.effects.core

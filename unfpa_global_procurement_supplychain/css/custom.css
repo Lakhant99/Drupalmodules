@@ -1,0 +1,139 @@
+html,
+body {
+  overflow: visible;
+}
+
+section.with-banner {
+  padding: 30px 0 0px 0 !important;
+}
+
+.bg-white {
+  padding: 0 !important;
+}
+
+.page-executive-board-new .exb section.related-content.top-space {
+  padding-top: 250px;
+}
+
+.pane-unfpa-global-executive-board-eb-board-decision-document-listing .view-executive-board-documents {
+  overflow: auto;
+}
+
+.path-executive-board .btn-collapse span.hidemore {
+  display: none;
+}
+
+/* Override for top menu */
+.exb #header menu #navigation ul.menu li > .menu {
+  top: 26px;
+}
+
+@media (max-width: 720px) {
+  .exb #header menu #navigation ul.menu li > .menu {
+    top: 0px;
+  }
+}
+
+.exb #header menu #navigation ul.menu li > .menu .menu {
+  top: 0px;
+}
+
+.exb #header menu #navigation ul.menu li {
+  -webkit-box-sizing: unset !important;
+  -moz-box-sizing: unset !important;
+  box-sizing: unset !important;
+}
+
+.exb #header .search_form .button,
+.exb #header #block-search-form .form-submit {
+  top: 0px;
+}
+
+.session-info-blocks.link-block a {
+  color: #ffffff;
+  font-size: 14px;
+}
+
+/*--- css for executive-board home page start here---*/
+.path-executive-board #readmore-expand .card-body ul li {
+  list-style-type: disc;
+  line-height: 1.5em;
+  margin: 0 0 0.6em 1em;
+}
+
+.path-executive-board .bg-white.with-banner + .bg-white article {
+  padding: 25px 0 35px 0;
+}
+
+.path-executive-board .bg-white.with-banner + .bg-white .btn.btn-collapse {
+  margin: 25px 0 0;
+}
+
+.path-executive-board #executive-board-wrapper .related-content.top-space {
+  margin: 44px 0 0 0;
+  padding: 85px 0 40px;
+}
+
+.path-executive-board #executive-board-wrapper .keyresources-wrapper {
+  margin: 25px 0 0 0;
+}
+
+.path-executive-board #executive-board-wrapper h2.article__title + .keyresources-wrapper h3 {
+  padding: 0 0 0.5em;
+}
+
+.path-executive-board #executive-board-wrapper .latest-wrapper {
+  margin-top: 0;
+}
+
+.path-executive-board #executive-board-wrapper .upcoming-latest .card .card-image {
+  max-height: 260px;
+  min-height: 260px;
+  overflow: hidden;
+}
+
+.path-executive-board #executive-board-wrapper .latest-wrapper a {
+  display: block;
+  text-align: left;
+  overflow: hidden;
+}
+
+.path-executive-board #executive-board-wrapper .latest-wrapper a.upcoming_latest img {
+  height: auto;
+  max-height: 560px;
+  width: 100%;
+}
+
+.path-executive-board #executive-board-wrapper .latest-wrapper a img {
+  transition: -webkit-transform 2.4s linear;
+  -webkit-transition: -webkit-transform 2.4s linear;
+  transition: transform 2.4s linear;
+  transition: transform 2.4s linear, -webkit-transform 2.4s linear;
+  width: 100%;
+}
+
+.path-executive-board #executive-board-wrapper .latest-wrapper a img:hover {
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+}
+
+.path-executive-board #executive-board-wrapper .view-executive-board.view-display-id-updates_listing_pane .item-list ul.pager {
+  margin: 20px 0 50px 0;
+}
+
+.path-executive-board #executive-board-wrapper .news-display-card {
+  min-height: inherit;
+}
+
+@media (max-width: 575.98px) {
+  .path-executive-board #executive-board-wrapper .news-display-card {
+    margin-bottom: 3%;
+  }
+}
+/*--- css for executive-board home page end here---*/
+
+.exb ul.events-toggle.disabled,
+.filter-by-view ul.events-toggle.disabled {
+  opacity: 0.4;
+  pointer-events: none;
+}

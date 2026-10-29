@@ -1,0 +1,731 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Drupal 8\\n"
+"MIME-Version: 1.0\\n"
+"Content-Type: text/plain; charset=UTF-8\\n"
+"Content-Transfer-Encoding: 8bit\\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\\n"
+
+msgid 'Vision and Agenda 2030'
+msgstr 'Vision et Agenda 2030'
+
+msgid 'How we work'
+msgstr 'Notre méthode de travail'
+
+msgid 'Operational excellence'
+msgstr 'Excellence Operationnelle'
+
+msgid 'Make a difference'
+msgstr 'Contribuer au changement'
+
+msgid 'Download'
+msgstr 'Téléchargements'
+
+msgid 'Return<br />to top'
+msgstr 'Retour en <br />haut de <br />la page'
+
+msgid 'Strategic Plan'
+msgstr 'Plan stratégique'
+
+msgid 'Our goal is to achieve'
+msgstr 'Notre objectif est de grantir '
+
+msgid 'Universal Access to <br />sexual and reproductive health<br /> and reproductive rights'
+msgstr "L'ACCÈS UNIVERSEL À LA <br />SANTÉ SEXUELLE ET REPRODUCTIVE<br /> ET AUX DROITS EN MATIÈRE DE REPRODUCTION"
+
+msgid 'with a vision to'
+msgstr 'aux fins de'
+
+msgid 'Unmet need for<br /> family planning'
+msgstr 'BESOINS DE PLANIFICATION FAMILIALE<br />  NON SATISFAITS'
+
+msgid 'Unmet need for family planning'
+msgstr 'Besoins de planification familiale non satisfaits'
+
+msgid 'Preventable<br /> maternal deaths'
+msgstr 'LES DÉCÈS MATERNELS<br /> ÉVITABLES'
+
+msgid 'Preventable maternal deaths'
+msgstr 'décès maternels évitables'
+
+msgid 'Ending Preventable Maternal Death'
+msgstr 'Éliminer les décès maternels évitables'
+
+msgid 'Gender-based violence<br /> and harmful practices'
+msgstr 'À LA VIOLENCE SEXISTE<br /> ET AUX PRATIQUES NÉFASTES'
+
+msgid 'Imagine a world where <br> every pregnancy is wanted <br> every childbirth is safe and <br> every young person's potential is fulfilled'
+msgstr 'Imaginez un monde où chaque grossesse est désirée, chaque accouchement est sans danger, et le potentiel de chaque jeune est accompli.'
+
+msgid 'This is the world we are striving to realize. Our goal is to achieve universal access to'
+msgstr 'C'est ce monde-là que nous nous employons à créer. Notre objectif est de réaliser l'accès universel à la'
+
+msgid 'Sexual and reproductive health is a state of complete physical, mental and social well-being in all matters relating to the reproductive system, the capacity to have a safe and satisfying sex life, the capability to reproduce and the freedom to decide if, when, and how often to do so. It also includes sexual health, the purpose of which is the enhancement of life and personal relations. Reproductive rights include the right of access to sexual and reproductive health information and services, and the right to make decisions concerning reproduction free of discrimination, coercion and violence.'
+msgstr 'La santé sexuelle et reproductive est un état de bien-être physique, mental et social complet dans toutes les questions relatives au système reproducteur, la capacité d'avoir une vie sexuelle sûre et satisfaisante, la capacité de se reproduire et la liberté de décider si, quand, et à quelle fréquence le faire. Cela inclut également la santé sexuelle, dont le but est l'amélioration de la vie et des relations personnelles. Les droits reproductifs comprennent le droit d'accéder à l'information et aux services de santé sexuelle et reproductive, et le droit de prendre des décisions concernant la reproduction sans discrimination, coercition et violence.'
+
+msgid 'sexual and reproductive health'
+msgstr 'santé sexuelle et reproductive'
+
+msgid 'realize reproductive rights, and reduce maternal mortality to accelerate progress on the agenda of the Programme of Action of the'
+msgstr 'et de réduire la mortalité maternelle en vue d'accélérer les progrès dans la mise en œuvre du Programme d'action issu de la'
+
+msgid 'The 1994 International Conference on Population and Development (ICPD), held in Cairo, articulated a bold new vision about the relationships between population, development and individual well-being. This vision was embodied in a Programme of Action, which 179 governments adopted and which recognised that reproductive health and rights, and women's empowerment and gender equality, are critical for sustainable development. A major global review of progress in implementing the ICPD Programme of Action 1994-2014 (also analyzing the gaps and challenges that remain) resulted in a Framework of Actions for the follow-up to the Programme of Action of the ICPD.'
+msgstr 'La Conférence internationale sur la population et le développement (CIPD) de 1994, tenue au Caire, a articulé une nouvelle vision audacieuse des relations entre population, développement et bien-être individuel. Cette vision a été incarnée dans un programme d'action que 179 gouvernements ont adopté et qui reconnaît que la santé et les droits en matière de procréation, ainsi que l'autonomisation des femmes et l'égalité des sexes, sont essentiels pour le développement durable. Un examen global majeur des progrès accomplis dans la mise en œuvre du Programme d'action de la CIPD 1994-2014 (analysant également les lacunes et les défis qui subsistent) a abouti à un cadre d'action pour le suivi du Programme d'action de la CIPD.'
+
+msgid 'International Conference on Population and Development (ICPD)'
+msgstr 'Conférence internationale sur la population et le développement (CIPD)'
+
+msgid 'to improve the lives of women, adolescents and youth, enabled by population dynamics, human rights and gender equality. Our new strategic plan is designed to drive the ambitions and goals of the ICPD and'
+msgstr 'afin d'améliorer les conditions de vie des femmes, des adolescents et des jeunes, en se fondant sur la dynamique des populations, les droits de l'homme et l'égalité des sexes. Notre nouveau plan stratégique est conçu de façon à soutenir la réalisation des ambitions et des objectifs énoncés par la CIPD et le'
+
+msgid 'The 2030 Agenda is a plan of action for people, planet and prosperity. It forms the new global development framework anchored around 17 Sustainable Development Goals (SDGs) covering economic and social development, and environmental protection. Poverty eradication is the overarching goal of the new agenda and corresponding Vision 2030 to work together to leave no one behind.'
+msgstr "L'Agenda 2030 est un plan d'action pour les personnes, la planète et la prospérité. Il forme le nouveau cadre de développement mondial ancré autour de 17 objectifs de développement durable (ODD) couvrant le développement économique et social et la protection de l'environnement. L'éradication de la pauvreté est l'objectif primordial du nouveau programme et de la Vision 2030 correspondante de travailler ensemble pour ne laisser personne de côté."
+
+msgid 'agendas'
+msgstr 'Agenda'
+
+msgid 'UNFPA is committed to key Agenda 2030 principles'
+msgstr 'L'UNFPA s'engage en faveur des grands principes énoncés dans le Programme 2030'
+
+msgid 'Protect and promote human rights'
+msgstr 'Protéger et promouvoir les droits de l'homme'
+
+msgid 'Leave no one behind and reach the furthest behind first'
+msgstr 'Ne laisser personne de côté et aider en premier lieu les plus défavorisés'
+
+msgid 'Strengthen cooperation and complementarity among development, humanitarian action and sustaining peace'
+msgstr 'Renforcer la coopération et la complémentarité entre le développement, l'action humanitaire et le maintien de la paix'
+
+msgid 'Strengthen link between development, humanitarian action & sustaining peace'
+msgstr 'Renforcer les liens entre les activités ayant trait au développement, au maintien de la paix et à l'action humanitaire'
+
+msgid 'Reduce risks and vulnerabilities and build resilience'
+msgstr 'Réduire les risques et les vulnérabilités et renforcer la résilience'
+
+msgid 'Ensure gender-responsive approaches at all levels of programming'
+msgstr 'S'assurer que des approches tenant compte de la problématique hommes-femmes soient adoptées à tous les niveaux de programmation'
+
+msgid 'Improve accountability, transparency and efficiency'
+msgstr 'Améliorer la responsabilité, la transparence et l'efficacité'
+
+msgid 'It is important that we act now. A bold agenda requires bold action. To achieve these objectives, we must'
+msgstr 'Il est important d'agir maintenant. Un programme ambitieux nécessite des mesures audacieuses. Pour atteindre ces objectifs, nous devons'
+
+msgid 'work together'
+msgstr 'travailler ensemble'
+
+msgid 'WORK TOGETHER'
+msgstr 'TRAVAILLER ENSEMBLE'
+
+msgid 'to'
+msgstr 'afin de'
+
+msgid 'leave no one behind'
+msgstr 'ne laisser personne de côté'
+
+msgid 'Transforming our future'
+msgstr 'Transformer notre avenir'
+
+msgid 'work together to leave no one behind'
+msgstr 'travailler ensemble afin de nadie se quede atrás'
+
+msgid 'Executive Director'
+msgstr 'Directrice exécutive'
+
+msgid 'Achieving universal access to sexual and reproductive health and reproductive rights of women and young people will transform our future.'
+msgstr 'L'accès de toutes les femmes et de tous les jeunes à la santé sexuelle et reproductive et aux droits en matière de reproduction redessinera notre avenir.'
+
+msgid 'Rooted in fundamental human rights and serving as a powerful development accelerator, sexual and reproductive health and rights benefits individuals, communities, and nations. Investing in women's sexual and reproductive health and rights is one of the best investments in international development. When a woman can plan her pregnancy, she can plan her future. Her prospects increase for completing education and securing an income. Her children are more likely to be healthy and educated, and poverty is less likely to be transferred to the next generation.'
+msgstr 'La santé sexuelle et reproductive et les droits en matière de reproduction, qui découlent des droits fondamentaux et contribuent largement à l'accélération du développement, profitent aux individus, à leurs communautés et à des nations tout entières. Les bénéfices que produisent les investissements effectués en faveur des femmes dans ce domaine sont exceptionnels pour le développement international. Lorsqu'une femme peut programmer ses grossesses, elle peut également planifier son avenir. Elle a de meilleures chances d'aller au bout de sa scolarité et de s'assurer un revenu régulier. Ses enfants sont plus susceptibles d'être en bonne santé et instruits, et elle risque moins de transmettre la pauvreté à la génération suivante.'
+
+msgid 'Access to sexual and reproductive health and reproductive rights'
+msgstr "L'accès à la santé sexuelle et reproductive et aux droits en matière de reproduction"
+
+msgid 'Reduces poverty'
+msgstr 'Réduit la pauvreté'
+
+msgid 'Saves lives'
+msgstr 'Sauve des vies'
+
+msgid 'Reduces <br /> poverty'
+msgstr 'Réduit <br /> la pauvreté'
+
+msgid 'Saves lives'
+msgstr 'Sauve des vies'
+
+msgid 'Saves <br /> lives'
+msgstr 'Sauve <br /> des vies'
+
+msgid 'Enables gender equality'
+msgstr 'Favorise l'égalité des sexes'
+
+msgid 'Enables <br /> gender equality'
+msgstr 'Favorise <br /> l'égalité des sexes'
+
+msgid 'Stimulates economic growth'
+msgstr 'Stimule la croissance économique'
+
+msgid 'Stimulates <br /> economic growth'
+msgstr 'Contribue au <br /> développement durable'
+
+msgid 'Supports sustainable development'
+msgstr 'Contribue au développement durable'
+
+msgid 'UNFPA Transformative Results'
+msgstr 'Résultats transformateurs de l'UNFPA'
+
+msgid 'Ending Preventable Maternal Death'
+msgstr 'Éliminer les décès maternels évitables'
+
+msgid 'Everyone has the right to health, including women and mothers. Since 1990, maternal death has declined by 44 per cent. Still, some 830 women and adolescent girls die each day from preventable causes related to complications of pregnancy and childbirth, and 99 per cent of all maternal deaths occur in developing countries - more than half in fragile and humanitarian settings.'
+msgstr 'Toute personne a droit à la santé, y compris les femmes et les mères. Depuis 1990, le nombre de décès maternels a reculé de 44 %. Pourtant, quelque 830 femmes et adolescentes meurent encore chaque jour de causes évitables liées aux complications de la grossesse et de l'accouchement. Presque tous ces décès maternels (99 %) surviennent dans les pays en développement, dont plus de la moitié dans des situations fragiles et de crise humanitaire.'
+
+msgid ""I felt so afraid and uncertain this morning, but now I feel more at peace," said Sabekun, in a refugee camp for Rohingyas in Bangladesh. She received a prenatal check-up for her first child, and learned about family planning for the first time, after walking for seven days to flee violence back home."
+msgstr "" J'avais si peur ce matin, je me posais tellement de questions... mais je me sens plus sereine maintenant ", se confie Sabekun, résidente d'un camp de réfugiés pour Rohingyas, au Bangladesh. Enceinte de son premier enfant, et après avoir marché pendant sept jours consécutifs pour fuir les violences, elle a pu bénéficier d'un examen prénatal, à l'occasion duquel elle a entendu parler pour la première fois de planification familiale."
+
+msgid 'Maternal deaths per 100,000 live births'
+msgstr 'Nombre de décès maternels pour 100 000 naissances vivantes'
+
+msgid 'SDG Target'
+msgstr 'Cible des ODD'
+
+msgid 'Assuming all the maternal deaths are preventable'
+msgstr 'En supposant que tous les décès maternels sont évitables'
+
+msgid 'Ending unmet need for family planning'
+msgstr 'Répondre aux besoins de planification familiale non satisfaits'
+
+msgid "Family planning is central to women’s empowerment and sustainable development. Women, adolescent and youth have the right to make their own informed choices about contraception. Today, more than 300 million women in developing countries are using contraception, but more than 214 million women who want to plan their births don’t have access to modern family planning."
+msgstr "La planification familiale est essentielle à l'autonomisation des femmes et au développement durable. Les femmes, les adolescent(e)s et les jeunes ont le droit de faire leurs propres choix éclairés concernant leur contraception. À l'heure actuelle, dans les pays en développement, plus de 300 millions de femmes utilisent un moyen de contraception. En revanche, plus de 214 millions de femmes souhaitant planifier leurs grossesses n'ont pas accès à des services modernes de planification familiale."
+
+msgid '"I had very little knowledge about contraception," said Aminata Kabba from Sierra Leone who became pregnant at the age of 15. "My advice to my family members and friends is that family planning is the only thing that will keep us in school when we are sexually active".'
+msgstr '" Je ne savais pas grand-chose sur la contraception ", explique Aminata Kabba, une Sierra-Léonaise qui est tombée enceinte à l'âge de 15 ans. " J'ai envie de dire aux membres de ma famille et à mes amies que la seule solution pour nous de rester à l'école après être devenues sexuellement actives, c'est de recourir à la planification familiale. "'
+
+msgid 'Percentage of women with an unmet need'
+msgstr 'Pourcentage de femmes ayant un besoin non satisfait'
+
+msgid 'for family planning'
+msgstr 'pour la planification familiale'
+
+msgid 'Women with unmet need are those, aged 15-49, who are married or in a union and want to stop or delay childbearing but are not using any method of contraception'
+msgstr 'Les femmes ayant des besoins non satisfaits sont celles, âgées de 15 à 49 ans, qui sont mariées ou en union et qui souhaitent arrêter ou retarder la procréation mais qui n'utilisent aucune méthode de contraception'
+
+msgid 'Ending gender-based violence and harmful practices'
+msgstr 'Mettre fin à la violence sexiste et aux pratiques néfastes'
+
+msgid 'As the struggle for gender equality continues, violence against women and girls remains a global pandemic. One in three women will experience physical or sexual violence in her lifetime. Around 2000, nearly one in three women between 20 and 24 years of age reported that they were married before 18 years of age. Around 2015, the ratio was just over one in four.'
+msgstr 'Alors que la lutte pour l'égalité des sexes se poursuit, la violence à l'égard des femmes et des filles demeure un fléau international. Une femme sur trois subira des violences physiques ou sexuelles au cours de sa vie. Vers l'an 2000, près d'une femme âgée de 20 à 24 ans sur trois indiquait avoir été mariée avant l'âge de 18 ans. Vers 2015, ce ratio était d'un peu plus d'une femme sur quatre.'
+
+msgid '"When a girl gets an education and a diploma, she has a chance to get a good job instead of a husband who controls her," said 16 year old Saba, a Syrian refugee in Zaatari camp in Jordan. Through a programme at the camp, Saba and her mother Izdihar advocate against child marriage.'
+msgstr '" Lorsqu'une fille va à l'école et décroche un diplôme, elle a de meilleures chances d'obtenir un bon emploi plutôt qu'un époux qui la contrôle ", affirme Saba, 16 ans, réfugiée syrienne. Saba et sa mère Izdihar plaident contre le mariage d'enfants dans le cadre d'un programme mis en œuvre dans le camp de Zaatari, en Jordanie, où elles résident.'
+
+msgid 'Ending Child Marriage'
+msgstr 'Mettre fin aux mariages d'enfants'
+
+msgid 'Per cent of girls married/in union before age 15'
+msgstr 'Pourcentage de filles mariées / en union avant l'âge de 15 ans'
+
+msgid 'Per cent of girls married/in union after age 15 but before age 18'
+msgstr 'Pourcentage de filles mariées / en union après l'âge de 15 ans mais avant l'âge de 18 ans'
+
+msgid 'Realizing Global Goals by 2030'
+msgstr 'Atteindre les objectifs mondiaux à l'horizon 2030'
+
+msgid 'In 2015, world leaders agreed to 17 global goals to advance sustainable development. The Sustainable Development Goals (SDGs) are integrated and indivisible, and provide a global framework for partnership and action.'
+msgstr 'En 2015, les dirigeants mondiaux se sont fixé 17 objectifs visant à favoriser le développement durable. Intégrés et indissociables, ces objectifs de développement durable (ODD) définissent un cadre mondial de partenariat et d'action.'
+
+msgid 'The work of UNFPA contributes to the achievement of the SDGs. Realizing these goals by 2030 requires a strategic shift in how we design and implement programmes, and how we measure impact.'
+msgstr 'Le travail mené par l'UNFPA contribue à la réalisation des ODD. La concrétisation de ces objectifs à l'horizon 2030 suppose de modifier notre façon de concevoir et de mettre en œuvre nos programmes, mais aussi notre manière de mesurer les impacts.'
+
+msgid 'Play next'
+msgstr 'Jouez ensuite'
+
+msgid 'Our strategic plan 2018-21 is closely aligned with SDG 3 for good health and well-being, and SDG 5 for gender equality and women's and girls' empowerment. It is also aligned with goals 10, 16 and 17, and, of course, all of our work ultimately makes a strong contribution to goal 1 to end poverty.'
+msgstr 'Notre plan stratégique pour 2018-2021 correspond étroitement à l'ODD 3 relatif à la santé et au bien-être, ainsi qu'à l'ODD 5 sur l'égalité des sexes et l'autonomisation des femmes et des filles. Il s'inscrit également dans la lignée des objectifs 10, 16 et 17. De plus, notre action contribue bien évidemment dans une large mesure à l'objectif 1 consistant à éradiquer la pauvreté.'
+
+msgid 'UNFPA focuses on universal access to sexual and reproductive health care services and reducing the global maternal mortality ratio. Priority is placed on strengthening capacities and health systems, and advancing policies and programmes to provide quality information and integrated services for sexual and reproductive health, including in humanitarian and fragile settings. Our efforts prioritize access for women, adolescents and youth, especially those furthest behind.'
+msgstr "L'UNFPA axe ses efforts sur l'accès universel aux services de santé sexuelle et reproductive et sur la baisse du taux de mortalité maternelle à l'échelle mondiale. La priorité est donnée au renforcement des capacités et des systèmes de santé et à l'adoption de politiques et programmes visant à fournir des informations de qualité et à proposer, plus particulièrement aux femmes, aux adolescents et aux jeunes, notamment les plus défavorisés d'entre eux, des services intégrés de santé sexuelle et reproductive, y compris dans les contextes fragiles et humanitaires."
+
+msgid 'UNFPA supports women's empowerment and the full exercise of sexual and reproductive health and reproductive rights, free of coercion, discrimination and violence; addresses underlying social norms to advance women's and girl's rights; and works to end gender-based violence and harmful practices. Efforts also focus on strengthening policies, mobilizing civil society and communities, and engaging men and boys to advance gender equality and women's empowerment.'
+msgstr "L'UNFPA œuvre en faveur de l'autonomisation des femmes, de la pleine jouissance de leur santé sexuelle et reproductive et de l'exercice de leurs droits en matière de reproduction, sans contrainte, discrimination ni violence ; agit sur les normes sociales sous-jacentes pour faire progresser les droits des femmes et des filles ; et intervient pour mettre un terme à la violence sexiste et aux pratiques néfastes. Nos actions visent également à renforcer les politiques, à mobiliser la société civile et les communautés, et à assurer l'engagement des hommes et des garçons afin de faire progresser l'égalité des sexes et l'autonomisation des femmes."
+
+msgid 'UNFPA focuses on protecting and promoting human rights, leaving no one behind and reaching the furthest behind first. By strengthening national population data systems, UNFPA maps and addresses inequalities, and supports gender equality and universal access to sexual and reproductive health and reproductive rights.'
+msgstr 'L'UNFPA s'attache à protéger et à promouvoir les droits fondamentaux, à ne laisser personne de côté et à aider les plus défavorisés en premier. En renforçant les systèmes nationaux de données démographiques, l'UNFPA recense et traite les inégalités, et soutient l'égalité des sexes et l'accès universel à la santé sexuelle et reproductive et aux droits en matière de reproduction. '
+
+msgid 'UNFPA focuses on strengthening health systems, national population data systems, capacities and multi-sectoral services for survivors of gender-based violence, and contributes to sustaining peace. UNFPA supports birth registration to provide legal identity for all. Efforts also focus on empowering young people as positive agents of change, including in humanitarian action and peacebuilding.'
+msgstr 'L'UNFPA met l'accent sur le renforcement des systèmes de santé, des systèmes nationaux de données démographiques, des capacités et des services multisectoriels proposés aux victimes de violence sexiste, et contribue au maintien de la paix. Nous soutenons l'enregistrement des naissances pour garantir l'identité juridique de tous. Nos actions visent également à donner aux jeunes les moyens d'intervenir en tant qu'agents positifs du changement, y compris dans les domaines de l'action humanitaire et de la consolidation de la paix.'
+
+msgid 'The ability of UNFPA to collaborate through multi-stakeholder partnerships at all levels is key to success to achieve universal access to sexual and reproductive health and reproductive rights. This includes supporting censuses, demographic and health surveys, and other large-scale data-gathering exercises to ensure that everyone is counted and accounted for in the pursuit of sustainable development.'
+msgstr 'La capacité de l'UNFPA à collaborer dans le cadre de partenariats multipartites à tous les niveaux est essentielle pour parvenir à garantir l'accès universel à la santé sexuelle et reproductive et aux droits en matière de reproduction. Ceci suppose de soutenir les recensements, les enquêtes démographiques et de santé, ainsi que d'autres exercices de collecte de données à grande échelle pour s'assurer que toutes les personnes seront comptabilisées et prises en compte dans la quête du développement durable.'
+
+msgid 'Driving change'
+msgstr 'Favoriser le changement'
+
+msgid 'What will it take to realize universal access to sexual and reproductive health and reproductive rights for women, adolescents and youth, even at the last mile?'
+msgstr 'Quelles mesures permettront d'assurer l'accès universel à la santé sexuelle et reproductive et aux droits en matière de reproduction des femmes, des adolescents et des jeunes, même au dernier kilomètre?'
+
+msgid 'UNFPA has identified four critical and interconnected conditions that are necessary to realize the goal of universal access to sexual and reproductive health and reproductive rights.'
+msgstr 'L'UNFPA a identifié quatre conditions indissociables et fondamentales pour réaliser l'accès universel à la santé sexuelle et reproductive et aux droits en matière de reproduction.'
+
+msgid 'carried out along with partners at the local and global level.'
+msgstr 'menées en collaboration avec des partenaires à l'échelle locale et mondiale.'
+
+msgid 'priority areas of UNFPAs work'
+msgstr 'prioritaires de l'UNFPA'
+
+msgid "'Core Four'"
+msgstr '" quatre grandes réalisations "'
+
+msgid 'These are the'
+msgstr 'Il s'agit des'
+
+msgid 'Sexual and reproductive health <br /> services and reproductive rights'
+msgstr 'Services de santé sexuelle et reproductive <br /> et droits en matière de reproduction'
+
+msgid "“I'm lucky that my gynecologist did not try to dissuade me when I told her I was pregnant”, says Anya, from Belarus, who uses a wheelchair and has a right to sexual and reproductive health."
+msgstr "" J'ai eu de la chance, ma gynécologue n'a pas essayé de me dissuader quand je lui ai dit que j'étais enceinte ! ", explique Anya, du Bélarus, qui est en fauteuil roulant et qui a droit à la santé sexuelle et reproductive."
+
+msgid 'Adolescent and <br /> youth empowerment'
+msgstr 'Autonomisation des <br /> adolescents et des jeunes'
+
+msgid '“I want to be a doctor someday”, says Shaina, aged 16, from the Philippines, who spoke during a campaign addressing adolescent pregnancy. “It means a great deal to me and many other girls that our voices are heard and we're empowered”.'
+msgstr '" Je veux devenir médecin ", affirme Shaina, une jeune Philippine de 16 ans, qui s'est exprimée lors d'une campagne en faveur de la lutte contre les grossesses précoces. " Pour moi et pour beaucoup d'autres filles, il est important d'être entendues et autonomisées. "'
+
+msgid 'Gender equality and <br /> women's empowerment'
+msgstr 'Égalité des sexes et <br /> autonomisation des femmes'
+
+msgid "“My aim is to educate every boy and girl about the harmful and unnecessary effects of female genital mutilation”, said Shaimaa Ahmed Ali, of Egypt. “One day, they will become fathers and mothers, and I want them to have the information that will make them take the right decisions for their children: Girls should not be mutilated.”"
+msgstr '" Je veux sensibiliser tous les garçons et toutes les filles aux effets néfastes et inutiles des mutilations génitales féminines ", déclare l'Égyptienne Shaimaa Ahmed Ali. " Un jour, ils seront parents à leur tour, et je veux qu'ils aient toutes les clés pour prendre la bonne décision pour leurs enfants : les filles ne doivent pas être mutilées. "'
+
+msgid 'Population data <br /> for development'
+msgstr 'Données démographiques <br /> au service du développement'
+
+msgid 'In 2017, Pakistan begun its first census in 19 years, with the support of UNFPA and other partners. The data will uncover important demographic trends and inequalities, which will inform policy-makers and leaders, as they chart the country's future.'
+msgstr 'En 2017, le Pakistan a entrepris son premier recensement en 19 ans, avec l'aide de l'UNFPA et d'autres partenaires. Les données qui en découleront lèveront le voile sur d'importantes inégalités et tendances démographiques, qui informeront les décideurs politiques et les dirigeants qui planifient l'avenir du pays.'
+
+msgid 'Every woman and young person has utilised integrated sexual and reproductive health services and exercised reproductive rights, free of coercion, discrimination and violence'
+msgstr 'Chaque femme et jeune a utilisé des services intégrés de santé sexuelle et procréative et a exercé ses droits reproductifs, sans contrainte, discrimination et violence'
+
+msgid 'UNFPA will support governments to ensure that integrated sexual and reproductive health services and reproductive rights are available, accessible and utilized, with an increased focus on strengthening health systems, and making them more people-centered. Priority will be placed on quality of care, equity in access, strengthened health workforces, and social accountability for sexual and reproductive health services, including in humanitarian, fragile and public health emergency contexts. UNFPA will also advocate, in partnership, for policies that prioritize access to sexual and reproductive health and reproductive rights for the most vulnerable groups.'
+msgstr 'Le FNUAP aidera les gouvernements à faire en sorte que les services intégrés de santé sexuelle et reproductive et les droits en matière de procréation soient disponibles, accessibles et utilisés, en mettant davantage l'accent sur le renforcement des systèmes de santé et en les rendant davantage centrés sur les personnes. La priorité sera accordée à la qualité des soins, à l'équité d'accès, au renforcement du personnel de santé et à la responsabilité sociale des services de santé sexuelle et reproductive, y compris dans les situations d'urgence humanitaire, fragile et de santé publique. Le FNUAP préconisera également, en partenariat, des politiques donnant la priorité à l’accès à la santé sexuelle et procréative et aux droits reproductifs pour les groupes les plus vulnérables.'
+
+msgid 'According to the Guttmacher Institute, if all pregnant women and newborns received full care, and if all women who want to avoid a pregnancy used modern contraceptives:'
+msgstr 'Selon le Guttmacher Institute, si toutes les femmes enceintes et les nouveau-nés recevaient des soins complets, et si toutes les femmes qui souhaitent éviter une grossesse utilisaient des contraceptifs modernes:'
+
+msgid 'maternal deaths would drop by 73 per cent'
+msgstr 'les décès maternels baisseraient de 73%'
+
+msgid 'newborn deaths would drop by 80 per cent'
+msgstr 'les décès de nouveau-nés chuteraient de 80%'
+
+msgid 'Additionally, if all unmet need for modern contraception were satisfied in developing regions, there would be approximately a three-quarters decline in unintended pregnancies.'
+msgstr 'En outre, si tous les besoins non satisfaits de contraception moderne étaient satisfaits dans les régions en développement, il y aurait une baisse d'environ trois quarts des grossesses non désirées.'
+
+msgid 'Every adolescent and youth, in particular adolescent girls, is empowered to have access to sexual and reproductive health and reproductive rights, in all contexts'
+msgstr 'Chaque adolescent et jeune, en particulier les adolescentes, est habilité à avoir accès à la santé sexuelle et reproductive et aux droits reproductifs, dans tous les contextes'
+
+msgid 'To ensure that young people are empowered to exercise choice and autonomy, UNFPA will prioritize:'
+msgstr 'Pour garantir aux jeunes les moyens d'exercer leur choix et leur autonomie, l'UNFPA accordera la priorité:'
+
+msgid 'strengthening skills and capabilities of young people, especially adolescent girls and boys, through comprehensive sexuality education'
+msgstr 'améliorer les compétences et renforcer les capacités des jeunes, en particulier des adolescent(e)s, grâce à une éducation complète à la sexualité ;'
+
+msgid 'intensifying evidence-based advocacy and policy dialogue, to build a conducive environment for the health and wellbeing of youth'
+msgstr 'intensifier le plaidoyer et le dialogue stratégique fondés sur des données probantes afin d’instaurer un environnement favorable à la santé et au bien-être des jeunes ;'
+
+msgid 'providing opportunities for young people to lead and participate in development, humanitarian action and sustaining peace, so that they play a vital role in decision-making that affects them, and their communities.'
+msgstr 'donner l’occasion aux jeunes de diriger le développement, l’action humanitaire et le maintien de la paix et d’y participer, afin d’occuper une place centrale dans la prise de décisions qui les touchent, eux et leur communauté.'
+
+msgid 'UNFPA will also expand partnerships to support youth livelihoods, and highlight the critical need to invest in adolescents and youth to reap the benefits of the demographic dividend.'
+msgstr 'L’UNFPA élargira également ses partenariats afin d’appuyer les moyens de subsistance des jeunes, et soulignera le besoin essentiel d’effectuer des investissements en faveur des adolescent(e)s et des jeunes afin de tirer parti du dividende démographique.'
+
+msgid 'increase a nation’s economic growth and lead to a cycle of healthier, better educated children.'
+msgstr 'augmenter la croissance économique d'une nation et conduire à l'instauration d'une génération en meilleure santé et plus instruite.'
+
+msgid "Triple a girl’s lifetime income"
+msgstr 'tripler leurs revenus'
+
+msgid 'Investments that empower <br /> 10-year-old girls can'
+msgstr 'Investir dans l'autonomie<br /> des filles de 10 ans peut'
+
+msgid 'Gender equality, the empowerment of women and girls, and reproductive rights are advanced in development and humanitarian settings'
+msgstr 'L’égalité des sexes, l’autonomisation de toutes les femmes et de toutes les filles, et les droits en matière de reproduction sont en progression dans les situations de crise humanitaire et les contextes de développement.'
+
+msgid 'Gender inequality has a significant role in constraining the ability of women and girls to exercise their sexual and reproductive health and rights. UNFPA will promote gender equality and women’s empowerment through a focus on preventing and responding to gender-based violence, and eliminating harmful practices, including female genital mutilation and child, early and forced marriage.'
+msgstr 'L’inégalité des sexes joue pour beaucoup dans l’incapacité des femmes et des filles à accéder à la santé sexuelle et reproductive et à exercer leurs droits en matière de reproduction. L’UNFPA promouvra l’égalité des sexes et l’autonomisation des femmes en s’attachant à prévenir et combattre la violence sexiste et à éliminer les pratiques néfastes telles que les mutilations génitales féminines et les mariages d’enfants, précoces ou forcés.'
+
+msgid 'UNFPA will intensify work on priority issues across development and humanitarian settings, through:'
+msgstr 'L’UNFPA intensifiera ses actions dans certains domaines prioritaires dans les contextes de développement et les situations de crise humanitaire, en prenant les mesures suivantes :'
+
+msgid 'strengthening policy, legal and accountability frameworks'
+msgstr 'renforcement des cadres politiques, juridiques et de responsabilisation ;'
+
+msgid 'leading the gender-based violence area of responsibility under the Global Protection Cluster of international humanitarian response'
+msgstr 'gestion du domaine de responsabilité relatif à la violence sexiste du Groupe mondial de la protection, qui mène des actions humanitaires à l’échelle internationale ;'
+
+msgid 'comprehensive programmes that address harmful social norms as a root barrier towards gender equality.'
+msgstr 'mise en place de programmes complets de lutte contre les normes sociales néfastes faisant obstacle à l’égalité des sexes.'
+
+msgid 'To realize these commitments, UNFPA will partner with key stakeholders, including men and boys, and local and global civil society.'
+msgstr 'Pour tenir ses engagements, l’UNFPA s’associera à certaines parties prenantes clés, telles que les hommes et les garçons, ou encore la société civile locale et mondiale.'
+
+msgid 'have experienced physical and/or sexual intimate partner violence or non-partner sexual violence.'
+msgstr 'ont déjà subi des violences physiques et/ou sexuelles de la part de leur partenaire intime ou des violences sexuelles de la part d'un tiers.'
+
+msgid '35 per cent<br /> of women'
+msgstr '35%<br /> des femmes'
+
+msgid 'Worldwide'
+msgstr 'À travers le monde'
+
+msgid 'Everyone, everywhere, is counted, and accounted for, in the pursuit of sustainable development'
+msgstr 'La quête du développement durable représente et tient compte de toutes les personnes, partout dans le monde.'
+
+msgid 'Universal access to sexual and reproductive health and reproductive rights cannot be achieved until everyone, everywhere, is counted, especially those furthest behind. It ensures better planning, better tracking and stronger accountability. UNFPA’s focus on generating and using population data is the foundation for all other areas of work. UNFPA supports governments and countries to generate and use data on vulnerable populations to inform plans, policies and programmes, so that targeted investments achieve sustainable development goals.'
+msgstr 'L’accès universel à la santé sexuelle et reproductive et aux droits en matière de reproduction ne pourra être atteint que si tous les individus, partout dans le monde, sont pris en compte, notamment les plus défavorisés. Il améliore la planification, le suivi et la responsabilité. Tous les domaines de travail de l’UNFPA reposent sur la priorité qu’il accorde à la production et à l’utilisation de données démographiques. L’UNFPA aide les gouvernements et les pays à produire et à utiliser des données sur les populations vulnérables afin d’étayer leurs plans, leurs politiques et leurs programmes, de façon à permettre à des investissements ciblés d’assurer la réalisation des objectifs de développement durable.'
+
+msgid 'A vital part of this is taking censuses into the 21st century with geospatial mapping, handheld devices, and other innovative technologies. In times of rapid change and insecurities- this is more necessary than ever.'
+msgstr 'Une part importante de notre travail consiste à moderniser les recensements en y associant cartographie géospatiale, appareils portables et autres technologies innovantes, ce qui est plus nécessaire que jamais en période d’insécurité et de transformation rapide.'
+
+msgid 'by most countries.'
+msgstr 'par la plupart des pays'
+
+msgid '40 per cent are regularly collected'
+msgstr '40% sont collectés régulièrement'
+
+msgid 'Of the 230 SDG indicators, 98 require population numbers and, of these, just over'
+msgstr 'Sur les 230 indicateurs relatifs aux objectifs de développement durable, 98 nécessitent de connaître les effectifs démographiques'
+
+msgid 'Census in the coming years'
+msgstr 'Recensements dans les années à venir'
+
+msgid 'A census is among the most complex and massive peacetime exercises that a nation undertakes. During the years 2018-2021, more than 150 countries and territories are scheduled to conduct a census. UNFPA provides technical support to developing countries during all stages of a national census to ensure that everyone is counted and accounted for in the pursuit of sustainable development​.'
+msgstr 'Le recensement figure parmi les exercices les plus complexes et les plus vastes entrepris par un pays en temps de paix. Plus de 150 pays et territoires ont prévu d'en organiser un entre 2018 et 2021. L'UNFPA fournit une assistance technique aux pays en développement tout au long du recensement national, afin de s'assurer que toutes les personnes sont comptabilisées et prises en compte dans la quête du développement durable.​'
+
+msgid 'The boundaries and names shown and the designations used on this map do not imply official endorsement or acceptance by the United Nations.'
+msgstr 'Les frontières, les noms et les appellations employés sur cette carte n'impliquent ni reconnaissance ni acceptation officielle de la part de l'Organisation des Nations Unies.'
+
+msgid 'In 2018, more than 135 million people across the world will need humanitarian assistance and protection*'
+msgstr 'En 2018, plus de 135 millions de personnes à l'échelle mondiale auront besoin d'une aide et d'une protection humanitaires.*'
+
+msgid 'With more and more people needing humanitarian assistance and protection, including women and young people, UNFPA is placing an increased emphasis on ensuring the core four priority areas are strengthened across humanitarian and development contexts, to reach the furthest left behind. Humanitarian intervention strategies will shift from reacting to disasters and conflicts to applying a resilience approach by linking prevention, preparedness and response with national capacity-building. This will ensure that systems, communities and societies are better equipped to respond to and recover from emergencies.'
+msgstr 'Compte tenu du nombre croissant de personnes ayant besoin d'une aide et d'une protection humanitaires, notamment des femmes et des jeunes, l'UNFPA insiste de plus en plus sur la nécessité de renforcer les quatre domaines prioritaires de travail dans les situations de crise humanitaire et de développement, afin d'atteindre les plus défavorisés. Les stratégies d'aide humanitaire passeront de la réponse aux catastrophes et aux conflits à l'adoption d'une approche basée sur la résilience étayée par la prévention, la préparation et la réponse ainsi que sur le renforcement des capacités nationales. Ce faisant, le Fonds garantira que les systèmes, les communautés et les sociétés sont mieux en mesure de faire face aux situations d'urgence et de s'en remettre.'
+
+msgid 'Ways We Work'
+msgstr 'Méthodes de travail'
+
+msgid 'Advocacy and Policy Dialogue'
+msgstr 'Plaidoyer et dialogue politique'
+
+msgid 'Developing, improving and reforming legislation, policies and strategies.'
+msgstr 'Élaborer, améliorer et réformer des lois, des politiques et des stratégies.'
+
+msgid 'Capacity Development'
+msgstr 'Renforcement des capacités'
+
+msgid 'Strengthening people skills, systems and resources and providing tailored technical expertise to deliver on the ICPD and 2030 agendas.'
+msgstr 'Renforcer les compétences humaines, les systèmes et les ressources, et fournir une expertise technique sur mesure pour mener à bien les Programmes 2030 et de la CIPD. '
+
+msgid 'Knowledge Management'
+msgstr 'Gestion des connaissances'
+
+msgid 'Improving programmes through data analysis, the timely delivery of high-quality knowledge products and innovative solutions.'
+msgstr 'Améliorer les programmes par le biais de l'analyse de données, de la fourniture opportune de produits de grande qualité fondés sur le savoir et de solutions innovantes.'
+
+msgid 'Partnerships and Coordination'
+msgstr 'Partenariats et coordination'
+
+msgid 'Strengthening partnership and South-South and triangular cooperation, and conducting inter-agency humanitarian coordination, that reinforces collective accountability to achieve results.'
+msgstr 'Renforcer les partenariats et la coopération Sud-Sud et triangulaire, et assurer une coordination humanitaire interinstitutions renforçant la responsabilisation collective à l'égard de l'obtention de résultats.'
+
+msgid 'Service Delivery'
+msgstr 'Prestation de services'
+
+msgid 'Procuring and delivering quality sexual and reproductive health services and supplies, and services for preventing and responding to gender-based violence.'
+msgstr 'Acquérir et assurer la provision de fournitures et de services de santé sexuelle et reproductive de qualité, et proposer des services de prévention et de réaction à la violence sexiste.'
+
+msgid 'We firmly believe the only way to deliver on our goal to achieve universal access to sexual and reproductive health is to work together.'
+msgstr 'Nous sommes fermement convaincus que la collaboration constitue la seule solution pour atteindre notre objectif consistant à assurer l'accès universel à la santé sexuelle et reproductive.'
+
+msgid 'By joining forces to advance the health and rights of women and young people, we can fulfill our collective promise to leave no one behind. UNFPA works in 155 countries, territories and other areas. Our presence and strategy in each country is responsive to national needs around our core mandate issues, as well as their ability to finance development. Our approach has evolved to better capture inequalities within and between countries - critical to ensuring that we leave no one behind, and reach the furthest behind first, in our journey to a more equitable and secure future.'
+msgstr 'En conjuguant nos efforts pour améliorer la santé et les droits des femmes et des jeunes, nous pouvons honorer notre promesse de ne laisser personne de côté. L'UNFPA intervient dans 155 pays, territoires et autres régions du monde. Les activités que nous menons et la stratégie que nous adoptons dans chaque pays tiennent compte des besoins nationaux dans les domaines fondamentaux couverts par notre mandat, ainsi que de la capacité du gouvernement concerné à financer le développement. Notre approche a évolué afin de mieux repérer les inégalités au niveau national et entre les pays, ce qui est essentiel si l'on veut s'assurer que personne n'est laissé de côté et que les problèmes des plus défavorisés sont traités en premier dans le cadre de nos interventions en faveur d'un avenir plus équitable et plus sûr.'
+
+msgid 'UNFPA Programme Countries'
+msgstr 'Pays ciblés par les programmes de l'UNFPA'
+
+msgid 'Country classification is based on country's relevant development indicators (the need) and ability to finance their own development. In general, red countries have the high(est) need and the lowest ability to finance. Pink countries on the other hand have the lowest needs and some ability to finance.'
+msgstr 'Les pays sont classés en fonction de leurs indicateurs de développement pertinents (besoins) et leur capacité à financer leur propre développement. En général, les pays en rouge présentent les besoins les plus importants, ou des besoins importants et une faible capacité de financement. Les pays en rose présentent au contraire les besoins les plus faibles et une certaine capacité de financement. Les pays en orange et en jaune se situent entre les deux. '
+
+msgid 'Besides above mentioned countries, UNFPA has multi-country programmes in Pacific Islands (yellow countries) and the Caribbean (pink countries).'
+msgstr 'Outre les pays susmentionnés, l'UNFPA a mis en place des programmes plurinationaux dans les îles du Pacifique (jaune) et des Caraïbes (rose).'
+
+msgid 'Note: The boundaries and names shown and the designations used on this map do not imply official endorsement or acceptance by the United Nations.'
+msgstr 'Remarque : les frontières, les noms et les appellations employés sur cette carte n'impliquent ni reconnaissance ni acceptation officielle de la part de l'Organisation des Nations Unies.'
+
+msgid 'Operational excellence'
+msgstr 'Excellence Operationnelle'
+
+msgid 'To achieve our goal and three transformative results, we will expand collective efforts to reach the furthest behind.'
+msgstr 'En vue d'atteindre notre objectif et d'obtenir trois résultats porteurs de transformation, nous intensifierons les efforts collectifs pour venir en aide aux personnes les plus défavorisées.'
+
+msgid 'Our strategies are evidence-based and take into account the lessons learned from previous plans. With a strong focus on performance, transparency, and accountability, our strategies are designed to further enhance effectiveness and efficiency of UNFPA by:'
+msgstr 'Nos stratégies sont fondées sur des éléments probants et tiennent compte des enseignements tirés des plans précédents. Mettant fortement l'accent sur l'obtention de résultats, la transparence et la responsabilité, nos stratégies sont conçues pour renforcer l'efficacité et l'efficience de l'UNFPA comme suit:'
+
+msgid 'Improving programming for results'
+msgstr 'amélioration des programmes axés sur l'obtention de résultats ;'
+
+msgid 'Optimizing management of resources'
+msgstr 'optimisation de la gestion des ressources ;'
+
+msgid 'Strengthening United Nations system-wide results, coordination and coherence'
+msgstr 'amélioration des résultats, de la coordination et de la cohérence du système des Nations Unies ;'
+
+msgid 'Enhancing communication, resource mobilization and partnerships for impact'
+msgstr 'renforcement de la communication, de la mobilisation des ressources et des partenariats afin d'obtenir l'effet voulu.'
+
+msgid 'By partnering with national governments, the private sector, civil society (including faith-based organizations), and academia, cutting-edge solutions can be found to overcome development and humanitarian challenges. When we co-create a solution, we can accelerate progress. Most important is working side-by-side with women and young people.'
+msgstr 'Les partenariats avec les gouvernements nationaux, le secteur privé, la société civile (y compris les organisations confessionnelles) et le secteur universitaire permettent de développer des solutions de pointe pour faire face aux nombreux obstacles au développement et aux difficultés humanitaires. En trouvant ensemble une solution, nous pouvons accélérer le rythme du progrès. Le plus important est de travailler main dans la main avec les femmes et les jeunes.'
+
+msgid 'Collaborate Across Sectors'
+msgstr 'METTRE EN PLACE UNE COLLABORATION INTERSECTORIELLE'
+
+msgid 'UNFPA works with many UN partners and our new strategic direction strengthens how we work together with UNDP, UNICEF and UN-Women, to better support countries to achieve sustainable development.'
+msgstr 'L'UNFPA travaille avec de nombreux partenaires au sein des Nations Unies, et notre nouvelle orientation stratégique renforce notre collaboration avec le PNUD, l'UNICEF et ONU-Femmes, pour mieux aider les pays à parvenir à un développement durable.'
+
+msgid 'In today's complex and interconnected world, an intervention in one area can have an impact in another. Humanitarian action can be undertaken in a way that contributes to achieving longer-term development. This new way of working acknowledges that whether you are an aid worker or humanitarian responder, we all need to analyse, plan and work together to achieve sustainable results.'
+msgstr 'Dans notre monde complexe et interdépendant, une intervention dans un secteur donné peut avoir des répercussions dans un autre secteur. L'action humanitaire peut être menée de façon à contribuer à assurer le développement à long terme. Cette nouvelle méthode de travail suppose une collaboration continue, notamment en ce qui concerne l'analyse et la planification, que nous soyons un travailleur humanitaire ou un secouriste, afin d'obtenir des résultats durables.'
+
+msgid 'UNFPA is committed to:'
+msgstr 'L'UNFPA s'engage à :'
+
+msgid 'Innovate'
+msgstr 'INNOVER'
+
+msgid 'Creating innovative solutions with partners to address development bottlenecks'
+msgstr 'élaborer des solutions innovantes avec ses partenaires pour surmonter les obstacles au développement ;'
+
+msgid 'Scaling-up innovations that have proven to be successful'
+msgstr 'transposer à grande échelle les innovations qui se sont avérées efficaces ;'
+
+msgid 'Partnering with innovators from the public and private sectors'
+msgstr 'collaborer avec des innovateurs issus des secteurs public et privé ;'
+
+msgid 'Institutionalizing a culture of innovation in UNFPA'
+msgstr 'instaurer un climat propice à l'innovation au sein de l'UNFPA.'
+
+msgid 'Bold, Vocal And Visible'
+msgstr 'FAIRE PREUVE D'AMBITION ET SE FAIRE ENTENDRE'
+
+msgid 'We stand up for human rights, deliver to the people we serve, and communicate our results and impact.'
+msgstr 'Nous promouvons les droits de l'homme, servons la population en faveur de laquelle nous œuvrons et communiquons les résultats que nous avons obtenus.'
+
+msgid 'Resources'
+msgstr 'Ressources'
+
+msgid 'The UNFPA Integrated Budget 2018-2021 presents the resources that will contribute to the achievement of results.'
+msgstr 'Le budget intégré de l'UNFPA pour 2018-2021 présente les ressources qui contribueront à la concrétisation des résultats recherchés'
+
+msgid 'Available resources, 2018 - 2021'
+msgstr 'Ressources disponibles pour 2018-2021'
+
+msgid 'Available resources 2018 - 2021'
+msgstr 'Ressources disponibles pour 2018-2021'
+
+msgid 'Regular resources'
+msgstr 'Ressources ordinaires'
+
+msgid 'Other resources'
+msgstr 'Autres ressources '
+
+msgid 'UNFPA estimates that the total resources available during 2018-2021 will be $4 billion, a decrease of $283.6 million, or 6.6 per cent, compared to the previous cycle.'
+msgstr 'Selon les estimations de l'UNFPA, les ressources totales disponibles pour la période 2018-2021 s'élèveront à 4 milliards de dollars, soit 283.6 millions de moins (6.6 %) que lors du cycle précédent.'
+
+msgid 'Planned use of resources for programmes, by location, 2018 - 2021'
+msgstr 'Utilisation prévue des ressources consacrées aux programmes, par lieu 2018 - 202'
+
+msgid 'Country'
+msgstr 'País'
+
+msgid 'Headquarters'
+msgstr 'Siège'
+
+msgid 'Regional'
+msgstr 'Régions'
+
+msgid 'Corporate'
+msgstr 'Institutionnel'
+
+msgid 'UNFPA continues to commit the majority of its resources at country level to help programme country governments achieve their set results.'
+msgstr 'L'UNFPA continue de dépenser la plupart de ses ressources à l'échelle des pays, afin d'aider les gouvernements des pays ciblés par ses programmes à atteindre les résultats qu'ils se sont fixés.'
+
+msgid 'Resources by area of work, 2018 - 2021'
+msgstr 'Ressources par domaine de travail pour 2018 - 2021'
+
+msgid 'Sexual and reproductive health and reproductive rights'
+msgstr 'Santé sexuelle et reproductive et droits en matière de reproduction '
+
+msgid 'Adolescent and youth empowerment'
+msgstr 'Autonomisation des adolescents et des jeunes '
+
+msgid 'Gender equality and women's empowerment'
+msgstr 'Égalité des sexes et autonomisation des femmes '
+
+msgid 'Population data for development'
+msgstr 'Données démographiques au service du développement '
+
+msgid 'Programming for results'
+msgstr 'Élaboration de programmes pour l'obtention de résultats '
+
+msgid 'Resource management'
+msgstr 'Gestion des ressources'
+
+msgid 'Delivering as one'
+msgstr 'Initiative " Unis dans l'action "'
+
+msgid 'Communication, resource mobilization and partnerships'
+msgstr 'Communication, mobilisation des ressources et partenariats '
+
+msgid 'Make a difference'
+msgstr 'Contribuer au changement'
+
+msgid 'Get involved'
+msgstr 'Engagez-vous!'
+
+msgid 'There are many ways you can make a difference.'
+msgstr 'Vous pouvez contribuer au changement de différentes façons'
+
+msgid 'Share and Connect'
+msgstr 'Partager et creeer des liens'
+
+msgid 'You can help change the lives of women and young people.'
+msgstr 'Vous pouvez aider à transformer la vie des femmes et des jeunes.'
+
+msgid 'Sign up to receive stories on women and young people reached by UNFPA, our latest news from emergencies, recent job vacancies, and​ updates about our work around the world.'
+msgstr 'Inscrivez-vous pour découvrir l'histoire de femmes et de jeunes ayant bénéficié des interventions de l'UNFPA, lire nos dernières actualités sur les urgences, consulter les emplois vacants et recevoir des nouvelles de notre travail partout dans le monde.'
+
+msgid 'Do something great today. By supporting UNFPA, you are making a difference for women and young people. Thank you for your generosity. ​Just press the button below.'
+msgstr 'Faites une bonne action en cliquant sur le bouton ci-dessous : en soutenant l'UNFPA, vous contribuerez à transformer la vie de femmes et de jeunes partout dans le monde. Merci pour votre générosité !'
+
+msgid 'Join us as a partner to support UNFPA in achieving results for and with women and young people​. Please contact UNFPA's Strategic Partnerships Branch at spb.office@unfpa.org'
+msgstr 'Devenez l'un des partenaires de l'UNFPA pour nous aider à obtenir des résultats pour les femmes et les jeunes et en collaboration avec eux. Contactez la Division des partenariats stratégiques de l'UNFPA à l'adresse suivante : spb.office@unfpa.org'
+
+msgid 'Click below for the UNFPA Strategic Plan 2018-2021'
+msgstr 'Cliquez ci-dessous pour consulter le Plan stratégique 2018-2021 de l'UNFPA'
+
+msgid 'END'
+msgstr 'ÉLIMINER'
+
+msgid 'Sexual and reproductive health services and reproductive rights'
+msgstr 'Services de santé sexuelle et reproductive et droits en matière de reproduction'
+
+msgid 'Adolescent and youth empowerment'
+msgstr 'Autonomisation des adolescents et des jeunes'
+
+msgid 'Gender equality and women's empowerment'
+msgstr 'Égalité des sexes et autonomisation des femmes'
+
+msgid 'Population data for development'
+msgstr 'Données démographiques au service du développement'
+
+msgid '214 million women in developing countries'
+msgstr 'non moins de 214 millions de femmes'
+
+msgid 'As many as'
+msgstr 'Dans les pays en développement'
+
+msgid 'lack access to contraceptives, resulting in 89 million unintended pregnancies and 48 million abortions every year, according to the Guttmacher Institute.'
+msgstr 'Dans les pays en développement, non moins de 214 millions de femmes sont privées d'accès aux moyens de contraception, ce qui, selon le Guttmacher Institute, résulte chaque année en 89 millions de grossesses non désirées et 48 millions d'avortements.'
+
+
+msgid 'scheduled for census'
+msgstr 'prévoyant un recensement'
+
+msgid 'countries'
+msgstr 'pays'
+
+msgid 'Country'
+msgstr 'pays'
+
+msgid 'Delivering results'
+msgstr 'Obtenir des résultats'
+
+msgid 'WORK TOGETHER'
+msgstr 'Travailler ensemble'
+
+msgid 'Spanish'
+msgstr 'Espagnol'
+
+msgid 'Russian'
+msgstr 'Russe'
+
+msgid 'Arabic'
+msgstr 'Arabe'
+
+msgid 'Chinese'
+msgstr 'Chinois'
+
+msgid 'sharecard-1_1.jpg'
+msgstr 'frsharecard-1_1.jpg'
+
+msgid 'sharecard-2_1.jpg'
+msgstr 'frsharecard-2_1.jpg'
+
+msgid 'sharecard-3_2.jpg'
+msgstr 'frsharecard-3_2.jpg'
+
+msgid 'A dispute exists between the Governments of Argentina and the United Kingdom of Great Britain and Northern Ireland concerning sovereignty over the Falkland Islands (Malvinas).'
+msgstr 'Un différend existe entre les Gouvernements de l'Argentine et du Royaume-Uni de Grande-Bretagne et d'Irlande du Nord au sujet de la souveraineté des îles Falkland (Malvinas).'
+
+msgid 'A bold agenda requires bold action.” Watch @Atayeshe speak about @UNFPA's work to ensure universal access to sexual and reproductive health and rights'
+msgstr 'Una agenda audaz exige medidas audaces.” Vea a @Atayeshe hablar sobre el trabajo del UNFPA para garantizar el acceso universal a la salud y los derechos sexuales y reproductivos'
+
+msgid 'A bold agenda requires bold action.” Watch @Atayeshe speak about'
+msgstr 'Un programme audacieux exige une action audacieuse. Regardez @Atayeshe parler de'
+
+msgid 'work to ensure universal access to sexual and reproductive health and rights'
+msgstr 'pour assurer laccès universel à la santé et aux droits sexuels et reproductifs'
+
+msgid "billion"
+msgstr "milliards"
+
+msgid "Country"
+msgstr "Pays"
+
+msgid "Subscribe"
+msgstr "S'INSCRIRE"
+
+msgid "Women and girls married/in union before age 15"
+msgstr "Femmes et filles mariées/en union avant 15 ans"
+
+msgid "Percentage of women with an unmet need"
+msgstr "Pourcentage de femmes ayant un besoin non satisfait"
+
+msgid "for family planning"
+msgstr "pour la planification familiale"
+
+msgid "See how achieving universal access to sexual and reproductive health and rights of women and young people will transform our future: via @UNFPA"
+msgstr "voyez comment la réalisation de laccès universel à la santé et aux droits sexuels et reproductifs pour les femmes et les jeunes transformera notre avenir : via @UNFPA #SRHR"
+
+msgid "%23DidYouKnow%3A According to @Guttmacher, if all pregnant women and newborns received full care, and if all women who want to avoid a pregnancy used modern contraceptives: maternal deaths would drop by 73%25%3F Learn more%3A via @UNFPA"
+msgstr "%23Le saviez-vous%3A Selon @Guttmacher, si toutes les femmes enceintes et les nouveau-nés recevaient des soins complets, et si toutes les femmes qui veulent éviter une grossesse utilisaient des contraceptifs modernes %3A les décès maternels chuteraient de 73%25%3F Apprendre encore plus%3A via @UNFPA"
+
+msgid "%23DidYouKnow%3A An estimated 35%25 of women worldwide have experienced physical and/or sexual violence%3F See how @UNFPA is working to end this %23humanrights violation"
+msgstr "%23Le saviez-vous%3A On estime que 35%25 des femmes dans le monde ont subi des violences physiques et/ou sexuelles%3F Découvrez comment @UNFPA travaille pour mettre fin à cela %23violation des droits de lhomme"
+
+msgid "Empowering 10-year-old girls can triple their lifetime income, increase a nation’s economic growth and lead to a cycle of healthier, better educated children: via @UNFPA #GirlPower"
+msgstr "Lautonomisation des filles de 10 ans peut tripler leur revenu à vie, augmenter la croissance économique dun pays et conduire à un cycle denfants en meilleure santé et mieux éduqués%3A via @UNFPA %3APouvoir des filles"
+
+msgid "%23DidYouKnow%3A Of the 230 indicators for the %23SDGs, 98 require %23population data and, of these, just over 40%2F are regularly collected by most countries%3F Helping countries secure this info is a core part of @UNFPA work"
+msgstr "%23Le saviez-vous%3A Sur les 230 indicateurs des %3ASDGs, 98 nécessitent des données de %3Apopulation et, parmi ceux-ci, un peu plus de 40%25  sont régulièrement collectés par la plupart des pays %3F Aider les pays à sécuriser ces informations est au cœur du travail de @UNFPA"
+
+msgid "According to @UNOCHA, more than 135 million people across the world will need #humanitarian assistance in 2018. @UNFPA is working to ensuring that their #reprohealth and rights are protected"
+msgstr "Selon @UNOCHA, plus de 135 millions de personnes dans le monde auront besoin dune aide %23humanitaire en 2018. @UNFPA efforce de garantir la protection de leur %23reprosanté et de leurs droits."
+
+msgid "#DidYouKnow: Every 2 minutes, a woman dies from causes related to pregnancy and childbirth? See how @UNFPA, the @UN reproductive health and rights agency, is working to end maternal death: unfpa.org"
+msgstr "%23Le saviez-vous%3A Toutes les 2 minutes, une femme meurt de causes liées à la grossesse et à laccouchement %3F Découvrez comment @UNFPA, lagence des Nations Unies pour la santé et les droits en matière de reproduction, efforce de mettre fin à la mort maternelle %3A unfpa.org"
+
+msgid "214 million women still lack access to #familyplanning. See how @UNFPA, the @UN reproductive health and rights agency, is working to bring this number down to ZERO: unfpa.org"
+msgstr "214 millions de femmes nont toujours pas accès au %23planningfamilial. Découvrez comment @UNFPA, lagence des Nations Unies pour la santé et les droits en matière de reproduction, sefforce de ramener ce nombre à ZÉRO %23 unfpa.org"
+
+msgid "1-in-3 women will experience physical or sexual abuse in her lifetime. See how @UNFPA, the @UN reproductive health and rights agency, is working to #ENDviolence against women and girls: unfpa.org"
+msgstr "1 femme sur 3 subira des abus physiques ou sexuels au cours de sa vie. Découvrez comment @UNFPA, lagence des Nations Unies pour la santé et les droits en matière de reproduction, semploie à lutter contre la violence à légard des femmes et des filles"

@@ -1,0 +1,247 @@
+<?php
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
+use Drupal\Core\Datetime\DrupalDateTime;
+/**
+ * @file
+ * Procurement Supply Chain Page Integration.
+ */
+
+/**
+ * Implements hook_theme().
+ */
+function unfpa_global_procurement_supplychain_theme($existing, $type, $theme, $path) {
+  return [
+    'node__ct_procurement' => [
+      'path' => $path . '/templates/node',
+      'template' => 'node--ct-procurement',
+      'base hook' => 'node',
+    ],
+    'procurement_supplychain_what_we_do' => [
+      'variables' => [
+        'what_we_do_banner_text' => NULL,
+      ],
+    ],
+    'what_we_do_banner' => [
+      'variables' => [
+        'what_we_do_banner_title' => NULL,
+        'what_we_do_banner_image' => NULL,
+        'what_we_do_banner_mobile_image' => NULL,
+      ],
+      'path' => $path . '/templates/block',
+      'template' => 'block--what-we-do-banner',
+    ],
+    'for_governments_and_partners' => [
+      'variables' => [
+        'govt_part_banner_text' => NULL,
+      ],
+    ],
+    'govt_part_banner' => [
+      'variables' => [
+        'govt_part_banner_title' => NULL,
+        'govt_part_banner_image' => NULL,
+        'govt_part_mobile_banner_image' => NULL,
+      ],
+      'path' => $path . '/templates/block',
+      'template' => 'block--govt-part-banner',
+    ],
+    'for_suppliers' => [
+      'variables' => [
+        'suppliers_banner_text' => NULL,
+      ],
+    ],
+    'suppliers_banner' => [
+      'variables' => [
+        'suppliers_banner_title' => NULL,
+        'suppliers_banner_image' => NULL,
+        'suppliers_mobile_banner_image' => NULL,
+      ],
+      'path' => $path . '/templates/block',
+      'template' => 'block--suppliers-banner',
+    ],
+    'products_and_tools' => [
+      'variables' => [
+        'prod_tools_banner_text' => NULL,
+      ],
+    ],
+    'prod_tools_banner' => [
+      'variables' => [
+        'prod_tools_banner_title' => NULL,
+        'prod_tools_banner_image' => NULL,
+        'prod_tools_mobile_banner_image' => NULL,
+      ],
+      'path' => $path . '/templates/block',
+      'template' => 'block--prod-tools-banner',
+    ],
+    'resources' => [
+      'variables' => [
+        'resources_banner_text' => NULL,
+      ],
+    ],
+    'resources_banner' => [
+      'variables' => [
+        'resources_banner_title' => NULL,
+        'resources_banner_image' => NULL,
+        'resources_mobile_banner_image' => NULL,
+      ],
+      'path' => $path . '/templates/block',
+      'template' => 'block--resources-banner',
+    ],
+    'my_acc' => [
+      'variables' => [
+        'my_acc_banner_text' => NULL,
+      ],
+    ],
+    'my_acc_banner' => [
+      'variables' => [
+        'my_acc_banner_title' => NULL,
+        'my_acc_banner_image' => NULL,
+        'my_acc_mobile_banner_image' => NULL,
+      ],
+      'path' => $path . '/templates/block',
+      'template' => 'block--my-acc-banner',
+    ],
+    'menu__procurement_supplychain' => [
+      'base hook' => 'menu',
+      'path' => $path . '/templates/menu',
+      'render element' => 'menu',
+    ],
+    'views_view__procurement_supplychain_resources__supplies_resources' => [
+      'base hook' => 'view',
+      'path' => $path . '/templates/views',
+      'template' => 'views-view--procurement-supplychain-resources--supplies-resources',
+    ],
+    'views_exposed_form__supplies_resources' => [
+      'base hook' => 'view',
+      'path' => $path . '/templates/views/exposed-form',
+      'template' => 'views-exposed-form--supplies-resources',
+      'render element' => 'form',
+    ],
+    'views_view_fields__procurement_supplychain_resources__supplies_resources' => [
+      'base hook' => 'view',
+      'path' => $path . '/templates/views/fields',
+      'template' => 'views-view-fields--procurement-supplychain-resources--supplies-resources',
+    ],
+    'views_view_fields__procurement_supplychain_resources__procurement_related_content' => [
+      'base hook' => 'view',
+      'path' => $path . '/templates/views/fields',
+      'template' => 'views-view-fields--procurement-supplychain-resources--procurement-related-content',
+    ],
+    'views_view_fields__procurement_supplychain_resources__govt_partners_related_content' => [
+      'base hook' => 'view',
+      'path' => $path . '/templates/views/fields',
+      'template' => 'views-view-fields--procurement-supplychain-resources--govt-partners-related-content',
+    ],
+  ];
+}
+
+/**
+ * Implements hook_preprocess_menu().
+ */
+function unfpa_global_procurement_supplychain_preprocess_menu(&$variables) {
+  if (isset($variables['menu_name']) && $variables['menu_name'] == 'procurement-supplychain') {
+    $img_arr = [
+      'What we do' => '/images/icon-home.svg',
+      'For Governments & Partners' => '/images/icon-calendar.svg',
+      'For Suppliers' => '/images/icon-bereau-member.svg',
+      'Products & Tools' => '/images/icon-doc.svg',
+      'Resources' => '/images/icon-decisions.svg',
+      'My Account' => '/images/icon-reports.svg',
+    ];
+
+    // Get Current Moduele path.
+    $module_handler = \Drupal::service('module_handler');
+    $module_path = $module_handler->getModule('unfpa_global_procurement_supplychain')->getPath();
+    foreach ($variables['items'] as $key => $item) {
+      if (isset($img_arr[$item['title']])) {
+        $variables['items'][$key]['icon'] = "/{$module_path}{$img_arr[$item['title']]}";
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_node().
+ * Add view and map blocks to procurement nodes.
+ */
+function unfpa_global_procurement_supplychain_preprocess_node(&$variables) {
+  if (!empty($variables['node'])) {
+    $node = $variables['node'];
+    if ($node->getType() == 'ct_procurement') {
+      // Pass image data to js
+      $banner_image = $mobile_image = NULL;
+      if (!$node->get('field_banner_image')->isEmpty()) {
+        $banner_image = $node->field_banner_image->entity->createFileUrl();
+        $variables['#attached']['drupalSettings']['banner_image'] = $banner_image;
+      }
+
+      if (!$node->get('field_banner_image_mobile')->isEmpty()) {
+        $mobile_image = $node->field_banner_image_mobile->entity->createFileUrl();
+        $variables['#attached']['drupalSettings']['mobile_image'] = $mobile_image;
+      }
+
+      // Get node title.
+      $node_title = $node->getTitle();
+
+      // Render related topics
+      $show_map = false;
+      $related_topics_nodes = [
+        'What we do' => 'procurement_related_content',
+        'For Governments & Partners' => 'govt_partners_related_content',
+      ];
+      if (in_array($node_title, array_keys($related_topics_nodes))) {
+        $show_related_topics = true;
+        $variables['related_topics_param'] = $related_topics_nodes[$node_title];
+      }
+
+      // Render Map
+      $show_related_topics = false;
+      if (in_array($node_title, ['For Governments & Partners','Procurement and supply chain governments and partners'] )) {
+        $show_map = true;
+
+        // Get Map
+        $govt_spending_obj =  \Drupal::service('unfpa_global_procurement_supplychain.govt_spending')->getGovernmentSpendingMapData();
+
+        // Attach map variables and libraries
+        $variables['#attached']['library'][] = 'unfpa_global_procurement_supplychain/government_partners';
+        $variables['#attached']['drupalSettings']['location'] = $govt_spending_obj['location'];
+        $variables['#attached']['drupalSettings']['country'] = $govt_spending_obj['country'];
+      }
+
+      $variables['show_related_topics'] = $show_related_topics;
+      $variables['show_map'] = $show_map;
+    }
+  }
+}
+
+function unfpa_global_procurement_supplychain_form_views_exposed_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  if (isset($form['#id']) && $form['#id'] == 'views-exposed-form-procurement-supplychain-resources-supplies-resources') {
+    $options = [];
+    $options[''] = new TranslatableMarkup('-Year');
+    $query = \Drupal::entityQuery('node');
+    $query->condition('type', 'ct_resources')
+      ->condition('status', 1)
+      ->sort('field_date', 'DESC');
+    $result = $query->execute();
+    if ($result) {
+      $nodes =  \Drupal\node\Entity\Node::loadMultiple($result);
+      foreach ($nodes as $node) {
+        $date = $node->field_date->value;
+        if ($date) {
+          $date = new DrupalDateTime($date, new DateTimeZone('UTC'));
+          $year = $date->format('Y');
+          if (!isset($options[$year]) && $year >= "2007") {
+            $options[$year] = $year;
+          }
+        }
+      }
+    }
+    $test = $options;
+    $form['field_date_value'] = [
+      '#type' => 'select',
+      '#options' => $options,
+      '#size' => NULL,
+      '#default_value' => 'All',
+    ];
+  }
+}

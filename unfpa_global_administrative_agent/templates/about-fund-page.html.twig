@@ -1,0 +1,82 @@
+<section class="margin-default intro">
+  <div class="container">
+    <div class="row center-md">
+      <div class="col-md-9 col-xs-12 intro-container p-lead">
+        <p>{{ bottom_header_text }}</p>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="margin-default">
+  <div class="container">
+    <div class="row portfolio-list center-xs">
+      <div class="col-md-12">
+        <h2 class="title-h2">{{ 'Active portfolio'|t }}</h2>
+      </div> 
+      {% for active_fund in active_funds %} 
+        <div class="col-md-3">
+          <a href="{{ active_fund.path }}">
+            <div class="portfolio-card">
+              <figure class="portfolio-card__background" style="background-image: url({{ file_url(active_fund.image_url) }});"></figure>
+              <h3 class="portfolio-card__text">{{ active_fund.title }}</h3>
+            </div>
+          </a>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+<section class="margin-default">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10 col-md-offset-1 p-lead">
+        <p>{{ 'Since 2008, UNFPA has served as Administrative Agent (AA) for selected joint programmes and multi-partner trust funds. UNFPA takes on the Administrative Agent role based purely on donor demand, and for programmes and funds in which it participates. This website provides information from 2010 till date on the joint programmes where UNFPA is the Administrative Agent.'|t }}</p>
+        <p>{{ 'As the Administrative Agent, UNFPA has taken the lead on and had a hand in designing all of the global, regional and country-level funds and programmes it administers. These cover areas critical to UNFPA’s mandate:'|t }}</p>
+        <ul class="list-bullets">
+          <li>{{ 'Sexual and reproductive health'|t }}</li>
+          <li>{{ 'Maternal, newborn and child health'|t }}</li>
+          <li>{{ 'Gender-based violence and harmful traditional practices'|t }}</li>
+          <li>{{ 'Adolescents and youth'|t }}</li>
+          <li>{{ 'Population and development.'|t }}</li>
+        </ul>
+        <div class="highlighted-text">
+          <p>{{ 'The Administrative Agent portfolio currently comprises 32 ongoing funds, with 13 donors and 6 participating organizations. In 2019, donor contributions amounted to $99.81 million, with $94.22  million in transfers to participating organizations.'|t }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="margin-default parallax-block">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <figure class="parallax-block__image">
+
+          <img src="{{ theme_path }}/images/fundsimg.jpg">
+        </figure>
+      </div>
+      <div class="col-md-5 p-lead">
+        <p>{{ 'As the development finance landscape continues its rapid evolution, inter-agency pooled financing mechanisms are set to play an increasingly strategic role in financing the 2030 Agenda. UNFPA continues to strengthen its role as steward and manager of joint programmes and pooled funds that empower the UN systems and partners to work together to ensure that no woman or child is left behind.'|t }}</p>
+      </div>
+    </div>
+  </div>
+</section>
+<footer class="footer-infos big-padding-top">
+  <figure class="footer-infos__background"></figure>
+  <div class="container">
+    <div class="row center-md">
+      <div class="col-md-12">
+        <h4 class="title-h2">{{ 'Past funds & joint programmes'|t }}</h4>
+      </div>
+    </div>
+    <div class="row center-md footer-infos__carousel">
+      <div class="col-md-12">
+        <div class="footer-infos__links">
+          {% for past_fund in past_funds %}
+            <span class="about_fund_past_joint_program"><a href="{{ past_fund.path }}">{{ past_fund.title }}</a></span>
+            {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

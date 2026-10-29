@@ -1,0 +1,2177 @@
+/* <<< MISCELLANOUS >>> */
+.hide-element {
+  display: none;
+}
+
+.loader {
+  display: none;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-color: #ffffff;
+  opacity: 0.6;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  background-image: url(../images/throbber-circle.gif);
+}
+
+/* <<< SUB-SUB-MENUS >>> */
+#procurement-supplychain-wrapper {
+  font-size: 18px;
+}
+
+#procurement-supplychain-wrapper .bm-tabs {
+  margin: 20px 0 0 0;
+}
+
+@media (max-width: 575.98px) {
+  #procurement-supplychain-wrapper .bm-tabs .nav-tabs > li {
+    width: 50%;
+  }
+  #procurement-supplychain-wrapper .bm-tabs .nav-tabs > li > a {
+    min-height: 64px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+  }
+}
+
+#procurement-supplychain-wrapper .bm-tabs .nav-tabs > li a {
+  color: #a1a1a1;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+#procurement-supplychain-wrapper .bm-tabs .nav-tabs > li > a:hover {
+  border-color: transparent;
+}
+
+#procurement-supplychain-wrapper .bm-tabs .nav > li > a:focus,
+#procurement-supplychain-wrapper .bm-tabs .nav > li > a:hover {
+  text-decoration: none;
+  background-color: transparent;
+}
+
+#procurement-supplychain-wrapper .bm-tabs .nav-tabs > li.active > a,
+#procurement-supplychain-wrapper .bm-tabs .nav-tabs > li.active > a:focus,
+#procurement-supplychain-wrapper .bm-tabs .nav-tabs > li.active > a:hover {
+  border: 0;
+  color: #000000;
+  border-color: transparent;
+  border-bottom: 4px solid #f7941e;
+  background-color: transparent;
+}
+
+/* <<< OVERVIEW PAGE >>> */
+/* //events type colors */
+/* //Key resources starts */
+#procurement-supplychain-wrapper .keyresources-wrapper {
+  margin: 50px 0 0 0;
+}
+
+#procurement-supplychain-wrapper .keyresources-wrapper .keygroups {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  margin: 0 0 25px 0;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -ms-flex-line-pack: justify;
+  align-content: space-between;
+}
+
+#procurement-supplychain-wrapper .keyresources-wrapper .keygroups__btn {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  border: 2px solid #cccccc;
+  padding: 20px 30px;
+  max-width: 49%;
+  font-size: 1.2rem;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  text-align: left;
+  position: relative;
+  margin-bottom: 2%;
+  color: #000000;
+  text-transform: unset;
+  white-space: normal;
+}
+
+#procurement-supplychain-wrapper .keyresources-wrapper .keygroups__btn:nth-child(odd) {
+  margin-right: 2%;
+}
+
+@media (max-width: 575.98px) {
+  #procurement-supplychain-wrapper .keyresources-wrapper .keygroups__btn {
+    max-width: 100%;
+    margin-right: 0%;
+    font-size: 0.9rem;
+  }
+  #procurement-supplychain-wrapper .keyresources-wrapper .keygroups__btn:nth-child(odd) {
+    margin-right: 0%;
+  }
+}
+
+#procurement-supplychain-wrapper .keyresources-wrapper .keygroups__btn span.icon-download {
+  margin-right: 30px;
+  width: 30px;
+  height: 30px;
+}
+
+#procurement-supplychain-wrapper .keyresources-wrapper .keygroups__btn span.icon-download img {
+  width: 30px;
+  height: 30px;
+}
+
+#procurement-supplychain-wrapper .keyresources-wrapper .keygroups__btn span:nth-of-type(1) {
+  width: 10%;
+}
+
+#procurement-supplychain-wrapper .keyresources-wrapper .keygroups__btn span:nth-of-type(2) {
+  width: 88%;
+}
+
+#procurement-supplychain-wrapper #readmore-expand .card-body ul li {
+  list-style-type: disc;
+  line-height: 1.5em;
+  margin: 0 0 0.6em 1em;
+}
+
+#procurement-supplychain-wrapper .bg-white.with-banner + .bg-white article {
+  padding: 40px 0 5px 0;
+}
+
+#procurement-supplychain-wrapper .bg-white.with-banner + .bg-white .btn.btn-collapse {
+  margin: 25px 0 0;
+}
+
+#procurement-supplychain-wrapper .keyresources-wrapper {
+  margin: 50px 0 0 0;
+}
+#procurement-supplychain-wrapper .latest-wrapper {
+  margin-top: 0;
+}
+
+#procurement-supplychain-wrapper .news-display-card {
+  min-height: inherit;
+}
+
+@media (max-width: 575.98px) {
+  #procurement-supplychain-wrapper .news-display-card {
+    margin-bottom: 3%;
+  }
+}
+
+/* <<< BUREAU AND MEMBERS PAGE >>> */
+#procurement-supplychain-wrapper .exec-brd-exposed-filter-container .exec-brd-filter-text {
+  color: #ea9111;
+  display: inline-block;
+  font-size: 20px;
+  vertical-align: middle;
+  margin: 0 15px 0 0;
+}
+
+#procurement-supplychain-wrapper .exec-brd-exposed-filter-container .exec-brd-view-filters {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+#procurement-supplychain-wrapper .exec-brd-view-filters #views-exposed-form-executive-board-bureau-members .form-select {
+  padding: 0 25px 0 10px;
+}
+
+#procurement-supplychain-wrapper .exec-brd-view-filters .form-select {
+  margin: 10px 5px 10px 0;
+}
+
+#procurement-supplychain-wrapper .exec-brd-exposed-filter-container .filter-by-text {
+  color: #a1a1a1;
+  font-family: Roboto, sans-serif;
+  font-size: 0.8rem;
+  font-weight: 400;
+  margin-bottom: 5px;
+}
+
+#procurement-supplychain-wrapper .exec-brd-view-filters select {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  height: auto;
+  padding: 14px 35px 14px 20px;
+  background: transparent;
+  background-image: none;
+  -webkit-appearance: none;
+  border: 1px #e8e8e8 solid;
+  font-size: 0.8rem;
+  color: #a1a1a1;
+  width: auto;
+  border-radius: 6px;
+}
+
+#procurement-supplychain-wrapper .exec-brd-view-filters select::after {
+  content: "";
+  width: 15px;
+  height: 15px;
+  background: url(../images/icon-arrow-down-dropdown.svg) no-repeat center center;
+  position: absolute;
+  right: 15px;
+  top: 22px;
+}
+
+#procurement-supplychain-wrapper .exec-brd-view-filters.dropdown-select select {
+  margin: 0;
+}
+
+#procurement-supplychain-wrapper .exec-brd-view-filters #views-exposed-form-executive-board-bureau-members .form-item {
+  position: relative;
+}
+
+#procurement-supplychain-wrapper .exec-brd-view-filters #views-exposed-form-executive-board-bureau-members input[type="submit"] {
+  background-color: #f7941e;
+  color: #ffffff;
+  height: auto;
+  margin-top: 0.7em;
+  padding: 16px 20px;
+  text-transform: none;
+  height: 48px;
+}
+
+#procurement-supplychain-wrapper .views-exposed-form .form-select,
+#procurement-supplychain-wrapper .form-select {
+  appearance: none;
+  border: 1px solid #acacac;
+  border-radius: 12px;
+  color: #000000;
+  font-size: 12px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  min-width: inherit;
+  padding: 4px 25px 4px 10px;
+  outline: none;
+  width: auto;
+  line-height: 20px;
+}
+
+#procurement-supplychain-wrapper .views-exposed-form .form-select.date-year {
+  min-width: initial;
+}
+
+#procurement-supplychain-wrapper #bureauMembers .exec-brd-exposed-filter-container,
+#procurement-supplychain-wrapper #membersExecutiveboard .exec-brd-exposed-filter-container {
+  padding: 50px 0 20px;
+}
+
+#procurement-supplychain-wrapper #bureauMembers .exec-brd-exposed-filter-container.bureau-memb-tab-details-container,
+#procurement-supplychain-wrapper #membersExecutiveboard .exec-brd-exposed-filter-container.bureau-memb-tab-details-container {
+  padding: 0 0 20px;
+}
+
+#procurement-supplychain-wrapper #membersExecutiveboard .exec-brd-view-filters.dropdown-select {
+  margin: 20px 0;
+}
+
+#procurement-supplychain-wrapper .view-executive-board .members {
+  padding: 35px 0 35px 0;
+  border-bottom: 1px #e8e8e8 solid;
+}
+
+#procurement-supplychain-wrapper .view-executive-board .members_img-wrapper {
+  border-radius: 100px;
+  width: 115px;
+  height: 115px;
+  overflow: hidden;
+  margin: 0 auto;
+  background: url("../images/icon-member-placeholder.svg") no-repeat center top;
+}
+
+@media (max-width: 575.98px) {
+  #procurement-supplychain-wrapper .view-executive-board .members_img-wrapper {
+    width: 90px;
+    height: 90px;
+  }
+
+  #procurement-supplychain-wrapper .view-executive-board .members_img-wrapper img {
+    width: 100%;
+  }
+}
+
+#procurement-supplychain-wrapper .view-executive-board .members_img-wrapper img {
+  width: 100%;
+}
+
+#procurement-supplychain-wrapper .view-executive-board .members_content h5 {
+  font-size: 16px;
+  color: #000000;
+  margin: 0;
+  padding-bottom: 5px;
+}
+
+#procurement-supplychain-wrapper .view-executive-board .members_content h5 span {
+  font-size: 0.7rem;
+  display: block;
+  padding: 5px 0;
+}
+
+#procurement-supplychain-wrapper .view-executive-board .members_content p {
+  padding: 0;
+  margin: 0;
+  font-size: 0.8rem;
+}
+
+/* Bureau Members Map */
+#procurement-supplychain-wrapper .region-map {
+  padding: 0;
+}
+
+#procurement-supplychain-wrapper .executive-board-outer-box {
+  margin: 0 0 40px;
+}
+
+#procurement-supplychain-wrapper .executive-board-outer-box .executive-board-sec-content {
+  padding: 0;
+}
+
+/* Map Radio Button Filter */
+#procurement-supplychain-wrapper .executive-board-filter-container {
+  float: left;
+  margin-top: -175px;
+  width: 150px;
+  position: relative;
+  z-index: 9;
+}
+
+#procurement-supplychain-wrapper .executive-board-filter-container .filters-title {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+  font-size: 1em;
+}
+
+#procurement-supplychain-wrapper .executive-board-filter-container ul.square-input-element {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+#procurement-supplychain-wrapper .executive-board-filter-container ul.square-input-element li label {
+  color: #000000;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 18px;
+  margin-left: 5px;
+  margin-bottom: 0;
+  vertical-align: top;
+  width: 85%;
+}
+
+#procurement-supplychain-wrapper .executive-board-filter-container ul#exbo-map-board-member li .iradio_futurico {
+  background-image: url('../images/exbo-map-legend.png');
+  -webkit-background-size: initial;
+  background-size: initial;
+  float: left;
+  margin: 2px 0 0;
+}
+
+#procurement-supplychain-wrapper .executive-board-filter-container ul#exbo-map-board-member li:nth-child(2) .iradio_futurico.checked {
+  background-position: -90px -18px;
+}
+
+#procurement-supplychain-wrapper .executive-board-filter-container ul#exbo-map-board-member li:nth-child(3) .iradio_futurico.checked {
+  background-position: -90px -36px;
+}
+
+#procurement-supplychain-wrapper .executive-board-filter-container ul#exbo-map-board-member li:nth-child(4) .iradio_futurico.checked {
+  background-position: -90px -54px;
+}
+
+#procurement-supplychain-wrapper .executive-board-filter-container ul#exbo-map-board-member li:nth-child(5) .iradio_futurico.checked {
+  background-position: -90px -72px;
+}
+
+#procurement-supplychain-wrapper .executive-board-filter-container ul#exbo-map-board-member li:nth-child(6) .iradio_futurico.checked {
+  background-position: -90px -90px;
+}
+
+/* Members of the Executive Board - Region Blocks */
+.region-info-block .exbo-region-columns {
+  box-shadow: 0px 0px 15px 1px #efefef;
+  -webkit-box-shadow: 0px 0px 15px 1px #efefef;
+  -moz-box-shadow: 0px 0px 15px 1px #efefef;
+  border: 1px solid #e8e8e8;
+}
+
+.region-info-block .exbo-region-columns div.country-title {
+  font-size: 16px;
+  color: #a1a1a1;
+  margin-bottom: 3px;
+}
+
+.region-info-block .exbo-region-columns div:not(.country-title) {
+  font-size: 14px;
+  color: #a1a1a1;
+}
+
+.region-info-block div.region-0,
+.region-info-block div.region-1,
+.region-info-block div.region-2,
+.region-info-block div.region-3,
+.region-info-block div.region-4 {
+  border-top-width: 3px;
+}
+
+.region-info-block .exbo-region-columns {
+  float: left;
+  margin: 0 2% 2% 0;
+  width: 30%;
+  border: 1px solid #d2d2d2;
+  padding: 2%;
+  cursor: pointer;
+  transition: 1s;
+  min-height: 126px;
+}
+
+.region-info-block .exbo-region-columns:hover {
+  background-color: #f2f2f2;
+  -webkit-box-shadow: 0 1px 5px 2px #92dee0;
+  box-shadow: 0 1px 5px 2px #92dee0;
+}
+
+.region-info-block .exbo-region-columns.active {
+  background-color: #e6f8ff;
+  -webkit-box-shadow: 0 1px 8px 4px #92dee0;
+  box-shadow: 0 1px 8px 4px #92dee0;
+}
+
+.region-info-block div.region-0 {
+  border-top: 6px solid #d3e8ee;
+}
+
+.region-info-block div.region-1 {
+  border-top: 6px solid #aad1e0;
+}
+
+.region-info-block div.region-2 {
+  border-top: 6px solid #7fbbd0;
+}
+
+.region-info-block div.region-3 {
+  border-top: 6px solid #2b8fb1;
+}
+
+.region-info-block div.region-4 {
+  border-top: 6px solid #124455;
+}
+
+.region-info-block .country-title {
+  color: #000000;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+}
+
+.region-info-block .regional-group,
+.region-info-block .time-mandate {
+  color: #000000;
+}
+
+/*#procurement-supplychain-wrapper a,*/
+#procurement-supplychain-wrapper a:visited {
+  color: #bbbbbb;
+  outline: none;
+}
+
+#procurement-supplychain-wrapper a:hover {
+  color: #000000;
+  text-decoration: underline;
+}
+
+#procurement-supplychain-wrapper .btn {
+  color: #a1a1a1;
+  text-transform: uppercase;
+  border-radius: 6px;
+}
+
+#procurement-supplychain-wrapper h1,
+#procurement-supplychain-wrapper h2,
+#procurement-supplychain-wrapper h3,
+#procurement-supplychain-wrapper h4,
+#procurement-supplychain-wrapper h5,
+#procurement-supplychain-wrapper h6 {
+  margin: 0;
+  padding: 0 0 30px 0;
+  font-weight: 700;
+  line-height: 1.2;
+  font-family: Roboto, sans-serif;
+  color: #000000;
+}
+
+#procurement-supplychain-wrapper h1 {
+  font-size: 2.5em;
+  min-width: 0vw;
+  color: #FFFFFF;
+}
+
+.disable-rfs #procurement-supplychain-wrapper h1,
+#procurement-supplychain-wrapper h1.disable-rfs {
+  font-size: 4.5rem;
+}
+
+#procurement-supplychain-wrapper h2 {
+  font-size: calc(1.2rem + 1.8vw);
+  min-width: 0vw;
+}
+
+.disable-rfs #procurement-supplychain-wrapper h2,
+#procurement-supplychain-wrapper h2.disable-rfs {
+  font-size: 2.5rem;
+}
+
+#procurement-supplychain-wrapper h3 {
+  font-size: calc(1.325rem + 1.08vw);
+  min-width: 0vw;
+  padding: 1em 0 0.5em 0;
+}
+
+.disable-rfs #procurement-supplychain-wrapper h3,
+#procurement-supplychain-wrapper h3.disable-rfs {
+  font-size: 2rem;
+}
+
+@media (min-width: 1000px) {
+  #procurement-supplychain-wrapper h3 {
+    font-size: 2rem;
+  }
+}
+
+#procurement-supplychain-wrapper h4 {
+  font-size: calc(1.275rem + 0.36vw);
+  min-width: 0vw;
+}
+
+.disable-rfs #procurement-supplychain-wrapper h4,
+#procurement-supplychain-wrapper h4.disable-rfs {
+  font-size: 1.5rem;
+}
+
+@media (min-width: 1000px) {
+  #procurement-supplychain-wrapper h4 {
+    font-size: 1.5rem;
+  }
+}
+
+#procurement-supplychain-wrapper h5 {
+  font-size: 1rem;
+}
+
+.event-details-wrapper {
+  padding: 0 0 20px;
+}
+
+#procurement-supplychain-wrapper section.with-banner {
+  padding: 30px 0 100px 0;
+}
+
+#procurement-supplychain-wrapper .bg-white {
+  padding: 100px 0;
+}
+
+@media (max-width: 575.98px) {
+  #procurement-supplychain-wrapper .bg-white {
+    padding: 50px 0;
+  }
+  #procurement-supplychain-wrapper .bm-tabs .nav-tabs {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+  }
+}
+
+#procurement-supplychain-wrapper .bg-light-grey {
+  background-color: #f7f7f7;
+  padding: 100px 0;
+}
+#procurement-supplychain-wrapper .bg-light-grey#related-content {
+  padding: 50px 0;
+}
+
+@media (max-width: 575.98px) {
+  #procurement-supplychain-wrapper .bg-light-grey {
+    padding: 50px 0;
+  }
+}
+
+#procurement-supplychain-wrapper .title {
+  font-size: calc(1.575rem + 2vw);
+  min-width: 0vw;
+  font-weight: 700;
+}
+
+.disable-rfs #procurement-supplychain-wrapper .title,
+#procurement-supplychain-wrapper .title.disable-rfs {
+  font-size: 4.5rem;
+}
+
+@media (min-width: 1000px) {
+  #procurement-supplychain-wrapper .title {
+    font-size: 2.75rem;
+  }
+}
+
+#procurement-supplychain-wrapper .breadcrumb {
+  background-color: transparent;
+  display: flex;
+  padding: 0;
+  margin: 0;
+}
+
+#procurement-supplychain-wrapper .breadcrumb > li {
+  display: inline-flex;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+#procurement-supplychain-wrapper .breadcrumb .breadcrumb-item {
+  font-size: 0.8rem;
+}
+
+#procurement-supplychain-wrapper .breadcrumb .breadcrumb-item.active {
+  color: #000000;
+}
+
+#procurement-supplychain-wrapper .btn.btn-collapse {
+  border: 1px solid #000000;
+  padding: 15px 50px;
+  margin: 25px 0;
+  text-transform: uppercase;
+  position: relative;
+  display: inline-block;
+}
+
+#procurement-supplychain-wrapper .btn.btn-collapse[aria-expanded|="false"]::after {
+  content: "";
+  position: absolute;
+  right: 18px;
+  top: 21px;
+  width: 10px;
+  height: 10px;
+  background: url(../images/arrow-down.svg) center center no-repeat;
+}
+
+#procurement-supplychain-wrapper .btn.btn-collapse[aria-expanded|="true"]::after {
+  content: "";
+  position: absolute;
+  right: 18px;
+  top: 21px;
+  width: 10px;
+  height: 10px;
+  background: url(../images/arrow-up.svg) center center no-repeat;
+}
+
+/* top header override */
+#container#procurement-supplychain-wrapper #header .search_form .field,
+#container#procurement-supplychain-wrapper #header #block-search-form .form-text {
+  font-size: 13px;
+}
+
+#container#procurement-supplychain-wrapper #header .search_form {
+  display: block;
+  width: 230px;
+  z-index: 999;
+  float: right;
+  margin-top: 15px;
+}
+
+.block-locale ul.language-switcher-locale-url,
+.block-locale ul.language-switcher-locale-url li {
+  top: -24px;
+}
+
+@media (max-width: 575.98px) {
+  #header .max_wrapper:after {
+    width: auto !important;
+  }
+}
+/* /* top header override end // */
+
+/* /* fix for anchor box-sizing property overriden by bootstrap css start // */
+.eb-page .main-nav div.top-btns a.btn-sdgs,
+.eb-page .main-nav div.top-btns a.donate {
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
+}
+
+.eb-page .main-nav ul.navigation li a {
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
+}
+
+.eb-page footer a.donate {
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
+}
+/* /* fix for anchor box-sizing property overriden by bootstrap css end// */
+
+.form-control {
+  border-radius: 6px;
+}
+
+#procurement-supplychain-wrapper .form-control {
+  height: 54px;
+}
+
+.browse-text {
+  font-size: 0.8rem;
+}
+
+#procurement-supplychain-wrapper .dropdown-select {
+  box-shadow: 0px 0px 15px 1px #efefef;
+  -webkit-box-shadow: 0px 0px 15px 1px #efefef;
+  -moz-box-shadow: 0px 0px 15px 1px #efefef;
+  position: relative;
+  border-radius: 6px;
+}
+
+#procurement-supplychain-wrapper .dropdown-select select {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  padding: 14px 40px 14px 20px;
+  background: url("../images/icon-arrow-down-dropdown.svg") no-repeat right 10px center;
+  /*background-image: none;*/
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  border: 1px #e8e8e8 solid;
+  font-size: 0.8rem;
+  color: #a1a1a1;
+  width: 100%;
+  border-radius: 6px;
+  position: relative;
+  z-index: 2;
+}
+
+#procurement-supplychain-wrapper .dropdown-select select::-ms-expand {
+  display: none;
+}
+
+#procurement-supplychain-wrapper .dropdown-select select:focus {
+  outline: none;
+}
+
+#procurement-supplychain-wrapper .dropdown-select::after {
+  content: '';
+  width: 15px;
+  height: 15px;
+  /*background: url("../images/icon-arrow-down-dropdown.svg") no-repeat center center;*/
+  background: none;
+  position: absolute;
+  right: 15px;
+  top: 20px;
+  z-index: 1;
+}
+
+/* //form filter by sessions */
+#procurement-supplychain-wrapper .form-sessions input[type="text"] {
+  background-color: #ffffff;
+  border: 1px #e8e8e8 solid;
+  padding: 20px;
+  color: #a1a1a1;
+  box-shadow: 0px 0px 15px 1px #efefef;
+  -webkit-box-shadow: 0px 0px 15px 1px #efefef;
+  -moz-box-shadow: 0px 0px 15px 1px #efefef;
+}
+
+#procurement-supplychain-wrapper .form-sessions {
+  padding: 50px 0 20px 0;
+}
+
+#procurement-supplychain-wrapper .form-sessions label,
+#procurement-supplychain-wrapper .form-sessions p {
+  font-size: 0.8rem;
+  color: #a1a1a1;
+  font-weight: 400;
+  margin-bottom: 15px;
+}
+
+#procurement-supplychain-wrapper .form-sessions label:first-child,
+#procurement-supplychain-wrapper .form-sessions p:first-child {
+  display: block;
+}
+
+#procurement-supplychain-wrapper .form-sessions p:first-child {
+  font-size: 0.85rem;
+}
+
+#procurement-supplychain-wrapper .form-sessions .session-search {
+  width: 45%;
+  position: relative;
+}
+
+@media (max-width: 575.98px) {
+  #procurement-supplychain-wrapper .form-sessions .session-search {
+    width: 100%;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 767.98px) {
+  #procurement-supplychain-wrapper .form-sessions .session-search {
+    width: 48%;
+  }
+}
+
+#procurement-supplychain-wrapper .form-sessions .session-search input[type="text"] {
+  width: 100%;
+  height: 50px;
+}
+
+#procurement-supplychain-wrapper .form-sessions .session-search-icon {
+  width: 20px;
+  height: 25px;
+  position: absolute;
+  right: 15px;
+  top: 10px;
+  z-index: 10;
+}
+
+#procurement-supplychain-wrapper .form-sessions .session-search-icon img {
+  width: 100%;
+  opacity: 0.3;
+}
+
+#procurement-supplychain-wrapper .form-sessions button[type="submit"] {
+  background-color: #f7941e;
+  color: #ffffff;
+  padding: 16px 20px;
+  text-transform: none;
+  height: 50px;
+}
+
+@media (max-width: 575.98px) {
+  #procurement-supplychain-wrapper .form-sessions button[type="submit"] {
+    margin-left: 1.5%;
+    height: 50px;
+  }
+}
+
+#procurement-supplychain-wrapper .form-sessions input[type="submit"] {
+  background-color: #f7941e;
+  border: 0 none;
+  color: #ffffff;
+  padding: 14px 20px;
+  text-transform: none;
+  height: 50px;
+}
+
+@media (max-width: 575.98px) {
+  #procurement-supplychain-wrapper .form-sessions input[type="submit"] {
+    margin-left: 1.5%;
+    height: 50px;
+  }
+}
+
+#procurement-supplychain-wrapper .form-sessions .session-dropdown {
+  width: 28%;
+  position: relative;
+}
+
+@media (max-width: 575.98px) {
+  #procurement-supplychain-wrapper .form-sessions .session-dropdown {
+    width: 100%;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 767.98px) {
+  #procurement-supplychain-wrapper .form-sessions .session-dropdown {
+    width: 48%;
+  }
+}
+
+#procurement-supplychain-wrapper .form-sessions .form-group {
+  margin-right: 1.5%;
+}
+
+@media (max-width: 575.98px) {
+  #procurement-supplychain-wrapper .form-sessions .form-group {
+    margin-right: 0;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 767.98px) {
+  #procurement-supplychain-wrapper .form-sessions .form-group {
+    width: 48%;
+  }
+}
+
+.search-group-row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+@media (max-width: 767px) {
+  .search-group-row {
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+  }
+}
+/* form filter by sessions// */
+
+/* //Executive Board top navigation starts */
+@media (max-width: 575.98px) {
+  #procurement-supplychain-wrapper .list-group-item {
+    padding: 0;
+  }
+}
+
+/* //Article Starts */
+#procurement-supplychain-wrapper article {
+  background: white;
+  padding: 0 0 50px 0;
+}
+
+#procurement-supplychain-wrapper article.exbo-event-detail-pg-image {
+  padding: 25px 0 0;
+}
+
+#procurement-supplychain-wrapper article:not(:first-of-type) {
+  margin-top: 2rem;
+}
+
+#procurement-supplychain-wrapper article__title {
+  font-size: calc(1.575rem + 4.68vw);
+  min-width: 0vw;
+  font-weight: 700;
+  margin: 0;
+}
+
+.disable-rfs #procurement-supplychain-wrapper article__title,
+#procurement-supplychain-wrapper article__title.disable-rfs {
+  font-size: 4.5rem;
+}
+
+@media (min-width: 1000px) {
+  #procurement-supplychain-wrapper article__title {
+    font-size: 4.5rem;
+  }
+}
+
+#procurement-supplychain-wrapper article__date {
+  padding-top: .25em;
+  font-size: 0.875rem;
+  opacity: .75;
+  margin: 0;
+}
+
+#procurement-supplychain-wrapper article__content {
+  padding-top: .75em;
+  font-size: 1.125rem;
+  margin: 0;
+  line-height: 1.5;
+}
+
+#procurement-supplychain-wrapper article p {
+  color: #000000;
+  line-height: 1.5em;
+  margin: 0 0 1.5em;
+}
+
+#procurement-supplychain-wrapper article__card-body {
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+/* Article End // */
+
+
+#procurement-supplychain-wrapper ul#relatedCategory {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+#procurement-supplychain-wrapper .latest-wrapper {
+  margin-top: -45%;
+  position: relative;
+}
+
+@media (min-width: 768px) and (max-width: 980px) {
+  #procurement-supplychain-wrapper .latest-wrapper {
+    margin-top: -50%;
+  }
+}
+
+@media (max-width: 575.98px) {
+  #procurement-supplychain-wrapper .latest-wrapper {
+    margin-top: 0;
+  }
+}
+
+#procurement-supplychain-wrapper .news-display-card {
+  margin-bottom: 40px;
+  position: relative;
+  background-color: #ffffff;
+  border: 1px solid #e8e8e8;
+  -webkit-transition: 0.5s ease;
+  transition: 0.5s ease;
+}
+
+#procurement-supplychain-wrapper .news-display-card:hover {
+  -webkit-box-shadow: 0px 0px 34px -5px rgba(0, 0, 0, 0.22);
+  box-shadow: 0px 0px 34px -5px rgba(0, 0, 0, 0.22);
+}
+
+@media (max-width: 575.98px) {
+  #procurement-supplychain-wrapper .news-display-card {
+    margin-bottom: 50px;
+  }
+}
+
+#procurement-supplychain-wrapper .news-display-card img {
+  width: 100%;
+  display: block;
+}
+
+#procurement-supplychain-wrapper .news-display-card .display-card {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: end;
+  -ms-flex-align: end;
+  align-items: flex-end;
+  position: absolute;
+  max-width: 48%;
+  right: 20px;
+  bottom: 20px;
+}
+
+@media (max-width: 575.98px) {
+  #procurement-supplychain-wrapper .news-display-card .display-card {
+    position: relative;
+    max-width: 100%;
+    right: 0;
+  }
+}
+
+#procurement-supplychain-wrapper .cardGroup {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+}
+
+#procurement-supplychain-wrapper .cardGroup .card {
+  width: 49%;
+  max-width: 49%;
+  margin-bottom: 2%;
+  min-height: 180px;
+  background-color: #ffffff;
+  border: 1px solid #e8e8e8;
+  -webkit-transition: 0.5s ease;
+  transition: 0.5s ease;
+}
+
+#procurement-supplychain-wrapper .cardGroup .card:hover,
+.path-executive-board #procurement-supplychain-wrapper .latest-wrapper a:hover {
+  -webkit-box-shadow: 0px 0px 34px -5px rgba(0, 0, 0, 0.22);
+  box-shadow: 0px 0px 34px -5px rgba(0, 0, 0, 0.22);
+}
+
+.path-executive-board #procurement-supplychain-wrapper .latest-wrapper .card-body a:hover,
+.path-executive-board #procurement-supplychain-wrapper .latest-wrapper .news-card-body a:hover {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+#procurement-supplychain-wrapper .cardGroup .card:nth-child(odd) {
+  margin-right: 2%;
+}
+
+#procurement-supplychain-wrapper .cardGroup .card img {
+  width: 100%;
+  display: block;
+}
+
+@media (max-width: 575.98px) {
+  #procurement-supplychain-wrapper .cardGroup .card {
+    max-width: 100%;
+    width: 100%;
+    margin-bottom: 3%;
+  }
+  #procurement-supplychain-wrapper .cardGroup .card:nth-child(odd) {
+    margin-right: 0%;
+  }
+}
+
+#procurement-supplychain-wrapper .news-card-body {
+  background-color: #ffffff;
+  padding: 20px;
+}
+
+#procurement-supplychain-wrapper .news-card-body p.content-type {
+  color: #f7941e;
+  text-transform: normal;
+  font-size: 0.8rem;
+  margin-bottom: 0.5rem;
+}
+
+#procurement-supplychain-wrapper .news-card-body h5.card-title {
+  font-size: 1.4rem;
+  line-height: 1.4;
+  font-weight: 700;
+}
+
+#procurement-supplychain-wrapper .news-card-body h5.card-title,
+#procurement-supplychain-wrapper .news-card-body h5.card-title a {
+  color: #000000;
+}
+
+#procurement-supplychain-wrapper .news-card-body .btn {
+  padding-left: 0;
+  padding-right: 0;
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+  font-weight: 500;
+}
+
+#procurement-supplychain-wrapper .related-content .nav-tabs {
+  border-bottom: 0;
+}
+
+#procurement-supplychain-wrapper #relatedCategory .nav-item {
+  font-size: 1.5rem;
+}
+
+#procurement-supplychain-wrapper #relatedCategory .nav-item .nav-link {
+  padding: .5rem 1.5rem;
+}
+
+@media (max-width: 575.98px) {
+  #procurement-supplychain-wrapper #relatedCategory .nav-item .nav-link {
+    padding: .5rem 0.7rem;
+    font-size: 0.9rem;
+  }
+}
+
+#procurement-supplychain-wrapper #relatedCategory .nav-item .nav-link:focus,
+#procurement-supplychain-wrapper #relatedCategory .nav-item .nav-link:hover {
+  border-color: transparent;
+}
+
+#procurement-supplychain-wrapper .nav-item.active {
+  color: #000000;
+  background-color: transparent;
+  border-color: transparent;
+  border-bottom: 2px solid #f7941e;
+  font-weight: 500;
+}
+
+#procurement-supplychain-wrapper .nav-item.active .nav-link {
+  color: #000000;
+}
+
+#procurement-supplychain-wrapper #relatedCategoryContent {
+  padding: 30px 0;
+}
+
+html body {
+  background: #fff;
+}
+
+#procurement-supplychain-wrapper section.with-banner {
+  padding: 25px 0 0px 0 !important;
+}
+
+#procurement-supplychain-wrapper .bg-white {
+  padding: 0 !important;
+}
+
+body .container-fluid {
+  padding: 0;
+  position: relative;
+}
+
+#procurement-supplychain-wrapper .article__content .btn-collapse .readmore {
+  display: none;
+}
+
+#procurement-supplychain-wrapper .article__content .btn-collapse .hidemore {
+  display: inline;
+}
+
+#procurement-supplychain-wrapper .article__content .btn-collapse.collapsed .readmore {
+  display: inline;
+}
+
+#procurement-supplychain-wrapper .article__content .btn-collapse.collapsed .hidemore {
+  display: none;
+}
+
+#procurement-supplychain-wrapper #bureauMembers button.form-submit {
+  background-color: #f7941e;
+  color: #ffffff;
+  height: auto;
+  padding: 16px 20px;
+  text-transform: none;
+  height: 48px;
+  border-radius: 3px;
+  font-weight: 600;
+  letter-spacing: 0;
+  margin: 0.7em 0;
+}
+
+#procurement-supplychain-wrapper #bureauMembers button.form-submit:hover {
+  box-shadow: none;
+}
+/*----*/
+
+#procurement-supplychain-wrapper .news-card-body h5.card-title {
+  padding: 1em 0 0.5em 0;
+}
+
+#procurement-supplychain-wrapper .news-card-body h5.card-title + a {
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+  font-weight: 500;
+  padding: 6px 0;
+}
+
+#procurement-supplychain-wrapper .exec-brd-view-filters select.form-select {
+  background: url(../images/icon-arrow-down-dropdown.svg) no-repeat right 10px center;
+  cursor: pointer;
+}
+
+#procurement-supplychain-wrapper .exec-brd-view-filters select.form-select::-ms-expand {
+  display: none;
+}
+
+#procurement-supplychain-wrapper .exec-brd-view-filters .blk {
+  width: auto;
+  padding-right: 0;
+}
+
+/*#procurement-supplychain-wrapper #membersExecutiveboard .exec-brd-view-filters select.form-select {
+  background: none;
+}*/
+
+#procurement-supplychain-wrapper .region-info-block .country-title {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 600;
+}
+
+.region-info-block-Africa,
+.region-info-block-Asia,
+.region-info-block-Eastern_Europe,
+.region-info-block-Latin_America_and_Caribbean,
+.region-info-block-Western_Europe_and_Others {
+  float: left;
+  width: 100%;
+}
+
+.region-info-block-Africa h4,
+.region-info-block-Asia h4,
+.region-info-block-Eastern_Europe h4,
+.region-info-block-Latin_America_and_Caribbean h4,
+.region-info-block-Western_Europe_and_Others h4 {
+  padding-bottom: 15px !important;
+  margin-top: 25px !important;
+}
+
+.region-info-block div.region-0,
+.region-info-block div.region-1,
+.region-info-block div.region-2,
+.region-info-block div.region-3,
+.region-info-block div.region-4 {
+  border-top-width: 3px;
+}
+
+body.path-executive-board {
+  overflow: visible !important;
+}
+
+/*-- SOF Procure branch css --*/
+#procurement-supplychain-wrapper .container {
+  max-width: 1170px;
+}
+.infographic-procurement-wrapper {
+  padding: 0 0 40px;
+}
+.infographic-procurement-wrapper.row {
+  margin: 35px 0 0;
+}
+.infographic-wrapper {
+  padding: 40px 0 0;
+  float: left;
+  width: 100%;
+}
+.infographic-header {
+  font-weight: 600;
+  margin: 0 0 20px;
+  font-size: 24px;
+}
+.infographic-content {
+  float: left;
+  width: 100%;
+}
+.infographic-content .col-lg-4 {
+  padding-left: 0;
+  width: 33.33333333%;
+  float: left;
+}
+.infographic-content .col-lg-8 {
+  padding-left: 0;
+  width: 66.66666667%;
+  float: left;
+}
+.infographic-content .img-container img {
+  width: 100%;
+  margin: 0;
+}
+.infographic-caption {
+  font-size: 16px;
+}
+.procurement-wrapper {
+  padding: 40px 0 0;
+}
+.procurement-header {
+  font-weight: 600;
+  margin: 0 0 20px;
+  font-size: 24px;
+}
+.procurement-content .row {
+  margin: 0;
+}
+.procurement-content .views-field-field-publication-cover-image {
+  width: 33.33333333%;
+  float: left;
+  padding-right: 15px;
+}
+.procurement-content .views-field-field-publication-cover-image .field-content {
+  float: left;
+  width: 100%;
+}
+.procurement-content .views-field-field-publication-cover-image img {
+  width: 100%;
+  margin: 0;
+}
+.procurement-content .views-field-title {
+  width: 66.66666667%;
+  float: left;
+  padding-left: 15px;
+}
+.procurement-content .views-field-title .field-content {
+  font-size: 16px;
+}
+.procurement-content .views-field-title .field-content a {
+  color: #ed8b00;
+}
+#procurement-supplychain-wrapper .hero-image {
+  height: calc(100vh - 320px);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+#procurement-supplychain-wrapper .hero-image:before {
+  display: none;
+}
+#procurement-supplychain-wrapper .topic-detail {
+  padding: 80px 0;
+}
+#procurement-supplychain-wrapper .topic-detail .page-content {
+  padding: 0;
+}
+#procurement-supplychain-wrapper .topic-detail .page-content p {
+  color: #000;
+  margin-bottom: 25px;
+}
+#procurement-supplychain-wrapper .topic-detail .page-content ul {
+  margin-bottom: 30px;
+}
+#procurement-supplychain-wrapper .topic-detail .page-content ul li {
+  color: #000;
+  font-size: 1em;
+  font-weight: 400;
+  margin-bottom: 15px;
+  padding-left: 30px;
+  position: relative;
+  line-height: 1.5;
+}
+#procurement-supplychain-wrapper .topic-detail .page-content ul li:before {
+  content: "";
+  position: absolute;
+  top: 7px;
+  left: 0;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: #d1d1d1;
+}
+#procurement-supplychain-wrapper .topic-detail .page-content ol {
+  margin-bottom: 30px;
+  padding-left: 15px;
+}
+#procurement-supplychain-wrapper .topic-detail .page-content ol li {
+  color: #000;
+  font-size: 1em;
+  font-weight: 400;
+  margin-bottom: 15px;
+  padding-left: 5px;
+  position: relative;
+  line-height: 1.5;
+  list-style: decimal;
+}
+
+#procurement-supplychain-wrapper .topic-detail .page-content figure {
+  margin: 10px 0 0;
+  background: none;
+}
+#procurement-supplychain-wrapper .topic-detail .page-content figure figcaption {
+  background: none;
+  color: #000;
+  padding: 0.8em 0;
+}
+#procurement-supplychain-wrapper .topic-detail .page-content blockquote {
+  width: 100%;
+  background: #f7941e;
+  padding: 3.5em;
+  font-weight: 300;
+}
+#procurement-supplychain-wrapper .topic-detail .page-content blockquote p {
+  color: #fff;
+}
+#procurement-supplychain-wrapper .topic-detail .container > .row {
+  display: flex;
+}
+#procurement-supplychain-wrapper .topic-detail .container > .row > .col-lg-4 {
+  padding-right: 30px;
+}
+
+#procurement-supplychain-wrapper .page-content blockquote p {
+  color: #fff;
+}
+#procurement-supplychain-wrapper .topic-content p a {
+  color: #000 !important;
+  outline: none !important;
+  position: relative;
+  font-weight: 700;
+  text-decoration-line: underline;
+  text-decoration-color: #f7941e !important;
+  text-decoration-thickness: 2px !important;
+  text-underline-offset: 4px;
+}
+#procurement-supplychain-wrapper .global-result-wrapper {
+  max-width: 1050px;
+  padding: 0 30px;
+  margin: 0 auto;
+}
+#procurement-supplychain-wrapper .ind-wrapper {
+  padding-top: 50px;
+}
+#procurement-supplychain-wrapper .row-col3 .card-highlights {
+  padding-top: 40px;
+}
+#procurement-supplychain-wrapper .article__content h5.article__title {
+  font-size: 1.5rem;
+  margin: 30px 0 0;
+}
+#procurement-supplychain-wrapper .article__content .views-exposed-form .form-fields {
+  padding-top: 10px !important;
+}
+#procurement-supplychain-wrapper .article__content .views-exposed-form .form-fields .form-actions {
+  margin-top: 0 !important;
+}
+#procurement-supplychain-wrapper .article__content .views-exposed-form .form-fields .form-actions .form-submit {
+  background: #f7941e;
+}
+.procurement-btn-blk {
+  display: flex;
+  justify-content: center;
+  padding: 20px 0 50px;
+}
+.procurement-btn-blk .btn {
+  margin: 10px 10px !important;
+  white-space: normal;
+  max-width: none;
+  color: #000 !important;
+  border: 2px solid #ed8b00 !important;
+  border-radius: 5px !important;
+  font-weight: 700;
+  font-size: 17px;
+  transition: all ease 0.3s;
+  text-decoration: none !important;
+  text-transform: none !important;
+  padding: 45px 30px 45px 105px !important;
+}
+.procurement-btn-blk.product-tool .btn:after {
+  content: "";
+  background: #ed8b00;
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 20px;
+  margin: auto 0;
+  width: 66px;
+  height: 66px;
+}
+.catalogue-btn:before {
+  background: url("../images/catalogue-icon.png") no-repeat 0 0 / cover;
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 39px;
+  margin: auto 0;
+  width: 29px;
+  height: 36px;
+  z-index: 1;
+}
+.lead-time-calculator-btn:before {
+  background: url("../images/lead-time-calculator-icon.png") no-repeat 0 0 / cover;
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 39px;
+  margin: auto 0;
+  width: 30px;
+  height: 37px;
+  z-index: 1;
+}
+.budget-planner-btn:before {
+  background: url("../images/budget-planner-icon.png") no-repeat 0 0 / cover;
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 35px;
+  margin: auto 0;
+  width: 37px;
+  height: 37px;
+  z-index: 1;
+}
+.procurement-btn-blk.product-tool .btn:hover {
+  color: #fff !important;
+}
+
+.procurement-btn-blk .btn:hover {
+  background-color: #db7b0b;
+}
+.procurement-btn-blk.login-blk {
+  padding-top: 0;
+}
+.procurement-btn-blk.login-blk .btn {
+  margin: 0 !important;
+}
+.unfpa_global_procurement_supplychain-processed .slick-next {
+  right: -7px !important;
+}
+/*-- EOF Procure branch css --*/
+
+@media (max-width: 1200px) {
+  #procurement-supplychain-wrapper .container {
+    width: auto;
+    max-width: 750px;
+  }
+}
+
+@media (max-width: 900px) {
+  #procurement-supplychain-wrapper .exec-brd-view-filters .blk {
+    float: left;
+  }
+
+  #procurement-supplychain-wrapper .exec-brd-view-filters select.form-select {
+    max-width: 100%;
+  }
+  #procurement-supplychain-wrapper .topic-detail .container > .row > .col-lg-4 {
+    padding-right: 15px;
+    width: 35%;
+  }
+  #procurement-supplychain-wrapper .topic-detail .container > .row > .col-lg-4 + .col-lg-8 {
+    width: 65%;
+  }
+}
+
+@media (max-width: 768px) {
+  #procurement-supplychain-wrapper .region-info-block .exbo-region-columns {
+    width: 48%;
+  }
+}
+
+@media (max-width: 700px) {
+  #procurement-supplychain-wrapper .executive-board-filter-container {
+    margin: 0;
+    width: 100%;
+  }
+
+  #procurement-supplychain-wrapper .exec-brd-view-filters .form-select {
+    margin-right: 0;
+  }
+
+  #procurement-supplychain-wrapper .exec-brd-view-filters .blk {
+    margin: 0 5px 0 0;
+  }
+
+  #procurement-supplychain-wrapper #bureauMembers button.form-submit {
+    margin-left: 0;
+  }
+  #procurement-supplychain-wrapper .ind-wrapper {
+    padding-top: 0;
+  }
+  #procurement-supplychain-wrapper .ind-wrapper .slick-list {
+    padding: 30px 0 10px;
+  }
+  #procurement-supplychain-wrapper .hero-image {
+    min-height: 200px;
+  }
+  .infographic-wrapper {
+    padding-bottom: 50px;
+  }
+}
+
+@media (max-width: 600px) {
+  #procurement-supplychain-wrapper .hero-image-mobile .content .title {
+    color: #fff;
+  }
+}
+
+@media (max-width: 480px) {
+  #procurement-supplychain-wrapper .region-info-block .exbo-region-columns {
+    width: 96%;
+  }
+  .related-content .view-procurement-supplychain-resources .view-content .row {
+    min-width: 100%;
+    max-width: 100%;
+    width: 100%;
+    margin: 0 0 20px;
+  }
+  .view-procurement-supplychain-resources .ct-card .ct-card__details--body {
+    padding: 1.5em;
+  }
+  .procurement-btn-blk {
+    display: block;
+    padding: 20px 20px 40px;
+  }
+  .procurement-btn-blk .btn {
+    width: 100%;
+    margin: 10px 0 !important;
+  }
+  #procurement-supplychain-wrapper .topic-detail .container > .row {
+    display: block;
+  }
+  #procurement-supplychain-wrapper .topic-detail .container > .row > .col-lg-4 {
+    width: 100%;
+  }
+  #procurement-supplychain-wrapper .topic-detail .container > .row > .col-lg-4 + .col-lg-8 {
+    width: 100%;
+  }
+  #procurement-supplychain-wrapper .navigation {
+    margin-bottom: 30px;
+  }
+  #procurement-supplychain-wrapper .hero-image {
+    display: none;
+  }
+  #procurement-supplychain-wrapper .page-content blockquote {
+    font-size: 0.8em;
+    border: none;
+    padding: 15px 0;
+  }
+}
+
+.ct-card__image.publication img,
+.ct-card__image.resources img,
+.ct-card__image.press img {
+  width: auto;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  background-color: #ffffff;
+}
+.ct-card__image img {
+  display: block;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+}
+
+.ct-card__image.publication,
+.ct-card__image.resources,
+.ct-card__image.press {
+  background-color: #eaeaea;
+}
+.ct-card__image {
+  position: relative;
+  overflow: hidden;
+  background-color: #eaeaea;
+  padding: 30% 0;
+}
+.ct-card__image a {
+  display: block;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  right: 0;
+  top: 0;
+}
+.ct-card__details {
+  width: 100%;
+}
+.ct-card__details--body {
+  background-color: #ffffff;
+  padding: 2em;
+}
+.ct-card__details--body p.content-type {
+  color: #ed8b00;
+  text-transform: normal;
+  font-size: 1em;
+  margin-bottom: 0.5em;
+}
+.ct-card__details--body h3.card-title,
+.ct-card__details--body h3.card-title a,
+.ct-card__details--body h4.card-title,
+.ct-card__details--body h4.card-title a {
+  color: #000000;
+  line-height: 1.4;
+  padding-top: 0;
+}
+
+#procurement-supplychain-wrapper .custom_radio1.pg--map {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 100%;
+  margin: 25px 0 0 0;
+}
+
+#procurement-supplychain-wrapper .custom_radio1.pg--map .colm {
+  margin-right: 20px;
+}
+
+#procurement-supplychain-wrapper .custom_radio1.pg--map label {
+  display: block;
+  padding: 2px 0;
+}
+
+#procurement-supplychain-wrapper .custom-radio.selected {
+  background-color: #f7941e;
+}
+#procurement-supplychain-wrapper .custom-radio {
+  width: 14px;
+  height: 14px;
+  display: inline-block;
+  position: relative;
+  z-index: 1;
+  top: 3px;
+  background-color: #ccc;
+  border-radius: 60%;
+  margin-right: 8px;
+}
+
+#procurement-supplychain-wrapper .custom-radio input[type="radio"] {
+  margin: 1px;
+  position: absolute;
+  z-index: 2;
+  cursor: pointer;
+  outline: none;
+  opacity: 0;
+  _noFocusLine: expression(this.hideFocus=true);
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  filter: alpha(opacity=0);
+  -khtml-opacity: 0;
+  -moz-opacity: 0;
+}
+
+#procurement-supplychain-wrapper description p {
+  color: #252525;
+  font-size: 1.30em;
+}
+
+#procurement-supplychain-wrapper h4#map-title {
+  font-size: 1.4em;
+  line-height: 1.2;
+  margin-top: 1em;
+  margin-bottom: 0;
+  text-align: center;
+}
+
+#procurement-supplychain-wrapper h4#map-title.pad-btm-0 {
+  padding-bottom: 0;
+}
+
+#map-scale-1 {
+  width: 28%;
+  margin: 0 0 10px 4%;
+  float: left;
+  display: none;
+}
+@media (max-width: 578px) {
+  #map-scale-1 {
+    margin: 0px 0 10px 0;
+  }
+}
+#procurement-supplychain-wrapper #map-scale-1 {
+  display: block;
+}
+#map-scale-1 .max {
+  font-size: 11px;
+  float: left;
+  color: #000;
+  margin-top: 10px;
+}
+#map-scale-1 .min {
+  font-size: 11px;
+  float: right;
+  color: #000;
+  margin-top: 10px;
+}
+#procurement-supplychain-wrapper #gov-spending-map.data1 #map-scale-1 .sowp-scale {
+  /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#9a4f01+0,e2b08c+100 */
+  background: #9a4f01; /* Old browsers */
+  background: -moz-linear-gradient(left,  #9a4f01 0%, #e2b08c 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(left,  #9a4f01 0%,#e2b08c 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to right,  #9a4f01 0%,#e2b08c 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#9a4f01', endColorstr='#e2b08c',GradientType=1 ); /* IE6-9 */
+  float: left;
+  height: 20px;
+  width: 100%;
+}
+#procurement-supplychain-wrapper #gov-spending-map.data2 #map-scale-1 .sowp-scale {
+  background: linear-gradient(to right, rgb(30, 87, 114) 0%,
+    rgb(74, 165, 207) 50%, rgb(74, 165, 207) 50%, rgb(215, 235, 244) 100%);
+  float: left;
+  height: 20px;
+  width: 100%;
+}
+
+#procurement-supplychain-wrapper .tab-content .btn-collapse {
+  color: #000 !important;
+  text-decoration: none !important;
+}
+#procurement-supplychain-wrapper .tab-content .btn-collapse .hidemore {
+  display: inline !important;
+}
+#procurement-supplychain-wrapper .tab-content .btn-collapse .readmore {
+  display: none !important;
+}
+#procurement-supplychain-wrapper .tab-content .btn-collapse.collapsed .readmore {
+  display: inline !important;
+}
+#procurement-supplychain-wrapper .tab-content .btn-collapse.collapsed .hidemore {
+  display: none !important;
+}
+
+#procurement-supplychain-wrapper .related-content .pager-next a {
+  position: relative;
+}
+#procurement-supplychain-wrapper .related-content .pager-next a:after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  right: 24px;
+  width: 10px;
+  height: 10px;
+  background: #f7f7f7;
+}
+#procurement-supplychain-wrapper .bg-white .pager-next a:after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  right: 24px;
+  width: 10px;
+  height: 10px;
+  background: #fff;
+}
+#procurement-supplychain-wrapper .supplies-resources-document-actions input.form-submit {
+  background: #f7941e;
+  transition: all ease 0.2s;
+  height: 64px;
+}
+#procurement-supplychain-wrapper .supplies-resources-document-actions input.form-submit:hover {
+  background: #db7b0b;
+}
+#procurement-supplychain-wrapper .res-btn {
+  /*color: #ed8b00 !important;*/
+}
+#procurement-supplychain-wrapper .global-result-wrapper h6 {
+  text-align: center;
+  color: #000;
+  margin: 0 0 40px;
+  display: inline-block;
+  width: 100%;
+  font-weight: 400;
+  font-size: 14px;
+  padding: 0;
+}
+.colm.partners01 .custom-radio {
+  background-color: #f7941e !important;
+}
+.colm.governments01 .custom-radio {
+  background-color: #4aa5cf !important;
+}
+
+.view-procurement-supplychain-resources .views-widget-filter-combine.supplies-resources-search {
+  float: left;
+  width: 45%;
+}
+.view-procurement-supplychain-resources .views-widget-filter-combine.supplies-resources-search .views-widget {
+  float: left;
+  width: 100%;
+}
+.view-procurement-supplychain-resources .views-widget-filter-combine.supplies-resources-search .form-item {
+  float: left;
+  width: 100%;
+}
+#procurement-supplychain-wrapper .view-procurement-supplychain-resources .supplies-resources-search input {
+  width: 100% !important;
+  margin: 0 !important;
+  font-weight: 400 !important;
+  color: #000 !important;
+  font-size: 16px;
+  height: 64px;
+  border: 1px #000000 solid;
+}
+#procurement-supplychain-wrapper .view-procurement-supplychain-resources .views-widget-filter-field_resource_date_value {
+  float: left;
+  margin: 0 15px 0 20px;
+}
+#procurement-supplychain-wrapper .view-procurement-supplychain-resources .views-widget-filter-field_resource_date_value select {
+  height: 64px;
+  border: 1px #000000 solid;
+  width: 160px;
+  font-size: 16px;
+  border-radius: 6px;
+  box-shadow: 0px 0px 15px 1px #efefef;
+  padding: 0 15px;
+}
+@media (max-width: 578px) {
+  #procurement-supplychain-wrapper .view-procurement-supplychain-resources .views-widget-filter-field_resource_date_value select {
+    width:100%;
+  }
+}
+#procurement-supplychain-wrapper .view-procurement-supplychain-resources .views-widget-filter-field_resource_date_value select:hover {
+  -webkit-box-shadow: 0px 0px 24px rgb(0 0 0 / 28%);
+  box-shadow: 0px 0px 24px rgb(0 0 0 / 28%);
+}
+#procurement-supplychain-wrapper .view-procurement-supplychain-resources .views-widget-filter-field_resource_date_value > label {
+  display: none;
+}
+#procurement-supplychain-wrapper .view-procurement-supplychain-resources .supplies-resources-document-actions {
+  float: left;
+  margin: 18px 0 0;
+}
+
+@media (max-width: 800px) {
+  .procurement-btn-blk.product-tool {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+  .procurement-btn-blk.product-tool .btn {
+    text-align: left;
+    padding: 30px 30px 30px 105px !important;
+  }
+}
+@media (max-width: 750px) {
+  .procurement-btn-blk.product-tool {
+    flex-wrap: wrap;
+  }
+  .procurement-btn-blk.product-tool .btn {
+    width: 44%;
+  }
+  #procurement-supplychain-wrapper .topic-detail {
+    padding: 30px 0;
+  }
+  #procurement-supplychain-wrapper .topic-detail > .col-lg-12 {
+    padding: 0;
+  }
+}
+@media (max-width: 420px) {
+  .procurement-btn-blk.product-tool .btn {
+    width: 100%;
+    padding: 40px 30px 40px 105px !important;
+  }
+  .procurement-btn-blk.product-tool .btn.catalogue-btn, .procurement-btn-blk.product-tool .btn.lead-time-calculator-btn {
+    padding: 30px 30px 30px 105px !important;
+  }
+  .view-procurement-supplychain-resources .views-widget-filter-combine.supplies-resources-search {
+    width: 100%;
+  }
+  #procurement-supplychain-wrapper .view-procurement-supplychain-resources .views-widget-filter-field_resource_date_value {
+    margin: 0;
+  }
+  #procurement-supplychain-wrapper .supplies-resources-document-actions input.form-submit {
+    margin: 0;
+  }
+  #procurement-supplychain-wrapper .view-procurement-supplychain-resources .supplies-resources-document-actions {
+    margin: 0;
+  }
+}
+
+#procurement-supplychain-wrapper .ind-wrapper.meetPartner {
+  padding-top: 0;
+}
+.meet-partner-slider {
+  max-width: 700px;
+  padding: 0 15px;
+  margin: 0 auto;
+}
+.meet-partner-slider .row-col {
+  width: 100%;
+  margin: 1%;
+}
+.video-bx {
+  position: relative;
+  width: 100%;
+}
+.video-bx iframe {
+  width: 100% !important;
+}
+.meet-partner-slider .slick-prev:before,
+.meet-partner-slider .slick-next:before {
+  color: #fa9700;
+}
+#procurement-supplychain-wrapper .ind-content i {
+  display: block;
+  width: 65px;
+  height: 65px;
+  margin: 0 auto -15px;
+}
+.contraceptive-protection-icon {
+  background: url(../images/contraceptive-protection-icon.svg) no-repeat 0 0 / cover;
+}
+.country-served-icon {
+  background: url(../images/country-served.svg) no-repeat 0 0 / cover;
+}
+.iarh-icon {
+  background: url(../images/iarh-icon.svg) no-repeat 0 0 / cover;
+}
+
+.icon-gov-institution {
+  background: url(../images/icon-government-institution.svg) no-repeat 0 0 / cover;
+}
+.icon-ngos-served {
+  background: url(../images/icon-ngo-served.svg) no-repeat 0 0 / cover;
+}
+.icon-partner-served {
+  background: url(../images/icon-partners-served.svg) no-repeat 0 0 / cover;
+}
+.icon-product-catalogue {
+  background: url(../images/icon-product-catalouges.svg) no-repeat 0 0 / cover;
+}
+.icon-condoms-procured {
+  background: url(../images/icon-condom-procured.svg) no-repeat 0 0 / cover;
+}
+.icon-countries-receivedSRH {
+  background: url(../images/icon-countries-received-SRH-supplies.svg) no-repeat 0 0 / cover;
+}
+
+.resources-section {
+  padding: 40px 0 20px !important;
+  margin: 5px 0 0;
+  background: #fff !important;
+}
+.resources-section .pager-next a:after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  right: 24px;
+  width: 10px;
+  height: 10px;
+  background: #fff;
+}
+
+#procurement-supplychain-wrapper .topic-detail .page-content figure[style="float:right"] {
+  margin: 6px 0 20px 25px;
+  max-width: 45%;
+}
+#procurement-supplychain-wrapper .topic-detail .page-content figure[style="float:left"] {
+  margin: 6px 25px 20px 0;
+  max-width: 45%;
+}
+@media (max-width: 578px) {
+  #procurement-supplychain-wrapper .topic-detail .page-content figure[style="float:right"],
+  #procurement-supplychain-wrapper .topic-detail .page-content figure[style="float:left"] {
+    max-width: 100%;
+    margin: 6px 0 25px 0;
+  }
+}
+
+#procurement-supplychain-wrapper .topic-detail .page-content figure.media-image figcaption {
+  background: #404040;
+  color: #CCCCCC;
+  font-size: 14px;
+  margin: 0;
+  padding: 10px 15px;
+  line-height: 20px;
+  text-align: left;
+  display: block;
+  width: 100% !important;
+}
+#procurement-supplychain-wrapper .topic-detail .page-content figure.media-image figcaption a {
+  text-decoration: underline;
+}
+
+#map-title span {
+  display: block;
+}
+
+.page-node-type-ct-procurement .bg-lightGrey {
+  background-color: #f2f2f2;
+  margin: 0;
+}
+
+#procurement-supplychain-wrapper .related-content .ct-card {
+  padding-bottom: 2em;
+}
+
+#procurement-supplychain-wrapper .related-content h3.card-title {
+  font-size: 1.5em;
+  margin: 0;
+  padding: 0;
+}
+
+nav.pager-nav {
+  margin: 25px 0 25px 0;
+}
+
+#related-content ul.pager {
+  margin-bottom: 20px !important;
+}
+
+.photo-credit {
+  position: relative;
+  text-align: right;
+  margin: -50px 15px 0 0;
+  padding-bottom: 15px;
+  z-index: 10;
+  color: rgb(255 255 255 / 50%);
+  font-size: 14px;
+}
+
+@media (max-width: 767px) {
+  .keyr-mobpad {
+    padding-right: 30px;
+    padding-left: 30px;
+  }
+}

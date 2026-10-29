@@ -1,0 +1,51 @@
+<nav class="graph-header margin-small graph-header--main graph-header-with-title"  for="mapChart">
+  <div class="container">
+    <div class="row between-md middle-md">
+      <ul class="graph-header__menu">
+        <li class="active"><a href="/dashboard">{{ 'Global view'|t }}</a></li>
+        <li>
+          <select name="" id="" class="select-default select-donors" placeholder="Donors">
+            <option value=""></option>
+            {% for donor,donor_dropdown in data.donor_dropdown %}
+              <option value="{{ donor_dropdown }}">{{ donor }}</option>
+            {% endfor %}
+          </select>
+        </li>
+        <li>
+          <select name="" id="" class="select-default select-partners" placeholder="Partners">
+            <option value=""></option>
+            {% for partner,partner_dropdown in data.partner_dropdown %}
+              <option value="{{ partner_dropdown }}">{{ partner }}</option>
+            {% endfor %}
+          </select>
+        </li>
+      </ul>
+    </div>
+    <div class="row between-md middle-md">
+      <h1 class="main-title title-h1 global-view-tab">{{ 'Fund origins and destinations'|t }}</h1>
+      <div class="graph-header__actions">
+        <select name="" id="" class="select-year chart-select map-year" data-filter="date">
+          {% for map_year in data.map_details.date_dropdown %}
+            <option value="{{ map_year }}">{{ map_year }}</option>
+          {% endfor %}
+          
+        </select>
+      </div>
+    </div>
+
+    <hr>
+  </div>
+</nav>
+<section class="margin-small">
+  <div class="container map-container">
+    <div class="row start-md">
+      <div class="col-xs-12">
+        <div id="mapChart" class="chart-container map-graph margin-small" data-type="map" data-filters="[{column: 'date', value: {{ data.map_details.start_date }} }]"></div>
+        <ul>
+        <li id="aa-amount-hq-2010-15" style="display:none;"> {{ 'For 2010 to 2015, an additional amount of $@aa_amount was implemented in multi-country projects.'|t({'@aa_amount' : additional_amount_hq_all}) }}</li>
+          <li id="aa-amount-hq" style="display:none;">{{ 'For <span>@start_year</span>, an additional amount of $<span>@amount</span> was implemented by the UN headquarters, regional or sub-regional offices.'|t({'@start_year' : data.map_details.start_date, '@amount' : start_year_amount }) }}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,14 @@
+unfpa_global_donation.thankyou:
+  path: '/thanks/{alias}'
+  defaults:
+    _controller: 'Drupal\unfpa_global_donation\Controller\ThankYouPage::content'
+  requirements:
+    _custom_access: '\Drupal\unfpa_global_donation\Controller\ThankYouPage::checkAccess'
+
+unfpa_global_front.pay_donation:
+  path: '/pay-donation'
+  defaults:
+    _form: '\Drupal\unfpa_global_donation\Form\DonationForm'
+    _title: 'Donate'
+  requirements:
+    _permission: 'access content'

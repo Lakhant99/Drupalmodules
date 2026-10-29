@@ -1,0 +1,4 @@
+services:
+  unfpa_global_procurement_supplychain.govt_spending:
+    class: 'Drupal\unfpa_global_procurement_supplychain\GovernmentSpendingService'
+    arguments: ['@module_handler','@database','@entity_field.manager','@path.alias_manager', '@unfpa_global_executive_board.cpd']

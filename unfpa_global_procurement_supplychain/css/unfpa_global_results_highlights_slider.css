@@ -1,0 +1,208 @@
+.ind-wrapper {
+  width: 100%;
+  padding: 15px 0 0 0;;
+}
+.ind-wrapper h2 {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 30px;
+  color: #002534;
+  margin: 0 0 10px 0;
+}
+.ind-wrapper p {
+  font-size: 16px;
+  line-height: 20px;
+  color: #5d686d;
+}
+.ind-wrapper .slick-list {
+  padding: 40px 0;
+}
+.ind-wrapper .row-wrap {
+  display: flex;
+  display: -webkit-flex;
+  padding: 0 12px 25px 12px;
+  min-height: 150px;
+}
+.ind-wrapper .row-wrap .row-col3 {
+  width: calc(100%/3);
+  margin: 0 1%;
+  float: left;
+  background-color: #fafafa;
+  position: relative;
+  min-height: 240px;
+}
+.ind-wrapper .row-wrap .row-col3:hover {
+  -webkit-box-shadow: 2px 3px 25px -11px rgba(0,0,0,0.57);
+  -moz-box-shadow: 2px 3px 25px -11px rgba(0,0,0,0.57);
+  box-shadow: 2px 3px 25px -11px rgba(0,0,0,0.57);
+}
+.ind-wrapper .global-result-wrapper .row-col3 {
+  width: 100%;
+}
+.row-col3 .card-highlights {
+  padding: 60px 20px 20px 20px;
+}
+.row-wrap .row-col3 .icon {
+  width: 66px;
+  height: 66px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  top: -25px;
+}
+.row-wrap .row-col3 .icon img {
+  width: 66px;
+  height: 66px;
+}
+.row-wrap .row-col3 .ind-content {
+  width: 100%;
+  float: left;
+}
+.row-col3 .ind-content h3 {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 34px;
+  color: #5d686d;
+  margin:0;
+  padding: 0 0 15px 0;
+  text-align: center;
+}
+.row-col3 .ind-content p {
+  font-size: 15px;
+  line-height: 20px;
+  color: #5d686d;
+  margin:0;
+  padding:0;
+  text-align: center;
+}
+.ind-wrapper .slick-slider {
+  margin-bottom: 0;
+  padding: 0 18px;
+}
+.global-result-wrapper {
+  padding-top: 15px;
+}
+.global-result-wrapper .slick-prev,
+.global-result-wrapper .slick-next {
+  top: 45%;
+}
+.global-result-wrapper .slick-prev {
+  left: 0px;
+  z-index: 1;
+  width: 28px;
+  height: 28px;
+}
+.global-result-wrapper .slick-next {
+  right: 0px;
+  z-index: 1;
+  width: 28px;
+  height: 28px;
+}
+.global-result-wrapper .slick-next:before,
+.global-result-wrapper .slick-prev:before {
+  color: #fa9700;
+  font-size: 28px;
+}
+.global-result-wrapper .slick-initialized .slick-slide:focus,
+#key-results .slick-initialized .slick-slide:focus {
+  outline: none;
+}
+
+@media (min-width:768px) and (max-width:959px) {
+  .row-wrap .row-col3 .icon,
+  .row-wrap .row-col3 .icon img {
+    width: 50px;
+    height: 50px;
+  }
+  .row-wrap .row-col3 .ind-content {
+    width: 100%;
+  }
+  .map-wrapper .country-region-box {
+    float: right;
+    width: 34%;
+    text-align: right;
+  }
+  .map-wrapper .indicator-title {
+    float: left;
+    width: 62%;
+  }
+  ul.map-legends,
+  ul.map-legends-2 {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    bottom: 20px;
+    left: 0;
+  }
+  .row-col3 .card-highlights {
+    padding: 40px 20px 20px 20px;
+  }
+}
+
+@media (max-width: 767px) {
+  .ind-wrapper .row-wrap {
+    display: flex;
+    display: -webkit-flex;
+    border-bottom: 0;
+    padding: 0 25px 25px 25px;
+    flex-wrap: wrap;
+  }
+  .ind-wrapper .row-wrap .row-col3 {
+    width: 100%;
+    float: left;
+    margin: 15px 0 15px 0;
+  }
+  .row-wrap .row-col3 .ind-content {
+    width: 70%;
+    float: left;
+  }
+  .ind-wrapper .row-wrap .row-col3 {
+    width: 100%;
+    float: left;
+    margin: 15px 0 15px 0;
+  }
+  .ind-wrapper .row-wrap {
+    display: flex;
+    display: -webkit-flex;
+    border-bottom: 0;
+    padding: 0 15px;
+    flex-wrap: wrap;
+  }
+  .row-wrap .row-col3 .icon,
+  .row-wrap .row-col3 .icon img {
+    width: 60px;
+    height: 60px;
+  }
+  .row-wrap .row-col3 .icon,
+  .row-wrap .row-col3 .icon img {
+    width: 60px;
+    height: 60px;
+  }
+  .row-wrap .row-col3 .ind-content {
+    width: 100%;
+    float: left;
+  }
+  .ind-wrapper h2 {
+    font-size: 20px;
+    line-height: 24px;
+  }
+  .ind-wrapper p {
+    font-size: 14px;
+    line-height: 18px;
+  }
+}
+
+@media (max-width: 340px) {
+  .row-wrap .row-col3 .icon {
+    width: 48px;
+    height: 48px;
+  }
+  .row-wrap .row-col3 .icon img {
+    width: 48px;
+    height: 48px;
+  }
+}

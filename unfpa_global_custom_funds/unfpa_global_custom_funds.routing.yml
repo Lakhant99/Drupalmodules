@@ -1,0 +1,7 @@
+unfpa_global_custom_funds.chart_update:
+  path: '/chart-update'
+  defaults:    
+    _controller: '\Drupal\unfpa_global_custom_funds\Controller\IncomingfundsChartDashboard::fundsChartUpdate'
+  requirements:
+    #_custom_access: '\Drupal\unfpa_global_custom_funds\Controller\IncomingfundsChartDashboard::isfundsChartAccessible'
+    _permission: 'access content'

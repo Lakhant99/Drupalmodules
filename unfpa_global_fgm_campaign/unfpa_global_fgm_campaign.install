@@ -1,0 +1,296 @@
+<?php
+
+/**
+ * @file
+ * Installation hooks for FGM Campaign module.
+ */
+
+/**
+ * Implements hook_schema().
+ */
+function unfpa_global_fgm_campaign_schema() {
+  $schema = [];
+
+  $schema['unfpa_global_fgm_campaign_pledges'] = [
+    'description' => 'Stores FGM Campaign pledge form submissions.',
+    'fields' => [
+      'sid' => [
+        'description' => 'The primary identifier for a submission.',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ],
+      'country' => [
+        'description' => 'Country code of the country that user selected during submission.',
+        'type' => 'varchar',
+        'length' => 2,
+        'not null' => TRUE,
+      ],
+      'user_hash' => [
+        'description' => 'Hash based on email of the user who submitted the form.',
+        'type' => 'varchar',
+        'length' => 64,
+        'not null' => TRUE,
+      ],
+      'ip_address' => [
+        'description' => 'IP address of the user who submitted the form.',
+        'type' => 'varchar',
+        'length' => 45,
+        'not null' => TRUE,
+      ],
+      'timestamp' => [
+        'description' => 'Time of submission.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ],
+    ],
+    'primary key' => [
+      'sid',
+    ],
+  ];
+
+  return $schema;
+}
+
+/**
+ * Implements hook_install().
+ */
+function unfpa_global_fgm_campaign_install() {
+  // Programmatically create initial pledges during installation.
+  $initial_pledges = unfpa_global_fgm_campaign_pledge_initial_ammounts();
+
+  // Initial pledges will use IP '0.0.0.0'.
+  $ip = '0.0.0.0';
+
+  foreach ($initial_pledges as $country => $ammount) {
+    for ($i = 0; $i < $ammount; $i++) {
+      unfpa_global_fgm_campaign_pledge_save_submission($country, '', $ip);
+    }
+  }
+}
+
+/**
+ * Gets list of all contries with their respoctive initial ammount of pledges.
+ *
+ * @return array
+ *   Array with all countries, where key is country iso code, and value is
+ *   the ammount of pledges that should be programmatically created for
+ *   the country durint installation of the 'unfpa_global_fgm_cmapaign' module.
+ */
+function unfpa_global_fgm_campaign_pledge_initial_ammounts() {
+  return [
+    'AF' => 353,
+    'AL' => 33,
+    'DZ' => 35,
+    'AO' => 41,
+    'AG' => 1,
+    'AR' => 104,
+    'AM' => 53,
+    'AW' => 0,
+    'AU' => 100,
+    'AT' => 21,
+    'AZ' => 39,
+    'BS' => 0,
+    'BH' => 0,
+    'BD' => 288,
+    'BB' => 22,
+    'BY' => 33,
+    'BE' => 78,
+    'BZ' => 15,
+    'BJ' => 115,
+    'BT' => 42,
+    'BO' => 61,
+    'BA' => 42,
+    'BW' => 30,
+    'BR' => 144,
+    'BN' => 0,
+    'BG' => 51,
+    'BF' => 156,
+    'BI' => 107,
+    'CV' => 8,
+    'KH' => 96,
+    'CM' => 177,
+    'CA' => 186,
+    'CF' => 116,
+    'TD' => 183,
+    'CL' => 28,
+    'CN' => 138,
+    'HK' => 0,
+    'MO' => 0,
+    'CO' => 102,
+    'KM' => 34,
+    'CG' => 52,
+    'CD' => 464,
+    'CR' => 24,
+    'HR' => 35,
+    'CU' => 23,
+    'CW' => 0,
+    'CY' => 1,
+    'CZ' => 1,
+    'CI' => 189,
+    'DK' => 150,
+    'DJ' => 31,
+    'DM' => 1,
+    'DO' => 32,
+    'EC' => 56,
+    'EG' => 129,
+    'SV' => 38,
+    'GQ' => 24,
+    'ER' => 56,
+    'EE' => 2,
+    'SZ' => 33,
+    'ET' => 455,
+    'FJ' => 47,
+    'FI' => 26,
+    'FR' => 293,
+    'GF' => 0,
+    'PF' => 0,
+    'GA' => 23,
+    'GM' => 52,
+    'GE' => 40,
+    'DE' => 128,
+    'GH' => 162,
+    'GR' => 15,
+    'GD' => 1,
+    'GP' => 0,
+    'GU' => 0,
+    'GT' => 42,
+    'GN' => 131,
+    'GW' => 54,
+    'GY' => 24,
+    'HT' => 109,
+    'HN' => 45,
+    'HU' => 219,
+    'IS' => 5,
+    'IN' => 631,
+    'ID' => 167,
+    'IR' => 64,
+    'IQ' => 181,
+    'IE' => 51,
+    'IL' => 9,
+    'IT' => 207,
+    'JM' => 38,
+    'JP' => 140,
+    'JO' => 240,
+    'KZ' => 43,
+    'KE' => 420,
+    'KI' => 9,
+    'KP' => 1,
+    'KR' => 35,
+    'XK' => 0,
+    'KW' => 1,
+    'KG' => 56,
+    'LA' => 59,
+    'LV' => 3,
+    'LB' => 180,
+    'LS' => 33,
+    'LR' => 90,
+    'LY' => 23,
+    'LT' => 2,
+    'LU' => 7,
+    'MK' => 29,
+    'MG' => 198,
+    'MW' => 161,
+    'MY' => 55,
+    'MV' => 16,
+    'ML' => 198,
+    'MT' => 0,
+    'MQ' => 0,
+    'MH' => 1,
+    'MR' => 85,
+    'MU' => 4,
+    'MX' => 72,
+    'FM' => 1,
+    'MD' => 41,
+    'MN' => 46,
+    'ME' => 21,
+    'MA' => 45,
+    'MZ' => 135,
+    'MM' => 245,
+    'NA' => 31,
+    'NP' => 277,
+    'NL' => 98,
+    'NC' => 0,
+    'NZ' => 16,
+    'NI' => 36,
+    'NE' => 171,
+    'NG' => 428,
+    'NO' => 27,
+    'OM' => 8,
+    'PK' => 402,
+    'PS' => 95,
+    'PA' => 58,
+    'PG' => 37,
+    'PY' => 24,
+    'PE' => 66,
+    'PH' => 201,
+    'PL' => 26,
+    'PT' => 22,
+    'PR' => 0,
+    'QA' => 0,
+    'RE' => 0,
+    'RO' => 42,
+    'RU' => 22,
+    'RW' => 119,
+    'KN' => 0,
+    'LC' => 0,
+    'VC' => 0,
+    'WS' => 2,
+    'SM' => 0,
+    'ST' => 25,
+    'SA' => 1,
+    'SN' => 196,
+    'RS' => 49,
+    'SC' => 0,
+    'SL' => 152,
+    'SG' => 3,
+    'SK' => 8,
+    'SI' => 2,
+    'SB' => 6,
+    'SO' => 203,
+    'ZA' => 108,
+    'SS' => 304,
+    'ES' => 143,
+    'LK' => 84,
+    'SD' => 253,
+    'SR' => 10,
+    'SE' => 63,
+    'CH' => 46,
+    'SY' => 221,
+    'TJ' => 68,
+    'TZ' => 161,
+    'TH' => 120,
+    'TL' => 47,
+    'TG' => 70,
+    'TO' => 0,
+    'TT' => 11,
+    'TN' => 56,
+    'TR' => 134,
+    'TM' => 32,
+    'TC' => 0,
+    'TV' => 0,
+    'UG' => 297,
+    'UA' => 97,
+    'AE' => 0,
+    'GB' => 264,
+    'VI' => 0,
+    'US' => 655,
+    'UY' => 32,
+    'UZ' => 57,
+    'VU' => 13,
+    'VE' => 36,
+    'VN' => 81,
+    'EH' => 0,
+    'YE' => 256,
+    'ZM' => 115,
+    'ZW' => 218,
+  ];
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function unfpa_global_fgm_campaign_uninstall() {
+  \Drupal::database()->schema()->dropTable('unfpa_global_fgm_campaign_pledges');
+}

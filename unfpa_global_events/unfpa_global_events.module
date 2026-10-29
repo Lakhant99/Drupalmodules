@@ -1,0 +1,266 @@
+<?php
+
+/**
+ * @file
+ * Template for Events pages.
+ */
+
+use Drupal\file\Entity\File;
+use Drupal\node\NodeInterface;
+
+/**
+ * Implements hook_preprocess_HOOK() for page--ct-events.html.twig.
+ */
+function unfpa_global_events_preprocess_page(&$variables) {
+  $is_admin = \Drupal::service('router.admin_context')->isAdminRoute();
+  if ($is_admin) {
+    return;
+  }
+
+  if (isset($variables['node'])) {
+    $node = $variables['node'];
+    if ($node->getType() == 'ct_events') {
+      $variables['node_id'] = $node->id();
+      // Get value of field_banner_title.
+      $variables['field_banner_title'] = $node->field_banner_title->value;
+      // Get image path of field_banner_image_large.
+      $banner_image_fields = banner_image_field_names();
+      foreach ($banner_image_fields as $key => $field_name) {
+        $field_value = $node->get($field_name)->getValue('values');
+        if (array_key_exists(0, $field_value)) {
+          $fid = $field_value[0]['target_id'];
+          if (!empty($fid)) {
+            $file = File::load($fid);
+            $path = $file->getFileUri();
+            $variables['banner_image_url'][$banner_image_fields[$key]] = file_create_url($path);
+          }
+        }
+      }
+      $variables['#attached']['library'][] = 'unfpa_global_events/unfpa_global_events';
+      $variables['#attached']['library'][] = 'unfpa_global_events/event_share';
+      $variables['#attached']['library'][] = 'unfpa_global/news-libraries';
+      $variables['#attached']['library'][] = 'unfpa_global/common-style';
+      $variables['#attached']['drupalSettings'] = isset($variables['banner_image_url']) ? $variables['banner_image_url'] : '';
+    }
+  }
+}
+
+/**
+ * Return an array of machine name of banner image fields.
+ */
+function banner_image_field_names() {
+  return [
+    'field_banner_image_large',
+    'field_banner_image_medium',
+    'field_banner_image_mobile',
+    'field_banner_image_ipad',
+  ];
+}
+
+/**
+ * Implements hook_theme().
+ */
+function unfpa_global_events_theme($existing, $type, $theme, $path) {
+  return [
+    'page__ct_events' => [
+      'template' => 'page/page--ct-events',
+      'base hook' => 'page',
+    ],
+    'node__ct_events' => [
+      'template' => 'page/node--ct-events',
+      'base hook' => 'node',
+    ],
+    'views_view__events__event_listing' => [
+      'base hook' => 'view',
+      'path' => $path . '/templates/views',
+      'template' => 'views-view--events--event-listing',
+    ],
+    'views_view__events__past_event_listing' => [
+      'base hook' => 'view',
+      'path' => $path . '/templates/views',
+      'template' => 'views-view--events--past-event-listing',
+    ],
+  ];
+}
+
+/**
+ * Implements hook_page_attachments().
+ */
+function unfpa_global_events_page_attachments(array &$attachments) {
+  $is_admin = \Drupal::service('router.admin_context')->isAdminRoute();
+  if ($is_admin) {
+    return;
+  }
+  $meta_tag_list = unfpa_global_events_add_metatag();
+  foreach ($meta_tag_list as $key => $value) {
+    $attachments['#attached']['html_head'][] = [$value, 'keywords' . $key];
+  }
+}
+
+/**
+ * Function to get meta tag.
+ */
+function unfpa_global_events_add_metatag() {
+  $is_admin = \Drupal::service('router.admin_context')->isAdminRoute();
+  if ($is_admin) {
+    return;
+  }
+  global $base_url;
+  $path = \Drupal::service('module_handler')->getModule('unfpa_global_events')->getPath();
+  $langcode = \Drupal::languageManager()->getCurrentLanguage()->getId();
+  $node = \Drupal::routeMatch()->getParameter('node');
+  $metatag = [];
+  if ($node instanceof NodeInterface && $node->getType() == 'ct_events') {
+    $share_card_title = $node->field_share_card_title->getString();
+    $node_title = $node->getTitle();
+    $config = \Drupal::config('system.site');
+    $images = $base_url . '/' . $path . '/images/share/';
+    // Get current language prefix.
+    $lang_prefix = '';
+    if ($langcode == 'es' || $langcode == 'fr') {
+      $images .= $langcode . '/';
+      $lang_prefix = $langcode . '/';
+    }
+    // Meta tags that don't change dynamically.
+    $og_locale = unfpa_global_custom_share_get_locale($langcode);
+    $og_sitename = $config->get('name');
+    $og_updated_time = time();
+    $og_type = 'article';
+    $tw_site = '@UNFPA';
+    $tw_card = 'summary_large_image';
+    // Values used if user shares the whole page.
+    $share_url = $base_url . '/' . $lang_prefix . 'events';
+    $share_title = !empty($share_card_title) ? $share_card_title : $node_title;
+    $share_image = $images . 'share-default.jpg';
+    $share_description = $node_title;
+    $metatag = [
+      [
+        '#tag' => 'meta',
+        '#attributes' => [
+          'name' => 'twitter:site',
+          'content' => $tw_site,
+        ],
+      ],
+      [
+        '#tag' => 'meta',
+        '#attributes' => [
+          'name' => 'twitter:card',
+          'content' => $tw_card,
+        ],
+      ],
+      [
+        '#tag' => 'meta',
+        '#attributes' => [
+          'name' => 'twitter:url',
+          'content' => $share_url,
+        ],
+      ],
+      [
+        '#tag' => 'meta',
+        '#attributes' => [
+          'name' => 'twitter:title',
+          'content' => $share_title,
+        ],
+      ],
+      [
+        '#tag' => 'meta',
+        '#attributes' => [
+          'name' => 'twitter:image',
+          'content' => $share_image,
+        ],
+      ],
+      [
+        '#tag' => 'meta',
+        '#attributes' => [
+          'name' => 'twitter:description',
+          'content' => $share_description,
+        ],
+      ],
+      [
+        '#tag' => 'meta',
+        '#attributes' => [
+          'property' => 'fb:app_id',
+          'content' => $share_description,
+        ],
+      ],
+      [
+        '#tag' => 'meta',
+        '#attributes' => [
+          'property' => 'og:description',
+          'content' => $share_description,
+        ],
+      ],
+      [
+        '#tag' => 'meta',
+        '#attributes' => [
+          'property' => 'og:image:url',
+          'content' => $share_image,
+        ],
+      ],
+      [
+        '#tag' => 'meta',
+        '#attributes' => [
+          'property' => 'og:image:height',
+          'content' => '900',
+        ],
+      ],
+      [
+        '#tag' => 'meta',
+        '#attributes' => [
+          'property' => 'og:image:width',
+          'content' => '1600',
+        ],
+      ],
+      [
+        '#tag' => 'meta',
+        '#attributes' => [
+          'property' => 'og:image',
+          'content' => $share_image,
+        ],
+      ],
+      [
+        '#tag' => 'meta',
+        '#attributes' => [
+          'property' => 'og:title',
+          'content' => $share_title,
+        ],
+      ],
+      [
+        '#tag' => 'meta',
+        '#attributes' => [
+          'property' => 'og:url',
+          'content' => $share_url,
+        ],
+      ],
+      [
+        '#tag' => 'meta',
+        '#attributes' => [
+          'property' => 'og:type',
+          'content' => $og_type,
+        ],
+      ],
+      [
+        '#tag' => 'meta',
+        '#attributes' => [
+          'property' => 'og:updated_time',
+          'content' => $og_updated_time,
+        ],
+      ],
+      [
+        '#tag' => 'meta',
+        '#attributes' => [
+          'property' => 'og:locale',
+          'content' => $og_locale,
+        ],
+      ],
+      [
+        '#tag' => 'meta',
+        '#attributes' => [
+          'property' => 'og:site_name',
+          'content' => $og_sitename,
+        ],
+      ],
+    ];
+  }
+  return $metatag;
+}

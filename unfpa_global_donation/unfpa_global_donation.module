@@ -1,0 +1,479 @@
+<?php
+
+/**
+ * @file
+ * Donation Page Integration.
+ */
+
+use Drupal\Core\Entity\ContentEntityInterface;
+use Drupal\field\Entity\FieldStorageConfig;
+use Drupal\paragraphs\Entity\Paragraph;
+use Drupal\Core\Url;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Field\WidgetBase;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+
+/**
+ * Set dynamic allowed values for the month price field in month paragraph.
+ *
+ * @param \Drupal\field\Entity\FieldStorageConfig $definition
+ *   The field definition.
+ * @param \Drupal\Core\Entity\ContentEntityInterface|null $entity
+ *   The entity being created if applicable.
+ * @param bool $cacheable
+ *   Boolean indicating if the results are cacheable.
+ *
+ * @return array
+ *   An array of possible key and value options.
+ *
+ * @see options_allowed_values()
+ */
+function unfpa_global_donation_price_options_list(FieldStorageConfig $definition, ContentEntityInterface $entity = NULL, $cacheable) {
+  $donation_service = \Drupal::service('unfpa_global_donation.main');
+
+  $price_options = $donation_service->getPriceOptions();
+  return $price_options;
+}
+
+/**
+ * Implements hook_theme().
+ */
+function unfpa_global_donation_theme($existing, $type, $theme, $path) {
+  return [
+    'page__ct_donate_page' => [
+      'variables' => [
+        'donate_page_form' => [
+          'render element' => 'form',
+        ],
+      ],
+      'path' => $path . '/templates/page',
+      'template' => 'page--ct-donate-page',
+      'base hook' => 'page',
+    ],
+    'donation_thank_you' => [
+      'template' => 'donation-thank-you',
+      'path' => $path . '/templates',
+      'variables' => [
+        'data' => NULL,
+      ],
+    ],
+    'unfpa_donation_form' => [
+      'render element' => 'form',
+      'template' => 'form--unfpa-donation',
+      'path' => $path . '/templates/form',
+    ],
+  ];
+}
+
+/**
+ * Implements hook_preprocess_page().
+ */
+function unfpa_global_donation_preprocess_page(&$variables) {
+  if (\Drupal::service('router.admin_context')->isAdminRoute()) {
+    return FALSE;
+  }
+  if (!empty($variables['node'])) {
+    $node = $variables['node'];
+    if ($node->bundle() == 'ct_donate_page') {
+      $lang_code = \Drupal::languageManager()->getCurrentLanguage()->getId();
+      $donation_service = \Drupal::service('unfpa_global_donation.main');
+
+      // Get Banner Data.
+      $ct_donate_banner = $node->get('field_donate_banner')->getValue();
+      foreach ($ct_donate_banner as $db_fields) {
+        $db_paragraph = Paragraph::load($db_fields['target_id']);
+
+        if ($db_paragraph->get('field_show_as_banner')->value == 1) {
+          $effect_type = $db_paragraph->get('field_effect_type')->value;
+
+          if ($effect_type == 'withEffect') {
+            // Desktop Banner Image.
+            if (!empty($db_paragraph->get('field_banner_image_desktop')->target_id)) {
+              $banner_desktop = $db_paragraph->get('field_banner_image_desktop')->entity->getFileUri();
+              if ($banner_desktop) {
+                $variables['dp_banner_desktop'] = file_create_url($banner_desktop);
+              }
+            }
+          }
+          elseif ($effect_type == 'withoutHeader') {
+            // Desktop Banner Image.
+            if (!empty($db_paragraph->get('field_banner_image_desktop')->target_id)) {
+              $banner_desktop = $db_paragraph->get('field_banner_image_desktop')->entity->getFileUri();
+              if ($banner_desktop) {
+                $variables['dp_banner_desktop'] = file_create_url($banner_desktop);
+              }
+            }
+
+            // Medium Banner Image.
+            if (!empty($db_paragraph->get('field_banner_image_medium')->target_id)) {
+              $banner_medium = $db_paragraph->get('field_banner_image_medium')->entity->getFileUri();
+              if ($banner_medium) {
+                $variables['dp_banner_image_medium'] = file_create_url($banner_medium);
+              }
+            }
+          }
+          elseif ($effect_type == 'withHeader') {
+            // Desktop Banner Image.
+            if (!empty($db_paragraph->get('field_half_banner_image_desktop')->target_id)) {
+              $banner_desktop = $db_paragraph->get('field_half_banner_image_desktop')->entity->getFileUri();
+              if ($banner_desktop) {
+                $variables['dp_half_banner_desktop'] = file_create_url($banner_desktop);
+              }
+            }
+
+            // Medium Banner Image.
+            if (!empty($db_paragraph->get('field_half_banner_image_mobile')->target_id)) {
+              $banner_medium = $db_paragraph->get('field_half_banner_image_mobile')->entity->getFileUri();
+              if ($banner_medium) {
+                $variables['dp_half_banner_image_medium'] = file_create_url($banner_medium);
+              }
+            }
+          }
+          else {
+            // Large Banner Image.
+            $banner_large = $db_paragraph->get('field_banner_image_large')->entity->getFileUri();
+            if ($banner_large) {
+              $variables['dp_banner_image_large'] = file_create_url($banner_large);
+            }
+
+            // Medium Banner Image.
+            $banner_medium = $db_paragraph->get('field_banner_image_medium')->entity->getFileUri();
+            if ($banner_medium) {
+              $variables['dp_banner_image_medium'] = file_create_url($banner_medium);
+            }
+          }
+
+          if ($effect_type == 'withEffect' || $effect_type == 'withoutEffect' || $effect_type == 'withoutHeader') {
+            // IPad Banner Image.
+            $banner_ipad = $db_paragraph->get('field_banner_image_ipad')->entity->getFileUri();
+            if ($banner_ipad) {
+              $variables['dp_banner_image_ipad'] = file_create_url($banner_ipad);
+            }
+
+            // Mobile Banner Image.
+            $banner_mobile = $db_paragraph->get('field_banner_image_mobile')->entity;
+            if ($banner_mobile) {
+              $variables['dp_banner_mobile'] = file_create_url($banner_mobile->getFileUri());
+            }
+          }
+
+          $variables['dp_banner_main_title'] = $db_paragraph->get('field_banner_title')->value;
+          $variables['dp_banner_sub_title'] = $db_paragraph->get('field_banner_sub_title')->value;
+          $variables['dp_effect_type'] = isset($effect_type) ? $effect_type : 'withEffect';
+        }
+      }
+
+      $country = 'US';
+      if ($cid = \Drupal::request()->request->get('country_code')) {
+        $country = $cid;
+      }
+      else {
+        // Get Currency Info.
+        $ip = \Drupal::request()->getClientIp();
+        $details = $donation_service->ip_details($ip);
+        $country = isset($details->country) ? $details->country : $country;
+      }
+
+      // Get info for all countries
+      $country_details = $donation_service->getCurrencyDetails();
+      $currency = isset($country_details[$country]) ? $country_details[$country] : NULL;
+
+      $variables['country_details'] = $country_details;
+      $variables['currency_symbol'] = $currency->symbol;
+      $variables['currency_code'] = $currency->currency;
+
+      // Get One time payment field info.
+      $ct_one_time = $node->get('field_one_time')->getValue();
+
+      $onetime_price = [];
+      $i = 0;
+      foreach ($ct_one_time as $ot_fields) {
+        $ot_paragraph = Paragraph::load($ot_fields['target_id']);
+
+        $price = $ot_paragraph->get('field_one_price')->value;
+        $price_data = $donation_service->getConversionRate($price, $variables['currency_code']);
+
+        $onetime_price[$i]['price'] = isset($price_data['amount']) ? $price_data['amount'] : NULL;
+        if (!empty($price_data['currency_code'])) {
+          $variables['currency_symbol'] = '$';
+          $variables['currency_code'] = 'USD';
+        }
+
+        $onetime_price[$i]['description'] = $ot_paragraph->get('field_one_description')->value;
+        $i++;
+      }
+
+      $variables['onetime_price'] = $onetime_price;
+
+      // Get Monthly payment field info.
+      $ct_monthly_time = $node->get('field_monthly')->getValue();
+
+      $monthly_price = [];
+      $i = 0;
+      foreach ($ct_monthly_time as $mnt_fields) {
+        $mnt_paragraph = Paragraph::load($mnt_fields['target_id']);
+
+        $price = $mnt_paragraph->get('field_month_price')->value;
+        $price_data = $donation_service->getConversionRate($price, $variables['currency_code']);
+
+        $monthly_price[$i]['price'] = isset($price_data['amount']) ? $price_data['amount'] : NULL;
+        if (!empty($price_data['currency_code'])) {
+          $variables['currency_symbol'] = '$';
+          $variables['currency_code'] = 'USD';
+        }
+
+        $monthly_price[$i]['description'] = $mnt_paragraph->get('field_month_description')->value;
+        $i++;
+      }
+
+      $variables['monthly_price'] = $monthly_price;
+
+      // Set remaining node field values for use in page.
+      $variables['page_title'] = $node->getTitle();
+      $variables['node_alias'] = \Drupal::service('path_alias.manager')->getAliasByPath('/node/' . $node->id(), $lang_code);
+      $variables['body'] = $node->get('body')->value;
+
+      // Get Field Image uri.
+      if (!empty($node->get('field_image')->target_id)) {
+        $variables['donate_banner'] = file_create_url($node->field_image->entity->getFileUri());
+      }
+      else {
+        $variables['donate_banner'] = '';
+      }
+
+      $variables['donate_page_form'] = \Drupal::formBuilder()->getForm('Drupal\unfpa_global_donation\Form\DonationForm');
+      $variables['referer_description'] = !empty($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : $variables['node_alias'];
+
+      // Get county list.
+      $current_country_name = '';
+      $ip_details = $donation_service->ip_details($donation_service->get_user_ip());
+      if (isset($ip_details->country) && !empty($ip_details->country != '')) {
+        $current_country_name = $ip_details->country;
+      }
+
+      // Check url exist for current IP address.
+      $country_list_array = $donation_service->getUNCountryList();
+      $current_path = \Drupal::service('path.current')->getPath();
+      $country_url_list = \Drupal::state()->get('country_url_list');
+      if ($country_url_list) {
+        foreach ($country_url_list as $k => $v) {
+          if (!empty($current_country_name)) {
+            if (($k == $current_country_name) && !empty($v) && $current_path == 'donate') {
+              return new RedirectResponse(Url::fromRoute($v)->toString());
+            }
+          }
+        }
+      }
+      unset($country_list_array['US']);
+      $variables['current_country_name'] = $current_country_name;
+      $variables['country_list_array'] = $country_list_array;
+
+      // Get stripe key (Set Stripe key using drush
+      // [drush sget public_key pk_test_C0XzYh8BmYzh2oB89n9ramCR]).
+      $params = ['donate_pk' => \Drupal::config('unfpa_global_fundraising.settings')->get("public_key")];
+
+      $variables['#attached']['library'][] = 'unfpa_global_donation/donate_page';
+      if (isset($variables['dp_effect_type']) && $variables['dp_effect_type'] != 'withoutHeader') {
+        $variables['#attached']['library'][] = 'unfpa_global_donation/wo_header_effect';
+      }
+
+      // Assign variabls to js.
+      $variables['#attached']['drupalSettings']['paymt_option']         = \Drupal::request()->request->get('paymt_option');
+      $variables['#attached']['drupalSettings']['dp_hero_image']        = isset($variables['dp_banner_desktop']) ? $variables['dp_banner_desktop'] : '';
+      $variables['#attached']['drupalSettings']['dp_mobile_hero_image'] = isset($variables['dp_banner_mobile']) ? $variables['dp_banner_mobile'] : '';
+      $variables['#attached']['drupalSettings']['dp_large_desk_img']    = isset($variables['dp_banner_image_large']) ? $variables['dp_banner_image_large'] : '';
+      $variables['#attached']['drupalSettings']['dp_medium_desk_img']   = isset($variables['dp_banner_image_medium']) ? $variables['dp_banner_image_medium'] : '';
+      $variables['#attached']['drupalSettings']['dp_iPad_mobile_img']   = isset($variables['dp_banner_image_ipad']) ? $variables['dp_banner_image_ipad'] : '';
+      $variables['#attached']['drupalSettings']['dp_effect_type']       = isset($variables['dp_effect_type']) ? $variables['dp_effect_type'] : '';
+      $variables['#attached']['drupalSettings']['params']               = $params;
+    }
+  }
+}
+
+/**
+ * Implements hook_field_widget_WIDGET_TYPE_form_alter().
+ */
+function unfpa_global_donation_field_widget_entity_reference_paragraphs_form_alter(&$element, FormStateInterface $form_state, $context) {
+  $field_definition = $context['items']->getFieldDefinition();
+  $paragraph_entity_reference_field_name = $field_definition->getName();
+
+  if ($paragraph_entity_reference_field_name == 'field_donate_banner') {
+    // kint($element);die;
+    $widget_state = WidgetBase::getWidgetState($element['#field_parents'], $paragraph_entity_reference_field_name, $form_state);
+
+    /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
+    $paragraph_instance = $widget_state['paragraphs'][$element['#delta']]['entity'];
+    $paragraph_type = $paragraph_instance->bundle();
+
+    // Determine which paragraph type is being embedded.
+    if ($paragraph_type == 'banner') {
+      $dependee_field_name = 'field_effect_type';
+      $selector = sprintf('[name="%s[%d][subform][%s]"]', $paragraph_entity_reference_field_name, $element['#delta'], $dependee_field_name);
+
+      // Dependent fields.
+      $element['subform']['field_banner_image_desktop']['#states'] = [
+        'visible' => [
+          [
+            $selector => ['value' => 'withEffect'],
+          ],
+          [
+            $selector => ['value' => 'withoutHeader'],
+          ],
+        ],
+      ];
+
+      $element['subform']['field_banner_image_desktop']['widget']['0']['#states'] = [
+        'required' => [
+          [
+            $selector => ['value' => 'withEffect'],
+          ],
+          [
+            $selector => ['value' => 'withoutHeader'],
+          ],
+        ],
+      ];
+
+      // Dependent fields.
+      $element['subform']['field_half_banner_image_desktop']['#states'] = [
+        'visible' => [
+          [
+            $selector => ['value' => 'withHeader'],
+          ],
+        ],
+      ];
+
+      $element['subform']['field_half_banner_image_desktop']['widget']['0']['#states'] = [
+        'required' => [
+          [
+            $selector => ['value' => 'withHeader'],
+          ],
+        ],
+      ];
+      $element['subform']['field_half_banner_image_mobile']['#states'] = [
+        'visible' => [
+          [
+            $selector => ['value' => 'withHeader'],
+          ],
+        ],
+      ];
+
+      $element['subform']['field_half_banner_image_mobile']['widget']['0']['#states'] = [
+        'required' => [
+          [
+            $selector => ['value' => 'withHeader'],
+          ],
+        ],
+      ];
+
+      // Dependent fields.
+      $element['subform']['field_banner_image_medium']['#states'] = [
+        'visible' => [
+          [
+            $selector => ['value' => 'withoutEffect'],
+          ],
+          [
+            $selector => ['value' => 'withoutHeader'],
+          ],
+        ],
+      ];
+
+      $element['subform']['field_banner_image_medium']['widget']['0']['#states'] = [
+        'required' => [
+          [
+            $selector => ['value' => 'withoutEffect'],
+          ],
+          [
+            $selector => ['value' => 'withoutHeader'],
+          ],
+        ],
+      ];
+
+      // Dependent fields.
+      $element['subform']['field_banner_image_ipad']['#states'] = [
+        'visible' => [
+          [
+            $selector => ['value' => 'withEffect'],
+          ],
+          [
+            $selector => ['value' => 'withoutEffect'],
+          ],
+          [
+            $selector => ['value' => 'withoutHeader'],
+          ],
+        ],
+      ];
+
+      $element['subform']['field_banner_image_ipad']['widget']['0']['#states'] = [
+        'required' => [
+          [
+            $selector => ['value' => 'withEffect'],
+          ],
+          [
+            $selector => ['value' => 'withoutEffect'],
+          ],
+          [
+            $selector => ['value' => 'withoutHeader'],
+          ],
+        ],
+      ];
+
+      // Dependent fields.
+      $element['subform']['field_banner_image_mobile']['#states'] = [
+        'visible' => [
+          [
+            $selector => ['value' => 'withEffect'],
+          ],
+          [
+            $selector => ['value' => 'withoutEffect'],
+          ],
+          [
+            $selector => ['value' => 'withoutHeader'],
+          ],
+        ],
+      ];
+
+      $element['subform']['field_banner_image_mobile']['widget']['0']['#states'] = [
+        'required' => [
+          [
+            $selector => ['value' => 'withEffect'],
+          ],
+          [
+            $selector => ['value' => 'withoutEffect'],
+          ],
+          [
+            $selector => ['value' => 'withoutHeader'],
+          ],
+        ],
+      ];
+
+      // Dependent fields.
+      $element['subform']['field_banner_image_large']['#states'] = [
+        'visible' => [
+          $selector => ['value' => 'withoutEffect'],
+        ],
+      ];
+
+      $element['subform']['field_banner_image_large']['widget']['0']['#states'] = [
+        'required' => [
+          $selector => ['value' => 'withoutEffect'],
+        ],
+      ];
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function unfpa_global_donation_preprocess_donation_thank_you(&$variables, $hook) {
+  if($hook == 'donation_thank_you') {
+    $session_data = $_SESSION['fundraising']['unfpa_global_donation'];
+  if ($_SESSION['fundraising']['result'] == 'success') {
+    $variables['#attached']['library'] = 'unfpa_global_donation/donation_track';
+    $variables['#attached']['drupalSettings'] = [
+      'donationData' => $session_data,
+    ];
+    unset($_SESSION['fundraising']['unfpa_global_donation']);
+  }
+  }
+}

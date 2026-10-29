@@ -1,0 +1,31 @@
+unfpa_global_administrative_agent.dashboard_data:
+  path: '/dashboard'
+  defaults:
+    _controller: '\Drupal\unfpa_global_administrative_agent\Controller\DashboardPageController::dashboardData'
+    _title: 'Dashboard'
+    year: ''
+  requirements:
+    _permission: 'access content'
+
+unfpa_global_administrative_agent.aa_homepage:
+  path: '/admin/unfpa_global_site_config/aa-homepage'
+  defaults:
+    _form: '\Drupal\unfpa_global_administrative_agent\Form\HeaderConfigForm'
+    _title: 'Homepage Configuration'
+  requirements:
+    _custom_access: '\Drupal\unfpa_global_administrative_agent\Form\HeaderConfigForm::checkAccess'
+
+unfpa_global_administrative_agent.load_more_transaction:
+  path: '/transactions/ajax'
+  defaults:
+    _controller: '\Drupal\unfpa_global_administrative_agent\Controller\DashboardPageController::loadMoreTransactions'
+  requirements:
+    _permission: 'access content'
+
+unfpa_global_administrative_agent.about_funds:
+  path: '/about-funds'
+  defaults:
+    _controller: '\Drupal\unfpa_global_administrative_agent\Controller\AboutFundsController::aboutFundsData'
+    _title: 'About the funds'
+  requirements:
+    _permission: 'access content'

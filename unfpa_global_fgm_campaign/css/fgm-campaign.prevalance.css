@@ -1,0 +1,111 @@
+.fgm-prevalance {
+  margin-bottom: 50px;
+}
+
+.fgm-prevalance-intro {
+  color: #000;
+  text-align: center;
+  margin: 0 auto;
+  max-width: 1250px;
+}
+
+.fgm-prevalance-intro p:first-child {
+  margin-top: 0;
+}
+
+.fgm-prevalance-intro p:last-child {
+  margin-bottom: 0;
+}
+
+.fgm-prevalance-intro h3 {
+  margin: 40px 0 0 0;
+  font-size: 34px;
+  line-height: 50px;
+  text-align: center;
+}
+
+.fgm-prevalance-map {
+  margin: 45px 0 30px;
+}
+
+#fgm-prevalance-worldmap_zoom {
+  display: none;
+}
+
+/* --- Legend --- */
+
+.fgm-prevalance-legend {
+  width: 100%;
+  overflow: hidden;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.fgm-prevalance-legend-item {
+  padding-bottom: 15px;
+}
+
+.fgm-prevalance-legend-color {
+  float: left;
+  width: 24px;
+  height: 24px;
+}
+
+.fgm-prevalance-legend-color.color-1 {
+  background: #329cab;
+}
+
+.fgm-prevalance-legend-color.color-2 {
+  background: #5932ab;
+}
+
+.fgm-prevalance-legend-color.color-3 {
+  background: #e1a33d;
+}
+
+.fgm-prevalance-legend-label {
+  margin-left: 30px;
+  color: #000000;
+  font-size: 20px;
+  line-height: 26px;
+  letter-spacing: 1px;
+}
+
+/* --- Disclaimer --- */
+
+.fgm-prevalance-disclaimer {
+  color: #000000;
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.fgm-prevalance-disclaimer p {
+  margin: 0.6em 0;
+}
+
+@media all and (min-width: 800px) {
+  .fgm-prevalance-legend-inner {
+    margin-left: -21px;
+  }
+
+  .fgm-prevalance-legend-item {
+    float: left;
+    overflow: hidden;
+    padding-left: 21px;
+    width: 33.3333%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+}
+
+/* RTL Arabic */
+.lang-ar .fgm-prevalance-legend-color {
+  float: right;
+}
+
+.lang-ar .fgm-prevalance-legend-label {
+  margin-left: 0;
+  margin-right: 30px;
+}

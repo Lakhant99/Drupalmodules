@@ -1,0 +1,909 @@
+<?php
+
+/**
+ * @file
+ * Register a module for fgm campaign data update.
+ */
+
+use Ctct\ConstantContact;
+use Ctct\Components\Contacts\Contact;
+
+use Drupal\node\Entity\Node;
+use Drupal\file\Entity\File;
+use Drupal\Core\Url;
+
+define('UNFPA_GLOBAL_FGM_CAMPAIGN_CONSTANT_CONTACT_API_KEY', 'wjthufe2b2m7zwuc4wz54zdz');
+define('UNFPA_GLOBAL_FGM_CAMPAIGN_CONSTANT_CONTACT_ACCESS_TOKEN', '31701f45-17e2-416a-9a3e-f8b04a28f22b');
+define('UNFPA_GLOBAL_FGM_CAMPAIGN_CONSTANT_CONTACT_LIST_ID', '1121797790');
+define('UNFPA_GLOBAL_FGM_CAMPAIGN_CONSTANT_CONTACT_LIST_ID_ARABIC', '1363949620');
+
+// Load ConstantContact library classes;
+spl_autoload_register('loadConstantContactClasses');
+
+/**
+ * Implements hook_theme().
+ */
+function unfpa_global_fgm_campaign_theme($existing, $type, $theme, $path) {
+  return [
+    'unfpa_global_fgm_campaign_data' => [
+      'variables' => [
+        'data' => NULL,
+      ],
+      'template' => 'fgm-campaign-page',
+    ],
+    'unfpa_global_fgm_campaign_sharelink' => [
+      'variables' => [
+        'data' => NULL,
+      ],
+      'template' => 'fgm-campaign-sharelink',
+    ],
+    'unfpa_global_fgm_campaign_nav' => [
+      'variables' => [
+        'data' => NULL,
+      ],
+      'template' => 'fgm-campaign-nav',
+    ],
+    'unfpa_global_fgm_campaign_entry' => [
+      'variables' => [
+        'data' => NULL,
+      ],
+      'template' => 'fgm-campaign-entry',
+    ],
+    'unfpa_global_fgm_campaign_panels' => [
+      'variables' => [
+        'data' => NULL,
+      ],
+      'template' => 'fgm-campaign-panels',
+    ],
+    'unfpa_global_fgm_campaign_map' => [
+      'variables' => [
+        'data' => NULL,
+      ],
+      'template' => 'fgm-campaign-map',
+    ],
+    'unfpa_global_fgm_campaign_actions' => [
+      'variables' => [
+        'data' => NULL,
+      ],
+      'template' => 'fgm-campaign-actions',
+    ],
+    'unfpa_global_fgm_campaign_sharemodal' => [
+      'variables' => [
+        'data' => NULL,
+      ],
+      'template' => 'fgm-campaign-sharemodal',
+    ],
+    'fgm_campaign_pledge_form' => [
+      'render element' => 'form',
+      'template' => 'fgm-campaign-pledge-form',
+    ],
+    'node__fgm' => [
+      'render element' => 'content',
+      'base hook' => 'node',
+    ],
+    'unfpa_global_fgm_campaign_pledgetoendfgm' => [
+      'variables' => [
+        'data' => NULL,
+      ],
+      'template' => 'fgm-campaign-pledgetoendfgm',
+    ],
+  ];
+}
+
+/**
+ * Saves selected data from pledge form submission into the database.
+ *
+ * @param $country
+ *   Country code of the country that user selected during submission.
+ * @param $email
+ *   E-mail of the user who submitted the pledge form.
+ * @param $ip
+ *   IP address of the user who submitted the pledge form.
+ */
+function unfpa_global_fgm_campaign_pledge_save_submission($country, $email, $ip) {
+  // For security reasons e-mails submitted via the pledge form are not
+  // stored the in database as open text but as SHA-256 hashes.
+  $hash = '0';
+  if ($email != '') {
+    $hash = hash('sha256', $email);
+  }
+
+  db_insert('unfpa_global_fgm_campaign_pledges')
+    ->fields([
+      'country' => $country,
+      'user_hash' => $hash,
+      'ip_address' => $ip,
+      'timestamp' => time(),
+    ])
+    ->execute();
+}
+
+/**
+ * Signup user to 'Constant Contact' FGM mailing list.
+ */
+function unfpa_global_fgm_campaign_constant_contact_signup($first_name, $last_name, $email) {
+  $api_key = \Drupal::state()->get('unfpa_global_fgm_campaign_constant_contact_api_key', UNFPA_GLOBAL_FGM_CAMPAIGN_CONSTANT_CONTACT_API_KEY);
+  $access_token = \Drupal::state()->get('unfpa_global_fgm_campaign_constant_contact_access_token', UNFPA_GLOBAL_FGM_CAMPAIGN_CONSTANT_CONTACT_ACCESS_TOKEN);
+
+  // System id of 'FGM campaign 2019' mailing list in Constant Contact.
+  // Separate mailing list for arabic and separate for other languages.
+  $mailing_list_id = \Drupal::state()->get('unfpa_global_fgm_campaign_constant_contact_list_id', UNFPA_GLOBAL_FGM_CAMPAIGN_CONSTANT_CONTACT_LIST_ID);
+  $fgm_lang = \Drupal::languageManager()->getCurrentLanguage()->getId();
+  if ($fgm_lang == 'ar') {
+    $mailing_list_id = \Drupal::state()->get('unfpa_global_fgm_campaign_constant_contact_list_id_arabic', UNFPA_GLOBAL_FGM_CAMPAIGN_CONSTANT_CONTACT_LIST_ID_ARABIC);
+  }
+
+  // Do nothing if Constant Contact signup is disabled.
+  if (!\Drupal::state()->get('unfpa_global_fgm_campaign_constantcontact_signup_enabled', 1)) {
+    return;
+  }
+
+  try {
+    $cc = new ConstantContact($api_key);
+
+    // Try to get the contact.
+    $response = $cc->contactService->getContacts($access_token, ['email' => $email]);
+
+    // If contact doesn't exist create new contact and add it to mailing list.
+    if (empty($response->results)) {
+      // Create contact object.
+      $contact = new Contact();
+      $contact->first_name = $first_name;
+      $contact->last_name = $last_name;
+      $contact->status = 'ACTIVE';
+      $contact->addEmail($email);
+      // Add to list.
+      $contact->addList($mailing_list_id);
+      // Add contact.
+      $cc->contactService->addContact($access_token, $contact, ['action_by' => 'ACTION_BY_VISITOR']);
+    }
+
+    // Otherwise just update existing contact.
+    else {
+      // Get contact object.
+      $contact = $response->results[0];
+      // Add to list.
+      $contact->addList($mailing_list_id);
+      // Update contact.
+      $cc->contactService->updateContact($access_token, $contact, ['action_by' => 'ACTION_BY_VISITOR']);
+    }
+  }
+  catch (Exception $ex) {
+    // Logs an error.
+    \Drupal::logger('unfpa_global_fgm_campaign')->error('Error while using Constant Contact PHP SDK: !error', ['!error' => print_r($ex->getMessage(), TRUE)]);
+  }
+}
+
+/**
+ * Preprocess variables for node--fgm.tpl.php.
+ */
+function unfpa_global_fgm_campaign_preprocess_node(&$variables) {
+  global $base_url;
+  $fgm_lang = \Drupal::languageManager()->getCurrentLanguage()->getId();
+  $curr_lang = ($fgm_lang == 'en') ? '' : '/' . $fgm_lang;
+  $variables['base_url_wlang'] = $base_url . $curr_lang;
+  $node = $variables['node'];
+  $type = $node->getType();
+
+  // We are only interested in FGM node type.
+  if ($type != 'fgm') {
+    return;
+  }
+
+  /* --- Attach assets --- */
+
+  // Add js and css.
+  $prevalance_data = unfpa_global_fgm_campaign_get_prevalance_data($fgm_lang);
+  $variables['#attached'] = [
+    'library' => ['unfpa_global_fgm_campaign/unfpa_global_fgm_campaign_details'],
+    'drupalSettings' => [
+      'unfpa_global_fgm_campaign' => [
+        'prevalance_data' => $prevalance_data,
+      ],
+    ],
+  ];
+
+  /* --- Include Nav --- */
+  $fgm_campaign_service = \Drupal::service('unfpa_global_fgm_campaign.fgm_campaign_data');
+  $variables['nav'] = $fgm_campaign_service->unfpa_global_fgm_campaign_nav('page');
+
+  /* --- Node Elements --- */
+
+  // Color.
+  $field_color = $node->field_color->getValue();
+  $variables['title'] = $node->title->value;
+  $variables['fgm_color'] = $field_color[0]['color'];
+
+  // Next story link.
+  $module_handler = \Drupal::service('module_handler');
+  $module_path = $module_handler->getModule('unfpa_global_fgm_campaign')->getPath();
+  $next_node = $node->field_next_story->target_id;
+  // If there is next node then next story links to that node.
+  if (isset($next_node)) {
+    $next_nid = $next_node;
+    $next_node = Node::load($next_nid);
+    if (!is_null(Node::load($next_nid))) {      
+      $next_node = Node::load($next_nid)->getTranslation($fgm_lang);
+    }
+    if(isset($next_node) && !empty($next_node)){
+      $variables['next_url'] = $variables['base_url_wlang'] . \Drupal::service('path.alias_manager')->getAliasByPath('/node/' . $next_nid);
+      $variables['next_pretitle'] = t('Next story');
+      $variables['next_title'] = $next_node->getTitle();
+      $variables['next_img'] = $base_url . '/' . $module_path . '/images/take-action.jpg';
+      if (isset($next_node->field_link_image->target_id) && !empty($next_node->field_link_image->target_id)) {
+        $link_image_file = File::load($next_node->field_link_image->target_id);
+        $variables['next_img'] = file_create_url($link_image_file->getFileUri());
+      }
+    }
+  }
+  // Otherwise it links back to main page.
+  else {
+    $variables['next_url'] = Url::fromRoute('unfpa_global_fgm_campaign.unfpa_global_fgm_campaign_data')->toString() . '#map';
+    $variables['next_pretitle'] = FALSE;
+    $variables['next_title'] = t('Take action');
+    $variables['next_img'] = $base_url . '/' . $module_path . '/images/take-action.jpg';
+  }
+
+  // Prevalance map.
+  $prevalance_map_field = $node->field_include_prevalance_map->value;
+  $variables['prevalance_map'] = '';
+  if (isset($node->field_include_prevalance_map->value) && !empty($node->field_include_prevalance_map->value)) {
+    $variables['prevalance_map'] = 1;
+  }
+
+  // Image slider.
+  $slider_imgs_field = $node->field_image_slider_images->getValue();
+  $variables['has_slider'] = FALSE;
+  $variables['slider_image'] = [];
+
+  if (isset($slider_imgs_field) && count($slider_imgs_field)) {
+    $variables['has_slider'] = TRUE;
+    $i = 0;
+    $sliderData = [];
+    foreach ($slider_imgs_field as $item) {
+      $img_slider_file = File::load($item['target_id']);
+      $sliderData[$i]['img_slider'] = file_create_url($img_slider_file->getFileUri());
+      $sliderData[$i]['img_credit'] = $item['alt'];
+      $sliderData[$i]['img_caption'] = $item['title'];
+      $i++;
+    }
+  }
+  $variables['slider_image'] = $sliderData;
+
+  /* --- No markup rendering for selected fields. --- */
+
+  // Use 'normakup' theme function for some fields, so they print without
+  // extra HTML - just raw value without the nee d to override their tpl.php's.
+  $variables['header_image'] = '';
+  if (isset($node->field_image->target_id) && !empty($node->field_image->target_id)) {
+    $header_image_file = File::load($node->field_image->target_id);
+    $variables['header_image'] = file_create_url($header_image_file->getFileUri());
+  }
+  $variables['mobile_image'] = '';
+  if (isset($node->field_mobile_banner->target_id) && !empty($node->field_mobile_banner->target_id)) {
+    $mobile_image_file = File::load($node->field_mobile_banner->target_id);
+    $variables['mobile_image'] = file_create_url($mobile_image_file->getFileUri());
+  }
+  $variables['subtitle'] = !empty($node->field_sub_title->value) ? $node->field_sub_title->value : '';
+  $variables['header_image_credit'] = !empty($node->field_header_image_credit->value) ? $node->field_header_image_credit->value : '';
+  $variables['body'] = $node->body->value;
+
+  /* --- Actions. --- */
+
+  $variables['actions'] = $fgm_campaign_service->unfpa_global_fgm_campaign_actions('1');
+
+  /* --- Sharing. --- */
+
+  $share_url = $variables['base_url_wlang'] . \Drupal::service('path.alias_manager')->getAliasByPath('/node/' . $node->id());
+  $share_description = $node->field_share_description->value;
+  if (isset($node->field_share_image->target_id) && !empty($node->field_share_image->target_id)) {
+    $share_image_file = File::load($node->field_share_image->target_id);
+    $share_img = file_create_url($share_image_file->getFileUri());
+  }
+
+  // Include share link.
+  $sharelink = [
+    'share_url' => $share_url,
+    'share_img' => $share_img,
+    'share_description' => $share_description,
+    'color' => $variables['fgm_color'],
+  ];
+
+  $variables['sharelink'] = $fgm_campaign_service->unfpa_global_fgm_campaign_sharelink($sharelink);
+
+  // Include share modal.
+  $variables['sharemodal'] = $fgm_campaign_service->unfpa_global_fgm_campaign_sharemodal();
+
+  $variables['include_prevalance_map'] = $node->field_include_prevalance_map->value;
+
+}
+
+/**
+ * Gets array of prevalance data per each country.
+ *
+ * @return array
+ *   Array with keys being country codes, and values being prevalance.
+ */
+function unfpa_global_fgm_campaign_get_prevalance_data($fgm_lang) {
+  $data = [
+    'AU' => [
+      'value' => 0,
+      'color' => 1,
+    ],
+    'AT' => [
+      'value' => 0,
+      'color' => 1,
+    ],
+    'BE' => [
+      'value' => 0,
+      'color' => 1,
+    ],
+    'BJ' => [
+      'value' => 19000,
+      'color' => 3,
+    ],
+    'BG' => [
+      'value' => 0,
+      'color' => 1,
+    ],
+    'BF' => [
+      'value' => 957000,
+      'color' => 3,
+    ],
+    'BI' => [
+      'value' => 0,
+      'color' => 3,
+    ],
+    'CM' => [
+      'value' => 0,
+      'color' => 3,
+    ],
+    'CA' => [
+      'value' => 0,
+      'color' => 1,
+    ],
+    'CF' => [
+      'value' => 113000,
+      'color' => 3,
+    ],
+    'TD' => [
+      'value' => 1146000,
+      'color' => 3,
+    ],
+    'CO' => [
+      'value' => 0,
+      'color' => 2,
+    ],
+    'CG' => [
+      'value' => 0,
+      'color' => 1,
+    ],
+    'CI' => [
+      'value' => 1115000,
+      'color' => 3,
+    ],
+    'CZ' => [
+      'value' => 0,
+      'color' => 1,
+    ],
+    'CD' => [
+      'value' => 0,
+      'color' => 2,
+    ],
+    'DK' => [
+      'value' => 0,
+      'color' => 1,
+    ],
+    'DJ' => [
+      'value' => 0,
+      'color' => 3,
+    ],
+    'EG' => [
+      'value' => 7143000,
+      'color' => 3,
+    ],
+    'ER' => [
+      'value' => 0,
+      'color' => 3,
+    ],
+    'ET' => [
+      'value' => 6286000,
+      'color' => 3,
+    ],
+    'FI' => [
+      'value' => 0,
+      'color' => 1,
+    ],
+    'FR' => [
+      'value' => 0,
+      'color' => 1,
+    ],
+    'GA' => [
+      'value' => 0,
+      'color' => 1,
+    ],
+    'GM' => [
+      'value' => 320000,
+      'color' => 3,
+    ],
+    'DE' => [
+      'value' => 0,
+      'color' => 1,
+    ],
+    'GH' => [
+      'value' => 46000,
+      'color' => 3,
+    ],
+    'GR' => [
+      'value' => 0,
+      'color' => 1,
+    ],
+    'GN' => [
+      'value' => 162000,
+      'color' => 3,
+    ],
+    'GW' => [
+      'value' => 1749000,
+      'color' => 3,
+    ],
+    'HU' => [
+      'value' => 0,
+      'color' => 1,
+    ],
+    'IS' => [
+      'value' => 0,
+      'color' => 1,
+    ],
+    'IN' => [
+      'value' => 0,
+      'color' => 2,
+    ],
+    'ID' => [
+      'value' => 15500000,
+      'color' => 3,
+    ],
+    'IR' => [
+      'value' => 0,
+      'color' => 2,
+    ],
+    'IQ' => [
+      'value' => 1065000,
+      'color' => 3,
+    ],
+    'IE' => [
+      'value' => 0,
+      'color' => 1,
+    ],
+    'IT' => [
+      'value' => 0,
+      'color' => 1,
+    ],
+    'JO' => [
+      'value' => 0,
+      'color' => 2,
+    ],
+    'KE' => [
+      'value' => 813000,
+      'color' => 3,
+    ],
+    'LV' => [
+      'value' => 0,
+      'color' => 1,
+    ],
+    'LR' => [
+      'value' => 0,
+      'color' => 3,
+    ],
+    'LY' => [
+      'value' => 0,
+      'color' => 1,
+    ],
+    'LU' => [
+      'value' => 0,
+      'color' => 1,
+    ],
+    'MK' => [
+      'value' => 0,
+      'color' => 1,
+    ],
+    'MW' => [
+      'value' => 0,
+      'color' => 2,
+    ],
+    'MY' => [
+      'value' => 0,
+      'color' => 2,
+    ],
+    'ML' => [
+      'value' => 3856000,
+      'color' => 3,
+    ],
+    'MR' => [
+      'value' => 632000,
+      'color' => 3,
+    ],
+    'MX' => [
+      'value' => 0,
+      'color' => 1,
+    ],
+    'NA' => [
+      'value' => 0,
+      'color' => 2,
+    ],
+    'NL' => [
+      'value' => 0,
+      'color' => 1,
+    ],
+    'NZ' => [
+      'value' => 0,
+      'color' => 1,
+    ],
+    'NE' => [
+      'value' => 2580000,
+      'color' => 3,
+    ],
+    'NG' => [
+      'value' => 14808000,
+      'color' => 3,
+    ],
+    'NO' => [
+      'value' => 0,
+      'color' => 1,
+    ],
+    'OM' => [
+      'value' => 0,
+      'color' => 2,
+    ],
+    'PK' => [
+      'value' => 0,
+      'color' => 2,
+    ],
+    'PA' => [
+      'value' => 0,
+      'color' => 2,
+    ],
+    'PE' => [
+      'value' => 0,
+      'color' => 2,
+    ],
+    'PH' => [
+      'value' => 0,
+      'color' => 2,
+    ],
+    'PL' => [
+      'value' => 0,
+      'color' => 1,
+    ],
+    'PT' => [
+      'value' => 0,
+      'color' => 1,
+    ],
+    'RO' => [
+      'value' => 0,
+      'color' => 1,
+    ],
+    'SA' => [
+      'value' => 0,
+      'color' => 2,
+    ],
+    'SN' => [
+      'value' => 699000,
+      'color' => 3,
+    ],
+    'SL' => [
+      'value' => 575000,
+      'color' => 3,
+    ],
+    'SO' => [
+      'value' => 2174000,
+      'color' => 3,
+    ],
+    'ZA' => [
+      'value' => 0,
+      'color' => 1,
+    ],
+    'SS' => [
+      'value' => 0,
+      'color' => 2,
+    ],
+    'ES' => [
+      'value' => 0,
+      'color' => 1,
+    ],
+    'LK' => [
+      'value' => 0,
+      'color' => 2,
+    ],
+    'SD' => [
+      'value' => 4475000,
+      'color' => 3,
+    ],
+    'SE' => [
+      'value' => 0,
+      'color' => 1,
+    ],
+    'CH' => [
+      'value' => 0,
+      'color' => 1,
+    ],
+    'SY' => [
+      'value' => 0,
+      'color' => 1,
+    ],
+    'TG' => [
+      'value' => 137000,
+      'color' => 3,
+    ],
+    'TR' => [
+      'value' => 0,
+      'color' => 1,
+    ],
+    'UG' => [
+      'value' => 0,
+      'color' => 3,
+    ],
+    'AE' => [
+      'value' => 0,
+      'color' => 1,
+    ],
+    'GB' => [
+      'value' => 0,
+      'color' => 1,
+    ],
+    'TZ' => [
+      'value' => 12000,
+      'color' => 3,
+    ],
+    'US' => [
+      'value' => 0,
+      'color' => 1,
+    ],
+    'YE' => [
+      'value' => 1897000,
+      'color' => 3,
+    ],
+    'ZW' => [
+      'value' => 0,
+      'color' => 2,
+    ],
+  ];
+
+  // Format numbers.
+  // First negotiate thousands separator sign.
+  $thousands_sep = ',';
+  if ($fgm_lang == 'es') {
+    $thousands_sep = '.';
+  }
+  if ($fgm_lang == 'fr') {
+    $thousands_sep = ' ';
+  }
+
+  // Process data array to format value numbers.
+  foreach ($data as $key => $item) {
+    // Skip 0 values.
+    if (!$item['value']) {
+      continue;
+    }
+    $value = number_format($item['value'], 0, '', $thousands_sep);
+    $data[$key]['value'] = $value;
+  }
+
+  return $data;
+}
+
+/**
+ * Load Constant Contact Classes and dependent classes.
+ */
+function loadConstantContactClasses($class) {
+  if (in_array($class, ['Ctct\ConstantContact', 'Ctct\Contact'])) {
+    $loader = include_once 'php-libs/contstant_contact/autoload.php';
+
+    if ($loader->findFile($class)) {
+      $loader->loadClass($class);
+    }
+  }
+}
+
+
+/**
+ * Implements hook_page_attachments().
+ */
+function unfpa_global_fgm_campaign_page_attachments(array &$attachments) {
+
+  $route_name = \Drupal::routeMatch()->getRouteName();
+  $routes = [
+    'unfpa_global_fgm_campaign.unfpa_global_fgm_campaign_data',
+    'unfpa_global_fgm_campaign.unfpa_global_fgm_campaign_data_share_id',
+  ];
+  if (in_array($route_name, $routes)) {
+    $share_id = \Drupal::requestStack()->getCurrentRequest()->get('share_id');
+    $meta_tag_list = unfpa_global_fgm_campaign_add_metatag($share_id);
+    foreach ($meta_tag_list as $key => $value) {
+      $attachments['#attached']['html_head'][] = [$value, 'keywords' . $key];
+    }
+
+  }
+}
+
+/**
+ * Get share tags locale in a form of 'en_US'.
+ *
+ * Used by og:locale sharing meta tag.
+ *
+ * @return string
+ *   Locale information in form of 'en_US', 'fr_FR', etc.
+ */
+function unfpa_global_fgm_campaign_share_get_locale() {
+  $lang = \Drupal::languageManager()->getCurrentLanguage()->getId();
+  $country = $lang;
+
+  if ($lang == 'en') {
+    $country = 'us';
+  }
+
+  return $lang . '_' . strtoupper($country);
+}
+
+/**
+ * Function to get meta tag.
+ */
+function unfpa_global_fgm_campaign_add_metatag($share_id = FALSE) {
+
+  $langcode = \Drupal::languageManager()->getCurrentLanguage()->getId();
+  $config = \Drupal::config('system.site');
+  $route_name = \Drupal::routeMatch()->getRouteName();
+  $data = \Drupal::service('unfpa_global_fgm_campaign.fgm_campaign_data')->unfpa_global_fgm_campaign_share_get_data($share_id);
+
+  $share_url = $data['url'];
+  $share_image = $data['img'];
+  $share_title = $data['title'];
+  $share_description = $data['description'];
+
+  // Meta tags that don't change dynamically.
+  $og_locale = unfpa_global_fgm_campaign_share_get_locale();
+  $og_sitename = $config->get('name');
+  $og_updated_time = time();
+  $og_type = 'article';
+  $og_image_type = 'image/jpeg';
+  $tw_site = '@UNFPA';
+  $tw_card = 'summary_large_image';
+  $fb_app_id = \Drupal::state()->get('unfpa_global_common_facebook_app_id', '2280985865254142');
+
+  $metatag = [
+   [
+     '#tag' => 'meta',
+     '#attributes' => [
+       'name' => 'twitter:site',
+       'content' => $tw_site,
+     ],
+   ],
+   [
+     '#tag' => 'meta',
+     '#attributes' => [
+       'name' => 'twitter:card',
+       'content' => $tw_card,
+     ],
+   ],
+   [
+     '#tag' => 'meta',
+     '#attributes' => [
+       'name' => 'twitter:url',
+       'content' => $share_url,
+     ],
+   ],
+   [
+     '#tag' => 'meta',
+     '#attributes' => [
+       'name' => 'twitter:title',
+       'content' => $share_title,
+     ],
+   ],
+   [
+     '#tag' => 'meta',
+     '#attributes' => [
+       'name' => 'twitter:image',
+       'content' => $share_image,
+     ],
+   ],
+   [
+     '#tag' => 'meta',
+     '#attributes' => [
+       'name' => 'twitter:description',
+       'content' => $share_description,
+     ],
+   ],
+   [
+     '#tag' => 'meta',
+     '#attributes' => [
+       'property' => 'fb:app_id',
+       'content' => $fb_app_id,
+     ],
+   ],
+   [
+     '#tag' => 'meta',
+     '#attributes' => [
+       'property' => 'og:description',
+       'content' => $share_description,
+     ],
+   ],
+   [
+     '#tag' => 'meta',
+     '#attributes' => [
+       'property' => 'og:image:url',
+       'content' => $share_image,
+     ],
+   ],
+   [
+     '#tag' => 'meta',
+     '#attributes' => [
+       'property' => 'og:image:height',
+       'content' => '628',
+     ],
+   ],
+   [
+     '#tag' => 'meta',
+     '#attributes' => [
+       'property' => 'og:image:width',
+       'content' => '1200',
+     ],
+   ],
+   [
+     '#tag' => 'meta',
+     '#attributes' => [
+       'property' => 'og:image:type',
+       'content' => $og_image_type,
+     ],
+   ],
+   [
+     '#tag' => 'meta',
+     '#attributes' => [
+       'property' => 'og:image',
+       'content' => $share_image,
+     ],
+   ],
+   [
+     '#tag' => 'meta',
+     '#attributes' => [
+       'property' => 'og:title',
+       'content' => $share_title,
+     ],
+   ],
+   [
+     '#tag' => 'meta',
+     '#attributes' => [
+       'property' => 'og:url',
+       'content' => $share_url,
+     ],
+   ],
+   [
+     '#tag' => 'meta',
+     '#attributes' => [
+       'property' => 'og:type',
+       'content' => $og_type,
+     ],
+   ],
+   [
+     '#tag' => 'meta',
+     '#attributes' => [
+       'property' => 'og:updated_time',
+       'content' => $og_updated_time,
+     ],
+   ],
+   [
+     '#tag' => 'meta',
+     '#attributes' => [
+       'property' => 'og:locale',
+       'content' => $og_locale,
+     ],
+   ],
+   [
+     '#tag' => 'meta',
+     '#attributes' => [
+       'property' => 'og:site_name',
+       'content' => $og_sitename,
+     ],
+   ],
+  ];
+
+  return $metatag;
+}

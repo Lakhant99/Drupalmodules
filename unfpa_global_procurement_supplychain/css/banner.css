@@ -1,0 +1,105 @@
+.exb .hero-image {
+  position: relative;
+  background-attachment: fixed;
+  background-position: center 0;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: calc(100vh - 250px);
+  padding: 75px;
+}
+
+@media (max-width: 980px) {
+  .exb .hero-image {
+    padding: 75px 25px;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .exb .hero-image {
+    display: none;
+  }
+}
+
+.exb .hero-image .content {
+  max-width: 1024px;
+  padding: 0 2.5rem;
+  margin: 0 auto;
+  color: #fff;
+  text-align: left;
+  position: relative;
+  top: 90%;
+  -webkit-transform: translateY(-75%);
+  transform: translateY(-75%);
+}
+
+@media (max-width: 980px) {
+  .exb .hero-image .content {
+    padding: 0 1rem;
+  }
+}
+
+.exb .hero-image .content .title {
+  margin: 0;
+  padding: 0;
+  color: #fff;
+  font-size: 3rem;
+}
+
+.hero-image-mobile {
+  display: none;
+}
+
+@media (max-width: 575.98px) {
+  .hero-image-mobile {
+    width: 100%;
+    height: 62vh;
+    background-size: cover;
+    background-position: 50% 50%;
+    color: #fff;
+    position: relative;
+    display: block;
+  }
+  .hero-image-mobile .content {
+    max-width: 100%;
+    padding: 0 2.5rem;
+    top: 84%;
+    position: absolute;
+    -webkit-transform: translate(0px, -75%);
+    transform: translate(0px, -75%);
+    text-align: left;
+  }
+  .hero-image-mobile .content .btn-more {
+    padding: 15px 50px;
+    border: 1px #fff solid;
+    margin: 50px auto 0 auto;
+    border-radius: 6px;
+    color: #fff;
+    font-size: 0.8em;
+    -webkit-transition: 0.5s ease-in;
+    transition: 0.5s ease-in;
+    text-transform: uppercase;
+  }
+  .hero-image-mobile .content .btn-more:hover {
+    background-color: #fff;
+    color: black;
+  }
+  .hero-image-mobile .content .title {
+    font-size: 2em;
+    line-height: 1.3;
+    margin: 0;
+    padding: 0;
+    color: #fff;
+    text-align: left;
+  }
+}
+
+.exb .hero-image::before {
+  content: '';
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: rgb(0,0,4);
+  background: linear-gradient(0deg, rgba(0,0,4,0.5074404761904762) 0%, rgba(0,0,0,0) 100%);
+}

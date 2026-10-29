@@ -1,0 +1,84 @@
+<div class="form-area">
+  <input id="donate_subscription" name="donate_subscription" type="hidden" value="">
+  <input id="final_amount" name="amount" type="hidden" value="">
+  <input id="other_amount_tab" name="other_amount_tab" type="hidden" value="">
+  <input id="other_amount_value" name="other_amount_value" type="hidden" value="">
+  <input id="node_alias" name="node_alias" type="hidden" value="">
+  <input id="currency_code" name="currency_code" type="hidden" value="">
+
+  {{ form.stripe_card_error }}
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="form-group">
+        {{ form.formfield_first_name }}
+        <p id="firstname-error-wrap" class="text-danger text-left"></p>
+      </div>
+    </div>
+    <div class="col-md-12">
+      <div class="form-group">
+        {{ form.formfield_last_name }}
+        <p id="lastname-error-wrap" class="text-danger text-left"></p>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="form-group">
+        {{ form.formfield_address }}
+      </div>
+    </div>
+    <div class="col-md-12">
+      <div class="form-group">
+        {{ form.formfield_address_2 }}
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="form-group">
+        {{ form.formfield_city }}
+      </div>
+    </div>
+    <div class="col-md-12">
+      <div class="form-group">
+        <div class="select-dropdown">
+          {{ form.formfield_country }}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="form-group">
+        {{ form.formfield_email }}
+        <p id="email-error-wrap" class="text-danger text-left"></p>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 padding-right0">
+      <div class="payment-info">
+        <label for="card-element"> {{ 'Payment details'|t }} </label>
+        <div id="card-element"></div>
+        <div id="card-errors"></div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+        {{ form.formfield_captcha }}
+        <p id="captcha-error-wrap" class="text-danger text-left"></p>
+    </div>
+  </div>
+  <div class="row form-btn-blk">
+    <div class="col-md-12 padding-right0">
+      {{ form.donate_currency }}
+      {{ form.form_build_id }}
+      {{ form.stripeToken }}
+      {{ form.form_id }}
+      {{ form.form_token }}
+      {{ form.actions }}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,64 @@
+<div id="trans" class="dashboard_transaction">
+  <nav class="tabs-nav tabs-nav--buttons">
+    <div class="container">
+      <div class="row middle-xs between-xs">
+        <h4 class="title-h2">{{ 'Transactions'|t }}</h4>
+        <div class="tabs-nav__options mobile-dropdown partner-dropdown">
+          {% if node_type == 'ct_donor' %}
+            <label for="#" class="mobile-dropdown__selected">{{ 'Commitments'|t }}</label>
+            <ul>
+              <li class="transaction-color--commitment commitments active"><a href="#commitments">{{ 'Commitments'|t }}</a></li>
+              <li class="transaction-color--deposit deposits"><a href="#deposits">{{ 'Deposits'|t }}</a></li>
+            </ul>
+          {% elseif node_type == 'aa_partners' %}
+            {% set class = 'active' %}
+            <label for="#" class="mobile-dropdown__selected">{{ 'Transfers'|t }}</label>
+            <ul>
+              <li class="transaction-color--transfer transfers active"><a href="#transfer">{{ 'Transfers'|t }}</a></li>
+            </ul>
+          {% else %}
+            <label for="#" class="mobile-dropdown__selected">{{ 'Commitments'|t }}</label>
+            <ul>
+              <li class="transaction-color--commitment commitments active"><a href="#commitments">{{ 'Commitments'|t }}</a></li>
+              <li class="transaction-color--deposit deposits"><a href="#deposits">{{ 'Deposits'|t }}</a></li>
+              <li class="transaction-color--transfer transfers"><a href="#transfer">{{ 'Transfers'|t }}</a></li>
+            </ul>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </nav>
+  <section class="tabs-container min-padding">
+    {% if node_type != 'aa_partners' %}
+      <article class="tabs-container__item graphs-container active transaction-background--commitments" data-id="commitments">
+        {% if node_type == 'ct_donor' %}
+          {{ drupal_view('aa_portal', 'commitment_transaction_register',node_id) }}
+        {% elseif node_type == 'ct_funds' %}
+          {{ drupal_view('aa_portal', 'commitment_transaction_register','all',node_id) }}
+        {% else %}
+          {{ drupal_view('aa_portal', 'commitment_transaction_register') }}
+        {% endif %} 
+      </article>
+      <article class="tabs-container__item graphs-container transaction-background--deposits" data-id="deposits">
+        {% if node_type == 'ct_donor' %}
+          {{ drupal_view('aa_portal', 'deposit_transaction_register',node_id) }}
+        {% elseif node_type == 'ct_funds' %}
+          {{ drupal_view('aa_portal', 'deposit_transaction_register','all',node_id) }}
+        {% else %}
+          {{ drupal_view('aa_portal', 'deposit_transaction_register') }}
+        {% endif %}       
+      </article>
+    {% endif %}
+    {% if node_type != 'ct_donor' %}
+      <article class="tabs-container__item graphs-container transaction-background--transfer {{ class }}" data-id="transfer">
+        {% if node_type == 'aa_partners' %}
+          {{ drupal_view('aa_portal', 'transfers_transaction_register',node_id) }}
+        {% elseif node_type == 'ct_funds' %}
+          {{ drupal_view('aa_portal', 'transfers_transaction_register','all',node_id) }}
+        {% else %}
+          {{ drupal_view('aa_portal', 'transfers_transaction_register') }}
+        {% endif %} 
+      </article>
+    {% endif %}
+  </section>
+</div>

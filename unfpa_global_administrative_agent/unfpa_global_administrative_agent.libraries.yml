@@ -1,0 +1,17 @@
+unfpa_global_administrative_agent.maps:
+  version: 1.x
+  dependencies:
+   - administrative_agent/administrative_agent.general
+unfpa_global_administrative_agent.charts:
+  version: 1.x
+  css:
+    theme:
+      css/unfpa_global_administrative_agent_chart.css: {}
+  js:
+    js/unfpa_global_administrative_agent_chart.js: {}
+  dependencies:
+   - administrative_agent/administrative_agent.general
+unfpa_global_administrative_agent.custom:
+  version: 1.x
+  dependencies:
+   - administrative_agent/administrative_agent.custom_edit

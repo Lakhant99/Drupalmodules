@@ -1,0 +1,580 @@
+.fgm-map {
+  position: relative;
+  z-index: 2;
+  background: #fff;
+  padding-top: 96px;
+}
+
+.fgm-map-inner {
+  padding-bottom: 60px;
+}
+
+h2.fgm-map-title {
+  margin: 0 0 60px 0;
+  padding-bottom: 60px;
+  color: #07081b;
+  font-size: 46px;
+  line-height: 58px;
+  text-align: center;
+  position: relative;
+}
+
+h2.fgm-map-title:after {
+  content: '';
+  display: block;
+  width: 39px;
+  height: 36px;
+  background: url(../images/arrow-map.svg) 0 0 no-repeat;
+  background-size: 39px 36px;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  margin-left: -18px;
+}
+
+.fgm-map-copy {
+  margin: 0 auto 60px;
+  max-width: 900px;
+  color: #51525f;
+  font-size: 22px;
+  line-height: 36px;
+  text-align: center;
+}
+
+.fgm-map-copy > *:first-child {
+  margin-top: 0;
+}
+
+.fgm-map-copy > *:last-child {
+  margin-bottom: 0;
+}
+
+.fgm-map-copy p {
+  margin: 1.5em;
+}
+
+.fgm-map-copy .fgm-map-copy-bold {
+  display: block;
+  font-size: 24px;
+  line-height: 36px;
+  color: #535361;
+  opacity: 1;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 800px;
+}
+
+@media all and (min-width: 768px) {
+  h2.fgm-map-title {
+    margin-bottom: 78px;
+    padding-bottom: 74px;
+  }
+
+  h2.fgm-map-title:after {
+    width: 52px;
+    height: 48px;
+    background-size: 52px 48px;
+    margin-left: -24px;
+  }
+}
+
+/* --- Pledge Form And Success Message --- */
+
+.fgm-form {
+  margin: 0 auto;
+  max-width: 1148px;
+  position: relative;
+}
+
+/* --- Pledge Form --- */
+
+.fgm-form-form {
+  position: relative;
+  z-index: 1;
+}
+
+.fgm-form-form-hidden {
+  opacity: 0;
+}
+
+h3.fgm-form-title {
+  margin: 0;
+  color: #07081b;
+  font-size: 34px;
+  line-height: 46px;
+  text-align: center;
+}
+
+p.fgm-form-desc {
+  margin: 0 auto;
+  max-width: 719px;
+  opacity: 0.7;
+  color: #07081b;
+  font-size: 14px;
+  line-height: 26px;
+  text-align: center;
+}
+
+.fgm-form form {
+  margin: 49px 0 12px 0;
+}
+
+.fgm-form .ajax-progress {
+  display: none!important;
+}
+
+.fgm-form-item {
+  margin-bottom: 31px;
+}
+
+.fgm-form-item .form-item {
+  margin: 0;
+  width: 100%;
+  position: relative;
+}
+
+.fgm-form-item label {
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  padding: 17px 0 2px 6px;
+  background: #fff;
+  color: #9956cc;
+  font-size: 17px;
+  line-height: 17px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 2;
+  transition: all 0.3s ease-out;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+/* Coountry form item needs space for arrow icon on the right. */
+.fgm-form-item .form-item-country label {
+  width: calc(100% - 38px);
+  cursor: pointer;
+}
+
+.fgm-form-filled label {
+  padding-top: 7px;
+  font-size: 12px;
+  line-height: 12px;
+}
+
+.fgm-form-item .form-required {
+  display: none;
+}
+
+.fgm-form .form-text,
+.fgm-form .form-select {
+  display: block;
+  width: 100%;
+  height: 58px;
+  padding: 13px 6px 0 6px;
+  border: 0;
+  border-radius: 0;
+  border-bottom: 1px solid #101020;
+  color: #07081b;
+  background: #fff;
+  font-size: 18px;
+  line-height: 58px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  -webkit-appearance: none;
+  outline: 0;
+}
+
+.fgm-form .form-text.error,
+.fgm-form .form-select.error {
+  border: 0;
+  border-bottom: 1px solid red;
+  color: red;
+}
+
+.fgm-form .form-select.error ~ .chosen-container .chosen-single {
+  border-bottom: 1px solid red;
+}
+
+.fgm-form-submit {
+  float: left;
+  margin-top: 20px;
+  width: calc(100% - 60px);
+  max-width: 200px;
+}
+
+#fgm-campaign-pledge-form .fgm-form-submit {
+  display: flex;
+}
+
+#fgm-campaign-pledge-form .fgm-form-submit .form-submit {
+  display: block;
+  width: 100%;
+  height: 58px;
+  padding: 0;
+  border-radius: 0;
+  border: 0;
+  color: #fff;
+  background: #9956cc;
+  font-size: 18px;
+  line-height: 58px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  transition: background-color 0.3s;
+  outline: 0;
+}
+
+.fgm-form-submit.form-submit:hover {
+  background: #924ec5;
+}
+
+#fgm-campaign-pledge-form .fgm-form-submit .form-submit.progress-disabled {
+  opacity: 0.3;
+  background: #9956cc;
+}
+
+.fgm-form-form .fgm-sharelink {
+  float: left;
+  margin-top: 19px;
+  margin-left: 26px;
+}
+
+/* --- Success Message --- */
+
+.fgm-form-success {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  z-index: 2;
+}
+
+.fgm-form-success-inner {
+  display: table;
+  width: 100%;
+  height: 100%;
+}
+
+.fgm-form-success-inner-2 {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+p.fgm-form-success-p1 {
+  margin: 0 auto;
+  max-width: 529px;
+  color: #9956cc;
+  font-size: 33px;
+  line-height: 40px;
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+p.fgm-form-success-p2 {
+  margin: 5px auto 0 auto;
+  max-width: 529px;
+  color: #000000;
+  font-size: 24px;
+  line-height: 40px;
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+.fgm-form-success .fgm-sharelink {
+  width: 60px;
+  margin: 10px auto 0 auto;
+}
+
+/* --- Error Messages --- */
+
+.fgm-map .messages {
+  margin: 0 0 35px 0;
+  background-image: none;
+  padding: 11px 10px 13px 15px;
+}
+
+.fgm-map .messages.error {
+  border-color: red;
+  color: #bc3e0b;
+}
+
+/* --- Pledge Map --- */
+
+p.fgm-map-instruction {
+  margin: 8px 0 62px 0;
+  color: #000000;
+  font-size: 17px;
+  line-height: 23px;
+  text-align: center;
+}
+
+.fgm-map-map {
+  margin-bottom: 15px;
+}
+
+/* Fix for map zoom buttons which we don't want. */
+#fgm-map-worldmap_zoom {
+  display: none;
+}
+
+.fgm-map-legend {
+  overflow: hidden;
+}
+
+.fgm-map-legend h4 {
+  margin: 0 0 8px 0;
+  color: #000000;
+  font-size: 20px;
+  line-height: 24px;
+  letter-spacing: 1px;
+}
+
+.fgm-map-legend-item {
+  overflow: hidden;
+  margin-top: 1px;
+  float: left;
+  width: 50%;
+}
+
+.fgm-map-legend-color {
+  float: left;
+  width: 24px;
+  height: 24px;
+}
+
+.fgm-map-legend-color.legend-color-1 {
+  background: #dfcce4;
+}
+
+.fgm-map-legend-color.legend-color-2 {
+  background: #d2b5d6;
+}
+
+.fgm-map-legend-color.legend-color-3 {
+  background: #c49bc9;
+}
+
+.fgm-map-legend-color.legend-color-4 {
+  background: #b282b9;
+}
+
+.fgm-map-legend-color.legend-color-5 {
+  background: #8f52a0;
+}
+
+.fgm-map-legend-label {
+  padding-left: 6px;
+  color: #000000;
+  font-size: 18px;
+  line-height: 24px;
+  letter-spacing: 1px;
+}
+
+.fgm-map-disclaimer {
+  width: 100%;
+  overflow: hidden;
+}
+
+.fgm-map-disclaimer p {
+  margin: 0;
+  max-width: 535px;
+  color: #9b9b9b;
+  font-size: 14px;
+  line-height: 17px;
+}
+
+/* --- Responsive --- */
+
+@media all and (min-width: 460px) {
+  .fgm-map-legend-item {
+    width: 33.3333%;
+  }
+}
+
+@media all and (min-width: 680px) {
+  .fgm-map-legend-item {
+    width: 20%;
+  }
+}
+
+@media all and (min-width: 800px) {
+  .fgm-form form {
+    margin-left: -36px;
+  }
+
+  .fgm-form-item {
+    float: left;
+    width: 50%;
+    padding-left: 36px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+
+  .fgm-form-submit {
+    margin-top: 20px;
+  }
+
+  .fgm-map-map {
+    position: relative;
+  }
+
+  .fgm-map-legend {
+    position: absolute;
+    left: 0;
+    bottom: 8px;
+  }
+
+  .fgm-map-legend-item {
+    float: none;
+    width: 100%;
+  }
+
+  .fgm-form-success .fgm-sharelink {
+    margin: -30px 0 0 0;
+    position: absolute;
+    right: 0;
+    top: 50%;
+  }
+}
+
+@media all and (min-width: 1000px) {
+  .fgm-map-legend {
+    bottom: 19px;
+  }
+}
+
+@media all and (min-width: 1250px) {
+  .fgm-form form {
+    margin-left: -30px;
+    margin-bottom: 43px;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .fgm-form-item {
+    width: 20%;
+    margin-bottom: 0;
+    padding-left: 30px;
+  }
+
+  .fgm-form-submit {
+    margin: 0;
+    max-width: none;
+    width: calc(20% - 86px);
+  }
+
+  .fgm-form-form .fgm-sharelink {
+    margin-top: 0;
+  }
+
+  .fgm-map-legend {
+    bottom: 29px;
+  }
+}
+#fgm-campaign-pledge-form #edit-submit {
+  display: block !important;
+}
+#fgm-campaign-pledge-form #edit-actions #edit-actions-submit {
+  display: block !important;
+  min-width: 119px;
+}
+#mess_success {
+  max-width: 719px;
+  font-size: 22px;
+  line-height: 26px;
+  text-align: left;
+  margin-bottom: 13px;
+}
+
+.select-dropdown .chosen-container-single .chosen-single {
+  height: 50px;
+}
+
+/* RTL Arabic */
+/* Coountry form item needs space for arrow icon on the left. */
+.lang-ar .fgm-form-item .form-item-country label {
+  width: calc(100% - 38px);
+  left: 38px;
+}
+
+.lang-ar .fgm-form-submit {
+  float: right;
+}
+
+.lang-ar .fgm-form-form .fgm-sharelink {
+  float: right;
+  margin-left: 0;
+  margin-right: 26px;
+}
+
+.lang-ar .fgm-map-legend h4 {
+  text-align: right;
+}
+
+.lang-ar .fgm-map-legend-item {
+  float: right;
+  direction: ltr;
+}
+
+.lang-ar .fgm-map-legend-color {
+  float: right;
+}
+
+.lang-ar .fgm-map-legend-label {
+  padding-left: 0;
+  padding-right: 6px;
+}
+
+@media all and (min-width: 800px) {
+  .lang-ar .fgm-form-item {
+    float: right;
+  }
+
+  .lang-ar .fgm-map-legend-item {
+    float: none;
+  }
+}
+
+.text-danger {
+  font-size: 12px;
+}
+
+.fgm-form-item p:last-child, 
+.fgm-form-item .form-group:last-child,
+.fgm-form-item .panel:last-child {
+  margin-top: 5px;
+}
+
+.path-pledgetoendfgm .fgm-sharelink {
+  display: none;
+}
+
+.path-pledgetoendfgm .select-dropdown::after {
+    background: none;
+}
+
+@media (max-width: 378px) {
+  #fgm-campaign-pledge-form {
+    display: table;
+  }
+  #fgm-campaign-pledge-form .fgm-sharelink {
+    margin-top: 0;
+  }
+}

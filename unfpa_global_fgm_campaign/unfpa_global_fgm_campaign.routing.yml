@@ -1,0 +1,23 @@
+unfpa_global_fgm_campaign.unfpa_global_fgm_campaign_data:
+  path: '/born-complete'
+  defaults:
+    _title: 'FGM Annual Report 2018'
+    _controller: '\Drupal\unfpa_global_fgm_campaign\Controller\FgmCampaignController::unfpa_global_fgm_campaign_data'
+  requirements:
+    _permission: 'access content'
+
+unfpa_global_fgm_campaign.unfpa_global_fgm_campaign_data_share_id:
+  path: '/born-complete/{share_id}'
+  defaults:
+    _title: 'FGM Annual Report 2018'
+    _controller: '\Drupal\unfpa_global_fgm_campaign\Controller\FgmCampaignController::unfpa_global_fgm_campaign_data'
+  requirements:
+    _permission: 'access content'
+    
+unfpa_global_fgm_campaign.unfpa_global_fgm_pledgetoendfgm:
+  path: '/pledgetoendfgm'
+  defaults:
+    _title: 'Pledge to End FGM'
+    _controller: '\Drupal\unfpa_global_fgm_campaign\Controller\FgmCampaignController::unfpa_global_fgm_campaign_pledgetoendfgm'
+  requirements:
+    _permission: 'access content'    

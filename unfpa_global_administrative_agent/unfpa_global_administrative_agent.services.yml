@@ -1,0 +1,24 @@
+services:
+  unfpa_global_administrative_agent.dashboard_data:
+      class: Drupal\unfpa_global_administrative_agent\DashboardData
+      arguments: ['@database','@entity_type.manager', '@path.alias_manager','@cache.data','@theme.manager','@file_system','@date.formatter','@language_manager','@state']
+
+  unfpa_global_administrative_agent.header_form:
+      class: Drupal\unfpa_global_administrative_agent\Form\HeaderConfigForm
+      arguments: ['@language_manager','@domain.negotiator','@entity_type.manager']
+
+  unfpa_global_administrative_agent.transaction_register:
+      class: Drupal\unfpa_global_administrative_agent\TransactionRegister
+      arguments: ['@theme.manager']
+
+  unfpa_global_administrative_agent.summary_block:
+      class: Drupal\unfpa_global_administrative_agent\Plugin\Block\SummaryBlock
+      arguments: ['@module_handler','@config.factory','@unfpa_global_administrative_agent.dashboard_data']
+
+  unfpa_global_administrative_agent.donut_chart:
+      class: Drupal\unfpa_global_administrative_agent\Plugin\Block\DonutChart
+      arguments: ['@entity_type.manager','@unfpa_global_administrative_agent.dashboard_data']
+
+  unfpa_global_administrative_agent.about_funds:
+      class: Drupal\unfpa_global_administrative_agent\AboutFundsController
+      arguments: ['@config.factory','@domain.negotiator','@theme.manager']

@@ -1,0 +1,87 @@
+.upcoming-event-listing-view .view-custom-header h1.title,
+.past-event-listing-view .view-custom-header h1.title {
+  border-bottom: 1px solid #d9dac4;
+  color: #5a5047;
+  display: block;
+  font-size: 22px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+  margin: 0 0 35px;
+  padding: 0 0 6px;
+  position: relative;
+}
+.upcoming-event-listing-view .bluelink.active,
+.past-event-listing-view .bluelink.active {
+  background: #0091ca;
+}
+.upcoming-event-listing-view .bluelink,
+.past-event-listing-view .bluelink {
+  background: #808080;
+  border-radius: 3px;
+  color: #ffffff;
+  float: left;
+  font-size: 18px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+  line-height: 45px;
+  margin-bottom: 50px;
+  margin-right: 20px;
+  padding: 0 15px;
+  text-decoration: none;
+}
+.upcoming-event-listing-view .views-row,
+.past-event-listing-view .views-row {
+  position: relative;
+  display: block;
+  border-bottom: 1px dotted #d9dac4;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+}
+.upcoming-event-listing-view .views-row .infos,
+.past-event-listing-view .views-row .infos {
+  margin-top: 6px;
+}
+.upcoming-event-listing-view .views-row .infos p,
+.past-event-listing-view .views-row .infos p {
+  color: #de7300;
+  font-size: 14px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+  line-height: 16px;
+  margin: 0 0 6px;
+  padding-left: 20px;
+}
+.upcoming-event-listing-view .views-row .infos p.calendar,
+.past-event-listing-view .views-row .infos p.calendar {
+  background: url('../images/ic-calendar.png') no-repeat scroll 0 center rgba(0, 0, 0, 0);
+  width: 100%;
+  display: inline-block;
+}
+.upcoming-event-listing-view .views-row .infos p.calendar,
+.past-event-listing-view .views-row .infos p.calendar {
+  border-collapse: separate;
+}
+.upcoming-event-listing-view .views-row .infos p.location,
+.past-event-listing-view .views-row .infos p.location {
+  background: url('../images/ic-location.png') no-repeat scroll 0 center rgba(0, 0, 0, 0);
+  width: 50%;
+  display: inline-block;
+}
+.upcoming-event-listing-view .views-row .event h2 a,
+.past-event-listing-view .views-row .event h2 a {
+  color: #0091ca;
+  font-size: 16px;
+  display: block;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+  line-height: 22px;
+}
+.view-events .event h2 {
+  margin: 0.5em 0;
+}
+.view-events .event p {
+  font-size: 14px;
+}
+.view-events .event a.details {
+  font-weight: 700;
+}
