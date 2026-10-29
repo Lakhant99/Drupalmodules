@@ -1,0 +1,12 @@
+university_info.admin:
+  title: University info settings
+  route_name: university_info.settings
+  base_route: domain.admin
+university_info.DMS:
+  title: DMS API settings
+  route_name: university_DMSAPI.settings
+  parent: system.admin_config
+university_info.APILINKS:
+  title: API Payment Links settings
+  route_name: university_API_Paymentlink.settings
+  base_route: domain.admin

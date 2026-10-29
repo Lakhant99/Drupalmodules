@@ -1,0 +1,28 @@
+<!-- Let's output the three variables passed to this template -->
+<h2>Last Cron Run:- </h2>
+<h4 class="p-3 mb-2 bg-dark text-white">{{ lastruncron }}</h4>
+
+<table id="table_id" class="display">
+    <thead>
+        <tr>
+          <th>Id</th>
+          <th>Transaction id</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Application Status</th>
+          <th>Last Date Application</th>
+          {# <th>Course Name</th>
+          <th>University Name</th> #}
+        </tr>
+    </thead>
+    <tbody>
+        {% for key, item in loanData %}
+        <tr>
+          {% for key,text in item %}
+              <td>{{ text }}</td>
+          {% endfor %} 
+          </tr>       
+        {% endfor %}  
+    </tbody>
+</table>

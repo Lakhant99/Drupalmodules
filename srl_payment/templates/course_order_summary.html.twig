@@ -1,0 +1,77 @@
+{# In a Twig template we attach the library. #}
+{{ attach_library('srl_payment/srl_payment') }}
+<section class="order-summary" id="orderSummary">
+    <div class="container wrapper">
+      <div class="row">
+        <div class="col-sm-8">
+          <div class="panel panel-default light-panel">
+            <div class="panel-heading">1. Order Summary
+              <p class="grey-text">You can review your order and complete the purchase.</p>
+            </div>
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-sm-6">
+                  <label class="order-info_name">Program Name:</label>
+                  <label class="order-info_value">{{ course_name }}</label>
+                </div>
+                <div class="col-sm-6">
+                  <label class="order-info_name">Delivery Mode:</label>
+                  <label class="order-info_value">Online</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-6" id="class-date-form">
+                  <div class="order-info_value">{{ cohort_date }}</div>
+                  <p class="date-select-error note"></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="panel panel-default light-panel">
+            <div class="panel-heading">2. Personal Information</div>
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-sm-6">
+                  <label class="order-info_name">Full Name:</label>
+                  <label class="order-info_value"> {{ name }}</label>
+                  <p class="note">The name will be printed on certificate.</p>
+                </div>
+                <div class="col-sm-6">
+                  <label class="order-info_name">Email:</label>
+                  <label class="order-info_value"> {{ email_id }}</label>
+                </div>
+                <div class="col-sm-6">
+                  <label class="order-info_name">Mobile Number:</label>
+                  <label class="order-info_value">{{ mobile_no }}</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="panel panel-default light-panel order-table">
+            <div class="panel-heading">3. Order Summary</div>
+            <div class="panel-body">
+              <table class="table">
+                <tr>
+                  <td>Course Fee</td>
+                  <td class="text-right">{{currency_code}}&nbsp;{{ actual_fee }}</td>
+                </tr>
+                <tr>
+                  <td>Tax</td>
+                  <td class="text-right"> - </td>
+                </tr>
+                <tr class="total">
+                  <td>Net Payable Amount</td>
+                  <td class="text-right">{{currency_code}} &nbsp; {{ payable_amount }}</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        {{ payeezy_form }}</div>
+        <div class="col-sm-12">
+       
+        </div>
+      </div>
+    </div>
+  </section>

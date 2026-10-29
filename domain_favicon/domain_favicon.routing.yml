@@ -1,0 +1,7 @@
+domain_favicon.settings:
+  path: '/admin/config/domain/domain-favicon'
+  defaults:
+    _form: '\Drupal\domain_favicon\Form\DomainFaviconForm'
+    _title: 'Domain favicon configuration'
+  requirements:
+    _permission: 'administer domains'

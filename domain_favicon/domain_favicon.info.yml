@@ -1,0 +1,10 @@
+name: Domain Favicon
+description: 'Manages domain favicon configuration.(Set favico icon according domain configured)'
+type: module
+core: 8.x
+core_version_requirement: ^8 || ^9
+package: Domain
+configure: domain_favicon.settings
+
+dependencies:
+  - domain:domain

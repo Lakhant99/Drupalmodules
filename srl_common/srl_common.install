@@ -1,0 +1,736 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the node module.
+ */
+
+use Drupal\Core\Field\BaseFieldDefinition;
+use Drupal\user\RoleInterface;
+use Drupal\Core\Database\Database;
+/**
+ * Implements hook_install().
+ */
+function srl_common_install() {
+  $fields = array(
+    'description' => 'srl custom Table for storing Candidate Test Details.',
+    'fields' => array(
+      'id' => array(
+        'description' => 'Unique indentifier for Table',
+        'length' => 10,
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'course_id' => array(
+        'description' => 'Node course id',
+        'type' => 'int',
+      ),
+      'transaction_id' => array(
+        'description' => 'Transaction ID',
+        'type' => 'varchar',
+        'length' => 25,
+        'not null' => TRUE,
+      ),
+      'name' => array(
+        'description' => 'Candidate name',
+        'type' => 'varchar',
+        'length' => 25,
+        'not null' => TRUE,
+      ),
+      'email_id' => array(
+        'description' => 'EmailID',
+        'type' => 'varchar',
+        'length' => 30,
+      ),
+      'mobile_no' => array(
+        'description' => 'Mobile No',
+        'type' => 'varchar',
+        'length' => 15,
+      ),
+      'course_code' => array(
+        'description' => 'Course Code',
+        'type' => 'varchar',
+        'length' => 30,
+      ),
+      'university_code' => array(
+        'description' => 'University Code',
+        'type' => 'varchar',
+        'length' => 15,
+      ),
+      'orgid' => array(
+        'description' => 'OrgId',
+        'type' => 'varchar',
+        'length' => 25,
+      ),
+      'bu_code' => array(
+        'description' => 'BU Code',
+        'type' => 'varchar',
+        'length' => 25,
+      ),
+      'source_code' => array(
+        'description' => 'Source Code',
+        'type' => 'varchar',
+        'length' => 255,
+      ),
+      'center_code'  =>  array(
+        'description'   =>  'Center Code',
+        'type'          =>  'varchar',
+        'length'        =>  30,
+      ),
+      'test_code' => array(
+        'description' => 'Test Code',
+        'type' => 'varchar',
+        'length' => 255,
+      ),
+      'test_type' => array(
+        'description' => 'Test Type',
+        'type' => 'varchar',
+        'length' => 255,
+      ),
+      'assessment_started_on' => array(
+        'description' => 'Assessment Started On',
+        'type' => 'varchar',
+        'length' => 50,
+      ),
+      'assessment_ended_on' => array(
+        'description' => 'Assessment Ended On',
+        'type' => 'varchar',
+        'length' => 50,
+      ),
+      'actual_started_on' => array(
+        'description' => 'Actual Started On',
+        'type' => 'varchar',
+        'length' => 50,
+      ),
+      'actual_ended_on' => array(
+        'description' => 'Actual Ended On',
+        'type' => 'varchar',
+        'length' => 50,
+      ),
+      'test_score' => array(
+        'description' => 'Test Score',
+        'varchar' => 30,
+      ),
+      'result' => array(
+        'description' => 'Result',
+        'type' => 'varchar',
+        'length' => 30,
+      ),
+      'country_code' =>array(
+        'description'   =>  'Country Code',
+        'type'          =>  'varchar',
+        'length'        =>  30,
+      ),
+      'access_permission' => array(
+        'description' => 'Assessment page access permission',
+        'type' => 'int',
+        'size' => 'tiny',
+        'not null' => FALSE,
+      ),
+      'json_response' => array(
+        'description' => 'JSONResponse',
+        'type' => 'text',
+      ),
+      'passing_percentage' => array(
+        'description' => 'assessment passing marks condition',
+        'type' => 'int',
+      ),
+    ),
+    'primary key' => array('id'),
+  );
+  $response = Database::getConnection()->schema()->tableExists('srl_candidate_test_details');
+  if(!$response){
+    $schema = Database::getConnection()->schema();
+    $schema->createTable('srl_candidate_test_details', $fields);
+
+  } 
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function srl_common_uninstall() {
+ 
+}
+/**create table  */
+function srl_common_update_8001() {
+  $fields = array(
+    'description' => 'srl custom Table for storing Candidate Test Details.',
+    'fields' => array(
+      'id' => array(
+        'description' => 'Unique indentifier for Table',
+        'length' => 10,
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'course_id' => array(
+        'description' => 'Node course id',
+        'type' => 'int',
+      ),
+      'transaction_id' => array(
+        'description' => 'Transaction ID',
+        'type' => 'varchar',
+        'length' => 25,
+        'not null' => TRUE,
+      ),
+      'name' => array(
+        'description' => 'Candidate name',
+        'type' => 'varchar',
+        'length' => 25,
+        'not null' => TRUE,
+      ),
+      'email_id' => array(
+        'description' => 'EmailID',
+        'type' => 'varchar',
+        'length' => 30,
+      ),
+      'mobile_no' => array(
+        'description' => 'Mobile No',
+        'type' => 'varchar',
+        'length' => 15,
+      ),
+      'course_code' => array(
+        'description' => 'Course Code',
+        'type' => 'varchar',
+        'length' => 30,
+      ),
+      'university_code' => array(
+        'description' => 'University Code',
+        'type' => 'varchar',
+        'length' => 15,
+      ),
+      'orgid' => array(
+        'description' => 'OrgId',
+        'type' => 'varchar',
+        'length' => 25,
+      ),
+      'bu_code' => array(
+        'description' => 'BU Code',
+        'type' => 'varchar',
+        'length' => 25,
+      ),
+      'source_code' => array(
+        'description' => 'Source Code',
+        'type' => 'varchar',
+        'length' => 255,
+      ),
+      'center_code'  =>  array(
+        'description'   =>  'Center Code',
+        'type'          =>  'varchar',
+        'length'        =>  30,
+      ),
+      'test_code' => array(
+        'description' => 'Test Code',
+        'type' => 'varchar',
+        'length' => 255,
+      ),
+      'test_type' => array(
+        'description' => 'Test Type',
+        'type' => 'varchar',
+        'length' => 255,
+      ),
+      'assessment_started_on' => array(
+        'description' => 'Assessment Started On',
+        'type' => 'varchar',
+        'length' => 50,
+      ),
+      'assessment_ended_on' => array(
+        'description' => 'Assessment Ended On',
+        'type' => 'varchar',
+        'length' => 50,
+      ),
+      'actual_started_on' => array(
+        'description' => 'Actual Started On',
+        'type' => 'varchar',
+        'length' => 50,
+      ),
+      'actual_ended_on' => array(
+        'description' => 'Actual Ended On',
+        'type' => 'varchar',
+        'length' => 50,
+      ),
+      'test_score' => array(
+        'description' => 'Test Score',
+        'varchar' => 30,
+      ),
+      'result' => array(
+        'description' => 'Result',
+        'type' => 'varchar',
+        'length' => 30,
+      ),
+      'country_code' =>array(
+        'description'   =>  'Country Code',
+        'type'          =>  'varchar',
+        'length'        =>  30,
+      ),
+      'access_permission' => array(
+        'description' => 'Assessment page access permission',
+        'type' => 'int',
+        'size' => 'tiny',
+        'not null' => FALSE,
+      ),
+      'json_response' => array(
+        'description' => 'JSONResponse',
+        'type' => 'text',
+      ),
+      'passing_percentage' => array(
+        'description' => 'assessment passing marks condition',
+        'type' => 'int',
+      ),
+    ),
+    'primary key' => array('id'),
+  );
+  $response = Database::getConnection()->schema()->tableExists('srl_candidate_test_details');
+  if(!$response){
+    $schema = Database::getConnection()->schema();
+    $schema->createTable('srl_candidate_test_details', $fields);
+
+  } 
+}
+/** modify table add new field */
+// function srl_common_update_8010(){
+//   $schema = Database::getConnection()->schema();
+//   $country_code  =  array(
+//               'description'   =>  'Country Code',
+//               'type'          =>  'varchar',
+//               'length'        =>  15,
+//           );
+//   $schema->addField('srl_candidate_test_details', 'country_code', $country_code);
+//   $center_code  =  array(
+//     'description'   =>  'Center Code',
+//     'type'          =>  'varchar',
+//     'length'        =>  15,
+//   );
+//   $schema->addField('srl_candidate_test_details', 'center_code', $center_code);
+// $last_name  =  array(
+//   'description'   =>  'Last name',
+//   'type'          =>  'varchar',
+//   'length'        =>  25,
+// );
+//   $schema->addField('srl_candidate_test_details', 'last_name', $last_name);
+//   $course_id  =  array(
+//     'description'   =>  'Application course node id',
+//     'type'          =>  'int',
+//   );
+
+//   $schema->addField('srl_candidate_test_details', 'course_id', $course_id);
+//   $passing_status  =  array(
+//     'description'   =>  'Test passing percentage',
+//     'type'          =>  'int',
+//   );
+
+//   $schema->addField('srl_candidate_test_details', 'passing_percentage', $passing_status);
+// }
+/**Alter table field  */
+// function srl_common_update_8011(){
+//   $schema = Database::getConnection()->schema();
+//     $schema->changeField('srl_candidate_test_details','transaction_id','transaction_id',array(
+//       'length' => 30,
+//       'type' => 'varchar',
+//     ));
+//     $schema->changeField('srl_candidate_test_details','name','name',array(
+//       'length' => 30,
+//       'type' => 'varchar',
+//     ));
+//     $schema->changeField('srl_candidate_test_details','course_code','course_code',array(
+//       'length' => 30,
+//       'type' => 'varchar',
+//     ));
+//     $schema->changeField('srl_candidate_test_details','assessment_started_on','assessment_started_on',array(
+//       'length' => 30,
+//       'type' => 'varchar',
+//     ));
+//     $schema->changeField('srl_candidate_test_details','assessment_ended_on','assessment_ended_on',array(
+//       'length' => 30,
+//       'type' => 'varchar',
+//     ));
+//     $schema->changeField('srl_candidate_test_details','actual_started_on','actual_started_on',array(
+//       'length' => 30,
+//       'type' => 'varchar',
+//     ));
+//     $schema->changeField('srl_candidate_test_details','actual_ended_on','actual_ended_on',array(
+//       'length' => 30,
+//       'type' => 'varchar',
+//     ));
+//     $schema->changeField('srl_candidate_test_details','test_score','test_score',array(
+//       'length' => 30,
+//       'type' => 'varchar',
+//     ));
+//     $schema->changeField('srl_candidate_test_details','result','result',array(
+//       'length' => 30,
+//       'type' => 'varchar',
+//     ));
+// //     $schema = \Drupal\Core\Database\Database::getConnection()->schema();
+// // $schema->changeField('srl_candidate_test_details','result','result',array(
+// //       'length' => 30,
+// //       'type' => 'varchar',
+// //     ));
+// //  $schema->fieldSetDefault('srl_candidate_test_details', 'result', 'pass');
+// }
+function srl_common_update_8010() {
+  $fields = array(
+    'description' => 'stackroute custom Table for storing application webform form data.',
+    'fields' => array(
+      'id' => array(
+        'description' => 'Unique indentifier for Table',
+        'length' => 10,
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'transaction_id' => array(
+        'description' => 'Transaction ID',
+        'type' => 'varchar',
+        'length' => 35,
+        'not null' => TRUE,
+      ),
+      'email_id' => array(
+        'description' => 'EmailID',
+        'type' => 'varchar',
+        'length' => 30,
+      ),
+      'mobile_no' => array(
+        'description' => 'Mobile No',
+        'type' => 'varchar',
+        'length' => 35,
+      ),
+      'step' => array(
+        'description' => 'Step completed',
+        'type' => 'varchar',
+        'length' => 255,
+      ),
+      'step_json_data' => array(
+        'description' => 'Steps data jsong format',
+        'type' => 'text',
+      ),
+    ),
+    'primary key' => array('id'),
+  );
+  $response = Database::getConnection()->schema()->tableExists('stackroute_webform_tempdata');
+  if(!$response){
+    $schema = Database::getConnection()->schema();
+    $schema->createTable('stackroute_webform_tempdata', $fields);
+
+  } 
+}
+function srl_common_update_8012(){
+  $schema = \Drupal\Core\Database\Database::getConnection()->schema();
+  $domain  =  array(
+    'description'   =>  'Domain id',
+    'type'          =>  'varchar',
+    'length' => 150,
+  );
+  
+  if(!$schema->fieldExists('srl_candidate_test_details', 'domain_id')) {
+    $schema->addField('srl_candidate_test_details', 'domain_id', $domain);
+  }
+}
+function srl_common_update_8013(){
+  $schema = \Drupal\Core\Database\Database::getConnection()->schema();
+  $program_interest  =  array(
+    'description'   =>  'Course program nid',
+    'type'          =>  'varchar',
+    'length' => 15,
+  );
+  if(!$schema->fieldExists('stackroute_webform_tempdata', 'program_interest')) {
+    $schema->addField('stackroute_webform_tempdata', 'program_interest', $program_interest);
+  }
+
+  $schema = \Drupal\Core\Database\Database::getConnection()->schema();
+  $batch_start_date  =  array(
+    'description'   =>  'Course batch start date',
+    'type'          =>  'varchar',
+    'length' => 20,
+  );
+  if(!$schema->fieldExists('srl_candidate_test_details', 'batch_start_date')) {
+    $schema->addField('srl_candidate_test_details', 'batch_start_date', $batch_start_date);
+  }
+}
+function srl_common_update_8014(){
+  
+  $schema = \Drupal\Core\Database\Database::getConnection()->schema();
+  $steps_level  =  array(
+    'description'   =>  'Application steps completed',
+    'type' => 'int',
+    'size' => 'tiny',
+  );
+  if(!$schema->fieldExists('srl_candidate_test_details', 'steps_level')) {
+   $schema->addField('srl_candidate_test_details', 'steps_level', $steps_level);
+  }
+}
+function srl_common_update_8015(){
+  
+  $schema = \Drupal\Core\Database\Database::getConnection()->schema();
+  $agreement_detail  =  array(
+    'description' => 'JSONResponse enrollment agreement info',
+    'type' => 'text',
+  );
+  if(!$schema->fieldExists('srl_candidate_test_details', 'enrollment_agreement_info')) {
+   $schema->addField('srl_candidate_test_details', 'enrollment_agreement_info', $agreement_detail);
+  }
+}
+/** 
+ * update table field size
+ * srl_candidate_test_details
+ *  */
+function srl_common_update_8016(){
+  $schema = \Drupal\Core\Database\Database::getConnection()->schema();
+  $fields = [
+    'transaction_id',
+    'name',
+    'email_id',
+    'mobile_no',
+    'course_code',
+    'university_code',
+    'orgid',
+    'bu_code',
+    'assessment_started_on',
+    'assessment_ended_on',
+    'actual_started_on',
+    'actual_ended_on',
+    'test_score',
+    'result',
+    'country_code',
+    'center_code',
+    'domain_id',
+    'batch_start_date',
+  ];
+  foreach($fields as $fid){
+    $schema->changeField('srl_candidate_test_details',$fid,$fid,array(
+      'length' => 255,
+      'type' => 'varchar',
+    ));
+  }
+}
+/** 
+ * update table field size
+ * payeezy_payment_details
+ *  */
+function srl_common_update_8017(){
+  $schema = \Drupal\Core\Database\Database::getConnection()->schema();
+  $fields = [
+    'transaction_id',
+    'user_name',
+    'email_id',
+    'mobile_no',
+    'course_code',
+    'university',
+    'course_name',
+    'delivery_mode',
+    'currency_code',
+    'base_amount',
+    'tax_amount',
+    'total_amount',
+    'cohort_date',
+    'city',
+    'state',
+    'country',
+    'zip_code',
+    'fp_transaction_id',
+    'status',
+    'transaction_completed_on',
+    'acceptance_date',
+    'user_ip',
+    'paid_amount'
+  ];
+  foreach($fields as $fid){
+    $schema->changeField('payeezy_payment_details',$fid,$fid,array(
+      'length' => 255,
+      'type' => 'varchar',
+    ));
+  }
+}
+/** 
+ * update table field size
+ * stackroute_webform_tempdata
+ *  */
+function srl_common_update_8018(){
+  $schema = \Drupal\Core\Database\Database::getConnection()->schema();
+  $fields = [
+    'transaction_id',
+    'email_id',
+    'mobile_no',
+    'domain_id',
+    'program_interest'
+  ];
+  foreach($fields as $fid){
+    $schema->changeField('stackroute_webform_tempdata',$fid,$fid,array(
+      'length' => 255,
+      'type' => 'varchar',
+    ));
+  }
+}
+/** add form version field
+ * form_version
+ */
+function srl_common_update_8019(){
+  $schema = \Drupal\Core\Database\Database::getConnection()->schema();
+  $form_version  =  array(
+    'description' => 'Application form version',
+    'type' => 'int',
+    'size' => 'tiny',
+  );
+  if(!$schema->fieldExists('srl_candidate_test_details', 'form_version')) {
+    $schema->addField('srl_candidate_test_details', 'form_version', $form_version);
+  }
+  if(!$schema->fieldExists('srl_candidate_test_details', 'form_version')) {
+    $schema->addField('stackroute_webform_tempdata', 'form_version', $form_version);
+  }
+}
+function srl_common_update_1820(){
+  $fields = array(
+    'description' => 'Save DMS API response',
+    'fields' => array(
+      'id' => array(
+        'description' => 'Unique indentifier for Table',
+        'length' => 10,
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'transaction_id' => array(
+        'description' => 'Application Transaction ID',
+        'type' => 'varchar',
+        'length' => 50,
+      ),
+      'timestamp' => array(
+        'description' => 'Application Transaction ID',
+        'type' => 'varchar',
+        'length' => 50,
+      ),
+      'api_url' => array(
+        'description' => 'Execute api url',
+        'type' => 'varchar',
+        'length' => 500,
+      ),
+      'api_method' => array(
+        'description' => 'API request method',
+        'type' => 'varchar',
+        'length' => 50,
+      ),
+      'api_json_header' => array(
+        'description' => 'api header json',
+        'type' => 'text',
+      ),
+      'api_json_body' => array(
+        'description' => 'api body parameter json',
+        'type' => 'text',
+      ),
+      'api_json_response' => array(
+        'description' => 'api response json',
+        'type' => 'text',
+      ),
+    ),
+    'primary key' => array('id'),
+  );
+  $response = Drupal\Core\Database\Database::getConnection()->schema()->tableExists('srl_dms_api_records');
+  if(!$response){
+    $schema = Drupal\Core\Database\Database::getConnection()->schema();
+    $schema->createTable('srl_dms_api_records', $fields);
+
+  } 
+}
+function srl_common_update_1821(){
+  $fields = array(
+    'description' => 'Save payment error response',
+    'fields' => array(
+      'id' => array(
+        'description' => 'Unique indentifier for Table',
+        'length' => 10,
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'transaction_id' => array(
+        'description' => 'Application Transaction ID',
+        'type' => 'varchar',
+        'length' => 50,
+        'not null' => TRUE,
+      ),
+      'error_description' => array(
+        'description' => 'api body parameter json',
+        'type' => 'text',
+      ),
+    ),
+    'primary key' => array('id'),
+  );
+  $response = Drupal\Core\Database\Database::getConnection()->schema()->tableExists('srl_payment_quest_response');
+  if(!$response){
+    $schema = Drupal\Core\Database\Database::getConnection()->schema();
+    $schema->createTable('srl_payment_quest_response', $fields);
+
+  } 
+}
+function srl_common_update_8022(){
+  $schema = \Drupal\Core\Database\Database::getConnection()->schema();
+  // $domain  =  array(
+  $payment_status = array(
+    'description'   =>  'Payment Status',
+    'type'          =>  'varchar',
+    'length' => 150,
+  );
+  
+  if(!$schema->fieldExists('srl_candidate_test_details', 'payment_status')) {
+    $schema->addField('srl_candidate_test_details', 'payment_status', $payment_status);
+  }
+ 
+}
+function srl_common_update_8023(){
+  $schema = \Drupal\Core\Database\Database::getConnection()->schema();
+  $payment_method = array(
+    'description'   =>  'Payment Method',
+    'type'          =>  'varchar',
+    'length' => 150,
+  );
+  $payment_date = array(
+    'description'   =>  'Payment Date',
+    'type'          =>  'varchar',
+    'length' => 150,
+  );
+  if(!$schema->fieldExists('srl_candidate_test_details', 'payment_method')) {
+    $schema->addField('srl_candidate_test_details', 'payment_method', $payment_method);
+  }
+  if(!$schema->fieldExists('srl_candidate_test_details', 'payment_date')) {
+    $schema->addField('srl_candidate_test_details', 'payment_date', $payment_date);
+  }
+}
+function srl_common_update_8024(){
+  $schema = \Drupal\Core\Database\Database::getConnection()->schema();
+  $application_status = array(
+    'description'   =>  'Application Status',
+    'type'          =>  'varchar',
+    'length' => 150,
+  );
+  $application_lastupdateddate = array(
+    'description'   =>  'Application Lastupdateddate',
+    'type'          =>  'varchar',
+    'length' => 150,
+  );
+  if(!$schema->fieldExists('srl_candidate_test_details', 'application_status')) {
+    $schema->addField('srl_candidate_test_details', 'application_status', $application_status);
+  }
+  if(!$schema->fieldExists('srl_candidate_test_details', 'application_lastupdateddate')) {
+    $schema->addField('srl_candidate_test_details', 'application_lastupdateddate', $application_lastupdateddate);
+  }
+}
+function srl_common_update_8025(){
+  $schema = \Drupal\Core\Database\Database::getConnection()->schema();
+  $application_course  =  array(
+    'description'   =>  'Application course',
+    'type'          =>  'varchar',
+    'length' => 150,
+  );
+  $application_university =  array(
+    'description'   =>  'Application University',
+    'type'          =>  'varchar',
+    'length' => 150,
+  );
+  if(!$schema->fieldExists('srl_candidate_test_details', 'application_course')) {
+    $schema->addField('srl_candidate_test_details', 'application_course', $application_course);
+  }
+  if(!$schema->fieldExists('srl_candidate_test_details', 'application_university')) {
+    $schema->addField('stackroute_webform_tempdata', 'application_university', $application_university);
+  }
+}

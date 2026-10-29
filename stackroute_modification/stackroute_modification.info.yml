@@ -1,0 +1,6 @@
+name: Stackroute modification
+description: 'Alter and extend the behavior of Drupal core'
+type: module
+core: 8.x
+core_version_requirement: ^8 || ^9
+package: Custom

@@ -1,0 +1,46 @@
+srl_climb_credit_api.cron:
+  path: '/srl-climb-credit-api/get-loandata'
+  defaults:
+    _title: 'Cron'
+    _controller: '\Drupal\srl_climb_credit_api\Controller\SrlClimbCreditApiController::build'
+  requirements:
+    _permission: 'administer permissions'
+
+srl_climb_credit_api.webhook:
+  path: '/srl-climb-credit-api/get-payment-info'
+  defaults:
+    _title: 'Webhook Payment'
+    _controller: '\Drupal\srl_climb_credit_api\Controller\SrlClimbCreditPaymentApiController::build'
+  requirements:
+    _permission: 'administer permissions'
+
+srl_climb_credit_api.settings_form:
+  path: '/admin/config/system/srl-climb-credit-api'
+  defaults:
+    _title: 'SRL Climb Credit Api settings'
+    _form: 'Drupal\srl_climb_credit_api\Form\SettingsForm'
+  requirements:
+    _permission: 'administer srl_climb_credit_api configuration'
+
+srl_climb_credit_api.email_form:
+  path: '/admin/config/system/multiemail'
+  defaults:
+    _title: 'User Email Configuration'
+    _form: 'Drupal\srl_climb_credit_api\Form\EmailSettingForm'
+  requirements:
+    _permission: 'administer srl_climb_credit_api configuration'
+
+srl_climb_credit_api.loan-webhook:
+  path: '/srl-climb-credit-api/get-loan-info'
+  defaults:
+    _title: 'Webhook Loan'
+    _controller: '\Drupal\srl_climb_credit_api\Controller\SrlClimbCreditLoanApiController::build'
+  requirements:
+    _permission: 'administer permissions'
+srl_climb_credit_api.example:
+  path: '/mail/example'
+  defaults:
+    _title: 'Example'
+    _controller: '\Drupal\srl_climb_credit_api\Controller\SrlMailController::content'
+  requirements:
+    _permission: 'access content'

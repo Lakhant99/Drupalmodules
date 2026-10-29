@@ -1,0 +1,84 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the SRL Climb Credit Api module.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function srl_climb_credit_api_install() {
+  \Drupal::messenger()->addStatus(__FUNCTION__);
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function srl_climb_credit_api_uninstall() {
+  \Drupal::messenger()->addStatus(__FUNCTION__);
+}
+
+/**
+ * Implements hook_schema().
+ */
+function srl_climb_credit_api_schema() {
+  $schema['srl_loan_application_detail'] = [
+    'description' => 'A table to store simple data',
+    'fields' => [
+      'id' => [
+      'description' => 'Holds the id value',
+      'type' => 'serial',
+      'unsigned' => TRUE,
+      'not null' => TRUE,
+      ],
+      'transaction_id' => [
+      'description' => 'Transaction ID',
+      'type' => 'varchar',
+      'length' => 255,
+      ],
+      'name' => [
+        'description' => 'student full name',
+        'type' => 'varchar',
+        'length' => 255,
+      ],
+      'email' => [
+        'description' => 'email',
+        'type' => 'varchar',
+        'length' => 50,
+      ],
+      'phone' => [
+        'description' => 'Mobile number',
+        'type' => 'varchar',
+        'length' => 255,
+      ],
+      'application_ref' => [
+        'description' => 'Application ref ID',
+        'type' => 'varchar',
+        'length' => 255,
+      ],
+      'application_status' => [
+        'description' => 'Application Status',
+        'type' => 'varchar',
+        'length' => 255,
+      ],
+      'application_lastupdateddate' => [
+        'description' => 'Application lastUpdatedDate',
+        'type' => 'varchar',
+        'length' => 255,
+      ],
+      'application_submissiondate' => [
+        'description' => 'Application Submission Date',
+        'type' => 'varchar',
+        'length' => 255,
+      ],
+      'json_response' => [
+        'description' => 'Loan Response Json',
+        'type' => 'text',
+      ],
+    ],  
+    'primary key' => ['id'], 
+  ];  
+  return $schema;
+}
+

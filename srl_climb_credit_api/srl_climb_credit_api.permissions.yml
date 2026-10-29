@@ -1,0 +1,4 @@
+administer srl_climb_credit_api configuration:
+  title: 'Administer srl_climb_credit_api configuration'
+  description: 'Optional description.'
+  restrict access: true

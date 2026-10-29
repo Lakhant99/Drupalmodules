@@ -1,0 +1,17 @@
+stackroute.custom_login:
+  path: /member-login
+  defaults:
+    _controller: '\Drupal\stackroute_modification\Controller\StackrouteModification::CustomLogin'
+    _title: 'Member Login'
+  requirements:
+    _permission: 'access content'
+stackroute.debug_code:
+  path: '/debug-code'
+  defaults: 
+    _controller: '\Drupal\stackroute_modification\Controller\StackrouteModification::DebuCode'
+    _title: 'Debug code'
+  requirements:
+    _permission: 'access content'
+  options:
+    no_cache: 'TRUE'
+

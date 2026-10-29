@@ -1,0 +1,10 @@
+services:
+  pdf.agreement:
+    class: Drupal\srl_payment\Services\Agreementpdf
+  srl_payment.routing_access_permission:
+    class: Drupal\srl_payment\Access\PyamentAccessPermission
+    tags:
+      - {name: access_check, applies_to: _payment_access_permission}
+  srl_payment.dms:
+    class: Drupal\srl_payment\Services\DMSServices
+ 

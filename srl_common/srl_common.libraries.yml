@@ -1,0 +1,7 @@
+srl_common_js:
+  version: 1.x
+  js:
+    js/custom_player.js: {}
+  css:
+    theme:
+      css/srl_common.css: {}

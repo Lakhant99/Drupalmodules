@@ -1,0 +1,9 @@
+srl_payment:
+  version: VERSION
+  js:
+    js/scrollbar.js: {}
+    js/srl_payment.js: {}
+  css:
+    theme:
+      css/scrollbar.css: {}
+      css/srl_payment.css: {}

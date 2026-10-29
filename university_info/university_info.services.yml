@@ -1,0 +1,4 @@
+# services:
+#   domain_favicon.manager:
+#     class: Drupal\domain_favicon\DomainListManager
+#     arguments: ['@config.factory','@domain.negotiator','@theme_handler','@library.discovery','@router.admin_context']

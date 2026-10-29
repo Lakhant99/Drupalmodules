@@ -1,0 +1,67 @@
+srl_payment.payeezy_payment:
+  path: '/payeezy-form/{fee}/{currency_code}/{transaction_id}/{course_id}'
+  defaults:
+    _form: '\Drupal\srl_payment\Form\PayeezyPaymentForm'
+    _title: 'Payment'
+  requirements:
+    _permission: 'access content'
+srl_payment.payeezy_payment_callback:
+  path: '/payeezy-payment'
+  defaults:
+    _controller: '\Drupal\srl_payment\Controller\PayeezyPaymentCallbackController::payeezypaymentcallback'
+    _title: 'Payment Status'
+  requirements:
+    _permission: 'access content'
+srl_payment.payeezy_settings:
+  path: '/admin/config/srl_payment'
+  defaults:
+    _form: '\Drupal\srl_payment\Form\PayeezyPaymentConfigurationForm'
+    _title: 'SRL Payment configuration page'
+  requirements:
+    _permission: 'administer site configuration'
+srl_payment.order_summary_callback:
+  path: '/order-summary'
+  defaults:
+    _controller: '\Drupal\srl_payment\Controller\CourseOrderSummaryController::courseordersummary'
+    _title: 'Order Summary'
+  requirements:
+    _payment_access_permission: 'TRUE'
+    _permission: 'access content'
+  options:
+    no_cache: 'TRUE'
+srl_payment.payeezy_cohort_date:
+  path: '/payeezy-cohort-date-form/{course_id}/{transaction_id}'
+  defaults:
+    _form: '\Drupal\srl_payment\Form\PayeezyPaymentCohortDateForm'
+    _title: 'Cohort Date'
+  requirements:
+    _permission: 'access content'
+srl_payment.payeezy_user_information:
+  path: '/admin/payeezy-user-information'
+  defaults:
+    _controller: '\Drupal\srl_payment\Controller\PayeezyUserInformationController::userinformation'
+    _title: 'Payeezy User Information'
+  requirements:
+    _permission: 'administer site configuration'
+srl_payment.term_agreement_form:
+  path: '/agreement-form'
+  defaults:
+    _form: '\Drupal\srl_payment\Form\TermAgreementForm'
+    _title: 'Term and agreement'
+
+srl_payment.controller:
+  path: '/payment-controller'
+  defaults:
+    _controller: '\Drupal\srl_payment\Controller\SrlPaymentController::controller'
+    _title: 'payment controller'
+  requirements:
+    _permission: 'access content'
+srl_payment.genrate_pdf:
+  path: '/genrate-pdf'
+  defaults:
+    _controller: '\Drupal\srl_payment\Controller\SrlPaymentController::generatePdf'
+    _title: 'genrate pdf '
+  requirements:
+    _permission: 'access content'
+  options:
+    no_cache: 'TRUE'

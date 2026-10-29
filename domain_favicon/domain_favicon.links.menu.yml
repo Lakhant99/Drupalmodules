@@ -1,0 +1,6 @@
+domain_favicon.settings:
+  title: Domain favicon
+  route_name: domain_favicon.settings
+  parent: domain.admin
+  description: 'Domain favicon'
+  weight: 10

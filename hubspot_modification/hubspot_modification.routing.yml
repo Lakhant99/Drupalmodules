@@ -1,0 +1,7 @@
+hubspot_modification.hubspot-api:
+  path: '/admin/hubspot-api'
+  defaults:
+    _title: 'hubspot'
+    _controller: '\Drupal\hubspot_modification\Controller\HubspotModificationController::Hubspot_API'
+  requirements:
+    _permission: 'access content' 

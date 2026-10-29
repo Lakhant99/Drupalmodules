@@ -1,0 +1,4 @@
+create custom nodes:
+  title: 'Create custom nodes'
+  description: 'Allows users to create custom nodes using the RESTful Post API.'
+  restrict access: TRUE

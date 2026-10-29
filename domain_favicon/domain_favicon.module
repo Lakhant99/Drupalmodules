@@ -1,0 +1,28 @@
+<?php
+/**
+ * HOOK_preprocess_html
+ * @var 
+ */
+function domain_favicon_preprocess_html(&$variables){
+   $domain = \Drupal::service('domain.negotiator')->getActiveId();
+   $config = \Drupal::config('domain_favicon.config');
+   if($config->get($domain) && $config->get($domain) > 0){
+      $file = \Drupal\file\Entity\File::load($config->get($domain));
+      if($file){
+         $icon = file_url_transform_relative(file_create_url($file->getFileUri()));
+         $icon = [
+            '#tag' => 'link',
+            '#attributes' => [
+                'href' => $icon,
+                'rel' => 'shortcut icon',
+                'sizes' => '52x52'
+            ],
+          ];
+          $variables['#attached']['html_head'][] = [
+              $icon,
+              'icon52x52'
+          ];
+      }
+      
+   }
+}

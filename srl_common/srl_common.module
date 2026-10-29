@@ -1,0 +1,1378 @@
+<?php 
+use Drupal\taxonomy\Entity\Term;
+use Drupal\Core\Database\Database;
+use Drupal\Node\Entity\Node;
+use Drupal\views\ViewExecutable;
+use Drupal\views\Plugin\views\query\QueryPluginBase;
+use Drupal\webform;
+use Drupal\webform\WebformSubmissionInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Drupal\Core\Mail\MailManagerInterface;
+use Drupal\Component\Utility\SafeMarkup;
+use Drupal\Component\Utility\Html;
+
+/**preprocess hook menu
+ * alter main menu
+ */
+function getProductPageUrl(){
+  $domain = \Drupal::service('domain.negotiator')->getActiveId();
+  $path_alias = [];
+  $query = db_select('node_field_data','node');
+  $query->leftjoin('node__field_course_code_reference','program','node.nid=program.entity_id');
+  $query->leftjoin('node__field_domain_access','domain','node.nid=domain.entity_id');
+  $query->fields('program',array('field_course_code_reference_target_id'));
+  $query->condition('node.status',1);
+  $query->condition('node.type','course_university_mapping');
+  $records = $query->condition('domain.field_domain_access_target_id',$domain)->execute();
+  while($result = $records->fetchAssoc()){
+      $nid = $result['field_course_code_reference_target_id'];
+      $alias = \Drupal::service('path.alias_manager')->getAliasByPath('/node/' . $nid);
+      $path_alias[$nid] = $alias;
+      
+    }
+  return $path_alias;
+
+}
+function getdiscountfee($domain,$coursereference_id){
+  $query = db_select('node__field_discount_fees', 'disfee');
+  $query->leftjoin('node__field_course_code_reference','cr','disfee.entity_id=cr.entity_id');
+  $query->leftjoin('node__field_domain_access','domain','cr.entity_id=domain.entity_id');
+  $query->fields('disfee',array('field_discount_fees_value'));
+  $query->condition('disfee.bundle','course_university_mapping');
+  $query->condition('cr.field_course_code_reference_target_id',$coursereference_id);
+  $query->condition('domain.field_domain_access_target_id',$domain);
+  $field_values=$query->execute()->fetchAll();
+  if($field_values[0]){
+      return $field_values[0]->field_discount_fees_value;
+  }
+  
+}
+function srl_common_user_login($account) {
+  $roles = $account->getRoles($exclude_locked_roles = false);
+  if(in_array('marketing_management',$roles)){
+    $response = new Symfony\Component\HttpFoundation\RedirectResponse('/download-policy-pdf');
+    $response->send();
+    return;
+  }
+}
+function srl_common_preprocess_menu(&$variables, $hook) {
+  $domain = \Drupal::service('domain.negotiator')->getActiveId();
+  if($variables['menu_name'] == 'main-menu'){
+    $items = $variables['items'];
+    foreach ($items as $key => &$item) {
+      if($item['url']->isExternal()){
+        if($item['url']->getUri() == 'https://www.hilbert.edu/'){
+          if( $domain == 'srl_hilbert_qc_niit_mts_com' ||  $domain == 'srl_qc2_niit_mts_com'){
+            // \Drupal::logger('menu alter')->notice('echo save external '.print_r($item['url']->getUri(),TRUE));
+          }else{
+            unset($variables['items'][$key]);
+          }
+        }
+      }
+    }
+  }
+}
+/**theme suggestion  */
+function srl_common_theme($existing, $type, $theme, $path){
+  return array(
+      'assessment_application' => array(
+          'variables' => array(
+              'assessment_html' => NULL,
+              'assessment_video' => NULL,
+              'header' => NULL,
+          ),
+
+      ),
+      'assessment_application_form' => array(
+        'variables' => array(
+          'form_html' => NULL,
+          'resume_form_html' => NULL,
+        ),
+      ),
+      'assessment_new_application_form' => array(
+        'variables' => array(
+          'form_html' => NULL,
+        ),
+      ),
+      'page_about_us_template' => array(
+        'variables' => array(
+          'banner_image' => NULL,
+          'image_overlay' => NULL,
+          'description' => NULL,
+          'skills_based_training_content' => NULL,
+          'skills_training' => NULL,
+          'bootcamp_highlights' => NULL,
+          'map_location' => NULL,
+          'chat_with_advisior' => NULL,
+        ),
+      ),
+      'page_faqs_template' => array(
+        'variables' => array(
+          'page_content' => NULL,
+        ),
+      ),
+      'page_support_template' => array(
+        'variables' => array(
+          'page_content' => NULL,
+        ),
+      ),
+      'page_thank_you' => array(
+        'variables' => array(
+          'page_html' => NULL,
+        ),
+      ),
+      'proceed_payment_form' =>[
+        'render element' => 'form',
+      ],
+      'srl_proceed_payment_form' =>[
+        'render element' => 'form',
+      ],
+      'landing_page_thank_you' => array(
+        'variables' => array(
+          'page_html' => NULL,
+        ),
+      ),
+      'landing_page' => array(
+        'variables' => array(
+          'page_html' => NULL,
+        ),
+      ),
+      'landing_pages' => array(
+        'variables' => array(
+          'page_html' => NULL,
+        ),
+      ),
+      'srl_climb_credit_api_loan_data' => array(
+        'variables' => array(
+          'loanData'  => NULL,
+          'lastruncron' => NULL,
+        ),
+      ),
+      'srl_climb_credit_payment_api_getdata' => array(
+        'variables' => array(
+          'paymentloanData'  => NULL,
+        ),
+      ),
+      'srl_climb_credit_loan_api_getdata' => array(
+        'variables' => array(
+          'loanpaymentloanData'  => NULL,
+        ),
+      ),
+  );
+}
+/*
+* @implement GET TEST MASTER
+* Get Course program Test Master info by course code 
+*/
+function getaptitudetestInfo($courseCode){
+  $query = db_select('node__field_course_code','course'); // our programs
+  $query->fields('AT',array('field_aptitudetest_target_id','entity_id'));
+  $query->fields('UD',array('field_university_domain_target_id'));
+  $query->leftjoin('node__field_aptitudetest','AT','course.entity_id=AT.entity_id');
+  $query->leftjoin('node__field_course_code_reference','CCR','course.entity_id=field_course_code_reference_target_id');
+  $query->leftjoin('node__field_university_domain','UD','CCR.entity_id=UD.entity_id');
+  $query->condition('course.field_course_code_value',$courseCode,'=');
+  $result = $query->execute()->fetchAll();
+  
+  return $result[0];
+}
+/**Get batch date */
+function getCourseBatchDate($course_id,$domain){
+  $current_date = \Drupal::time()->getRequestTime();
+  $batch_start_date = '';
+  $results = \Drupal::entityQuery('node')
+    ->condition('type', 'course_university_mapping')
+    ->condition('field_domain_access.target_id', $domain)
+    ->condition('field_course_code_reference.target_id', $course_id)
+    ->execute();
+    foreach($results as $value){
+      $course_map = $value;
+    }
+    if($course_map){
+      $node_storage = \Drupal::entityTypeManager()->getStorage('node');
+      $node = $node_storage->load($course_map);
+  
+        $close_day = $node->get('field_registration_close_day')->getValue()[0]['value'];
+        $next_current_date = strtotime('+'.$close_day, $current_date);
+        $batch_dates = $node->get('field_course_batch_start_date')->getValue();
+        if(count($batch_dates) > 0){
+            $date_timestamp = [];
+            foreach($batch_dates as $batch_date){
+              $get_date = strtotime($batch_date['value']);
+              if($get_date >= $next_current_date){
+                  $date_timestamp[] = $get_date;
+              }
+            }
+            sort($date_timestamp);
+            foreach($date_timestamp as $batch_date){
+              if($batch_date >= $next_current_date){
+                  $batch_start[] = $batch_date;
+              }
+            }
+            if(count($batch_start) > 0){
+              $batch_start_date = date('Y-m-d',$batch_start[0]);
+            }
+        }
+    }
+    return $batch_start_date;
+}
+/*
+ *  @implement 
+ * save webform assessment Application fourm information.
+*/
+function insertApplicationInfo($records){ 
+  $domain = \Drupal::service('domain.negotiator')->getActiveId();
+  $course_node = \Drupal::entityTypeManager()->getStorage('node')->load($records['program_interest']);
+  $query = db_select('node__field_course_code','course');
+      $query->fields('course',array('field_course_code_value'));
+      $query->condition('course.entity_id',$records['program_interest'],'=');
+      $result = $query->execute()->fetchCol();
+      $records['course_code'] = $result[0];
+  $test_master = getaptitudetestInfo($records['course_code']);
+  $records['course_id'] = $records['program_interest'];
+  
+  $phone_number = merge_PhoneWithCountry($records['phone'],$records['country']);
+  
+
+  $records['transaction_id'] = $phone_number.'_'.\Drupal::time()->getRequestTime();
+  if(isset($course_node->field_aptitudetest->target_id)){
+    $test_master_info = Term::load($course_node->field_aptitudetest->target_id);
+    
+    $records['bu_code'] = $test_master_info->get('field_bucode')->getValue()[0]['value'];
+    $records['orgid'] = $test_master_info->get('field_orgid')->getValue()[0]['value'];
+    $records['source_code'] = $test_master_info->get('field_sourcecode')->getValue()[0]['value'];
+    $records['test_code'] = $test_master_info->get('field_testcode')->getValue()[0]['value'];
+    $records['test_type'] = $test_master_info->get('field_testtype')->getValue()[0]['value'];
+    $records['passing_percentage'] = $test_master_info->get('field_passing_percentage')->getValue()[0]['value'];
+  }
+  if(isset($test_master->field_university_domain_target_id)){
+    $un_domain = Term::load($test_master->field_university_domain_target_id);
+    $records['country_code'] = $un_domain->get('field_country_code')->getValue()[0]['value'];
+    $records['center_code'] = $un_domain->get('field_center_code')->getValue()[0]['value'];
+    $records['university_code'] = $un_domain->get('field_university_code')->getValue()[0]['value'];
+  }
+  $batch_start_date = getCourseBatchDate($records['course_id'],$domain);
+  $connection = \Drupal::service('database');
+    $connection->insert('srl_candidate_test_details')
+    ->fields(['transaction_id','course_id', 'name', 'email_id','mobile_no','course_code','university_code','country_code',
+              'center_code','orgid','bu_code','source_code','test_code','test_type','access_permission','json_response','passing_percentage','result','domain_id', 'batch_start_date','form_version',
+    ])
+    ->values([
+      'transaction_id' => $records['transaction_id'],
+      'course_id' => $records['course_id'],
+      'name' => $records['full_name'].' '.$records['last_name'],
+      'email_id' => $records['email'],
+      'mobile_no' => $phone_number,
+      'course_code' => $records['course_code'],
+      'university_code' => $records['university_code'],
+      'country_code' => $records['country_code'],
+      'center_code' => $records['center_code'],
+      'orgid' => $records['orgid'],
+      'bu_code' => $records['bu_code'],
+      'source_code' => $records['source_code'],
+      'test_code' => $records['test_code'],
+      'test_type' => $records['test_type'],
+      'access_permission' => 1,
+      'json_response' => addslashes(json_encode($records)),
+      'passing_percentage' => $records['passing_percentage'],
+      'result' => 'skiped',
+      'domain_id' => $domain,
+      'batch_start_date' => $batch_start_date,
+      'steps_level' => 1,
+      'form_version' => 2,
+    ])
+    ->execute();
+    $session = \Drupal::request()->getSession();
+    $session->set('transaction_id', $records['transaction_id']);
+    return $records['transaction_id'];
+}
+/** @implement 
+ * Update assessment start date time info 
+ * */
+function insertStartDatetime($transaction_id){
+  $connection = \Drupal::service('database');
+  $start_time = \Drupal::time()->getRequestTime();
+  $query = $connection->update('srl_candidate_test_details')
+    ->fields([
+      'assessment_started_on' => $start_time
+    ])
+    ->condition('transaction_id', $transaction_id, '=')
+    ->execute();
+}
+/**@implements
+ * Get assessment info and send to assessment system.
+ */
+function getAssessmentUserRecord($transaction_id){
+  $query = db_select('srl_candidate_test_details','records');
+    $query->fields('records',array('transaction_id','course_id','name', 'email_id','mobile_no','course_code','university_code','country_code','center_code','orgid','bu_code','batch_start_date','source_code','json_response','payment_status'));
+    $query->condition('records.transaction_id',$transaction_id);
+    $field_values=$query->execute()->fetchAll(); 
+  return $field_values[0];
+}
+function country_code(){
+  return  [
+    "213" => "Algeria (+213)",
+    "376" => "Andorra (+376)",
+    "244" => "Angola (+244)",
+    "1264" => "Anguilla (+1264)",
+    "1268" => "Antigua &amp; Barbuda (+1268)",
+    "54" => "Argentina (+54)",
+    "374" => "Armenia (+374)",
+    "297" => "Aruba (+297)",
+    "61" => "Australia (+61)",
+    "43" => "Austria (+43)",
+    "994" => "Azerbaijan (+994)",
+    "1242" => "Bahamas (+1242)",
+    "973" => "Bahrain (+973)",
+    "880" => "Bangladesh (+880)",
+    "1246" => "Barbados (+1246)",
+    "375" => "Belarus (+375)",
+    "32" => "Belgium (+32)",
+    "501" => "Belize (+501)",
+    "229" => "Benin (+229)",
+    "1441" => "Bermuda (+1441)",
+    "975" => "Bhutan (+975)",
+    "591" => "Bolivia (+591)",
+    "387" => "Bosnia Herzegovina (+387)",
+    "267" => "Botswana (+267)",
+    "55" => "Brazil (+55)",
+    "673" => "Brunei (+673)",
+    "359" => "Bulgaria (+359)",
+    "226" => "Burkina Faso (+226)",
+    "257" => "Burundi (+257)",
+    "855" => "Cambodia (+855)",
+    "237" => "Cameroon (+237)",
+    "1" => "Canada OR USA (+1)",
+    "238" => "Cape Verde Islands (+238)",
+    "1345" => "Cayman Islands (+1345)",
+    "236" => "Central African Republic (+236)",
+    "56" => "Chile (+56)",
+    "86" => "China (+86)",
+    "57" => "Colombia (+57)",
+    "269" => "Comoros (+269)",
+    "242" => "Congo (+242)",
+    "682" => "Cook Islands (+682)",
+    "506" => "Costa Rica (+506)",
+    "385" => "Croatia (+385)",
+    "53" => "Cuba (+53)",
+    "90392" => "Cyprus North (+90392)",
+    "357" => "Cyprus South (+357)",
+    "42" => "Czech Republic (+42)",
+    "45" => "Denmark (+45)",
+    "253" => "Djibouti (+253)",
+    "1809" => "Dominica & Dominican Republic (+1809)",
+    "593" => "Ecuador (+593)",
+    "20" => "Egypt (+20)",
+    "503" => "El Salvador (+503)",
+    "240" => "Equatorial Guinea (+240)",
+    "291" => "Eritrea (+291)",
+    "372" => "Estonia (+372)",
+    "251" => "Ethiopia (+251)",
+    "500" => "Falkland Islands (+500)",
+    "298" => "Faroe Islands (+298)",
+    "679" => "Fiji (+679)",
+    "358" => "Finland (+358)",
+    "33" => "France (+33)",
+    "594" => "French Guiana (+594)",
+    "689" => "French Polynesia (+689)",
+    "241" => "Gabon (+241)",
+    "220" => "Gambia (+220)",
+    "7880" => "Georgia (+7880)",
+    "49" => "Germany (+49)",
+    "233" => "Ghana (+233)",
+    "350" => "Gibraltar (+350)",
+    "30" => "Greece (+30)",
+    "299" => "Greenland (+299)",
+    "1473" => "Grenada (+1473)",
+    "590" => "Guadeloupe (+590)",
+    "671" => "Guam (+671)",
+    "502" => "Guatemala (+502)",
+    "224" => "Guinea (+224)",
+    "245" => "Guinea - Bissau (+245)",
+    "592" => "Guyana (+592)",
+    "509" => "Haiti (+509)",
+    "504" => "Honduras (+504)",
+    "852" => "Hong Kong (+852)",
+    "36" => "Hungary (+36)",
+    "354" => "Iceland (+354)",
+    "91" => "India (+91)",
+    "62" => "Indonesia (+62)",
+    "98" => "Iran (+98)",
+    "964" => "Iraq (+964)",
+    "353" => "Ireland (+353)",
+    "972" => "Israel (+972)",
+    "39" => "Italy (+39)",
+    "1876" => "Jamaica (+1876)",
+    "81" => "Japan (+81)",
+    "962" => "Jordan (+962)",
+    "7" => "Kazakhstan or Uzbekistan or Russia or Tajikstan (+7)",
+    "254" => "Kenya (+254)",
+    "686" => "Kiribati (+686)",
+    "850" => "Korea North (+850)",
+    "82" => "Korea South (+82)",
+    "965" => "Kuwait (+965)",
+    "996" => "Kyrgyzstan (+996)",
+    "856" => "Laos (+856)",
+    "371" => "Latvia (+371)",
+    "961" => "Lebanon (+961)",
+    "266" => "Lesotho (+266)",
+    "231" => "Liberia (+231)",
+    "218" => "Libya (+218)",
+    "417" => "Liechtenstein (+417)",
+    "370" => "Lithuania (+370)",
+    "352" => "Luxembourg (+352)",
+    "853" => "Macao (+853)",
+    "389" => "Macedonia (+389)",
+    "261" => "Madagascar (+261)",
+    "265" => "Malawi (+265)",
+    "60" => "Malaysia (+60)",
+    "960" => "Maldives (+960)",
+    "223" => "Mali (+223)",
+    "356" => "Malta (+356)",
+    "692" => "Marshall Islands (+692)",
+    "596" => "Martinique (+596)",
+    "222" => "Mauritania (+222)",
+    "52" => "Mexico (+52)",
+    "691" => "Micronesia (+691)",
+    "373" => "Moldova (+373)",
+    "377" => "Monaco (+377)",
+    "976" => "Mongolia (+976)",
+    "1664" => "Montserrat (+1664)",
+    "212" => "Morocco (+212)",
+    "258" => "Mozambique (+258)",
+    "95" => "Myanmar (+95)",
+    "264" => "Namibia (+264)",
+    "674" => "Nauru (+674)",
+    "977" => "Nepal (+977)",
+    "31" => "Netherlands (+31)",
+    "687" => "New Caledonia (+687)",
+    "64" => "New Zealand (+64)",
+    "505" => "Nicaragua (+505)",
+    "227" => "Niger (+227)",
+    "234" => "Nigeria (+234)",
+    "683" => "Niue (+683)",
+    "672" => "Norfolk Islands (+672)",
+    "670" => "Northern Marianas (+670)",
+    "47" => "Norway (+47)",
+    "968" => "Oman (+968)",
+    "680" => "Palau (+680)",
+    "507" => "Panama (+507)",
+    "675" => "Papua New Guinea (+675)",
+    "595" => "Paraguay (+595)",
+    "51" => "Peru (+51)",
+    "63" => "Philippines (+63)",
+    "48" => "Poland (+48)",
+    "351" => "Portugal (+351)",
+    "1787" => "Puerto Rico (+1787)",
+    "974" => "Qatar (+974)",
+    "262" => "Reunion (+262)",
+    "40" => "Romania (+40)",
+    "250" => "Rwanda (+250)",
+    "378" => "San Marino (+378)",
+    "239" => "Sao Tome &amp; Principe (+239)",
+    "966" => "Saudi Arabia (+966)",
+    "221" => "Senegal (+221)",
+    "381" => "Serbia (+381)",
+    "248" => "Seychelles (+248)",
+    "232" => "Sierra Leone (+232)",
+    "65" => "Singapore (+65)",
+    "421" => "Slovak Republic (+421)",
+    "386" => "Slovenia (+386)",
+    "677" => "Solomon Islands (+677)",
+    "252" => "Somalia (+252)",
+    "27" => "South Africa (+27)",
+    "34" => "Spain (+34)",
+    "94" => "Sri Lanka (+94)",
+    "290" => "St. Helena (+290)",
+    "1869" => "St. Kitts (+1869)",
+    "1758" => "St. Lucia (+1758)",
+    "249" => "Sudan (+249)",
+    "597" => "Suriname (+597)",
+    "268" => "Swaziland (+268)",
+    "46" => "Sweden (+46)",
+    "41" => "Switzerland (+41)",
+    "963" => "Syria (+963)",
+    "886" => "Taiwan (+886)",
+    "66" => "Thailand (+66)",
+    "228" => "Togo (+228)",
+    "676" => "Tonga (+676)",
+    "1868" => "Trinidad &amp; Tobago (+1868)",
+    "216" => "Tunisia (+216)",
+    "90" => "Turkey (+90)",
+    "993" => "Turkmenistan (+993)",
+    "1649" => "Turks &amp; Caicos Islands (+1649)",
+    "688" => "Tuvalu (+688)",
+    "256" => "Uganda (+256)",
+    "44" => "UK (+44)", 
+    "380" => "Ukraine (+380)",
+    "971" => "United Arab Emirates (+971)",
+    "598" => "Uruguay (+598)",
+    "678" => "Vanuatu (+678)",
+    "379" => "Vatican City (+379)",
+    "58" => "Venezuela (+58)",
+    "84" => "Vietnam (+84)",
+    "1284" => "Virgin Islands - British (+1284)",
+    "1340" => "Virgin Islands - US (+1340)",
+    "681" => "Wallis & Futuna (+681)",
+    "969" => "Yemen (North)(+969)",
+    "967" => "Yemen (South)(+967)",
+    "260" => "Zambia (+260)",
+    "263" => "Zimbabwe (+263)"
+  ];
+  
+}
+function createTerm(){
+  $country = country_code();
+  foreach($country as $key => $category){
+    // kint($category,$key);
+    $term = \Drupal::entityManager()->getStorage('taxonomy_term')->loadByProperties(['name' => trim($category)]);
+    $term = reset($term);
+    $term_id = $term ? FALSE : TRUE;
+    if($term_id){
+      // $term = Term::load($_tid);
+      // $term->field_country_code->setValue($key);
+      // $term->Save();
+      $term = Term::create(array(
+        'name' => trim($category),
+        'field_country_code' => $key,
+        'vid' => 'country_code',
+      ))->save();
+    }
+
+  }
+}
+function getCountryCode(){
+  $query = \Drupal::entityQuery('taxonomy_term');
+  $query->condition('vid', "country_code");
+  $query->sort('name','ASC');
+  $tids = $query->execute();
+  $terms = \Drupal\taxonomy\Entity\Term::loadMultiple($tids);
+  foreach ($terms as $term) {
+      $options[$term->get('field_country_code')->value] = $term->getName();
+      
+  }
+  return $options;
+}
+
+/** set program intrested options  */
+function setUniversityProgramsOptions($domain){
+  $course_id = \Drupal::request()->query->get('course');
+  $query = db_select('node_field_data','course');
+  $query->leftjoin('node__field_domain_access','domain','course.nid=domain.entity_id');
+  $query->leftjoin('node__field_course_code_reference','ccr','course.nid=ccr.entity_id');
+  $query->leftjoin('node__field_map_in_hubspot','mh','course.nid=mh.entity_id');
+  $query->fields('ccr',array('field_course_code_reference_target_id'));
+  $query->condition('course.type','course_university_mapping');
+  $query->condition('course.status',1);
+  $query->condition('mh.field_map_in_hubspot_value',1);
+  $query->condition('domain.field_domain_access_target_id',$domain);
+  $records = $query->execute();
+  while($result = $records->fetchAssoc()){
+    if($result['field_course_code_reference_target_id']){
+      $nids[$result['field_course_code_reference_target_id']] = $result['field_course_code_reference_target_id'];
+    }
+  }
+  $query = db_select('node_field_data','course');
+  $query->fields('course',array('nid','title'));
+  $query->condition('course.nid',$nids,'IN');
+  $query->condition('course.status',1);
+  $records = $query->execute();
+  $options = [];
+  while($result = $records->fetchAssoc()){
+    $options[$result['nid']] = $result['title'];
+  }
+  return $options;
+}
+
+/** set landing program intrested options  */
+
+function setUniversityLandingProgramsOptions($domain, $page_template){
+  $domain = \Drupal::service('domain.negotiator')->getActiveId();
+  $query = db_select('node_field_data','course');
+  $query->leftjoin('node__field_domain_access','domain','course.nid=domain.entity_id');
+  $query->leftjoin('node__field_microsite_course_reference','msp','course.nid=msp.entity_id');
+  $query->leftjoin('node__field_page_layout','pl','course.nid=pl.entity_id');
+  $query->fields('msp',array('field_microsite_course_reference_target_id'));
+  $query->condition('course.type','course_landing_page');
+  $query->condition('course.status',1);
+  $query->condition('pl.field_page_layout_value',$page_template);
+  $query->condition('domain.field_domain_access_target_id',$domain);
+  $records = $query->execute();
+  while($result = $records->fetchAssoc()){
+    if($result['field_microsite_course_reference_target_id']){
+      $nids[$result['field_microsite_course_reference_target_id']] = $result['field_microsite_course_reference_target_id'];
+    }
+  }
+
+  $query = db_select('node_field_data','course');
+  $query->fields('course',array('nid','title'));
+  $query->condition('course.nid',$nids,'IN');
+  $query->condition('course.status',1);
+  $records = $query->execute();
+  $options = [];
+  while($result = $records->fetchAssoc()){
+    $options[$result['nid']] = $result['title'];
+  }
+  return $options;
+}
+
+
+/**
+ * Webform submission handler for the 'goto' action.
+ *
+ * @param array $form
+ *   An associative array containing the structure of the form.
+ * @param \Drupal\Core\Form\FormStateInterface $form_state
+ *   The current state of the form.
+ */
+function srl_common_webform_submission_form_alter(array &$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  $form['#cache'] = ['max-age' => 0];
+  $domain = \Drupal::service('domain.negotiator')->getActiveId();
+  /**new application form */
+  if($form_id == 'webform_submission_new_application_form_add_form'){
+    $session = \Drupal::request()->getSession();
+    $session->remove('transaction_id');
+    {
+      $course_id = \Drupal::request()->query->get('course');
+      $options = setUniversityProgramsOptions($domain);
+      
+      $form['elements']['program_fit']['program_interest']['#options'] = $options;
+
+      // $test = $form['elements']['program_fit']['program_interest']['widget'][0]['value']['#default_value'];
+      // $mytset = $form['elements']['program_fit']['program_interest']['widget'][0]['target_id']["#value"];
+      
+      
+      // $form['#after_build'][] = 'set_keywords_after_build';
+
+      // $key = $form_state->input["program_interest"];
+      // $val = $form['elements']['program_fit']['program_interest']['#options'] [$key];
+
+
+
+
+
+      $form['elements']['basic_information']['country']['#prefix'] = '<div id="custom-phone-fieldset" class="countryphone"><div class="phone-field-title form-required">Phone (With Country Code)</div>';
+      $form['elements']['basic_information']['country']['#options'] = getCountryCode();
+      $form['elements']['basic_information']['phone']['#suffix'] = '</div>';
+      // if($domain == 'srl_qc_niit_mts_com' || $domain == 'srl_adelphi_qc_niit_mts_com' || $domain == 'adelphi_landing_university' || $domain == 'srl_pointpark_qc_niit_mts_com' || $domain == 'point_park_university' || $domain == 'stackroute_suffolk_university'){
+        $form['elements']['program_funding']['how_do_you_plan_on_funding_your_bootcamp']['#field_prefix'] = '<span class="field-prefix">Those hello Students Who Chose to Pay in full up-front will receive a $3000 Discount!</span>';
+        // }
+
+      if(isset($course_id)){
+        if (array_key_exists($course_id,$options)){
+          $form['elements']['program_fit']['program_interest']['#default_value'] = $course_id;
+          $form['elements']['program_fit']['program_interest']['#attributes']['disabled'] = 'disabled';
+        }
+      }
+      $coursereference_id = $form_state->getValue('program_interest');
+      $discount_fee_amount = getdiscountfee($domain,$coursereference_id);
+      $discount_fee_amount= number_format($discount_fee_amount);
+      $suffix_text= '<span class="field-prefix">'."Those Students Who Chose to Pay in full up-front will receive a"." $"."$discount_fee_amount"." USD Discount!".'</span>' ;
+      $form['elements']['program_funding']['how_do_you_plan_on_funding_your_bootcamp']['#field_prefix'] =$suffix_text;
+      
+
+      if($form['progress']['#current_page'] == 'basic_information' && isset($form_state->getSubmitHandlers()[0]) && $form_state->getSubmitHandlers()[0] != '::previous'){
+        $form['elements']['basic_information']['country']['#default_value'] = 1;
+      }
+      $parameters = \Drupal::request()->query->all();
+      /** set utm parameters */
+      if(array_key_exists('utm_medium',$parameters) || array_key_exists('utm_source',$parameters) || array_key_exists('utm_campaign',$parameters) || array_key_exists('utm_term',$parameters) || array_key_exists('utm_content',$parameters) || array_key_exists('gclid',$parameters)){
+        $form['elements']['program_fit']['utm_source']['#default_value'] = $parameters['utm_source'] ? $parameters['utm_source'] : '';
+        $form['elements']['program_fit']['utm_medium']['#default_value'] = $parameters['utm_medium'] ? $parameters['utm_medium'] : '';
+        $form['elements']['program_fit']['utm_campaign']['#default_value'] = $parameters['utm_campaign'] ? $parameters['utm_campaign'] : '';
+        $form['elements']['program_fit']['utm_term']['#default_value'] = $parameters['utm_term'] ? $parameters['utm_term'] : '';
+        $form['elements']['program_fit']['utm_content']['#default_value'] = $parameters['utm_content'] ? $parameters['utm_content'] : '';
+        $form['elements']['program_fit']['gclid']['#default_value'] = $parameters['gclid'] ? $parameters['gclid'] : '';
+     
+      }else{
+        if(isset($_COOKIE['UTM_PARAMETERS'])){
+          $UTM_PARAMETERS = json_decode($_COOKIE['UTM_PARAMETERS']);
+          $form['elements']['program_fit']['utm_source']['#default_value'] = $UTM_PARAMETERS->utm_source;
+          $form['elements']['program_fit']['utm_medium']['#default_value'] = $UTM_PARAMETERS->utm_medium;
+          $form['elements']['program_fit']['utm_campaign']['#default_value'] = $UTM_PARAMETERS->utm_campaign;
+          $form['elements']['program_fit']['utm_term']['#default_value'] = $UTM_PARAMETERS->utm_term;
+          $form['elements']['program_fit']['utm_content']['#default_value'] = $UTM_PARAMETERS->utm_content;
+          $form['elements']['program_fit']['gclid']['#default_value'] = $UTM_PARAMETERS->gclid;
+       
+        }
+      }
+    }
+    /** end set utm parameters */
+    /**resume application form */
+    $loader = $session->get('temp_transaction_id_resume');
+    $data = resumeApplicationForm();
+    if($data){
+      foreach($data as $step => $field_value){
+        $field_value = json_decode($field_value);
+        foreach($field_value as $field_id => $value){
+          if($step == 'program_fit' && $field_id == 'factors_deciding_to_enroll'){
+            $options = explode(';',$value);
+            $form['elements']['program_fit']['factors_deciding_to_enroll']['#default_value'] = $options;
+          }else{
+            $form['elements'][$step][$field_id]['#default_value'] = $value;
+          }
+        }
+        if($loader){
+          $form['elements'][$step]['resume_loader'] = [
+            '#type' => 'markup',
+            '#markup' => '<div id="getformdata"><div class="ring">Loading<span></span></div></div>'
+          ];
+
+        }
+      }
+    }
+  }
+  if($form_id == 'webform_submission_download_brochure_add_form' || $form['#webform_id']== "download_brochure" ){
+    $session = \Drupal::request()->getSession();
+    $form['elements']['country']['#prefix'] = '<div id="custom-phone-fieldset" class="countryphone d-flex align-items-end">';
+    $form['elements']['phone_number']['#suffix'] = '</div>';
+    $form['elements']['country']['#options'] = getCountryCode();
+    $form['elements']['country']['#default_value'] = 1;
+    
+    $parameters = \Drupal::request()->query->all();
+
+
+    if(array_key_exists('utm_medium',$parameters) || array_key_exists('utm_source',$parameters) || array_key_exists('utm_campaign',$parameters) || array_key_exists('utm_term',$parameters) || array_key_exists('utm_content',$parameters) || array_key_exists('gclid',$parameters)){
+        $form['elements']['utm_source']['#default_value'] = $parameters['utm_source'] ? $parameters['utm_source'] : '';
+        $form['elements']['utm_medium']['#default_value'] = $parameters['utm_medium'] ? $parameters['utm_medium'] : '';
+        $form['elements']['utm_campaign']['#default_value'] = $parameters['utm_campaign'] ? $parameters['utm_campaign'] : '';
+        $form['elements']['utm_term']['#default_value'] = $parameters['utm_term'] ? $parameters['utm_term'] : '';
+        $form['elements']['utm_content']['#default_value'] = $parameters['utm_content'] ? $parameters['utm_content'] : '';
+        $form['elements']['gclid']['#default_value'] = $parameters['gclid'] ? $parameters['gclid'] : '';
+    
+      }else{
+      if(isset($_COOKIE['UTM_PARAMETERS'])){
+        $UTM_PARAMETERS = json_decode($_COOKIE['UTM_PARAMETERS']);
+        $form['elements']['utm_source']['#default_value'] = $UTM_PARAMETERS->utm_source;
+        $form['elements']['utm_medium']['#default_value'] = $UTM_PARAMETERS->utm_medium;
+        $form['elements']['utm_campaign']['#default_value'] = $UTM_PARAMETERS->utm_campaign;
+        $form['elements']['utm_term']['#default_value'] = $UTM_PARAMETERS->utm_term;
+        $form['elements']['utm_content']['#default_value'] = $UTM_PARAMETERS->utm_content;
+        $form['elements']['gclid']['#default_value'] = $UTM_PARAMETERS->gclid;
+      }
+    }
+
+  }
+  if($form['#webform_id'] == 'landing_page_lead_form'){
+    $course_microsite = null;
+    $current_path = \Drupal::service('path.current')->getPath();
+    $node_id = preg_replace("/[^0-9]/", '', $current_path);
+    if($node_id){
+      $landing_course_page = \Drupal::entityTypeManager()->getStorage('node')->load($node_id);
+      $course_microsite = $landing_course_page->get('field_microsite_course_reference')->getValue()[0]['target_id'];
+    }
+    { 
+      $getRoute = \Drupal::routeMatch()->getRouteName();
+      $page_template = 'landing_product_with_form';
+      if($getRoute == 'srl_common.application_form_landing_page'){
+        $page_template = 'landing_product_without_form';
+        
+      }
+    $course_id = \Drupal::request()->query->get('course');
+      
+
+      $options = setUniversityLandingProgramsOptions($domain,$page_template);
+      $form['elements']['program_fit']['program_interest']['#options'] = $options;
+      if(isset($course_id)){
+        if (array_key_exists($course_id,$options)){
+          $form['elements']['program_fit']['program_interest']['#default_value'] = $course_id;
+          $form['elements']['program_fit']['program_interest']['#attributes']['disabled'] = 'disabled';
+        }
+      }
+      if($course_microsite){
+        $form['elements']['program_fit']['program_interest']['#default_value'] = $course_microsite;
+        $form['elements']['program_fit']['program_interest']['#attributes']['disabled'] = 'disabled';
+      }
+      $form['elements']['basic_information']['country']['#prefix'] = '<div id="custom-phone-fieldset" class="countryphone"><div class="phone-field-title form-required">Phone (With Country Code)</div>';
+      // $form['elements']['basic_information']['country']['#options'] = getCountryCode();
+      $form['elements']['basic_information']['phone']['#suffix'] = '</div>';
+      // if($domain == 'srl_qc_niit_mts_com' || $domain == 'srl_adelphi_qc_niit_mts_com' || $domain == 'adelphi_landing_university' || $domain == 'srl_pointpark_qc_niit_mts_com' || $domain == 'point_park_university' || $domain == 'stackroute_suffolk_university'){
+        $form['elements']['program_funding']['how_do_you_plan_on_funding_your_bootcamp']['#field_prefix'] = '<span class="field-prefix">Darshan Those Students Who Chose to Pay in full up-front will receive a $3000 Discount!</span>';
+        // }
+      $coursereference_id = $form_state->getValue('program_interest');
+      $discount_fee_amount = getdiscountfee($domain,$coursereference_id);
+      $discount_fee_amount= number_format($discount_fee_amount);
+      $suffix_text= '<span class="field-prefix">'."Those Students Who Chose to Pay in full up-front will receive a"." $"."$discount_fee_amount"." USD Discount!".'</span>' ;
+      $form['elements']['program_funding']['how_do_you_plan_on_funding_your_bootcamp']['#field_prefix'] =$suffix_text;
+      
+      if($form['progress']['#current_page'] == 'basic_information' && isset($form_state->getSubmitHandlers()[0]) && $form_state->getSubmitHandlers()[0] != '::previous'){
+        $form['elements']['basic_information']['country']['#default_value'] = 1;
+      }
+      $parameters = \Drupal::request()->query->all();
+      /** set utm parameters */
+      if(array_key_exists('utm_medium',$parameters) || array_key_exists('utm_source',$parameters) || array_key_exists('utm_campaign',$parameters) || array_key_exists('utm_term',$parameters) || array_key_exists('utm_content',$parameters) || array_key_exists('gclid',$parameters)){
+        $form['elements']['program_fit']['utm_source']['#default_value'] = $parameters['utm_source'] ? $parameters['utm_source'] : '';
+        $form['elements']['program_fit']['utm_medium']['#default_value'] = $parameters['utm_medium'] ? $parameters['utm_medium'] : '';
+        $form['elements']['program_fit']['utm_campaign']['#default_value'] = $parameters['utm_campaign'] ? $parameters['utm_campaign'] : '';
+        $form['elements']['program_fit']['utm_term']['#default_value'] = $parameters['utm_term'] ? $parameters['utm_term'] : '';
+        $form['elements']['program_fit']['utm_content']['#default_value'] = $parameters['utm_content'] ? $parameters['utm_content'] : '';
+        $form['elements']['program_fit']['gclid']['#default_value'] = $parameters['gclid'] ? $parameters['gclid'] : '';
+      
+      }else{
+        if(isset($_COOKIE['UTM_PARAMETERS'])){
+          $UTM_PARAMETERS = json_decode($_COOKIE['UTM_PARAMETERS']);
+          $form['elements']['program_fit']['utm_source']['#default_value'] = $UTM_PARAMETERS->utm_source;
+          $form['elements']['program_fit']['utm_medium']['#default_value'] = $UTM_PARAMETERS->utm_medium;
+          $form['elements']['program_fit']['utm_campaign']['#default_value'] = $UTM_PARAMETERS->utm_campaign;
+          $form['elements']['program_fit']['utm_term']['#default_value'] = $UTM_PARAMETERS->utm_term;
+          $form['elements']['program_fit']['utm_content']['#default_value'] = $UTM_PARAMETERS->utm_content;
+          $form['elements']['program_fit']['gclid']['#default_value'] = $UTM_PARAMETERS->gclid;
+      
+        }
+      }
+    }
+    /** end set utm parameters */
+    /**resume application form */
+    // $loader = $session->get('temp_transaction_id_resume');
+    // $data = resumeApplicationForm();
+    // if($data){
+    //   foreach($data as $step => $field_value){
+    //     $field_value = json_decode($field_value);
+    //     foreach($field_value as $field_id => $value){
+    //         $form['elements'][$step][$field_id]['#default_value'] = $value;
+    //     }
+    //     if($loader){
+    //       $form['elements'][$step]['resume_loader'] = [
+    //         '#type' => 'markup',
+    //         '#markup' => '<div id="getformdata"><div class="ring">Loading<span></span></div></div>'
+    //       ];
+    //     }
+    //   }
+    // }
+  }
+}
+
+
+function srl_common_form_alter(&$form, &$form_state, $form_id){
+  $domain = \Drupal::service('domain.negotiator')->getActiveId();
+  if(isset($form['elements']['phone_code'])){
+    $form['elements']['phone_code']['#options'] = getCountryCode();
+  }
+  if(isset($form['elements']['phone']['phone_code'])){
+    $form['elements']['phone']['phone_code']['#options'] = getCountryCode();
+    $form['elements']['phone']['phone_code']['#default_value'] = 1;
+  }
+  if(isset($form['elements']['i_agree_to_revived_other_communication_from_stackroute_learning_'])){
+    $site_name = \Drupal::config('system.site')->get('name');
+    $site_name_prefix = '';
+    $site_name_suffix = '';
+    if( $domain == 'srl_qc_niit_mts_com'){
+      $site_name_suffix = ' Office of Professional & Continuing Education (OPCE)';
+    }elseif($domain == 'mercy_edu' || $domain == 'stackroute_mercy_college'){
+      $site_name_prefix = 'CERTIFi by';
+    }
+    elseif($domain == 'stackroute_suffolk_university'){
+      $site_name_suffix = 'Center for Continuing and Professional Education';
+    }
+    $label_name = 'I agree to receive other communications from '.$site_name_prefix.' '.$site_name.' '.$site_name_suffix;
+    
+    $description = '<p>By requesting info, I am authorizing '.$site_name_prefix.' '.$site_name.' '.$site_name_suffix.' to contact me using the phone number and email address provided above, by auto-dialer or via text, about its programs of study. Authorization is not required to apply or enroll. As an alternative to granting this authorization, I can get information or apply by calling the '.$site_name_prefix.' '.$site_name.' '.$site_name_suffix.' directly.</p>';
+    
+    $form['elements']['i_agree_to_revived_other_communication_from_stackroute_learning_']['#title'] = $label_name;	
+    $form['elements']['i_agree_to_revived_other_communication_from_stackroute_learning_']['#description']['#markup'] = $description;
+  }
+  
+  if( $form_id == 'taxonomy_term_university_form'){
+    $properties = [
+       'vid' => 'university_policy',
+    ];
+    $terms = \Drupal::entityManager()->getStorage('taxonomy_term')->loadByProperties($properties);
+    foreach($terms as $key => $values){
+       $type = $values->get('field_policy_type')->getValue()[0]['value'];
+       if($type == 'EA'){
+          $enrollment['_none'] = '- Select a value -';
+          $enrollment[$key] = $values->getName();
+          $form['field_enrollment_agreement']['widget']['#options'] = $enrollment;
+       }
+       if($type == 'TOU'){
+          $term_of_use['_none'] = '- Select a value -';
+          $term_of_use[$key] = $values->getName();
+          $form['field_term_of_use']['widget']['#options'] = $term_of_use;
+       }
+    }
+  }
+  if($form['#id'] == 'views-exposed-form-order-summary-page-1'){
+    
+    $batch_date = db_select('node__field_course_batch_start_date','B_date');
+    $batch_date->fields('B_date',['field_course_batch_start_date_value']);
+    $batch_date->distinct();
+    $dates =  $batch_date->execute()->fetchAll();
+    foreach($dates as $key => $value){
+      $timestamp[] = strtotime($value->field_course_batch_start_date_value);
+      
+    }
+    sort($timestamp);
+    $batch_start[''] = 'All';
+    foreach($timestamp as $time){
+      $batch_start[date('Y-m-d',$time)] = date('Y-m-d',$time);
+    }
+    $form['cohort_date']['#type'] = 'select';
+    $form['cohort_date']['#options'] = $batch_start;
+    $form['cohort_date']['#default_value'] = 'All';
+    $form['cohort_date']['#size'] = 1;
+
+    $form['term_of_use']['#type'] = 'select';
+    $form['term_of_use']['#options'] = ['' => 'All',1 => 'Yes',0 => 'No'];
+    $form['term_of_use']['#default_value'] = 'All';
+    $form['term_of_use']['#size'] = 1;
+
+    $form['enrollment_agreement']['#type'] = 'select';
+    $form['enrollment_agreement']['#options'] = ['' => 'All',1 => 'Yes',0 => 'No'];
+    $form['enrollment_agreement']['#default_value'] = 'All';
+    $form['enrollment_agreement']['#size'] = 1;
+
+    $domain_list = \Drupal::service('domain.loader')->loadOptionsList();
+    $options[''] = 'All';
+    foreach($domain_list as $key => $value){
+      $options[$key] = $value;
+    }
+    $form['university']['#type'] = 'select';
+    $form['university']['#options'] = $options;
+    $form['university']['#default_value'] = 'All';
+    $form['university']['#size'] = 1;
+  }
+}
+/** hook view query alter */
+function srl_common_views_query_alter(ViewExecutable $view, QueryPluginBase $query) {
+  // kint($view);
+  // if ($view->id() == 'order_summary') {
+  //   // some action
+  //   kint($query->where);
+  // }
+}
+/** view pre render */
+function srl_common_views_pre_render(\Drupal\views\ViewExecutable $view) {
+  if ($view->id() == "order_summary" && $view->current_display == 'page_1') {
+     $results = $view->result;
+     $domain_list = \Drupal::service('domain.loader')->loadOptionsList();
+     foreach($results as $key => $value){
+       
+       $mobile_no = $value->payeezy_payment_details_mobile_no;
+       $str = explode('-',$mobile_no);
+       $mobile_no = '+'.(int) filter_var($str[0], FILTER_SANITIZE_NUMBER_INT).'-'.$str[1];
+       $value->payeezy_payment_details_mobile_no = $mobile_no;
+       
+       $domain_id = $value->payeezy_payment_details_university;
+       $value->payeezy_payment_details_university = $domain_list[$domain_id];
+       
+       $enrollment = $value->payeezy_payment_details_enrollment_agreement_pdf;
+       $term_of_use = $value->payeezy_payment_details_term_of_use_pdf;
+        if($enrollment == 'rejected' || $enrollment == ''){
+          $value->payeezy_payment_details_enrollment_agreement_pdf = NULL;
+        }
+        if($term_of_use == 'rejected' || $term_of_use == ''){
+           $value->payeezy_payment_details_term_of_use_pdf = NULL;
+        }
+     }
+  }
+}
+function checkAccessRecord($transaction_id){
+  $query = db_select('srl_candidate_test_details','records');
+    $query->fields('records',array('transaction_id'));
+    $query->condition('records.transaction_id',$transaction_id);
+    $field_values=$query->execute()->fetchCol();
+    
+    return $field_values[0];
+}
+
+function getCourseVideoLink($entity_id){
+  $connection = Database::getConnection();
+  $sth = $connection->select('node__field_video_media', 'vm')
+        ->fields('vm', array('field_video_media_value'))
+        ->condition('vm.entity_id',$entity_id);
+      $data = $sth->execute()->fetchAll();
+      if(isset($data[0]->field_video_media_value) && strlen($data[0]->field_video_media_value) > 1){
+        $media_url = $data[0]->field_video_media_value;
+        if(strpos($media_url, 'youtube') !== false){
+          preg_match('/^https?:\/\/(www\.)?((?!.*list=)youtube\.com\/watch\?.*v=|youtu\.be\/)(?<id>[0-9A-Za-z_-]*)/', $media_url, $matches);
+          $youtube_src = 'https://www.youtube.com/embed/'.$matches['id'].'?enablejsapi=1&autoplay=1&rel=0';
+          $youtube_url[] = isset($matches['id']) ? 'youtube' : FALSE;
+          $youtube_url[] = isset($matches['id']) ? $youtube_src : FALSE;
+          return  $youtube_url;
+        } elseif(strpos($media_url, 'vimeo') !== false){
+            
+          $url = (int) substr(parse_url($data[0]->field_video_media_value, PHP_URL_PATH), 1); 
+          $url_src = 'https://player.vimeo.com/video/'.$url.'?rel=0&amp;hd=1&amp;autoplay=true&amp;loop=0';
+          $vimeo_url[] = isset($url) ? 'vimeo' : FALSE;
+          $vimeo_url[] = isset($url) ? $url_src : FALSE;
+          return $vimeo_url;
+        }
+
+      }
+      
+} 
+function getCurrentDate($format = NULL){
+  $current_time = \Drupal::time()->getCurrentTime();
+  if($format){
+    $current_date = strtotime(date($format,$current_time));
+  }else{
+    $current_date = strtotime(date('Y-m-d',$current_time));
+  }
+
+  return $current_date;
+}
+function phoneNumberValidation($phone_number = NULL){
+  $validate = FALSE;
+  if($phone_number){
+    $pattern = '/^[0-9\-\(\)\/\+\s]{10,17}$/';
+    $phoneNumbers = trim($phone_number);
+
+    preg_match($pattern, $phoneNumbers, $matches);
+    if($matches[0]){
+      $int_number = filter_var($matches[0], FILTER_SANITIZE_NUMBER_INT);
+      if(strlen($int_number) < 10 || strlen($int_number) > 12){
+        $validate = FALSE;
+          
+      }else{
+          $validate = TRUE;
+      }
+    }else{
+      $validate = FALSE;
+        
+    }
+  }
+  return $validate;
+}
+function regexValidation($pattern,$string){
+  $validate = FALSE;
+  $string = trim($string);
+
+  preg_match($pattern, $string, $matches);
+  
+  if($matches[0]){
+    $validate = TRUE;
+  }
+  return $validate;
+}
+function getStepsInfo($email, $phone_number, $step){
+  $domain = \Drupal::service('domain.negotiator')->getActiveId();
+  $query = db_select('stackroute_webform_tempdata','records');
+    $query->fields('records',['transaction_id']);
+    $query->condition('records.email_id',$email);
+    $query->condition('records.mobile_no',$phone_number);
+    $query->condition('records.domain_id',$domain);
+    $query->condition('records.step',$step);
+    $field_values=$query->execute()->fetchAll();
+  return $field_values[0];
+}
+
+function insertWebformTempData($data){
+    $phone_number = str_replace('+','',$data['phone']);
+    $phone_number = str_replace('-','',$phone_number);
+    $phone_number = str_replace(' ','',$phone_number);
+    $phone_number = str_replace('(','',$phone_number);
+    $phone_number = str_replace(')','',$phone_number);
+    // $phone_number = (int) filter_var($data['country'], FILTER_SANITIZE_NUMBER_INT).'-'.$phone_number;
+    $phone_number = trim($data['country']).'-'.$phone_number;
+
+    $temp_transaction_id = getStepsInfo($data['email'], $phone_number, $data['step']);
+    if(!$temp_transaction_id){
+      $transaction_id = getStepsInfo($data['email'], $phone_number, 'user_info');
+      $temp_transaction_id = $transaction_id->transaction_id ? $transaction_id->transaction_id : $phone_number.'_'.\Drupal::time()->getRequestTime();
+      insert_webform_data($data,$temp_transaction_id);
+
+    }else{
+      if($data['step'] == 'our_overall_career_outlook'){
+        $connection = \Drupal::service('database');
+        $connection->delete('stackroute_webform_tempdata')
+          ->condition('transaction_id', $temp_transaction_id->transaction_id)
+          ->execute();
+      }else{
+        update_webform_data($data,$temp_transaction_id->transaction_id);
+      }
+    }
+}
+function insert_webform_data($data,$temp_transaction_id){
+  $domain = \Drupal::service('domain.negotiator')->getActiveId();
+  $phone_number = str_replace('+','',$data['phone']);
+  $phone_number = str_replace('-','',$phone_number);
+  $phone_number = str_replace(' ','',$phone_number);
+  $phone_number = str_replace('(','',$phone_number);
+  $phone_number = str_replace(')','',$phone_number);
+  $connection = \Drupal::service('database');
+  $connection->insert('stackroute_webform_tempdata')
+      ->fields(['transaction_id','email_id', 'mobile_no', 'step','step_json_data','domain_id','form_version'])
+      ->values([
+        'transaction_id' => $temp_transaction_id,
+        'email_id' => $data['email'],
+        'mobile_no' => trim($data['country']).'-'.$phone_number,
+        'step' => $data['step'],
+        'step_json_data' => json_encode($data),
+        'domain_id' => $domain,
+        'program_interest' => $data['program_interest'],
+        'form_version' => 2,
+      ])
+      ->execute();
+}
+function update_webform_data($data,$temp_transaction_id){
+  $connection = \Drupal::service('database');
+  $phone_number = str_replace('+','',$data['phone']);
+  $phone_number = str_replace('-','',$phone_number);
+  $phone_number = str_replace(' ','',$phone_number);
+  $phone_number = str_replace('(','',$phone_number);
+  $phone_number = str_replace(')','',$phone_number);
+
+  $connection->update('stackroute_webform_tempdata')
+    ->fields([
+      'email_id' => $data['email'],
+      'mobile_no' => trim($data['country']).'-'.$phone_number,
+      'step_json_data' => json_encode($data),
+      'program_interest' => $data['program_interest'],
+    ])
+    ->condition('transaction_id', $temp_transaction_id, '=')
+    ->condition('step', $data['step'], '=')
+    ->execute();
+}
+function resumeApplicationForm(){
+  $data = NULL;
+  $session = \Drupal::request()->getSession();
+  $temp_transaction_id = $session->get('temp_transaction_id_resume');
+
+  if($temp_transaction_id){
+    $query = db_select('stackroute_webform_tempdata','records');
+    $query->fields('records',['step','step_json_data']);
+    $query->condition('records.transaction_id',$temp_transaction_id);
+    $query->orderby('records.id','ASC');
+  
+    $step_data = $query->execute();
+    while($data_values = $step_data->fetchAssoc()){
+      $data[$data_values['step']] = $data_values['step_json_data'];
+    } 
+  }
+  return $data;
+}
+function setApplicationProcessSteps($data){
+  $connection = \Drupal::service('database');
+  $application = db_select('srl_candidate_test_details', 'detail');
+    $application->fields('detail', ['steps_level']);
+    $application->condition('detail.transaction_id',$data['transaction_id']);
+    $assessment = $application->execute()->fetchCol();
+    if($assessment[0] == 1){
+      $query = $connection->update('srl_candidate_test_details')
+        ->fields([
+          'steps_level' => 2
+        ])
+        ->condition('transaction_id',$data['transaction_id'], '=')
+        ->execute();
+
+    }elseif($assessment[0] == 2){
+      $query = $connection->update('srl_candidate_test_details')
+        ->fields([
+          'steps_level' => 3
+        ])
+        ->condition('transaction_id',$data['transaction_id'], '=')
+        ->execute();
+    }else{
+      $query = $connection->update('srl_candidate_test_details')
+        ->fields([
+          'steps_level' => 2
+        ])
+        ->condition('transaction_id',$data['transaction_id'], '=')
+        ->execute();
+    }
+}
+function deleteWebformTempData($values){
+  $domain = \Drupal::service('domain.negotiator')->getActiveId();
+  $phone_number = str_replace('+','',$values['phone']);
+  $phone_number = str_replace('-','',$phone_number);
+  $phone_number = str_replace(' ','',$phone_number);
+  $phone_number = str_replace('(','',$phone_number);
+  $phone_number = str_replace(')','',$phone_number);
+  $phone_number = trim($values['country']).'-'.$phone_number;
+
+  $connection = \Drupal::service('database');
+      $connection->delete('stackroute_webform_tempdata')
+      ->condition('email_id', $values['email'])
+      ->condition('mobile_no',$phone_number)
+      ->condition('domain_id',$domain)
+      ->execute();
+}
+function resetResumeApplicationSteps($data){
+  $connection = \Drupal::service('database');
+  $domain = \Drupal::service('domain.negotiator')->getActiveId();
+  $phone_number = str_replace('+','',$data['phone']);
+  $phone_number = str_replace('-','',$phone_number);
+  $phone_number = str_replace(' ','',$phone_number);
+  $phone_number = str_replace('(','',$phone_number);
+  $phone_number = str_replace(')','',$phone_number);
+  $phone_number = trim($data['country']).'-'.$phone_number;
+
+  $connection->update('srl_candidate_test_details')
+    ->fields([
+        'steps_level' => 0,
+    ])
+    ->condition('email_id',$data['email'])
+    ->condition('mobile_no', $phone_number)
+    ->condition('domain_id',$domain)
+    ->execute();
+}
+function getNextBatchDate($course_id,$domain){
+  $next_date = '';
+  $current_date = \Drupal::time()->getRequestTime();
+  $results = \Drupal::entityQuery('node')
+      ->condition('type', 'course_university_mapping')
+      ->condition('field_domain_access.target_id', $domain)
+      ->condition('field_course_code_reference.target_id', $course_id)
+      ->execute();
+      if($results){
+        $course_batch= array_values($results);
+        $course = \Drupal::entityTypeManager()->getStorage('node')->load($course_batch[0]);
+
+        $batch_dates = $course->get('field_course_batch_start_date')->getValue();
+        $close_day = $course->get('field_registration_close_day')->getValue()[0]['value'];
+        $next_current_date = strtotime('+'.$close_day, $current_date); // 13th
+
+        $date_timestamp = [];
+        foreach($batch_dates as $batch_date){
+          $get_date = strtotime($batch_date['value']);
+          $get_date = date('d M Y',$get_date).' 23:59:59';
+          $get_date = strtotime($get_date);
+          if($get_date >= $next_current_date){
+              $date_timestamp[] = $get_date;
+          }
+        }
+        sort($date_timestamp);
+        $next_date = date('F d',$date_timestamp[0]).'<span>'.date('S',$date_timestamp[0]).'</span> '.date('Y',$date_timestamp[0]);
+      }
+      return $next_date; 
+}
+function getUniversityTOS($domain){
+  $query = db_select('taxonomy_term__field_university_domain','domain');
+  $query->leftjoin('taxonomy_term__field_term_of_use','term','domain.entity_id=term.entity_id');
+  $query->leftjoin('taxonomy_term__field_university_code','clientID','domain.entity_id=clientID.entity_id');
+  $query->fields('term',array('field_term_of_use_target_id'));
+  $query->fields('clientID',array('field_university_code_value'));
+  $result = $query->condition('domain.field_university_domain_target_id',$domain)->execute()->fetchAll();
+
+  $term_id['term_of_use'] = $result[0]->field_term_of_use_target_id;
+  $term_id['clientID'] = $result[0]->field_university_code_value;
+  return $term_id;
+}
+function srl_common_cron(){
+  // 1. DISBURSED =>	Loan fully funded
+  // 2. DISBURSED_PARTIAL =>	Loan funded, but there are more disbursements
+  // 3. ATIL_SENT =>	Application approved, pending acceptance
+  // 4. PRE_APPROVED =>	Pre-approved
+  // 5. PROCESSING =>	Currently processing
+  // 6. FTIL_SENT =>	Application approved & accepted
+  // 7. REFUND_PROCESSING =>	Refund in progress
+  // 8. REFUND_COMPLETE =>	Refunded
+  // 9. DECLINED =>	Declined to proceed with loan
+  // 10. INCOMPLETE =>	Application incomplete
+  // 11. DROPPED => 	Dropped class
+  // 12. DENIED =>	Asked to re-apply with a co-borrower
+    // $current_time = time() + 6*60*60; 6hr total=21600;
+    $status = 'DISBURSED,PRE_APPROVED,ATIL_SENT,PRE_APPROVED,PROCESSING,REFUND_COMPLETE,DECLINED,INCOMPLETE,DROPPED,DENIED';
+    $current_time = time();
+    $state = \Drupal::state();
+    $last_refresh_state = 'srl_climb_credit_api.last_refresh';
+    $last_refresh = $state->get($last_refresh_state, 0);
+    // every 12hr run the cron.
+    if ($current_time - $last_refresh > 43200) {
+      $process = 'True';
+      $page = 1;
+      $new_record = array();
+      $temp_record = array();
+      $connection = \Drupal::service('database');
+      $query =  $connection->query("SELECT MAX(application_lastupdateddate) As lastupdateddate FROM srl_loan_application_detail");
+      $record = $query->fetchAll();
+      $last_update_date_tb = strtotime($record[0]->lastupdateddate);
+      while($process == "True" ) {
+          $client = \Drupal::httpClient();
+          $client_url = 'https://climbcredit.com/api/v1/applications?page='.$page.'&limit=50&sort_by=LAST_UPDATED&sort_direction=DESC&application_status='.$status;
+          $request_response = $client->get($client_url, [
+              'headers' => ['Content-Type' => 'application/json','API-KEY' => '0fbaa5f1-529f-58b4-9595-688c59664019'],
+              ])->getBody()->getContents();
+          $results = json_decode($request_response);
+          foreach($results->data->results as $key => $result) {
+              $last_updated_submition = $result->application->lastUpdatedDate;
+              $last_submition_application = strtotime($last_updated_submition);
+              if($last_update_date_tb <= $last_submition_application ) {
+                  $new_record[] = $result;
+              }else{
+                  $temp_record[] = $result;
+              }
+          } 
+          if($results->data->totalPages <= $page) {
+              $process = 'False';
+              break;
+          }else{
+              $page++;
+          }
+      }
+      foreach($new_record as $key => $result) {           
+          $api_data = json_encode($result);
+          $value = [
+              'transaction_id' => $result->customer->studentId,
+              'name' => $result->customer->firstName.' '.$result->customer->lastName,
+              'email' => $result->customer->email,
+              'phone' => $result->customer->phone,
+              'application_ref' => $result->application->ref,
+              'application_status' => $result->application->status,
+              'application_lastupdateddate' => $result->application->lastUpdatedDate,
+              'application_submissiondate' => $result->application->applicationSubmissionDate,
+              'application_course' =>  $result->program->name,
+              'application_university' => $result->school->name,
+              'json_response' => $api_data,
+          ];
+          $connection->insert('srl_loan_application_detail')
+          ->fields(['transaction_id', 'name', 'email','phone','application_ref','application_status','application_lastupdateddate','application_submissiondate','json_response',
+          ])
+          ->values($value)
+          ->execute();
+      }
+      \Drupal::state()->set($last_refresh_state, $current_time);
+    }
+  
+  // $session = \Drupal::database()->truncate('sessions')->execute();
+  $current_date = \Drupal::time()->getRequestTime();
+  $sessions_date = strtotime('-3 hours', $current_date);
+  $connection = \Drupal::service('database');
+      $log_session = $connection->delete('sessions')
+      ->condition('uid',0)
+      ->condition('timestamp', $sessions_date, '<')
+      ->execute();
+  
+  
+}
+/**
+ * Implements of hook_node_presave().
+ */
+/**
+ * Implements hook_feeds_presave().
+ */
+// function srl_common_feeds_presave(FeedsSource $source, \Drupal\Core\Entity\EntityInterface $entity, $item) {
+//   $test = $item;
+//   if ($source->importer->id != 'my_importer') {
+//     // No modification needed for this importer.
+//     return;
+//   }
+
+//   $email = $item['email address'];
+//   // Remove "NOT GIVEN" from the email column to stop errors.
+//   if ($email == "NOT GIVEN"){
+//     $entity->field_email['und'][0]['email'] = '';
+//   } 
+// }
+/**
+ * Implements hook_mail().
+ */
+function srl_common_mail($key, &$message, $params) {
+  $options = array(
+    'langcode' => $message['langcode'],
+  );
+  switch ($key) {
+    case 'payment_api':
+      $message['from'] = \Drupal::config('system.site')->get('mail');
+      $message['subject'] = t('@title', array('@title' => $params['title']), $options);
+      $message['headers']['Content-Type'] = 'text/html; charset=UTF-8; format=flowed';
+      $message['body'][] = Html::escape($params['message']);
+      break;
+  case 'loan_api':
+      $message['from'] = \Drupal::config('system.site')->get('mail');
+      $message['subject'] = t('@title', array('@title' => $params['title']), $options);
+      $message['headers']['Content-Type'] = 'text/html; charset=UTF-8; format=flowed';
+      $message['body'][] = Html::escape($params['message']);
+      break;
+  }
+}

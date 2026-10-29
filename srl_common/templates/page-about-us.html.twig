@@ -1,0 +1,60 @@
+<section class="banner-home">
+   <div class="inner-banner-about">
+      <div class="banner-on-text">
+         {{ banner_image|raw }}
+      </div>
+   </div>
+</section>
+<section class="about-text-content">
+   <div class="container">
+      {{ description|raw }}
+   </div>
+</section>
+<section class="about-count">
+   <div class="container">
+      <div class="row">
+            {{ skills_based_training_content|raw }}
+      </div>
+   </div>
+</section>
+<section class="about-why-skill-text">
+   <div class="container">
+      <div class="row">
+            <div class="col-md-5">
+               {{ skills_training.image|raw}}
+            </div>
+            <div class="col-md-7 py-5 ttwiabout">
+               {{ skills_training.description|raw}}
+            </div>
+      </div>
+   </div>
+</section>
+
+<section class="bootcamp">
+   <div class="container">
+      <div class="row mt-4 mx-5">
+      {{ bootcamp_highlights|raw }}
+      </div>
+   </div>
+</section>
+
+<section class="about-mapsection">
+   <div class="container">
+      <div class="row">
+         <div class="col-md-8">
+               {{ map_location.description|raw }}
+         </div>
+         <div class="col-md-4">
+            {{ map_location.map|raw }}
+         </div>
+      </div>
+   </div>        
+</section>
+
+<section class="homecalltoaction">
+   <div class="container">
+      <label>Not Ready to Apply?</label>
+      <label>Have more questions about our bootcamp?</label>
+      <button class="chat-open btn btn-chat mt-4">Chat with an Advisor Now </button>
+   </div>
+</section>

@@ -1,0 +1,132 @@
+{{ attach_library('srl_payment/srl_payment') }}
+{# steps wizard #}
+<div class="progress-new">
+    <div class="steps-wizards">
+        <ol class="d-flex justify-content-center">
+            <li class="complete step-25 "><span><i class="fa fa-check" aria-hidden="true"></i></span></li>
+            <li class="complete step-50"><span><i class="fa fa-check" aria-hidden="true"></i></span></li>
+            <li class="complete step-75"><span><i class="fa fa-check" aria-hidden="true"></i></span></li>
+            <li class="complete step-100"><span><i class="fa fa-check" aria-hidden="true"></i></span></li>
+        </ol>
+    </div>
+</div>
+<div id="assessment_confirmation">
+  {# Application process confirmation #}
+  <div class="application-confirmation {{ page_html.jquery_update|raw }} {{ page_html.show_section|raw }}">
+      <div class="media message-card">
+          <div class="media-left verify-application">
+              <div class="loader"></div>
+          </div>
+          <div class="media-body">
+              <h4 class="media-heading">Thank you for submitting the application. We are verifying your information, evaluating program requirement's.</h4>
+          </div>
+      </div>
+  </div>
+  {# order summary #}
+  <div class="application-confirmed {{ page_html.jquery_update|raw }} {{ page_html.hide_section|raw }}">
+    <div class="thanks_page text-center">
+		<p class="thanks_heading mt-2"><span class="green-text">Congratulations</span> {{ page_html.student_name|raw }}!</p>
+		<p class="thanks_heading_sub">You have been accepted into the {{ page_html.university_course|raw }} Bootcamp</p>
+		<p class="boot_heading">Our next bootcamp starts on “{{ page_html.next_date|raw }}”</p>
+    <h5 class="mt-4"><b>Scholarship Opportunities Available -</b><br>Submit Your Application to Speak to a Program Consultant Today</h5>
+
+		<div class="row mt-5">
+	      <div class="col-md-12 col-lg-6">
+		      <div class="thankHeading">Order Summary</div>
+		      <div class="thankOuter">
+		        <p class="thanksPara">You can review your order and complete the purchase</p>
+		        <div class="row mb-2">
+		          <div class="col-md-6 p-0 pl-md-3">
+		            <label>Programe Name </label>
+		          </div>
+		          <div class="col-md-6 p-0 pl-md-3">
+				  <div class="labelValue">{{ page_html.course_name|raw }}</div>
+				</div>
+		        </div>
+				<div class="row mb-2">
+		          <div class="col-md-6 p-0 pl-md-3">
+		            <label>Delivery Mode </label>
+		          </div>
+		          <div class="col-md-6 p-0 pl-md-3">
+				  <div class="labelValue">Online</div>
+				  </div>
+		        </div>
+				<div class="row mb-2">
+                <div class="col-md-6 p-0 pl-md-3">
+                <label>Class Start Date </label>
+				</div>
+				<div class="col-md-6 p-0 pl-md-3">
+				<div class="labelValue">{{ page_html.next_date|raw }}</div>
+				</div>
+				</div>
+            <div class="row mb-2">
+              <div class="col-md-6 p-0 pl-md-3">
+                <label>Full Name </label>
+              </div>
+              <div class="col-md-6 p-0 pl-md-3">
+                <div class="labelValue">{{ page_html.student_name|raw }}</div>
+              </div>
+            </div>
+		        <div class="row mb-2">
+		          <div class="col-md-6 p-0 pl-md-3">
+		            <label>Email </label>
+		          </div>
+		          <div class="col-md-6 p-0 pl-md-3">
+		            <div class="labelValue email-id" data-toggle="tooltip" title="{{ page_html.email_id|raw }}">{{ page_html.email_id|raw }}</div>
+		          </div>
+		        </div>
+				<div class="row mb-2">
+		          <div class="col-md-6 p-0 pl-md-3">
+		            <label>Mobile No. </label>
+		          </div>
+		          <div class="col-md-6 p-0 pl-md-3">
+		            <div class="labelValue">{{ page_html.mobile_no|raw }}</div>
+		          </div>
+		        </div>
+	      </div>
+      
+	      </div>
+        <div class="col-md-12 col-lg-6">
+		      <div class="thankHeading">Payment Details</div>
+		      <div class="thankOuter">
+            <div class="row paymentRow">
+              <div class="col-6 col-md-6 p-0 pl-md-3">Course Fee</div>
+              <div class="col-md-6 p-0 pr-md-3 text-right col-6">${{ page_html.course_fee|number_format|raw }} USD</div>
+            </div>
+            <div class="row paymentRow">
+              <div class="col-6 col-md-6 p-0 pl-md-3">Discount</div>
+              <div class="col-6 col-md-6 p-0 pr-md-3 text-right">${{ page_html.discouted_amount|number_format|raw }} USD</div>
+            </div>
+            <div class="amountHeading row">
+              <div class="col-6">Net Payable Amount </div>
+              <div class="col-6 text-right">${{ page_html.actual_course_fee|number_format|raw }} USD</div>
+            </div>
+		        <p class="thanksPara mt-4">
+              In order to enroll click the button below to submit payment and doing so will also complete the <a class="popup-button" data-target="#termofservices" data-toggle="modal"> Terms Of Use</a> agreement. Upon completion you will receive a Welcome Email outlining the next steps for the upcoming cohort.
+            </p>
+            <div class="proceed-payment-form-container">
+              {{ page_html.proceed_payment_form|raw }}
+            </div>
+            <div class="haveQuestions">
+              <p class="boot_heading">Have Questions? </p>
+              <p class="boot_heading_sub">Book an appointment with an Advisor – <br>instead of schedule a call with an advisorto discuss enrolling</p>
+              <p class="boot_heading_sub">Chat with an Advisor Now. – have this action pop the chat bot</p>
+              <div class="row mt-5">
+                <div class="col-12 col-xl-6 mb-5 mb-md-3 p-0">
+                  <img src="/themes/hilbert/images/default_images/call-agent.png" class="img-fluid m-auto d-block">
+                  <p class="thanks_heading_sub_1 mt-3">Book an appointment<br> with an Advisor</p>
+                  <a class="btn btn-thanks-outline" target="_blank" href="{{ page_html.chatbot_link | raw }}">Schedule Now</a>
+                </div>
+                <div class="col-12 col-xl-6 p-0">
+                  <img src="/themes/hilbert/images/default_images/chat-agent.png" class="img-fluid m-auto d-block">
+                  <p class="thanks_heading_sub_1 mt-3">Chat with an Advisor</p>
+                  <button class="btn btn-thanks-outline chat-open btn-chat" href="#">Chat Now</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

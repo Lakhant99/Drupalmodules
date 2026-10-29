@@ -1,0 +1,6 @@
+name: SRL Payeezy Payment
+type: module
+description: 'custom payeezy module to manage website payments'
+package: Custom
+version: 8.x
+core: '8.x'

@@ -1,0 +1,11 @@
+services:
+  stackroute_modification.route_subscriber:
+    class: Drupal\stackroute_modification\Routing\RouteSubscriber
+    tags:
+      - { name: event_subscriber }
+  stackroute_modification.plugin.manager.viewsaccess:
+    class: Drupal\stackroute_modification\Plugin\views\access\ViewsCustomAccess
+    parent: default_plugin_manager
+  stackroute_modification.custom_access_check:
+    class: Drupal\stackroute_modification\Access\ServicesAccessCheck
+    parent: default_plugin_manager

@@ -1,0 +1,4 @@
+domain_favicon.admin:
+  title: Domain favicon settings
+  route_name: domain_favicon.settings
+  base_route: domain.admin

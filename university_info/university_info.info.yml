@@ -1,0 +1,10 @@
+name: University information
+description: 'Manages university information configuration.(Set logo and extra information about university)'
+type: module
+core: 8.x
+core_version_requirement: ^8 || ^9
+package: Domain
+configure: university_info.settings
+
+dependencies:
+  - domain:domain
