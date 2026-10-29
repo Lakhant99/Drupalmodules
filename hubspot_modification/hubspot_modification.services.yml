@@ -1,9 +1,0 @@
-services:
-  api.hubspot:
-    class: Drupal\hubspot_modification\HubspotCustomServices
-    arguments: ['@current_user']
-  api.hubspotupdate:
-    class: Drupal\hubspot_modification\Services\HubspotAPI
-    arguments: ['@current_user']
-
-    

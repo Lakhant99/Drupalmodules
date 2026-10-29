@@ -1,7 +1,0 @@
-1. add new field in taxonomy term univerisity_policy.
-   i. policy_domain
-   ii. policy_type
-2. change course university mapping manage form display
-   i. remove footnote field from form display
-   ii. remove university domainfrom manage from display
-

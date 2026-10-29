@@ -1,8 +1,0 @@
-# Schema for the configuration files of the SRL Climb Credit Api module.
-srl_climb_credit_api.settings:
-  type: config_object
-  label: 'SRL Climb Credit Api settings'
-  mapping:
-    api:
-      type: string
-      label: 'Api'

@@ -1,8 +1,0 @@
-name: SRL Climb Credit Api
-type: module
-description: SRL climb Credit API for loan and payment webhook intrgration
-package: Custom
-version: 8.x
-core: '8.x'
-dependencies:
-  - drupal:restui
